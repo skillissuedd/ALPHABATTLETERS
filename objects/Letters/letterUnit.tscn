@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1jc64rlfelov"]
+
+[ext_resource type="Script" uid="uid://jcv0ems6dx8s" path="res://Scripts/Objects/Letters/letter_unit.gd" id="1_2oajw"]
+
+[node name="LetterUnit" type="Node2D"]
+script = ExtResource("1_2oajw")

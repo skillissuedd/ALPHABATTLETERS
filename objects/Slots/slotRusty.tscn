@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dta72as0nixno"]
+
+[ext_resource type="Script" uid="uid://cl38uc64n2s74" path="res://Scripts/Objects/slot_1.gd" id="1_6unle"]
+[ext_resource type="Texture2D" uid="uid://i4ht01btn6y6" path="res://textures/tiles/chessTile2.png" id="2_3yism"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4c3kn"]
+size = Vector2(168, 159)
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_6unle")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.4, 0.266667, 0.196078, 1)
+texture_filter = 1
+position = Vector2(80, 80)
+scale = Vector2(10, 10)
+texture = ExtResource("2_3yism")
+
+[node name="Slot_Collision" type="CollisionShape2D" parent="."]
+visibility_layer = 2
+position = Vector2(80, 80)
+scale = Vector2(1.6, 1.6)
+shape = SubResource("RectangleShape2D_4c3kn")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

@@ -1,0 +1,19 @@
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://cf23xochpop1q"]
+
+[ext_resource type="Texture2D" uid="uid://i4ht01btn6y6" path="res://textures/tiles/chessTile2.png" id="1_3ixk3"]
+[ext_resource type="Texture2D" uid="uid://byy1y758ycdau" path="res://textures/tiles/chessTile1.png" id="1_c1dlg"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xny2o"]
+texture = ExtResource("1_3ixk3")
+texture_region_size = Vector2i(28, 28)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3ixk3"]
+texture = ExtResource("1_c1dlg")
+texture_region_size = Vector2i(28, 28)
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(28, 28)
+sources/6 = SubResource("TileSetAtlasSource_3ixk3")
+sources/0 = SubResource("TileSetAtlasSource_xny2o")

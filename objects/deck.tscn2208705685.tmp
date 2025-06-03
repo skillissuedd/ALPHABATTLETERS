@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ysw1vyd7dj33"]
+
+[ext_resource type="Script" uid="uid://lxywlt50vwm" path="res://Scripts/ObjectScripts/Deck.gd" id="1_ijvi3"]
+[ext_resource type="Resource" uid="uid://c438xqul6k3yu" path="res://resources/letter_stats.tres" id="2_c0h2s"]
+
+[node name="Deck" type="GridContainer"]
+offset_left = 17.0
+offset_top = 8.0
+offset_right = 102.0
+offset_bottom = 58.0
+script = ExtResource("1_ijvi3")
+letter_stats = ExtResource("2_c0h2s")

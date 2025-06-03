@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://dydttf2xsvrcr"]
+
+[ext_resource type="Script" uid="uid://1oklaro78mi3" path="res://Scripts/letter.gd" id="1_pqkil"]
+[ext_resource type="Texture2D" uid="uid://bbys37p6vumnt" path="res://textures/stoneLetter1.jpg" id="2_pqkil"]
+
+[node name="Letter" type="Button"]
+offset_left = 232.0
+offset_top = 64.0
+offset_right = 252.0
+offset_bottom = 84.0
+script = ExtResource("1_pqkil")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -27.0
+offset_right = 27.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_pqkil")
+expand_mode = 1
+
+[node name="TextEdit" type="TextEdit" parent="TextureRect"]
+clip_contents = false
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -40.0
+offset_right = 25.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "25 DMG
+10 DEF"
+theme_override_font_sizes/font_size = 49
+text = "A"
+editable = false
+scroll_fit_content_height = true
+scroll_fit_content_width = true

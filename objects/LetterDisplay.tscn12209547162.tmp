@@ -1,0 +1,95 @@
+[gd_scene load_steps=6 format=3 uid="uid://cb5w2yq6f7axj"]
+
+[ext_resource type="Script" uid="uid://7b8t1rokifof" path="res://Scripts/ObjectScripts/letter_Display.gd" id="1_r0arm"]
+[ext_resource type="Texture2D" uid="uid://byy1y758ycdau" path="res://textures/chessTile1.png" id="2_cmgim"]
+[ext_resource type="Resource" uid="uid://c438xqul6k3yu" path="res://resources/letter_stats.tres" id="2_t3owe"]
+[ext_resource type="FontFile" uid="uid://djdwvxc53g8c0" path="res://fonts/Inversionz.ttf" id="3_t3owe"]
+[ext_resource type="FontFile" uid="uid://cltoojf5br46e" path="res://fonts/SpicyNoodle-K7X5X.ttf" id="4_cmgim"]
+
+[node name="Letter" type="Control"]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.755
+anchor_right = 0.5
+anchor_bottom = 0.755
+offset_left = 6.10352e-05
+offset_top = -0.23999
+offset_right = 6.10352e-05
+offset_bottom = -0.23999
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_r0arm")
+letter_stats_path = null
+letter_stats = ExtResource("2_t3owe")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = -67.5002
+offset_top = -60.0
+offset_right = 11.4998
+offset_bottom = 25.0
+texture = ExtResource("2_cmgim")
+
+[node name="LetterLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0001
+offset_top = -47.5
+offset_right = -1.00014
+offset_bottom = 6.49995
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = ExtResource("3_t3owe")
+theme_override_font_sizes/font_size = 78
+text = "A"
+horizontal_alignment = 1
+
+[node name="ATKLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -5.00012
+offset_top = -77.5
+offset_right = 31.9999
+offset_bottom = -33.5
+theme_override_colors/font_color = Color(0.835294, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = ExtResource("4_cmgim")
+theme_override_font_sizes/font_size = 30
+text = "15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DefLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -87.5002
+offset_top = 5.0
+offset_right = -51.5002
+offset_bottom = 49.0
+theme_override_colors/font_color = Color(0.26293, 0.480554, 0.995333, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = ExtResource("4_cmgim")
+theme_override_font_sizes/font_size = 30
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = -90.0001
+offset_top = 70.0
+offset_right = 50.9999
+offset_bottom = 101.0
+text = "Randomize letter
+"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

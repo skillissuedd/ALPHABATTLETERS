@@ -1,0 +1,112 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhoy2t5bgr8ko"]
+
+[ext_resource type="Script" uid="uid://d0rv56lcfbioq" path="res://control.gd" id="1_0fbet"]
+
+[sub_resource type="GDScript" id="GDScript_0fbet"]
+script/source = "extends Control
+
+@onready var board_grid = $BoardGrid
+var letter_button_scene = preload(\"res://LetterButton.tscn\")
+
+func _ready():
+	generate_board(16)
+
+func generate_board(count: int):
+	for i in count:
+		var cell = letter_button_scene.instantiate()
+		board_grid.add_child(cell)
+"
+
+[node name="Main" type="Control"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 41.0
+offset_top = 81.0
+offset_right = 441.0
+offset_bottom = 481.0
+script = ExtResource("1_0fbet")
+
+[node name="BoardGrid" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.077
+anchor_bottom = -0.077
+offset_left = 25.0
+offset_top = 37.8
+offset_right = 437.0
+offset_bottom = 449.8
+columns = 4
+
+[node name="Button" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+script = SubResource("GDScript_0fbet")
+
+[node name="Button2" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+script = SubResource("GDScript_0fbet")
+
+[node name="Button3" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+script = SubResource("GDScript_0fbet")
+
+[node name="Button4" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+script = SubResource("GDScript_0fbet")
+
+[node name="Button5" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+script = SubResource("GDScript_0fbet")
+
+[node name="Button6" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+script = SubResource("GDScript_0fbet")
+
+[node name="Button7" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+script = SubResource("GDScript_0fbet")
+
+[node name="Button8" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+script = SubResource("GDScript_0fbet")
+
+[node name="Button9" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button10" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button11" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button12" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button13" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button14" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button15" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button16" type="Button" parent="BoardGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2

@@ -1,0 +1,108 @@
+[gd_scene load_steps=6 format=3 uid="uid://cb5w2yq6f7axj"]
+
+[ext_resource type="Script" uid="uid://7b8t1rokifof" path="res://Scripts/ObjectScripts/letter_Display.gd" id="1_r0arm"]
+[ext_resource type="Texture2D" uid="uid://4si68rtf8ld7" path="res://textures/letterTile45.png" id="2_t3owe"]
+[ext_resource type="FontFile" uid="uid://djdwvxc53g8c0" path="res://fonts/Inversionz.ttf" id="3_t3owe"]
+[ext_resource type="FontFile" uid="uid://cltoojf5br46e" path="res://fonts/SpicyNoodle-K7X5X.ttf" id="4_cmgim"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmgim"]
+size = Vector2(100, 98.6487)
+
+[node name="Letter" type="Control"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+anchor_left = 0.087
+anchor_top = 0.154
+anchor_right = 0.087
+anchor_bottom = 0.154
+offset_left = -100.224
+offset_top = -99.792
+offset_right = 99.776
+offset_bottom = 100.208
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+script = ExtResource("1_r0arm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
+scale = Vector2(1.875, 1.85)
+texture = ExtResource("2_t3owe")
+centered = false
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+light_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+light_mask = 2
+position = Vector2(50.6667, 50.8108)
+shape = SubResource("RectangleShape2D_cmgim")
+
+[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
+modulate = Color(0, 0, 0, 0.392157)
+show_behind_parent = true
+scale = Vector2(0.975, 0.95)
+texture = ExtResource("2_t3owe")
+centered = false
+
+[node name="LetterLabel" type="Label" parent="Sprite2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.5333
+offset_top = -50.0
+offset_right = 43.4667
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_constants/outline_size = 23
+theme_override_fonts/font = ExtResource("3_t3owe")
+theme_override_font_sizes/font_size = 125
+text = "A"
+horizontal_alignment = 1
+
+[node name="DefLabel" type="Label" parent="Sprite2D"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -34.0
+offset_right = 27.0
+grow_vertical = 0
+size_flags_horizontal = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.26293, 0.480554, 0.995333, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = ExtResource("4_cmgim")
+theme_override_font_sizes/font_size = 30
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ATKLabel" type="Label" parent="Sprite2D"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -34.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.835294, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = ExtResource("4_cmgim")
+theme_override_font_sizes/font_size = 30
+text = "15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
