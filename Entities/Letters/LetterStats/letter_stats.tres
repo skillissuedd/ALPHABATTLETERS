@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="LetterStats" load_steps=2 format=3 uid="uid://c438xqul6k3yu"]
+
+[ext_resource type="Script" uid="uid://dpd05djx7lmpr" path="res://Entities/Letters/LetterStats/letter_stats.gd" id="1_6n42d"]
+
+[resource]
+script = ExtResource("1_6n42d")
+atk = 25
+hp = 15

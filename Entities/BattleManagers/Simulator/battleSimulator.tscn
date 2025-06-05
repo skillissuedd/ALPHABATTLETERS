@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2cuqmk8uafxv"]
+
+[ext_resource type="Script" uid="uid://bexoj25cxsqjt" path="res://Entities/BattleManagers/Simulator/battle_SIMULATOR.gd" id="1_heui7"]
+
+[node name="BattleSimulator" type="Node2D"]
+script = ExtResource("1_heui7")

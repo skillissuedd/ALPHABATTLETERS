@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvhipaaqpctj6"]
+
+[ext_resource type="Script" uid="uid://dqgm4l2mqgg0a" path="res://Entities/BattleManagers/Animator/battle_ANIMATOR.gd" id="1_5ue5m"]
+
+[node name="BattleAnimator" type="Node2D"]
+script = ExtResource("1_5ue5m")

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cobtvt8orra4u"]
-
-[ext_resource type="Script" uid="uid://d3tq3014htfiq" path="res://Scripts/Objects/Managers/hand_manager.gd" id="1_qnegd"]
-
-[node name="handManager" type="Node2D"]
-script = ExtResource("1_qnegd")

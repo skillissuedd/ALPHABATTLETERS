@@ -1,0 +1,112 @@
+[gd_scene load_steps=4 format=3 uid="uid://be6dijs30c51b"]
+
+[ext_resource type="Script" uid="uid://k7oq1x86epp" path="res://Entities/Letters/LetterDisplay/Ally/ally_letter_display.gd" id="1_7ietf"]
+[ext_resource type="FontFile" uid="uid://cltoojf5br46e" path="res://fonts/SpicyNoodle-K7X5X.ttf" id="2_728kf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_785dx"]
+size = Vector2(52.5, 76.75)
+
+[node name="LetterDisplay" type="Control"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 100)
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("1_7ietf")
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LetterLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -54.5
+offset_right = 39.0
+offset_bottom = 54.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_constants/outline_size = 23
+theme_override_font_sizes/font_size = 79
+text = "A"
+horizontal_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="Panel/LetterLabel"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel/LetterLabel/Area2D"]
+position = Vector2(40, 53.5)
+shape = SubResource("RectangleShape2D_785dx")
+debug_color = Color(0.296228, 0.608454, 0.456804, 0.42)
+
+[node name="DefLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.785
+anchor_top = 0.91
+anchor_right = 0.785
+anchor_bottom = 0.91
+offset_left = 6.5
+offset_top = -11.0
+offset_right = 33.5
+offset_bottom = 23.0
+grow_vertical = 0
+size_flags_horizontal = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.262745, 0.627451, 0.278431, 1)
+theme_override_colors/font_outline_color = Color(0.105882, 0.239216, 0.105882, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = ExtResource("2_728kf")
+theme_override_font_sizes/font_size = 30
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ATKLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38
+anchor_top = 1.045
+anchor_right = 0.38
+anchor_bottom = 1.045
+offset_left = -47.0
+offset_top = -25.5
+offset_right = -19.0
+offset_bottom = 8.5
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.898039, 0.223529, 0.207843, 1)
+theme_override_colors/font_outline_color = Color(0.294118, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = ExtResource("2_728kf")
+theme_override_font_sizes/font_size = 30
+text = "15"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -16,9 +16,9 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 
 [autoload]
 
-Mousebrain="*res://Scripts/Globals/mousebrain.gd"
-Global="*res://Scripts/Globals/Global.gd"
-SfxManager="*res://Scripts/Globals/sfx_manager.gd"
+Mousebrain="*res://Entities/Globals/mousebrain.gd"
+Global="*res://Entities/Globals/Global.gd"
+SfxManager="*res://Entities/Globals/sfx_manager.gd"
 
 [debug]
 

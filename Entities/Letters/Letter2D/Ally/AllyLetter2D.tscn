@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8qw74sbkrdmr"]
+
+[ext_resource type="Script" uid="uid://dog622cfi84ii" path="res://Entities/Letters/Letter2D/Ally/ally_letter_2d.gd" id="1_hfbg8"]
+[ext_resource type="PackedScene" uid="uid://dkm5o1qn5fv2p" path="res://Entities/Framebars/letterFramebar/FrameBar.tscn" id="2_3ysmy"]
+[ext_resource type="PackedScene" uid="uid://be6dijs30c51b" path="res://Entities/Letters/LetterDisplay/Ally/AllyLetterDisplay.tscn" id="3_vxqm8"]
+[ext_resource type="Script" uid="uid://jcv0ems6dx8s" path="res://Entities/Letters/LetterUnit/letter_unit.gd" id="4_vh3gd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmgim"]
+size = Vector2(50.4, 51.3514)
+
+[node name="Letter2D" type="Sprite2D"]
+script = ExtResource("1_hfbg8")
+
+[node name="Area2D" type="Area2D" parent="."]
+light_mask = 2
+scale = Vector2(1.875, 1.85)
+collision_mask = 24
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_cmgim")
+debug_color = Color(0.458002, 0.697924, 0.491358, 0.419608)
+
+[node name="FrameBar" type="Node2D" parent="."]
+
+[node name="FrameBar" parent="FrameBar" instance=ExtResource("2_3ysmy")]
+
+[node name="Display" type="Node2D" parent="."]
+position = Vector2(0, 6)
+
+[node name="LetterDisplay" parent="Display" instance=ExtResource("3_vxqm8")]
+offset_left = -49.5
+offset_top = -49.5
+offset_right = 50.5
+offset_bottom = 50.5
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.392157)
+show_behind_parent = true
+
+[node name="LetterUnit" type="Node2D" parent="."]
+script = ExtResource("4_vh3gd")
+metadata/_custom_type_script = "uid://jcv0ems6dx8s"
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

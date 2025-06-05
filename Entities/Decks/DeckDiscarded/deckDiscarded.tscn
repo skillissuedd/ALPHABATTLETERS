@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://k4v4s2gtpl8t"]
+
+[ext_resource type="Script" uid="uid://dgckgyy1y63pt" path="res://Entities/Decks/DeckDiscarded/deck_discarded.gd" id="1_es41y"]
+
+[node name="DeckDiscarded" type="Node2D"]
+script = ExtResource("1_es41y")
