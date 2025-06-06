@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cg52rayeaql02"
-path="res://.godot/imported/upgrade1.wav-c6a2495c5d71e5dbd6da45e012e80b07.sample"
+path="res://.godot/imported/upgrade1.wav-90f999be7468e5eda0b3d8793fccf406.sample"
 
 [deps]
 
-source_file="res://sounds/upgrade1.wav"
-dest_files=["res://.godot/imported/upgrade1.wav-c6a2495c5d71e5dbd6da45e012e80b07.sample"]
+source_file="res://Entities/Letters/LetterUpgrades/upgrade1.wav"
+dest_files=["res://.godot/imported/upgrade1.wav-90f999be7468e5eda0b3d8793fccf406.sample"]
 
 [params]
 

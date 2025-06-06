@@ -5,7 +5,7 @@ class_name deck_class
 const LETTER_SCENE2D = preload("res://Entities/Letters/Letter2D/Ally/AllyLetter2D.tscn")
 
 const GRID_COLUMNS = 13  # 13 x 4 grid for 52 letters
-const CELL_SIZE = Vector2(200, 200)
+const CELL_SIZE = Vector2(250, 250)
 var rand_index = null
 
 var row = null
@@ -35,8 +35,7 @@ func fill_deck():
 		col = i % GRID_COLUMNS
 		letter2Dinstance.position = Vector2(col, row) * CELL_SIZE
 		add_child(letter2Dinstance)
-		letter2Dinstance.set_letter(deck[i])
-		letter2Dinstance.update_element_style()
+		letter2Dinstance.finish_letter_preparation(deck[i])
 
 func get_random_letter_instance() -> Node2D:
 	if deck.is_empty():

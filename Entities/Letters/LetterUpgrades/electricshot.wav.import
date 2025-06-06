@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dut7tplxpm4uo"
-path="res://.godot/imported/electricshot.wav-5294b9e548599626adea5027a3713462.sample"
+path="res://.godot/imported/electricshot.wav-67808838a833155d2b79dfcc1b1b1ea4.sample"
 
 [deps]
 
-source_file="res://sounds/electricshot.wav"
-dest_files=["res://.godot/imported/electricshot.wav-5294b9e548599626adea5027a3713462.sample"]
+source_file="res://Entities/Letters/LetterUpgrades/electricshot.wav"
+dest_files=["res://.godot/imported/electricshot.wav-67808838a833155d2b79dfcc1b1b1ea4.sample"]
 
 [params]
 

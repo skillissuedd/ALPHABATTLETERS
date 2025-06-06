@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://fg0drki0ud1j"
-path="res://.godot/imported/superupgrade.wav-1186661ab33d81e9785cf4259740a016.sample"
+path="res://.godot/imported/superupgrade.wav-805b5b34d0803e08b4a7bd6d9d9e2a1b.sample"
 
 [deps]
 
-source_file="res://sounds/superupgrade.wav"
-dest_files=["res://.godot/imported/superupgrade.wav-1186661ab33d81e9785cf4259740a016.sample"]
+source_file="res://Entities/Letters/LetterUpgrades/superupgrade.wav"
+dest_files=["res://.godot/imported/superupgrade.wav-805b5b34d0803e08b4a7bd6d9d9e2a1b.sample"]
 
 [params]
 

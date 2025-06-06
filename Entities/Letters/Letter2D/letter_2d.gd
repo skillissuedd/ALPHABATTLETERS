@@ -7,10 +7,12 @@ var current_goal_scale: Vector2 = Vector2(0.2, 0.2)
 var scale_tween: Tween
 var scale_mod:float = 2
 var max_size := Vector2(200, 200)
+
 #DRAGGING
 @export var mouse_in: bool = false
 @export var is_dragging: bool = false
 @export var is_active: bool = true
+
 #SLOTS AND POSITION
 var current_selected_slot = null
 var overlapping_slots = []
@@ -19,21 +21,48 @@ var closest_dist = null
 var dist = null
 var position_in_hand = Vector2()
 var is_outside = false
-#UI
-var texture_img = null
-var element = "Neutral"
-@onready var LetterDisplay = $Display/LetterDisplay
-var is_enemy: bool
 
+#Letter info and stats
+var letter_stats_path = "res://Entities/Letters/LetterStats/letter_stats.tres"
+var letter_stats = load(letter_stats_path)
+@export var current_letter = "A"
 @export var max_hp: int
-var current_hp: int 
-var current_atk: int
+@export var current_hp: int 
+@export var current_atk: int
+@export var is_enemy: bool
+@onready var current_upgrade = null
+var element = "Neutral"
+
+#References
 @onready var letter_unit = $LetterUnit
 @onready var frame_bar = $FrameBar/FrameBar
+@onready var LetterDisplay = $Display/LetterDisplay
+var texture_img = null
 
-	
-func return_unit():
-	return letter_unit
+func finish_letter_preparation(letter: String):
+	if !is_enemy:
+		set_letter(letter)
+		update_element_style()
+	else:
+		var random_letter = Global.letter_stats.return_random_letter()
+		set_letter(random_letter)
+		update_element_style()
+		#frame_bar.set_hp_percent(100)
+		frame_bar.border_color = Color.DARK_RED
+
+func set_letter(character: String):
+	current_letter = character
+	var stats = letter_stats.get_stats(character)
+	max_hp = stats["hp"]
+	current_hp = max_hp
+	current_atk = stats["atk"]
+	if LetterDisplay:
+		LetterDisplay.change_letter(character)
+		LetterDisplay.update_stats(current_atk, current_hp)
+		letter_unit.initialize(character, is_enemy, current_atk, max_hp, element)
+		
+func get_upgrade():
+	return current_upgrade
 	
 func show_stats():
 	letter_unit.show_stats()
@@ -44,20 +73,6 @@ func _ready():
 func set_active(state: bool):
 	is_active=state
 
-func set_random_letter():
-	var random_letter = Global.letter_stats.return_random_letter()
-	if LetterDisplay:
-		LetterDisplay.change_letter(random_letter)
-	if is_enemy:
-		LetterDisplay.change_letter(random_letter)
-		LetterDisplay.update_stats(LetterDisplay.base_atk+1, LetterDisplay.base_hp+2)
-		
-func set_letter(character: String):
-	if LetterDisplay:
-		LetterDisplay.change_letter(character)
-		max_hp = LetterDisplay.base_hp
-		current_hp = max_hp
-		current_atk = LetterDisplay.base_atk
 
 func return_letter():
 	if LetterDisplay:
@@ -71,7 +86,8 @@ func _on_area_2d_mouse_exited() -> void:
 	mouse_in = false
 	
 func update_element_style():
-	element = LetterDisplay.return_element()
+	element = letter_stats.get_element_for_letter(current_letter)
+	LetterDisplay.change_element(element)
 	match element:
 		"Water":
 			texture_img=preload("res://textures/tiles/letterTileWater.png")

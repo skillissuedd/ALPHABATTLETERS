@@ -71,12 +71,15 @@ func init_enemies(enemy_count: int):
 	for i in range(min(enemy_count, candidate_slots.size())):
 		var slot = candidate_slots[i]
 		var enemy = ENEMY_LETTER_2D.instantiate()
-		slot.letter_is_placed()
 		slot.add_child(enemy)
+		enemy.finish_letter_preparation("A")
+		slot.current_letter = enemy
+		slot.letter_is_placed()
 		enemy.position += Vector2(80,80)
 		enemy.letter_unit.grid_x = slot.slotColumn
 		enemy.letter_unit.grid_y = slot.slotRow
-		enemy.set_random_letter()
-		enemy.update_element_style()
-		enemy.modulate = Color(1, 0.6, 0.6, 1)
-		Global.board_scene.enemy_letters.append(enemy.return_unit())
+		
+		enemy.modulate = Color(1, 0.8, 0.8, 1)
+		Global.board_scene.enemy_letters.append(enemy.letter_unit)
+		
+	

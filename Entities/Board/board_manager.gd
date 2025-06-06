@@ -104,10 +104,10 @@ func create_board():
 func randomize_slot():
 	var roll = randf() * 100.0
 	var slotRolled = null
-	if roll <= 98.0:
+	if roll <= 18.0:
 		slotRolled = slot_scene
 	else:
-		var roll2 = randi() * 11
+		var roll2 = randi() % 11
 		if roll2 <= 6:
 			slotRolled = slotRusty
 		elif roll2 <= 8:

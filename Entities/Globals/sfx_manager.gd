@@ -1,5 +1,7 @@
 extends Node2D
 class_name SFXManager
+const MYSTERY_ITEM_SOUND = preload("res://Entities/Letters/LetterUpgrades/mysteryItem.wav")
+
 
 const POOL_SIZE := 12
 var pool: Array[AudioStreamPlayer2D] = []
@@ -32,3 +34,6 @@ func hit_sound():
 
 func death_sound():
 	play_sfx(preload("res://sounds/death1.wav"), global_position)
+
+func upgrade_vector():
+	play_sfx(MYSTERY_ITEM_SOUND, global_position)

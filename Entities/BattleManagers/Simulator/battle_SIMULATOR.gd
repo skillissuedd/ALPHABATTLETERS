@@ -32,7 +32,9 @@ func restore_backup(backup: Dictionary):
 		unit.hp = backup[unit]["hp"]
 		unit.is_dead = backup[unit]["is_dead"]
 		unit.letterParent.LetterDisplay.update_stats(backup[unit]["attack"], backup[unit]["hp"])
-		unit.letterParent.update_frame_bar((float(backup[unit]["hp"]*100)/float(backup[unit]["hp"])) ,false )
+		unit.letterParent.update_frame_bar((float(backup[unit]["hp"]*100)/float(backup[unit]["hp"])), false )
+		if unit.is_enemy == true:
+			unit.letterParent.modulate = Color(0.8, 0.8, 1)
 		
 func simulate_battle(player_letters: Array, enemy_letters: Array, apply: bool = false) -> Dictionary:
 	# Organize enemies by position for quick lookup

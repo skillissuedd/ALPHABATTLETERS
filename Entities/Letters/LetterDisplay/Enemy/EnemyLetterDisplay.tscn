@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://0jwxwj57em7w" path="res://Entities/Letters/LetterDisplay/Enemy/enemy_letter_display.gd" id="1_vec7r"]
 [ext_resource type="FontFile" uid="uid://cltoojf5br46e" path="res://fonts/SpicyNoodle-K7X5X.ttf" id="2_maknq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_785dx"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjnlj"]
 size = Vector2(52.5, 76.75)
 
 [node name="LetterDisplay" type="Control"]
@@ -43,11 +43,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -39.0
-offset_top = -54.5
-offset_right = 39.0
-offset_bottom = 54.5
+offset_top = -42.0
+offset_right = 41.0
+offset_bottom = 68.0
 grow_horizontal = 2
 grow_vertical = 2
+rotation = 3.14159
+pivot_offset = Vector2(40, 48)
 size_flags_horizontal = 4
 theme_override_constants/outline_size = 23
 theme_override_font_sizes/font_size = 79
@@ -55,31 +57,28 @@ text = "A"
 horizontal_alignment = 1
 
 [node name="Area2D" type="Area2D" parent="Panel/LetterLabel"]
-collision_layer = 8
+position = Vector2(39, 57.5)
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Panel/LetterLabel/Area2D"]
-position = Vector2(40, 53.5)
-shape = SubResource("RectangleShape2D_785dx")
-debug_color = Color(0.77347, 0.419392, 0.385667, 0.42)
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_qjnlj")
 
-[node name="DefLabel" type="Label" parent="Panel"]
+[node name="HPLabel" type="Label" parent="Panel"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -29.0
-offset_top = -30.0
-offset_right = 1.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 3.14159
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -12.0
+offset_right = 17.0
+offset_bottom = 22.0
+grow_vertical = 0
 size_flags_horizontal = 2
 size_flags_vertical = 8
-theme_override_colors/font_color = Color(0.992157, 0.847059, 0.207843, 1)
-theme_override_colors/font_outline_color = Color(0.372549, 0.372549, 0, 1)
+theme_override_colors/font_color = Color(0.26293, 0.480554, 0.995333, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = ExtResource("2_maknq")
 theme_override_font_sizes/font_size = 30
@@ -89,22 +88,21 @@ vertical_alignment = 1
 
 [node name="ATKLabel" type="Label" parent="Panel"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 58.0
-offset_top = -30.0
-offset_right = 88.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 3.14159
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -14.0
+offset_top = -12.0
+offset_right = 14.0
+offset_bottom = 22.0
+grow_horizontal = 0
+grow_vertical = 0
 size_flags_horizontal = 10
 size_flags_vertical = 8
-theme_override_colors/font_color = Color(0.984314, 0.54902, 0, 1)
-theme_override_colors/font_outline_color = Color(0.352941, 0.176471, 0, 1)
+theme_override_colors/font_color = Color(0.835294, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = ExtResource("2_maknq")
 theme_override_font_sizes/font_size = 30

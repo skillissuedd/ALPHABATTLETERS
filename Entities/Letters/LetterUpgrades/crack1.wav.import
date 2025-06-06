@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b266vlppu58hb"
-path="res://.godot/imported/crack1.wav-8fb941083b15a500292530a997fdf395.sample"
+path="res://.godot/imported/crack1.wav-05721861bc6168f658954b8dd9f4bc16.sample"
 
 [deps]
 
-source_file="res://sounds/crack1.wav"
-dest_files=["res://.godot/imported/crack1.wav-8fb941083b15a500292530a997fdf395.sample"]
+source_file="res://Entities/Letters/LetterUpgrades/crack1.wav"
+dest_files=["res://.godot/imported/crack1.wav-05721861bc6168f658954b8dd9f4bc16.sample"]
 
 [params]
 

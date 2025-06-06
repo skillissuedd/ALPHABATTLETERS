@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bxtp51ivvcu60"
-path="res://.godot/imported/triple shot.wav-85c71ce5811efa85fd38eb551c042845.sample"
+path="res://.godot/imported/triple shot.wav-eb855c42e8f7334accef82fd1ada5e48.sample"
 
 [deps]
 
-source_file="res://sounds/triple shot.wav"
-dest_files=["res://.godot/imported/triple shot.wav-85c71ce5811efa85fd38eb551c042845.sample"]
+source_file="res://Entities/Letters/LetterUpgrades/triple shot.wav"
+dest_files=["res://.godot/imported/triple shot.wav-eb855c42e8f7334accef82fd1ada5e48.sample"]
 
 [params]
 

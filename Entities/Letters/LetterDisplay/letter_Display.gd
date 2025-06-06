@@ -4,47 +4,64 @@ class_name LetterDisplayClass
 
 #Default letter stats
 var stats: Dictionary
-@export var letter_stats_path = "res://Entities/Letters/LetterStats/letter_stats.tres"
-@export var letter_stats = load(letter_stats_path)
+
 
 #Letter face and stats
+@onready var letter2D = get_parent().get_parent() as letter2Dclass
 @onready var letter_label = $Panel/LetterLabel
 @onready var ATK_label = $Panel/ATKLabel
-@onready var HP_label = $Panel/DefLabel
-var current_letter = "G"
+@onready var HP_label = $Panel/HPLabel
 var current_element = "Neutral"
-var letter_unit
-@export var base_atk :int
-@export var base_hp :int
-@export var current_hp :int
 var is_enemy:bool
+
+func animate_letter_flip():
+	var tween := create_tween()
+		# Step 1: normalize rotation
+	letter_label.rotation_degrees = fmod(letter_label.rotation_degrees, 360)
+	
+		# Step 2: scale up
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(letter_label, "scale", Vector2(1.5, 1.5), 0.3)
+	tween.tween_callback(Callable(Global.sfx_manager, "upgrade_vector"))
+	# Step 3: rotate after scale-up
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(letter_label, "rotation_degrees", letter_label.rotation_degrees + 180, 0.5)
+	
+	# Step 4: scale back down
+	tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tween.tween_property(letter_label, "scale", Vector2(1.0, 1.0), 0.2).set_delay(0.8)
+	
+	# Step 5: after everything, pop the labels in parallel
+	tween.tween_callback(Callable(self, "_pop_stat_labels"))
+
+	
+func _pop_stat_labels():
+	var tween := create_tween()
+	var pop_scale = Vector2(1.5, 1.5)
+	var normal_scale = Vector2(1.0, 1.0)
+	
+	tween.parallel().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_property(ATK_label, "scale", pop_scale, 0.5)
+	tween.tween_property(HP_label, "scale", pop_scale, 0.5)
+	
+	tween.parallel().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tween.tween_property(ATK_label, "scale", normal_scale, 0.5).set_delay(0.1)
+	tween.tween_property(HP_label, "scale", normal_scale, 0.5).set_delay(0.1)
+	update_stats(letter2D.current_hp, letter2D.current_atk)
 
 #On ready
 func _ready():
 	mouse_filter = Control.MOUSE_FILTER_PASS
 	await get_tree().process_frame
 	
-#Change letter to another from stats
 func change_letter(character: String):
-	current_letter = character
-	change_element(current_letter)
 	letter_label.text = str(character)
-	stats = letter_stats.get_stats(character)
 	
-	update_stats(int(stats["atk"]), int(stats["hp"]))
-	get_parent().get_parent().letter_unit.initialize(current_letter, is_enemy, base_atk, base_hp, current_element)
-	#ATK_label.add_theme_font_size_override("font_size", 25 + (current_atk*0.2))
-	#ATK_label.add_theme_constant_override("outline_size", 5+ (current_atk*0.2))
-	
-	#DEF_label.add_theme_font_size_override("font_size", 25 + (current_hp * 0.2))
-	#DEF_label.add_theme_constant_override("outline_size", 5 + (current_hp*0.2))
+func update_stats(attack: int, hp: int):
+	ATK_label.text = str(attack)
+	HP_label.text = str(hp)
 
-func change_element(letterToElement: String):
-	current_element = letter_stats.get_element_for_letter(letterToElement)
-	change_font(current_element)
-	get_parent().get_parent().update_element_style()
-
-func change_font(element: String):
+func change_element(element: String):
 	var font: Font = null
 	match element:
 		"Water":
@@ -59,20 +76,3 @@ func change_font(element: String):
 			
 	if font:
 		letter_label.add_theme_font_override("font", font)
-
-func update_stats(attack: int, hp: int):
-	base_atk = attack
-	base_hp = hp
-	ATK_label.text = str(attack)
-	HP_label.text = str(hp)
-	var unit = get_parent().get_parent().return_unit()
-	unit.update_stats(attack, hp)
-
-func return_stats():
-	return [base_atk, current_hp]
-	
-func return_letter():
-	return $Panel/LetterLabel.text
-
-func return_element():
-	return current_element

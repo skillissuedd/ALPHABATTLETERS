@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dra6je55bsveu"]
 
-[ext_resource type="Script" uid="uid://cl38uc64n2s74" path="res://Entities/Slots/slot_1.gd" id="1_7twif"]
+[ext_resource type="Script" uid="uid://bkf0mmmfa1yhi" path="res://Entities/Slots/Upgrade/slot_upgrade.gd" id="1_t63k8"]
 [ext_resource type="Texture2D" uid="uid://i4ht01btn6y6" path="res://textures/tiles/chessTile2.png" id="2_wgll3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4c3kn"]
@@ -9,7 +9,7 @@ size = Vector2(168, 159)
 [node name="Area2D" type="Area2D"]
 collision_layer = 16
 collision_mask = 3
-script = ExtResource("1_7twif")
+script = ExtResource("1_t63k8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.811765, 0, 1, 1)

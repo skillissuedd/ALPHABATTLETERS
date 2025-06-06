@@ -1,8 +1,9 @@
-extends Area2D
+class_name slot_class extends Area2D 
 var mouse_in: bool = false
 var is_selected = false
 var slotColumn: int = 0
-var slotRow: int = 0
+var slotRow: int = 0 
+var current_letter: Node2D
 @onready var slot_sprite = $Sprite2D
 @onready var slotCollision = $Slot_Collision
 
@@ -12,6 +13,7 @@ func _ready() -> void:
 func is_hovered(letter2D: Node2D):
 	slot_sprite.self_modulate = Color(1, 1, 1, 0.2)
 	letter2D.reparent(self)
+	current_letter = letter2D
 	Global.board_scene.on_slot_is_hovered(self, letter2D)
 	
 func is_not_hovered():

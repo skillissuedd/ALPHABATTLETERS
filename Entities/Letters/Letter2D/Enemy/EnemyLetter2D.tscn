@@ -28,7 +28,6 @@ debug_color = Color(0.732085, 0.438544, 0.475271, 0.42)
 
 [node name="Display" type="Node2D" parent="."]
 position = Vector2(0, -6)
-rotation = 3.14159
 
 [node name="LetterDisplay" parent="Display" instance=ExtResource("2_e4u6o")]
 

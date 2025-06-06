@@ -17,14 +17,14 @@ func animate_affected_letters(enemy_letters: Array):
 		var letterNode = letter["ref"].letterParent
 		var letterDisplay=letterNode.LetterDisplay
 		var letterPrevHP = int(letterDisplay.HP_label.text)
-		var letterMaxHP = int(letterDisplay.base_hp)
+		var letterMaxHP = int(letterNode.max_hp)
 		letterDisplay.update_stats(letter["attack"], letter["hp"])
 		#letterNode.shake_letter()
 		#Global.sfx_manager.hit_sound()
-		letterNode.modulate = Color(0.7, 0.7, 0.7)
+		#letterNode.modulate = Color(0.7, 0.7, 0.7)
 		letterNode.frame_bar.previous_hp_percent=float(letterPrevHP*100/letterMaxHP)
 		letterNode.update_frame_bar((float(letter["hp"]*100)/float(letterMaxHP)), false)
 		
 		if letter["hp"] <= 0:
-			letterNode.modulate = Color(0.4, 0.4, 0.4)
+			letterNode.modulate = Color(0.8, 0.8, 1)
 			#Global.sfx_manager.death_sound()

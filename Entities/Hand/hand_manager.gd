@@ -1,5 +1,4 @@
 extends Node2D
-class_name slot_class
 
 @export var letter2Dscene = preload("res://Entities/Letters/Letter2D/Ally/AllyLetter2D.tscn")
 @export var cell_size: Vector2 = Vector2(250, 250)
