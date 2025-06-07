@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcvgb1vvjwqv0"]
+
+[ext_resource type="Texture2D" uid="uid://imd38w5c8u48" path="res://Entities/Letters/Death/skull_default.png" id="1_jb7lm"]
+
+[node name="DeathMark" type="Sprite2D"]
+texture = ExtResource("1_jb7lm")

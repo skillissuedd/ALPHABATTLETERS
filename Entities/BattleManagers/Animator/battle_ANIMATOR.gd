@@ -26,5 +26,5 @@ func animate_affected_letters(enemy_letters: Array):
 		letterNode.update_frame_bar((float(letter["hp"]*100)/float(letterMaxHP)), false)
 		
 		if letter["hp"] <= 0:
-			letterNode.modulate = Color(0.8, 0.8, 1)
+			letterDisplay.death_mark.visible = true
 			#Global.sfx_manager.death_sound()

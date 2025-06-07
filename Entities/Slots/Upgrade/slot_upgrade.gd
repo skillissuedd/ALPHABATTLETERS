@@ -1,1 +1,1 @@
-extends Area2D
+extends slot_class

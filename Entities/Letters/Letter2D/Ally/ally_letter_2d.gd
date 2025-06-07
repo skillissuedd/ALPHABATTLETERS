@@ -26,7 +26,7 @@ func get_closest_slot() -> Area2D:
 		Global.board_scene.slot_hovered_block = false
 	Global.currently_hovered_slot = closest_slot
 	closest_slot.is_hovered(self)
-	
+
 	return closest_slot
 	
 func _physics_process(delta: float) -> void:

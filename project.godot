@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 Mousebrain="*res://Entities/Globals/mousebrain.gd"
 Global="*res://Entities/Globals/Global.gd"
 SfxManager="*res://Entities/Globals/sfx_manager.gd"
+GlobalOptions="*res://Entities/Globals/GlobalOptions.gd"
 
 [debug]
 
@@ -38,4 +39,5 @@ click={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 2d/snap/snap_2d_transforms_to_pixel=true

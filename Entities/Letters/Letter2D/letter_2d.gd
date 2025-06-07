@@ -109,14 +109,12 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		area.set_deferred("monitorable", false)
 		area.set_deferred("monitoring", false)
 		letter.visible=false
-
-
-	
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if area.is_in_group("slots") and not area.is_selected:
 		area.is_not_hovered()
 		overlapping_slots.erase(area)
-
+	if overlapping_slots.is_empty():
+		Global.battle_simulator.load_backups()
 
 #############################
 #### ANIMATIONS #########

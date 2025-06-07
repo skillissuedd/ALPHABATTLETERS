@@ -26,21 +26,26 @@ func create_backup(letter_array: Array) -> Dictionary:
 			"attack": unit.attack
 		}
 	return backup
-	
+
+func load_backups():
+	if player_backup:
+		restore_backup(player_backup)
+	if enemy_backup:
+		restore_backup(enemy_backup)
+
+
 func restore_backup(backup: Dictionary):
 	for unit in backup.keys():
 		unit.hp = backup[unit]["hp"]
 		unit.is_dead = backup[unit]["is_dead"]
+		if !unit.is_dead:
+			unit.letterParent.LetterDisplay.death_mark.visible = false
 		unit.letterParent.LetterDisplay.update_stats(backup[unit]["attack"], backup[unit]["hp"])
-		unit.letterParent.update_frame_bar((float(backup[unit]["hp"]*100)/float(backup[unit]["hp"])), false )
-		if unit.is_enemy == true:
-			unit.letterParent.modulate = Color(0.8, 0.8, 1)
-		
+		unit.letterParent.update_frame_bar((float(backup[unit]["hp"]*100)/float(backup[unit]["hp"])), false)
 func simulate_battle(player_letters: Array, enemy_letters: Array, apply: bool = false) -> Dictionary:
 	# Organize enemies by position for quick lookup
 	if !apply:
-		restore_backup(player_backup)
-		restore_backup(enemy_backup)
+		load_backups()
 	var sim_player = {}
 	var sim_enemy = {}
 	var letters_to_animate =[]

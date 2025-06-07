@@ -3,7 +3,7 @@ extends Node2D
 @export var slot_scene = preload ("res://Entities/Slots/slot1.tscn")
 @export var slotRusty = preload("res://Entities/Slots/Rusty/slotRusty.tscn")
 @export var slotGolden = preload("res://Entities/Slots/Golden/slotGolden.tscn")
-@export var slotUpgrade = preload("res://Entities/Slots/Upgrade/Tier3/Vector/upgradeVector.tscn")
+@export var slotUpgrade = preload("res://Entities/Slots/Upgrade/slotUpgrade.tscn")
 @export var cell_size: Vector2 = Vector2(300, 300)
 @onready var rows: int = 5
 @onready var cols: int = 5
@@ -24,7 +24,8 @@ func on_slot_is_hovered(slot: Node2D, letter2D: Node2D):
 		ally_letters.append(letter2D.letter_unit)
 		letter2D.letter_unit.grid_x = slotX
 		letter2D.letter_unit.grid_y = slotY
-		Global.battle_simulator.run_simulation()
+		if GlobalOptions.toggle_preview_animations:
+			Global.battle_simulator.run_simulation()
 
 func prepare_simulation_data() -> Dictionary:
 	var ally_letters_sim = []
@@ -102,14 +103,17 @@ func create_board():
 		slot_grid.append(row)
 
 func randomize_slot():
-	var roll = randf() * 100.0
 	var slotRolled = null
-	if roll <= 18.0:
+	var roll = randi() % 101
+	if GlobalOptions.hard_mode:
+		if roll < 1:
+			slotRolled = slotRusty
+	if roll <= 99:
 		slotRolled = slot_scene
 	else:
 		var roll2 = randi() % 11
 		if roll2 <= 6:
-			slotRolled = slotRusty
+			slotRolled = slotGolden
 		elif roll2 <= 8:
 			slotRolled = slotGolden
 		else:

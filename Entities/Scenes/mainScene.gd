@@ -21,6 +21,7 @@ func init_interface():
 	
 	Global.battle_simulator = $BattleSimulator
 	Global.battle_animator = $BattleAnimator
+	
 func _ready():
 	init_interface()
 	Global.battle_manager.before_round()

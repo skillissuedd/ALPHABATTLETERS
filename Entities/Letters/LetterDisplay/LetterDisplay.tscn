@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cb5w2yq6f7axj"]
+[gd_scene load_steps=5 format=3 uid="uid://cb5w2yq6f7axj"]
 
 [ext_resource type="Script" uid="uid://7b8t1rokifof" path="res://Entities/Letters/LetterDisplay/letter_Display.gd" id="1_r0arm"]
+[ext_resource type="PackedScene" uid="uid://bcvgb1vvjwqv0" path="res://Entities/Letters/Death/death_mark.tscn" id="3_oaod5"]
 [ext_resource type="FontFile" uid="uid://cltoojf5br46e" path="res://fonts/SpicyNoodle-K7X5X.ttf" id="4_cmgim"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_785dx"]
@@ -107,3 +108,8 @@ theme_override_font_sizes/font_size = 30
 text = "15"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DeathMark" parent="Panel" instance=ExtResource("3_oaod5")]
+visible = false
+position = Vector2(50, 51)
+scale = Vector2(2.57143, 2.6129)

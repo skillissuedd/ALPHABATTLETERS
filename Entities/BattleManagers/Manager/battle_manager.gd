@@ -78,8 +78,7 @@ func init_enemies(enemy_count: int):
 		enemy.position += Vector2(80,80)
 		enemy.letter_unit.grid_x = slot.slotColumn
 		enemy.letter_unit.grid_y = slot.slotRow
-		
-		enemy.modulate = Color(1, 0.8, 0.8, 1)
+		#enemy.modulate = Color(1, 0.8, 0.8, 1)
 		Global.board_scene.enemy_letters.append(enemy.letter_unit)
 		
 	

@@ -4,7 +4,7 @@ class_name LetterDisplayClass
 
 #Default letter stats
 var stats: Dictionary
-
+@onready var death_mark = $Panel/DeathMark
 
 #Letter face and stats
 @onready var letter2D = get_parent().get_parent() as letter2Dclass
