@@ -3,7 +3,7 @@ extends Node2D
 @export var slot_scene = preload ("res://Entities/Slots/slot1.tscn")
 @export var slotRusty = preload("res://Entities/Slots/Rusty/slotRusty.tscn")
 @export var slotGolden = preload("res://Entities/Slots/Golden/slotGolden.tscn")
-@export var slotUpgrade = preload("res://Entities/Slots/Upgrade/slotUpgrade.tscn")
+@export var slotUpgrade = preload("res://Entities/Slots/Upgrade/Tier3/Vector/upgradeVector.tscn")
 @export var cell_size: Vector2 = Vector2(300, 300)
 @onready var rows: int = 5
 @onready var cols: int = 5

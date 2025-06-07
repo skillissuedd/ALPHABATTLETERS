@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dra6je55bsveu"]
+[gd_scene load_steps=4 format=3 uid="uid://dt2op4jnjd5sr"]
 
-[ext_resource type="Script" uid="uid://cvfsgwomqagpe" path="res://Entities/Slots/Upgrade/slot_upgrade.gd" id="1_t63k8"]
-[ext_resource type="Texture2D" uid="uid://i4ht01btn6y6" path="res://textures/tiles/chessTile2.png" id="2_wgll3"]
+[ext_resource type="Script" uid="uid://cclv82psephds" path="res://Entities/Slots/Upgrade/Tier3/Assassin/upgrade_assassin.gd" id="1_ycbh4"]
+[ext_resource type="Texture2D" uid="uid://i4ht01btn6y6" path="res://textures/tiles/chessTile2.png" id="2_ndat5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4c3kn"]
 size = Vector2(168, 159)
@@ -9,14 +9,14 @@ size = Vector2(168, 159)
 [node name="Area2D" type="Area2D"]
 collision_layer = 16
 collision_mask = 3
-script = ExtResource("1_t63k8")
+script = ExtResource("1_ycbh4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.811765, 0, 1, 1)
 texture_filter = 1
 position = Vector2(80, 80)
 scale = Vector2(10, 10)
-texture = ExtResource("2_wgll3")
+texture = ExtResource("2_ndat5")
 
 [node name="Slot_Collision" type="CollisionShape2D" parent="."]
 visibility_layer = 2

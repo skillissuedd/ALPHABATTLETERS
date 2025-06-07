@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd2n0uqw5bdqm"
-path="res://.godot/imported/woodTile1.jpg-9920df62c1ebaa54da81c9916f6e8cd8.ctex"
+uid="uid://dslkyoufpddj5"
+path="res://.godot/imported/letterTileWater.png-fc46aaa06be82fd703ab668afcfa1e5b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/tiles/woodTile1.jpg"
-dest_files=["res://.godot/imported/woodTile1.jpg-9920df62c1ebaa54da81c9916f6e8cd8.ctex"]
+source_file="res://Entities/Letters/Letter2D/ElementalTiles/letterTileWater.png"
+dest_files=["res://.godot/imported/letterTileWater.png-fc46aaa06be82fd703ab668afcfa1e5b.ctex"]
 
 [params]
 

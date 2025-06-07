@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr8epcciv4aqq"
-path="res://.godot/imported/letterTileFire.png-9be7dc125f9c1188659907d25d9d2d4c.ctex"
+uid="uid://cd1q4vnlr6tdw"
+path="res://.godot/imported/letterTileEarth.png-dd9bb16f2fd924c0b5ee5138dd8db9a3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/tiles/letterTileFire.png"
-dest_files=["res://.godot/imported/letterTileFire.png-9be7dc125f9c1188659907d25d9d2d4c.ctex"]
+source_file="res://Entities/Letters/Letter2D/ElementalTiles/letterTileEarth.png"
+dest_files=["res://.godot/imported/letterTileEarth.png-dd9bb16f2fd924c0b5ee5138dd8db9a3.ctex"]
 
 [params]
 

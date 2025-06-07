@@ -37,7 +37,6 @@ var element = "Neutral"
 @onready var letter_unit = $LetterUnit
 @onready var frame_bar = $FrameBar/FrameBar
 @onready var LetterDisplay = $Display/LetterDisplay
-var texture_img = null
 
 func finish_letter_preparation(letter: String):
 	if !is_enemy:
@@ -90,19 +89,15 @@ func update_element_style():
 	LetterDisplay.change_element(element)
 	match element:
 		"Water":
-			texture_img=preload("res://textures/tiles/letterTileWater.png")
-			self.texture=load("res://textures/tiles/letterTileWater.png")
+			self.texture=load("res://Entities/Letters/Letter2D/ElementalTiles/letterTileWater.png")
 		"Fire":
-			texture_img=preload("res://textures/tiles/letterTileFire.png")
-			self.texture=load("res://textures/tiles/letterTileFire.png")
+			self.texture=load("res://Entities/Letters/Letter2D/ElementalTiles/letterTileFire.png")
 		"Electric":
-			texture_img=preload("res://textures/tiles/letterTileElectric.png")
-			self.texture=load("res://textures/tiles/letterTileElectric.png")
+			self.texture=load("res://Entities/Letters/Letter2D/ElementalTiles/letterTileElectric.png")
 		"Earth":
-			texture_img=preload("res://textures/tiles/woodTile1.jpg")
-			self.texture=load("res://textures/tiles/woodTile1.jpg")
+			self.texture=load("res://Entities/Letters/Letter2D/ElementalTiles/woodTile1.jpg")
 		"Neutral":
-			self_modulate = Color(0.9, 0.9, 0.9)    # светлый мрамор
+			self_modulate = Color(0.9, 0.9, 0.9) 
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:

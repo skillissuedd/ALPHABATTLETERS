@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://8v6qoj58xipv"
-path="res://.godot/imported/letterTileElectric.png-b0a9be406ef95f023f2050f2e1d5341a.ctex"
+path="res://.godot/imported/letterTileElectric.png-8732b3c7bfc4369a8682409bd3f4b404.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/tiles/letterTileElectric.png"
-dest_files=["res://.godot/imported/letterTileElectric.png-b0a9be406ef95f023f2050f2e1d5341a.ctex"]
+source_file="res://Entities/Letters/Letter2D/ElementalTiles/letterTileElectric.png"
+dest_files=["res://.godot/imported/letterTileElectric.png-8732b3c7bfc4369a8682409bd3f4b404.ctex"]
 
 [params]
 
