@@ -27,4 +27,5 @@ func animate_affected_letters(enemy_letters: Array):
 		
 		if letter["hp"] <= 0:
 			letterDisplay.death_mark.visible = true
+			letterNode.modulate = Color (1, 1, 1, 0.8)
 			#Global.sfx_manager.death_sound()

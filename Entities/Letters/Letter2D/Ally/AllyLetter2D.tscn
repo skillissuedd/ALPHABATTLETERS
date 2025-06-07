@@ -23,6 +23,7 @@ debug_color = Color(0.458002, 0.697924, 0.491358, 0.419608)
 [node name="FrameBar" type="Node2D" parent="."]
 
 [node name="FrameBar" parent="FrameBar" instance=ExtResource("2_3ysmy")]
+border_color = Color(1, 0.969291, 0.928374, 1)
 
 [node name="Display" type="Node2D" parent="."]
 position = Vector2(0, 6)

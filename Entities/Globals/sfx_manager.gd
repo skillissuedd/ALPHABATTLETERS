@@ -14,11 +14,11 @@ func _ready():
 		add_child(player)
 		pool.append(player)
 
-func play_sfx(stream: AudioStream, position: Vector2):
+func play_sfx(stream: AudioStream, sound_position: Vector2):
 	for player in pool:
 		if not player.playing:
 			player.stream = stream
-			player.global_position = position
+			player.global_position = sound_position
 			player.play()
 			return
 

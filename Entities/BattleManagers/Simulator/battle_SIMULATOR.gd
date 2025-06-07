@@ -40,6 +40,7 @@ func restore_backup(backup: Dictionary):
 		unit.is_dead = backup[unit]["is_dead"]
 		if !unit.is_dead:
 			unit.letterParent.LetterDisplay.death_mark.visible = false
+			unit.letterParent.modulate = Color (1, 1, 1, 1)
 		unit.letterParent.LetterDisplay.update_stats(backup[unit]["attack"], backup[unit]["hp"])
 		unit.letterParent.update_frame_bar((float(backup[unit]["hp"]*100)/float(backup[unit]["hp"])), false)
 func simulate_battle(player_letters: Array, enemy_letters: Array, apply: bool = false) -> Dictionary:
@@ -91,17 +92,14 @@ func simulate_battle(player_letters: Array, enemy_letters: Array, apply: bool = 
 	
 	
 # Update real LetterUnits (refs)
-	if apply:
-		for player_letter in player_letters:
-			attack(player_letter)
+	#if apply:
+		#for player_letter in player_letters:
+			#attack(player_letter)
 
 	return {
 	"player_alive": sim_player.values().filter(func(p): return !p["is_dead"]).size(),
 	"enemy_alive": sim_enemy.values().filter(func(e): return !e["is_dead"]).size()
 }
-
-func attack(letter_unit: LetterUnit):
-	pass
 	
 func run_simulation():
 	var sim_data = Global.board_scene.prepare_simulation_data()
@@ -109,4 +107,4 @@ func run_simulation():
 		player_backup = create_backup(sim_data["player_letters"])
 	if enemy_backup == null:
 		enemy_backup = create_backup(sim_data["enemy_letters"])
-	var sim_result = simulate_battle(sim_data["player_letters"], sim_data["enemy_letters"], false)
+	simulate_battle(sim_data["player_letters"], sim_data["enemy_letters"], false)

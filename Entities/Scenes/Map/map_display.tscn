@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ypcl10kq6vue"]
+
+[ext_resource type="Script" uid="uid://o7xsrhrl4upp" path="res://Entities/Scenes/Map/map_display.gd" id="1_sf2xo"]
+
+[node name="MapManager" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_sf2xo")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_right = 368.0
+offset_bottom = 355.0
+columns = 5

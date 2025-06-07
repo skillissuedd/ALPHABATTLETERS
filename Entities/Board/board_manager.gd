@@ -80,6 +80,26 @@ func return_letters():
 				all_letters.append(child)
 		return all_letters
 
+func create_upgrade_board():
+	reset_board()
+	
+	var slot_index := 1
+	for y in range(rows):
+		var row: Array = []
+		# Invert the row index so that row 0 is at the bottom
+		var actual_y := rows - 1 - y
+		for x in range(cols):
+			
+			var slot = randomize_slot()
+			slot.name = "Slot_%d" % slot_index
+			slot.position = Vector2(x, actual_y) * cell_size
+			slot.slotColumn = x
+			slot.slotRow = actual_y
+			add_child(slot)
+			row.append(slot)
+			slot_index += 1
+
+		slot_grid.append(row)
 	
 func create_board():
 	reset_board()

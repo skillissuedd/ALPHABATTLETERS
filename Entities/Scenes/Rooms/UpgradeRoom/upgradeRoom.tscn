@@ -1,0 +1,93 @@
+[gd_scene load_steps=15 format=3 uid="uid://synnw0mus554"]
+
+[ext_resource type="Script" uid="uid://cg7hisldyev0t" path="res://Entities/Scenes/Rooms/UpgradeRoom/upgradeRoom.gd" id="1_2fm5j"]
+[ext_resource type="PackedScene" uid="uid://bvkcos12mjaxr" path="res://Entities/Board/boardManager.tscn" id="2_ctpp8"]
+[ext_resource type="PackedScene" uid="uid://cobtvt8orra4u" path="res://Entities/Hand/handManager.tscn" id="3_gwxr8"]
+[ext_resource type="PackedScene" uid="uid://cgbeiher77acw" path="res://Entities/Mouse/mouse.tscn" id="4_fk88b"]
+[ext_resource type="PackedScene" uid="uid://ysw1vyd7dj33" path="res://Entities/Decks/deck.tscn" id="5_qwl6y"]
+[ext_resource type="PackedScene" uid="uid://crwftl3w4v8qo" path="res://Entities/BattleManagers/Manager/battleManager.tscn" id="6_83f81"]
+[ext_resource type="Shader" uid="uid://bebd7eu5owxt0" path="res://shaders/rainbow_border.gdshader" id="7_y6wn6"]
+[ext_resource type="PackedScene" uid="uid://k4v4s2gtpl8t" path="res://Entities/Decks/DeckDiscarded/deckDiscarded.tscn" id="8_pp1na"]
+[ext_resource type="PackedScene" uid="uid://b40yamh1qyeup" path="res://Entities/SFXmanager/SFXmanager.tscn" id="9_0cbn1"]
+[ext_resource type="PackedScene" uid="uid://d2cuqmk8uafxv" path="res://Entities/BattleManagers/Simulator/battleSimulator.tscn" id="10_sfi4b"]
+[ext_resource type="PackedScene" uid="uid://cvhipaaqpctj6" path="res://Entities/BattleManagers/Animator/battleANIMATOR.tscn" id="11_hb3nh"]
+[ext_resource type="PackedScene" uid="uid://cngb63kfm4jub" path="res://Entities/Scenes/UI_manager.tscn" id="12_keaih"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4b75m"]
+shader = ExtResource("7_y6wn6")
+shader_parameter/brightness = 0.865
+shader_parameter/contrast = 0.655
+shader_parameter/alpha_mult = 4.98
+shader_parameter/border_size = 0.505
+shader_parameter/speed = 0.03
+shader_parameter/is_active = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qxria"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_2fm5j")
+
+[node name="BoardManager" parent="." instance=ExtResource("2_ctpp8")]
+position = Vector2(-253, -450)
+
+[node name="handManager" parent="." instance=ExtResource("3_gwxr8")]
+position = Vector2(-274, 1231)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(439, 331)
+zoom = Vector2(0.445, 0.445)
+
+[node name="Mouse" parent="." instance=ExtResource("4_fk88b")]
+position = Vector2(-264, 452)
+
+[node name="Deck" parent="." instance=ExtResource("5_qwl6y")]
+position = Vector2(2397, 0)
+
+[node name="BattleManager" parent="." instance=ExtResource("6_83f81")]
+position = Vector2(-1084, -450)
+scale = Vector2(0.89, 0.89)
+
+[node name="Button" type="Button" parent="."]
+offset_left = -1084.0
+offset_top = 788.0
+offset_right = -583.0
+offset_bottom = 1030.0
+theme_override_font_sizes/font_size = 171
+text = "FIGHT"
+
+[node name="TextureRect" type="NinePatchRect" parent="."]
+visible = false
+show_behind_parent = true
+material = SubResource("ShaderMaterial_4b75m")
+offset_left = -364.0
+offset_top = -568.0
+offset_right = 1214.0
+offset_bottom = 1016.0
+texture = SubResource("CompressedTexture2D_qxria")
+draw_center = false
+
+[node name="DeckDiscarded" parent="." instance=ExtResource("8_pp1na")]
+position = Vector2(-2822, 233)
+
+[node name="sfxManager" parent="." instance=ExtResource("9_0cbn1")]
+position = Vector2(364, 233)
+
+[node name="BattleSimulator" parent="." instance=ExtResource("10_sfi4b")]
+
+[node name="BattleAnimator" parent="." instance=ExtResource("11_hb3nh")]
+
+[node name="UiManager" parent="." instance=ExtResource("12_keaih")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1680.0
+offset_top = 1169.0
+offset_right = 1821.0
+offset_bottom = 1215.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4.235, 4.235)
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

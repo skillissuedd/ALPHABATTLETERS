@@ -114,5 +114,5 @@ vertical_alignment = 1
 
 [node name="DeathMark" parent="Panel" instance=ExtResource("3_sdokf")]
 visible = false
-position = Vector2(48, 59)
-scale = Vector2(4.3201, 3.82879)
+position = Vector2(50, 50)
+scale = Vector2(2.13099, 2.02231)
