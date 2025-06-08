@@ -80,5 +80,7 @@ func init_enemies(enemy_count: int):
 		enemy.letter_unit.grid_y = slot.slotRow
 		#enemy.modulate = Color(1, 0.8, 0.8, 1)
 		Global.board_scene.enemy_letters.append(enemy.letter_unit)
+		Global.sfx_manager.play_sfx("stone1", enemy.position)
+		await get_tree().create_timer(0.3).timeout
 		
 	

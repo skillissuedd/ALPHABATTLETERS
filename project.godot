@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ALPHABATTLETTERS"
-run/main_scene="uid://synnw0mus554"
+run/main_scene="uid://drakbuggxc807"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
 [autoload]

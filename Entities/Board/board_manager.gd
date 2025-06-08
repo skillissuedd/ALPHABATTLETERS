@@ -81,25 +81,7 @@ func return_letters():
 		return all_letters
 
 func create_upgrade_board():
-	reset_board()
-	
-	var slot_index := 1
-	for y in range(rows):
-		var row: Array = []
-		# Invert the row index so that row 0 is at the bottom
-		var actual_y := rows - 1 - y
-		for x in range(cols):
-			
-			var slot = randomize_slot()
-			slot.name = "Slot_%d" % slot_index
-			slot.position = Vector2(x, actual_y) * cell_size
-			slot.slotColumn = x
-			slot.slotRow = actual_y
-			add_child(slot)
-			row.append(slot)
-			slot_index += 1
-
-		slot_grid.append(row)
+	create_board()
 	
 func create_board():
 	reset_board()
@@ -116,12 +98,22 @@ func create_board():
 			slot.position = Vector2(x, actual_y) * cell_size
 			slot.slotColumn = x
 			slot.slotRow = actual_y
+			slot.scale = Vector2(0, 0)  # Start invisible/small
 			add_child(slot)
 			row.append(slot)
 			slot_index += 1
 
 		slot_grid.append(row)
-
+	await animate_slots_appearing()
+	
+func animate_slots_appearing() -> void:
+	for y in range(rows):
+		for x in range(cols):
+			var slot = slot_grid[y][x]
+			slot.appear()
+			Global.sfx_manager.play_sfx("stone2", slot.position)
+			await get_tree().create_timer(0.1).timeout  # Delay between each slot
+			
 func randomize_slot():
 	var slotRolled = null
 	var roll = randi() % 101

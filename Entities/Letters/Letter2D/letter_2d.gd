@@ -89,13 +89,13 @@ func update_element_style():
 	LetterDisplay.change_element(element)
 	match element:
 		"Water":
-			self.texture=load("res://Entities/Letters/Letter2D/ElementalTiles/letterTileWater.png")
+			self.texture=load("res://Entities/Letters/Letter2D/Elements/Water/letterTileWater.png")
 		"Fire":
-			self.texture=load("res://Entities/Letters/Letter2D/ElementalTiles/letterTileFire.png")
+			self.texture=load("res://Entities/Letters/Letter2D/Elements/Fire/letterTileFire.png")
 		"Electric":
-			self.texture=load("res://Entities/Letters/Letter2D/ElementalTiles/letterTileElectric.png")
+			self.texture=load("res://Entities/Letters/Letter2D/Elements/Electric/letterTileElectric.png")
 		"Earth":
-			self.texture=load("res://Entities/Letters/Letter2D/ElementalTiles/woodTile1.jpg")
+			self.texture=load("res://Entities/Letters/Letter2D/Elements/Earth/woodTile1.jpg")
 		"Neutral":
 			self_modulate = Color(0.9, 0.9, 0.9) 
 
@@ -166,7 +166,7 @@ func play_attack_animation():
 	tween.tween_property(attack_label, "global_position", end_pos, 1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	tween.tween_property(attack_label, "modulate:a", 0, 0.2).set_delay(0.2)
 	tween.tween_callback(Callable(attack_label, "queue_free"))
-	Global.sfx_manager.play_sfx(preload("res://sounds/attack_1.wav"), global_position)
+	Global.sfx_manager.play_sfx("hit1", global_position)
 	
 	
 func shake_letter(strength := 15.0, duration := 0.3, shakes := 15):
@@ -175,7 +175,7 @@ func shake_letter(strength := 15.0, duration := 0.3, shakes := 15):
 	var time_per_shake := duration / float(shakes)
 
 	for i in range(shakes):
-		var offset := Vector2(
+		offset = Vector2(
 			randf_range(-strength, strength),
 			randf_range(-strength, strength)
 		)

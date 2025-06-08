@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8v6qoj58xipv"
-path="res://.godot/imported/letterTileElectric.png-8732b3c7bfc4369a8682409bd3f4b404.ctex"
+uid="uid://cd1q4vnlr6tdw"
+path="res://.godot/imported/letterTileEarth.png-36c3d081dd300d5b7559c76a26c6e994.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Letters/Letter2D/ElementalTiles/letterTileElectric.png"
-dest_files=["res://.godot/imported/letterTileElectric.png-8732b3c7bfc4369a8682409bd3f4b404.ctex"]
+source_file="res://Entities/Letters/Letter2D/Elements/Earth/letterTileEarth.png"
+dest_files=["res://.godot/imported/letterTileEarth.png-36c3d081dd300d5b7559c76a26c6e994.ctex"]
 
 [params]
 

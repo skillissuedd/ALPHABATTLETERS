@@ -10,6 +10,12 @@ var current_letter: Node2D
 func _ready() -> void:
 	add_to_group("slots")
 	
+func appear():
+	scale = Vector2(0, 0)
+	var tween := create_tween()
+	tween.tween_property(self, "scale", Vector2(1, 1), 0.15).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	
+	
 func is_hovered(letter2D: Node2D):
 	slot_sprite.self_modulate = Color(1, 1, 1, 0.2)
 	letter2D.reparent(self)

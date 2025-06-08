@@ -1,9 +1,18 @@
 extends Node2D
 class_name SFXManager
-const MYSTERY_ITEM_SOUND = preload("res://Entities/Letters/LetterUpgrades/mysteryItem.wav")
-
-
 const POOL_SIZE := 12
+
+const SOUNDS := {
+	"hit1": preload("res://sounds/hit1.wav"),
+	"hit2": preload("res://sounds/hit2.wav"),
+	"hit3": preload("res://sounds/hit3.wav"),
+	"death": preload("res://sounds/death1.wav"),
+	"upgrade": preload("res://Entities/Letters/LetterUpgrades/mysteryItem.wav"),
+	"slot1": preload("res://Entities/Slots/bloop.wav"),
+	"stone1":preload("res://Entities/Slots/stone1.mp3"),
+	"stone2":preload("res://Entities/Slots/stone2.mp3")
+}
+
 var pool: Array[AudioStreamPlayer2D] = []
 
 func _ready():
@@ -14,26 +23,16 @@ func _ready():
 		add_child(player)
 		pool.append(player)
 
-func play_sfx(stream: AudioStream, sound_position: Vector2):
+func play_sfx(name: String, position: Vector2):
+	if not SOUNDS.has(name):
+		push_warning("Unknown SFX name: %s" % name)
+		return
+		
+	var stream = SOUNDS[name]
+	
 	for player in pool:
 		if not player.playing:
 			player.stream = stream
-			player.global_position = sound_position
+			player.global_position = position
 			player.play()
 			return
-
-func hit_sound():
-	var choice = randi() % 3 + 1
-	match choice:
-		1:
-			play_sfx(preload("res://sounds/hit1.wav"), global_position)
-		2:
-			play_sfx(preload("res://sounds/hit2.wav"), global_position)
-		3:
-			play_sfx(preload("res://sounds/hit3.wav"), global_position)
-
-func death_sound():
-	play_sfx(preload("res://sounds/death1.wav"), global_position)
-
-func upgrade_vector():
-	play_sfx(MYSTERY_ITEM_SOUND, global_position)

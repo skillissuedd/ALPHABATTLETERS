@@ -11,25 +11,23 @@ func init_interface():
 	Global.board_scene = $BoardManager
 	Global.hand_scene= $handManager
 	Global.battle_manager = $BattleManager
+	Global.battle_simulator = $BattleSimulator
+	Global.battle_animator = $BattleAnimator
 	Global.sfx_manager = $sfxManager
 	Global.deck_scene.initialize_deck()
 	Global.deck_scene.fill_deck()
 	Global.board_scene.create_board()
-
-	position_the_deck()
 	Global.hand_scene.fill_hand()
 	
-	Global.battle_simulator = $BattleSimulator
-	Global.battle_animator = $BattleAnimator
+	
 	
 func _ready():
+	GlobalOptions.current_room = "Battle"
 	init_interface()
+	await get_tree().create_timer(3).timeout
 	Global.battle_manager.before_round()
 
-func position_the_deck():
-	var deck_position = Global.deck_scene.global_position
-	for letterinDeck in Global.deck_scene.get_children():
-		letterinDeck.position += deck_position
+
 
 func _on_button_pressed() -> void:
 	Global.battle_manager.round_start()

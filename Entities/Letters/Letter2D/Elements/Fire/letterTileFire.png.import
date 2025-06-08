@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cr8epcciv4aqq"
-path="res://.godot/imported/letterTileFire.png-3b373ab7957d4de3b1b01801e1d37d39.ctex"
+path="res://.godot/imported/letterTileFire.png-8ff7e3d42b7e624db59018d1f6cb54c8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Letters/Letter2D/ElementalTiles/letterTileFire.png"
-dest_files=["res://.godot/imported/letterTileFire.png-3b373ab7957d4de3b1b01801e1d37d39.ctex"]
+source_file="res://Entities/Letters/Letter2D/Elements/Fire/letterTileFire.png"
+dest_files=["res://.godot/imported/letterTileFire.png-8ff7e3d42b7e624db59018d1f6cb54c8.ctex"]
 
 [params]
 

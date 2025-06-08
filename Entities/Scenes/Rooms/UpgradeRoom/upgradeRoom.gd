@@ -15,16 +15,14 @@ func init_interface():
 	Global.deck_scene.initialize_deck()
 	Global.deck_scene.fill_deck()
 	Global.board_scene.create_upgrade_board()
-	
 	position_the_deck()
 	Global.hand_scene.fill_hand()
-	
 	Global.battle_simulator = $BattleSimulator
 	Global.battle_animator = $BattleAnimator
 	
 func _ready():
 	init_interface()
-	#Global.battle_manager.before_round()
+	
 
 func position_the_deck():
 	var deck_position = Global.deck_scene.global_position
