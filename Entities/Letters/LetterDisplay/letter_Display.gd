@@ -14,7 +14,7 @@ var stats: Dictionary
 var current_element = "Neutral"
 var is_enemy:bool
 
-func animate_letter_flip():
+func vector_upgrade_animation():
 	var tween := create_tween()
 		# Step 1: normalize rotation
 	letter_label.rotation_degrees = fmod(letter_label.rotation_degrees, 360)

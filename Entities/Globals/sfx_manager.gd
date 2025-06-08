@@ -10,7 +10,8 @@ const SOUNDS := {
 	"upgrade": preload("res://Entities/Letters/LetterUpgrades/mysteryItem.wav"),
 	"slot1": preload("res://Entities/Slots/bloop.wav"),
 	"stone1":preload("res://Entities/Slots/stone1.mp3"),
-	"stone2":preload("res://Entities/Slots/stone2.mp3")
+	"stone2":preload("res://Entities/Slots/stone2.mp3"),
+	"upgradeTile":preload("res://Entities/Slots/upgradeTile.wav")
 }
 
 var pool: Array[AudioStreamPlayer2D] = []

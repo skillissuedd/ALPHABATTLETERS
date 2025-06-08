@@ -44,13 +44,12 @@ const ELEMENT_MAP = {
 }
 
 const UPGRADE_LIST = {
-	"Tier 3": ["The Vector"],#, "The Assassin", "The Rebirth", "The Pierce"],
+	"Tier 3": ["The Vector", "The Assassin", "The Rebirth", "The Pierce"],
 	"Tier 2": ["The Trajectory", "The Halo", "The Dart"],
 	"Tier 1": ["The Berserker", "The Line", "The Scar"],
 	"Tier S": ["The Mirror"],
 	"Tier Catharsis": ["The Catharsis"]
 }
-
 
 func get_element_for_letter(current_letter: String):
 	current_letter = current_letter.to_upper()

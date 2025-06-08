@@ -3,7 +3,7 @@ extends Node2D
 @export var slot_scene = preload ("res://Entities/Slots/slot1.tscn")
 @export var slotRusty = preload("res://Entities/Slots/Rusty/slotRusty.tscn")
 @export var slotGolden = preload("res://Entities/Slots/Golden/slotGolden.tscn")
-@export var slotUpgrade = preload("res://Entities/Slots/Upgrade/slotUpgrade.tscn")
+@export var slotUpgrade = preload("res://Entities/Slots/Upgrade/Tier3/Rebirth/upgradeRebirth.tscn")
 @export var cell_size: Vector2 = Vector2(300, 300)
 @onready var rows: int = 5
 @onready var cols: int = 5
@@ -82,6 +82,33 @@ func return_letters():
 
 func create_upgrade_board():
 	create_board()
+	await get_tree().create_timer(3).timeout
+	var upgrade_count = (randi() % 2) +2
+	var target_row := int(rows / 2) - 1  # Slightly above center row
+	var center_col := int(cols / 2)
+	var offset_list 
+	if upgrade_count == 2:
+		offset_list = [-1, 1]  # For cols 1 and 3 if center is 2
+	else:
+		offset_list = [-1, 0, 1]
+	
+	
+	for offset in offset_list:
+		var target_col = center_col + offset
+
+		if target_col >= 0 and target_col < cols:
+			var base_slot = slot_grid[target_row][target_col]
+			var upgrade_tile = slotUpgrade.instantiate()
+
+			upgrade_tile.position = base_slot.position
+			upgrade_tile.slotRow = base_slot.slotRow
+			upgrade_tile.slotColumn = base_slot.slotColumn
+
+			remove_child(base_slot)
+			slot_grid[target_row][target_col] = upgrade_tile
+			add_child(upgrade_tile)
+			Global.sfx_manager.play_sfx("upgradeTile", upgrade_tile.position)
+			await get_tree().create_timer(0.5).timeout
 	
 func create_board():
 	reset_board()

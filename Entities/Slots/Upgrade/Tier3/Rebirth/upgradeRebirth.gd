@@ -1,23 +1,25 @@
 extends slot_class
 var is_used: bool = false
+@onready var rebirth_label = $Sprite2D/Label
 
 func letter_is_placed():
 	if !is_used:
-		var upgrade_list = Global.letter_stats.UPGRADE_LIST
-		if current_letter.get_upgrade() == null:
-			var current_tier = upgrade_list["Tier 3"]
-			var current_upgrade = current_tier[randi() % current_tier.size()]
-			match current_upgrade:
-				"The Vector":
-					current_letter.current_hp = current_letter.current_atk
-					current_letter.current_atk = current_letter.max_hp
-					current_letter.max_hp = current_letter.current_hp
-					current_letter.letter_unit.update_stats(current_letter.current_atk, current_letter.current_hp)
-					current_letter.LetterDisplay.animate_letter_flip()
-					#current_letter.letter_unit.update_stats(current_letter.LetterDisplay.return_stats())
-				"The Assassin":
-					current_letter.LetterDisplay.animate_letter_flip()
-				"The Rebirth":
-					current_letter.LetterDisplay.animate_letter_flip()
-				"The Pierce":
-					current_letter.LetterDisplay.animate_letter_flip()
+		var letter_upgrade = current_letter.get_upgrade()
+		if letter_upgrade == null:
+			is_used = true
+			rebirth_label.queue_free()
+			current_letter.current_upgrade = "Rebirth"
+			var next_letter = get_next_letter(current_letter.current_letter)
+			current_letter.finish_letter_preparation(next_letter)
+			Global.battle_simulator.run_simulation()
+
+func get_next_letter(letter: String) -> String:
+	if letter.length() != 1:
+		return ""
+	var code := letter.to_ascii_buffer()[0]
+	if code >= 65 and code <= 89:  # 'A' to 'Y'
+		return char(code + 1)
+	elif code == 90:  # 'Z' wraps to 'A'
+		return "A"
+	else:
+		return "" 

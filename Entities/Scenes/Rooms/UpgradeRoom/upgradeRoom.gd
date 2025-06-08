@@ -19,6 +19,8 @@ func init_interface():
 	Global.hand_scene.fill_hand()
 	Global.battle_simulator = $BattleSimulator
 	Global.battle_animator = $BattleAnimator
+	GlobalOptions.toggle_preview_animations = false
+	GlobalOptions.current_room = "Upgrade"
 	
 func _ready():
 	init_interface()
