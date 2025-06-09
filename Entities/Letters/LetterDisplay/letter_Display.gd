@@ -1,6 +1,7 @@
 extends Control
 
 class_name LetterDisplayClass
+signal animation_ended
 
 #Default letter stats
 var stats: Dictionary
@@ -32,24 +33,39 @@ func vector_upgrade_animation():
 	tween.tween_property(letter_label, "scale", Vector2(1.0, 1.0), 0.2).set_delay(0.8)
 	
 	# Step 5: after everything, pop the labels in parallel
-	tween.tween_callback(Callable(self, "_pop_stat_labels"))
-
+	tween.tween_callback(Callable(self, "_pop_stat_labels").bind("Vector"))
+	emit_signal("animation_ended")
 	
-func _pop_stat_labels():
+func rebirth_upgrade_animation(newLetter: String):
+	# Step 2: Fade out current letter
+	var tween = create_tween()
+	tween.tween_property(letter_label, "modulate:a", 0.0, 0.3)
+
+	# Step 3: After fade out, change text
+	tween.tween_callback(Callable(self, "change_letter").bind(newLetter))
+
+	# Step 4: Add reforming particles (converge inward)
+	tween.tween_callback(Callable(self, "_add_reform_particles").bind(letter_label))
+
+	# Step 5: Fade in new letter
+	tween.tween_property(letter_label, "modulate:a", 1.0, 0.3)
+	emit_signal("animation_ended")
+	
+func _pop_stat_labels(upgrade: String):
 	var tween := create_tween()
 	var pop_scale = Vector2(1.5, 1.5)
 	var normal_scale = Vector2(1.0, 1.0)
 	
-	tween.parallel().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_property(ATK_label, "scale", pop_scale, 0.5)
 	tween.tween_property(HP_label, "scale", pop_scale, 0.5)
 	
-	tween.parallel().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	tween.tween_property(ATK_label, "scale", normal_scale, 0.5).set_delay(0.1)
 	tween.tween_property(HP_label, "scale", normal_scale, 0.5).set_delay(0.1)
-	update_stats(letter2D.current_hp, letter2D.current_atk)
+	update_stats(letter2D.current_atk, letter2D.current_hp)
 
-#On ready
+	#On ready
 func _ready():
 	mouse_filter = Control.MOUSE_FILTER_PASS
 	await get_tree().process_frame

@@ -1,9 +1,15 @@
 extends Node2D
-
+#SlotTypes
 @export var slot_scene = preload ("res://Entities/Slots/slot1.tscn")
 @export var slotRusty = preload("res://Entities/Slots/Rusty/slotRusty.tscn")
 @export var slotGolden = preload("res://Entities/Slots/Golden/slotGolden.tscn")
-@export var slotUpgrade = preload("res://Entities/Slots/Upgrade/Tier3/Rebirth/upgradeRebirth.tscn")
+@export var slotUpgrade = preload("res://Entities/Slots/Upgrade/slotUpgrade.tscn")
+@export var upgradeVector = preload("res://Entities/Slots/Upgrade/Tier3/Vector/upgradeVector.tscn")
+@export var upgradeRebirth = preload("res://Entities/Slots/Upgrade/Tier3/Rebirth/upgradeRebirth.tscn")
+@export var upgradeAssassin = preload("res://Entities/Slots/Upgrade/Tier3/Assassin/upgradeAssassin.tscn")
+@export var upgradePierce = preload("res://Entities/Slots/Upgrade/Tier3/Pierce/upgradePierce.tscn")
+
+
 @export var cell_size: Vector2 = Vector2(300, 300)
 @onready var rows: int = 5
 @onready var cols: int = 5
@@ -98,7 +104,11 @@ func create_upgrade_board():
 
 		if target_col >= 0 and target_col < cols:
 			var base_slot = slot_grid[target_row][target_col]
-			var upgrade_tile = slotUpgrade.instantiate()
+			var upgrade_tile
+			if offset > 0:
+				upgrade_tile = upgradeVector.instantiate()
+			else:
+				upgrade_tile = upgradeRebirth.instantiate()
 
 			upgrade_tile.position = base_slot.position
 			upgrade_tile.slotRow = base_slot.slotRow
