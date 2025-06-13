@@ -43,7 +43,8 @@ func clear_hand():
 	
 func unlock_hand(state:bool):
 	for letterToUnlock in get_children():
-		letterToUnlock.set_active(state)
+		if letterToUnlock as letter2Dclass:
+			letterToUnlock.set_active(state)
 		
 func arrange_hand():
 	var size := letter_row.size()

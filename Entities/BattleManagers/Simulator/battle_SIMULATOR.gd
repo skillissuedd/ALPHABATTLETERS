@@ -44,6 +44,7 @@ func restore_backup(backup: Dictionary):
 		unit.letterParent.LetterDisplay.update_stats(backup[unit]["attack"], backup[unit]["hp"])
 		unit.letterParent.update_frame_bar((float(backup[unit]["hp"]*100)/float(backup[unit]["hp"])), false)
 func simulate_battle(player_letters: Array, enemy_letters: Array, apply: bool = false) -> Dictionary:
+	
 	# Organize enemies by position for quick lookup
 	if !apply:
 		load_backups()

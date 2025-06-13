@@ -5,7 +5,7 @@ class_name deck_class
 const LETTER_SCENE2D = preload("res://Entities/Letters/Letter2D/Ally/AllyLetter2D.tscn")
 
 const GRID_COLUMNS = 13  # 13 x 4 grid for 52 letters
-const CELL_SIZE = Vector2(250, 250)
+const CELL_SIZE = Vector2(250, 280)
 var rand_index = null
 
 var row = null

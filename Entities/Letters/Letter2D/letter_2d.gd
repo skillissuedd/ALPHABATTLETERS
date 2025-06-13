@@ -40,21 +40,22 @@ var element = "Neutral"
 
 func finish_letter_preparation(letter: String):
 	if !is_enemy:
-		set_letter(letter)
-		update_element_style()
+		init_letter(letter)
 	else:
 		var random_letter = Global.letter_stats.return_random_letter()
-		set_letter(random_letter)
-		update_element_style()
+		init_letter(random_letter)
+		update_element_style(random_letter)
 		#frame_bar.set_hp_percent(100)
 		frame_bar.border_color = Color.DARK_RED
 
-func set_letter(character: String):
+func init_letter(character: String):
 	current_letter = character
 	var stats = letter_stats.get_stats(character)
 	max_hp = stats["hp"]
 	current_hp = max_hp
 	current_atk = stats["atk"]
+	element = letter_stats.get_element_for_letter(current_letter)
+	update_element_style(element)
 	if LetterDisplay:
 		LetterDisplay.change_letter(character)
 		LetterDisplay.update_stats(current_atk, current_hp)
@@ -84,10 +85,10 @@ func _on_area_2d_mouse_entered() -> void:
 func _on_area_2d_mouse_exited() -> void:
 	mouse_in = false
 	
-func update_element_style():
-	element = letter_stats.get_element_for_letter(current_letter)
-	LetterDisplay.change_element(element)
-	match element:
+func update_element_style(letterForElement: String):
+	if LetterDisplay:
+		LetterDisplay.change_element(letterForElement)
+	match letterForElement:
 		"Water":
 			self.texture=load("res://Entities/Letters/Letter2D/Elements/Water/letterTileWater.png")
 		"Fire":

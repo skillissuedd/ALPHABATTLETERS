@@ -51,7 +51,7 @@ func rebirth_upgrade_animation(newLetter: String):
 	tween.tween_property(letter_label, "modulate:a", 1.0, 0.3)
 	emit_signal("animation_ended")
 	
-func _pop_stat_labels(upgrade: String):
+func _pop_stat_labels():
 	var tween := create_tween()
 	var pop_scale = Vector2(1.5, 1.5)
 	var normal_scale = Vector2(1.0, 1.0)
