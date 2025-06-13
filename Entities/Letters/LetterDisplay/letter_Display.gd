@@ -33,7 +33,7 @@ func vector_upgrade_animation():
 	tween.tween_property(letter_label, "scale", Vector2(1.0, 1.0), 0.2).set_delay(0.8)
 	
 	# Step 5: after everything, pop the labels in parallel
-	tween.tween_callback(Callable(self, "_pop_stat_labels").bind("Vector"))
+	tween.tween_callback(Callable(self, "_pop_stat_labels"))
 	emit_signal("animation_ended")
 	
 func rebirth_upgrade_animation(newLetter: String):
@@ -63,7 +63,7 @@ func _pop_stat_labels():
 	tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	tween.tween_property(ATK_label, "scale", normal_scale, 0.5).set_delay(0.1)
 	tween.tween_property(HP_label, "scale", normal_scale, 0.5).set_delay(0.1)
-	update_stats(letter2D.current_atk, letter2D.current_hp)
+	update_stats()
 
 	#On ready
 func _ready():
@@ -73,7 +73,7 @@ func _ready():
 func change_letter(character: String):
 	letter_label.text = str(character)
 	
-func update_stats(attack: int, hp: int):
+func update_stats(attack: int = letter2D.properties.attack, hp: int = letter2D.properties.max_hp):
 	ATK_label.text = str(attack)
 	HP_label.text = str(hp)
 

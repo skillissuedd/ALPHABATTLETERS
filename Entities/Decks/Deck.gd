@@ -8,34 +8,46 @@ const GRID_COLUMNS = 13  # 13 x 4 grid for 52 letters
 const CELL_SIZE = Vector2(250, 280)
 var rand_index = null
 
-var row = null
-var col = null
-@onready var current_letter = "A"
 @export var letter_stats: LetterStats
-@onready var all_letters = letter_stats.LETTER_STATS.keys()
-
-var letter2Dinstance = null
 
 var deck: Array = []
+var letter_instances: Dictionary = {}
 
 func _ready():
 	pass
 	
 func initialize_deck():
 	deck.clear()
+	var all_letters = letter_stats.LETTER_STATS.keys()
 	all_letters.sort()
 	for letter in all_letters:
 		deck.append(letter)
 		deck.append(letter)
 
 func fill_deck():
+	letter_instances.clear()
 	for i in range(deck.size()):
-		letter2Dinstance = LETTER_SCENE2D.instantiate()
-		row = i / GRID_COLUMNS
-		col = i % GRID_COLUMNS
+		var letter2Dinstance = LETTER_SCENE2D.instantiate()
+		var row = i / GRID_COLUMNS
+		var col = i % GRID_COLUMNS
 		letter2Dinstance.position = (Vector2(col, row) * CELL_SIZE)+global_position
 		add_child(letter2Dinstance)
-		letter2Dinstance.finish_letter_preparation(deck[i])
+		letter2Dinstance.init_letter(deck[i], false)
+		
+		if not letter_instances.has(deck[i]):
+			letter_instances[deck[i]] = []
+			letter_instances[deck[i]].append(letter2Dinstance)
+
+func update_letter_instances(letterToCheck):
+	var all_instances = get_instances_of_letter(letterToCheck.letter)
+	for instance in all_instances:
+		instance.properties.update_stats(letterToCheck.attack, letterToCheck.max_hp)
+		
+		
+
+func get_instances_of_letter(target_letter: String) -> Array:
+	return letter_instances.get(target_letter, [])
+
 
 func get_random_letter_instance() -> Node2D:
 	if deck.is_empty():
@@ -53,8 +65,8 @@ func pick_random_deck_child():
 
 func append_to_deck(letter: Node2D):
 	var total_letters = get_child_count()  # сколько уже добавлено
-	row = total_letters / GRID_COLUMNS
-	col = total_letters % GRID_COLUMNS
+	var row = total_letters / GRID_COLUMNS
+	var col = total_letters % GRID_COLUMNS
 	deck.append(letter.return_letter())
 	letter.reparent(self)
 	letter.position = Vector2(col, row) * CELL_SIZE
@@ -70,8 +82,8 @@ func refill_main_deck(deckFROM: deck_class, deckTO: deck_class):
 func arrange_deck():
 	deck.sort()
 	for j in deck.size():
-		letter2Dinstance = get_child(j)
+		var letter2Dinstance = get_child(j)
 		letter2Dinstance.set_letter(deck[j])
-		row = j / GRID_COLUMNS
-		col = j % GRID_COLUMNS
+		var row = j / GRID_COLUMNS
+		var col = j % GRID_COLUMNS
 		letter2Dinstance.position = Vector2(col, row) * CELL_SIZE

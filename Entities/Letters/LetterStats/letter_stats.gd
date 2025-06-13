@@ -3,11 +3,8 @@ extends Resource
 class_name LetterStats
 const stats_script = preload("res://Entities/Letters/LetterStats/letter_stats.gd")
 
-var current_element = "Neutral"
-@export var atk : int = 25
-@export var hp : int = 15
 
-const LETTER_STATS = {
+var LETTER_STATS = {
 	"A": { "atk": 5, "hp": 3 },
 	"B": { "atk": 2, "hp": 5 },
 	"C": { "atk": 3, "hp": 4 },
@@ -50,6 +47,11 @@ const UPGRADE_LIST = {
 	"Tier S": ["The Mirror"],
 	"Tier Catharsis": ["The Catharsis"]
 }
+
+func update_global_stat(letter: String, stat: String, value: int):
+	if LETTER_STATS.has(letter) and LETTER_STATS[letter].has(stat):
+		LETTER_STATS[letter][stat] = value
+		
 
 func get_element_for_letter(current_letter: String):
 	current_letter = current_letter.to_upper()

@@ -1,7 +1,6 @@
 extends letter2Dclass
 
 func _ready():
-	is_enemy = false
 	add_to_group("allyLetters")
 	add_to_group("letters")
 	frame_bar.set_hp_percent(100)
@@ -9,7 +8,6 @@ func _ready():
 func set_hand_position(current_pos: Vector2):
 	position_in_hand = current_pos
 	
-
 func get_closest_slot() -> Area2D:
 	if overlapping_slots.is_empty():
 		return null

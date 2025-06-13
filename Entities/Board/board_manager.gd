@@ -27,39 +27,43 @@ func on_slot_is_hovered(slot: Node2D, letter2D: Node2D):
 		slot_hovered_block = true
 		var slotX = slot.slotColumn
 		var slotY = slot.slotRow
-		ally_letters.append(letter2D.letter_unit)
-		letter2D.letter_unit.grid_x = slotX
-		letter2D.letter_unit.grid_y = slotY
+		ally_letters.append(letter2D.properties)
+		letter2D.properties.grid_x = slotX
+		letter2D.properties.grid_y = slotY
 		if GlobalOptions.toggle_preview_animations:
 			Global.battle_simulator.run_simulation()
 
 func prepare_simulation_data() -> Dictionary:
 	var ally_letters_sim = []
 	var enemy_letters_sim = []
-	for letter_unit in ally_letters:
-		if letter_unit.is_dead:
+	for properties in ally_letters:
+		if properties.is_dead:
 			continue
 		ally_letters_sim.append({
-			"ref": letter_unit,
-			"x": letter_unit.grid_x,
-			"y": letter_unit.grid_y,
-			"hp": letter_unit.hp,
-			"attack": letter_unit.attack,
-			"is_enemy": false,
-			"is_dead": letter_unit.is_dead
+			"ref": properties,
+			"letter": properties.letter,
+			"x": properties.grid_x,
+			"y": properties.grid_y,
+			"current_hp": properties.current_hp,
+			"max_hp": properties.max_hp,
+			"attack": properties.attack,
+			"is_enemy": properties.is_enemy,
+			"is_dead": properties.is_dead
 		})
 		
-	for letter_unit in enemy_letters:
-		if letter_unit.is_dead:
+	for properties in enemy_letters:
+		if properties.is_dead:
 			continue
 		enemy_letters_sim.append({
-			"ref": letter_unit,
-			"x": letter_unit.grid_x,
-			"y": letter_unit.grid_y,
-			"hp": letter_unit.hp,
-			"attack": letter_unit.attack,
-			"is_enemy": true,
-			"is_dead": letter_unit.is_dead
+			"ref": properties,
+			"letter": properties.letter,
+			"x": properties.grid_x,
+			"y": properties.grid_y,
+			"current_hp": properties.current_hp,
+			"max_hp": properties.max_hp,
+			"attack": properties.attack,
+			"is_enemy": properties.is_enemy,
+			"is_dead": properties.is_dead
 		})
 
 	return {

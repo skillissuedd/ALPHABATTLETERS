@@ -12,9 +12,9 @@ func letter_is_placed():
 					current_letter.current_hp = current_letter.current_atk
 					current_letter.current_atk = current_letter.max_hp
 					current_letter.max_hp = current_letter.current_hp
-					current_letter.letter_unit.update_stats(current_letter.current_atk, current_letter.current_hp)
+					current_letter.properties.update_stats(current_letter.current_atk, current_letter.current_hp)
 					current_letter.LetterDisplay.animate_letter_flip()
-					#current_letter.letter_unit.update_stats(current_letter.LetterDisplay.return_stats())
+					#current_letter.properties.update_stats(current_letter.LetterDisplay.return_stats())
 				"The Assassin":
 					current_letter.LetterDisplay.animate_letter_flip()
 				"The Rebirth":

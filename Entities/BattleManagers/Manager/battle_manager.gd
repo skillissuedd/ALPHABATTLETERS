@@ -72,14 +72,15 @@ func init_enemies(enemy_count: int):
 		var slot = candidate_slots[i]
 		var enemy = ENEMY_LETTER_2D.instantiate()
 		slot.add_child(enemy)
-		enemy.finish_letter_preparation("A")
+		enemy.init_letter(Global.letter_stats.return_random_letter(), true)
+		enemy.finish_letter_preparation()
 		slot.current_letter = enemy
 		slot.letter_is_placed()
 		enemy.position += Vector2(80,80)
-		enemy.letter_unit.grid_x = slot.slotColumn
-		enemy.letter_unit.grid_y = slot.slotRow
+		enemy.properties.grid_x = slot.slotColumn
+		enemy.properties.grid_y = slot.slotRow
 		#enemy.modulate = Color(1, 0.8, 0.8, 1)
-		Global.board_scene.enemy_letters.append(enemy.letter_unit)
+		Global.board_scene.enemy_letters.append(enemy.properties)
 		Global.sfx_manager.play_sfx("stone1", enemy.position)
 		await get_tree().create_timer(0.3).timeout
 		

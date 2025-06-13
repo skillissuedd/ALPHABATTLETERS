@@ -13,8 +13,8 @@ func letter_is_placed():
 			var next_letter = get_next_letter(current_letter.current_letter)
 			current_letter.LetterDisplay.rebirth_upgrade_animation(next_letter)
 			current_letter.finish_letter_preparation(next_letter)
-
 			Global.battle_simulator.run_simulation()
+			
 func get_next_letter(letter: String) -> String:
 	if letter.length() != 1:
 		return ""

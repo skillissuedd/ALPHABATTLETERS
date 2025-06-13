@@ -8,7 +8,7 @@ var grid_x: int = 0
 var grid_y: int = 0
 @onready var letterParent = get_parent()
 # Combat stats
-var hp: int = 20
+var current_hp: int = 20
 var max_hp: int = 20
 var attack: int = 10
 var is_dead: bool = false
@@ -16,6 +16,7 @@ var is_dead: bool = false
 # Effects / Buffs
 var element_type: String = "" # Optional: "Fire", "Water", etc.
 var locked: bool = false
+var current_upgrade: String = ""
 
 func initialize(
 	letter_char: String,
@@ -28,7 +29,7 @@ func initialize(
 	is_enemy = is_enemy_state
 	attack = atk
 	max_hp = hp_val
-	hp = hp_val
+	current_hp = hp_val
 	element_type = element
 	is_dead = false
 	locked = false
@@ -38,7 +39,7 @@ func show_stats():
 	print( " is_enemy: ", is_enemy)
 	print( " atk: ", attack,)
 	print( " max_hp: ", 	max_hp,)
-	print( " hp: ", hp,)
+	print( " hp: ", current_hp,)
 	print("element: ", 	element_type)
 	print (is_dead)
 	print (locked)
@@ -56,4 +57,4 @@ func animate_death() -> void:
 func update_stats(atk_val: int, hp_val: int):
 	attack = atk_val
 	max_hp = hp_val
-	hp = hp_val
+	current_hp = hp_val

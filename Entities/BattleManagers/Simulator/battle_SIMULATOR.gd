@@ -4,16 +4,17 @@ var enemy_backup = null
 
 
 
-func letterunit_to_sim_data(letter_unit: LetterUnit) -> Dictionary:
+func letterunit_to_sim_data(properties: LetterUnit) -> Dictionary:
 	return {
-		"ref": letter_unit,
-		"letter": letter_unit.letter,
-		"x": letter_unit.grid_x,
-		"y": letter_unit.grid_y,
-		"hp": letter_unit.hp,
-		"attack": letter_unit.attack,
-		"is_enemy": letter_unit.is_enemy,
-		"is_dead": letter_unit.is_dead
+		"ref": properties,
+		"letter": properties.letter,
+		"x": properties.grid_x,
+		"y": properties.grid_y,
+		"current_hp": properties.current_hp,
+		"max_hp": properties.max_hp,
+		"attack": properties.attack,
+		"is_enemy": properties.is_enemy,
+		"is_dead": properties.is_dead
 	}
 	
 func create_backup(letter_array: Array) -> Dictionary:
@@ -21,7 +22,8 @@ func create_backup(letter_array: Array) -> Dictionary:
 	for letter in letter_array:
 		var unit = letter["ref"]
 		backup[unit] = {
-			"hp": unit.hp,
+			"current_hp": unit.current_hp,
+			"max_hp": unit.max_hp,
 			"is_dead": unit.is_dead,
 			"attack": unit.attack
 		}
@@ -36,13 +38,13 @@ func load_backups():
 
 func restore_backup(backup: Dictionary):
 	for unit in backup.keys():
-		unit.hp = backup[unit]["hp"]
+		unit.current_hp = backup[unit]["current_hp"]
 		unit.is_dead = backup[unit]["is_dead"]
 		if !unit.is_dead:
 			unit.letterParent.LetterDisplay.death_mark.visible = false
 			unit.letterParent.modulate = Color (1, 1, 1, 1)
-		unit.letterParent.LetterDisplay.update_stats(backup[unit]["attack"], backup[unit]["hp"])
-		unit.letterParent.update_frame_bar((float(backup[unit]["hp"]*100)/float(backup[unit]["hp"])), false)
+		unit.letterParent.LetterDisplay.update_stats(backup[unit]["attack"], backup[unit]["current_hp"])
+		unit.letterParent.update_frame_bar(100, false)
 func simulate_battle(player_letters: Array, enemy_letters: Array, apply: bool = false) -> Dictionary:
 	
 	# Organize enemies by position for quick lookup
@@ -84,10 +86,10 @@ func simulate_battle(player_letters: Array, enemy_letters: Array, apply: bool = 
 		if current_target:
 			if !letters_to_animate.has(current_target):
 				letters_to_animate.append(current_target)
-			current_target["hp"] -= ally["attack"]
-			if current_target["hp"] <= 0:
+			current_target["current_hp"] -= ally["attack"]
+			if current_target["current_hp"] <= 0:
 				current_target["is_dead"] = true
-				current_target["hp"] = 0
+				current_target["current_hp"] = 0
 	Global.battle_animator.animate_affected_letters(letters_to_animate)
 	
 	
