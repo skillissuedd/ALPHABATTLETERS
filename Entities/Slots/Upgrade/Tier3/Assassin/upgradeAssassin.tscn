@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dt2op4jnjd5sr"]
+[gd_scene load_steps=5 format=3 uid="uid://dt2op4jnjd5sr"]
 
 [ext_resource type="Script" uid="uid://cclv82psephds" path="res://Entities/Slots/Upgrade/Tier3/Assassin/upgrade_assassin.gd" id="1_ycbh4"]
-[ext_resource type="Texture2D" uid="uid://i4ht01btn6y6" path="res://textures/tiles/chessTile2.png" id="2_ndat5"]
+[ext_resource type="Texture2D" uid="uid://bve7i1mct1q1p" path="res://Entities/Slots/Upgrade/Tier3/Vector/tileVector.png" id="2_fi4vh"]
+[ext_resource type="FontFile" uid="uid://chvukhbl2d2lh" path="res://fonts/Almendra-Regular.ttf" id="3_fl5p6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4c3kn"]
 size = Vector2(168, 159)
@@ -12,11 +13,55 @@ collision_mask = 3
 script = ExtResource("1_ycbh4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.811765, 0, 1, 1)
+modulate = Color(0.317262, 0.824159, 0.482805, 1)
 texture_filter = 1
 position = Vector2(80, 80)
 scale = Vector2(10, 10)
-texture = ExtResource("2_ndat5")
+texture = ExtResource("2_fi4vh")
+
+[node name="Label" type="Label" parent="Sprite2D"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.4
+offset_top = -34.0
+offset_right = -7.4
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.375, 0.375)
+theme_override_colors/font_color = Color(0, 0.8515, 0.625814, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("3_fl5p6")
+theme_override_font_sizes/font_size = 33
+text = "."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Sprite2D"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -30.3
+offset_right = 10.0
+offset_bottom = 60.7
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.375, 0.375)
+theme_override_colors/font_color = Color(0, 0.8515, 0.625814, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("3_fl5p6")
+theme_override_font_sizes/font_size = 48
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Slot_Collision" type="CollisionShape2D" parent="."]
 visibility_layer = 2

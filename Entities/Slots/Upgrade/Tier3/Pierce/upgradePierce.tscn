@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnhp0p6jrlk7x"]
+[gd_scene load_steps=5 format=3 uid="uid://dnhp0p6jrlk7x"]
 
 [ext_resource type="Script" uid="uid://x0cbccdh6vvm" path="res://Entities/Slots/Upgrade/Tier3/Pierce/upgradePierce.gd" id="1_vl16u"]
-[ext_resource type="Texture2D" uid="uid://i4ht01btn6y6" path="res://textures/tiles/chessTile2.png" id="2_nksdh"]
+[ext_resource type="Texture2D" uid="uid://bve7i1mct1q1p" path="res://Entities/Slots/Upgrade/Tier3/Vector/tileVector.png" id="2_gjrwn"]
+[ext_resource type="FontFile" uid="uid://chvukhbl2d2lh" path="res://fonts/Almendra-Regular.ttf" id="3_qgd3s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4c3kn"]
 size = Vector2(168, 159)
@@ -12,13 +13,80 @@ collision_mask = 3
 script = ExtResource("1_vl16u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.811765, 0, 1, 1)
+modulate = Color(0.317262, 0.824159, 0.482805, 1)
 texture_filter = 1
 position = Vector2(80, 80)
 scale = Vector2(10, 10)
-texture = ExtResource("2_nksdh")
+texture = ExtResource("2_gjrwn")
+
+[node name="Label2" type="Label" parent="Sprite2D"]
+texture_filter = 1
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.245
+anchor_right = 0.35
+anchor_bottom = 0.245
+offset_left = -21.7
+offset_top = -22.26
+offset_right = 19.3
+offset_bottom = 21.74
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.375, 0.375)
+theme_override_colors/font_color = Color(0, 0.8515, 0.625814, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("3_qgd3s")
+theme_override_font_sizes/font_size = 33
+text = "_"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Sprite2D"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -30.3
+offset_right = 10.0
+offset_bottom = 60.7
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.375, 0.375)
+theme_override_colors/font_color = Color(0, 0.8515, 0.625814, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("3_qgd3s")
+theme_override_font_sizes/font_size = 48
+text = "P"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Sprite2D"]
+texture_filter = 1
+anchors_preset = -1
+anchor_left = 0.671
+anchor_top = 0.252
+anchor_right = 0.671
+anchor_bottom = 0.252
+offset_left = -21.688
+offset_top = -22.256
+offset_right = 19.312
+offset_bottom = 21.744
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.375, 0.375)
+theme_override_colors/font_color = Color(0, 0.8515, 0.625814, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("3_qgd3s")
+theme_override_font_sizes/font_size = 33
+text = "_"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Slot_Collision" type="CollisionShape2D" parent="."]
+visible = false
 visibility_layer = 2
 position = Vector2(80, 80)
 scale = Vector2(1.6, 1.6)

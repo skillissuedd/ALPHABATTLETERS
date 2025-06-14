@@ -110,9 +110,9 @@ func create_upgrade_board():
 			var base_slot = slot_grid[target_row][target_col]
 			var upgrade_tile
 			if offset > 0:
-				upgrade_tile = upgradeVector.instantiate()
+				upgrade_tile = upgradeAssassin.instantiate()
 			else:
-				upgrade_tile = upgradeRebirth.instantiate()
+				upgrade_tile = upgradePierce.instantiate()
 
 			upgrade_tile.position = base_slot.position
 			upgrade_tile.slotRow = base_slot.slotRow

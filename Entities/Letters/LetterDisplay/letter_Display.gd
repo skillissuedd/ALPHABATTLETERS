@@ -9,9 +9,11 @@ var stats: Dictionary
 
 #Letter face and stats
 @onready var letter2D = get_parent().get_parent() as letter2Dclass
-@onready var letter_label = $Panel/LetterLabel
-@onready var ATK_label = $Panel/ATKLabel
-@onready var HP_label = $Panel/HPLabel
+@onready var letter_label: Label = $Panel/LetterLabel
+@onready var ATK_label: Label = $Panel/ATKLabel
+@onready var HP_label: Label = $Panel/HPLabel
+@onready var upgrade_label: Label = $Panel/UpgradeLabel
+
 var current_element = "Neutral"
 var is_enemy:bool
 
@@ -19,7 +21,6 @@ func vector_upgrade_animation():
 	var tween := create_tween()
 		# Step 1: normalize rotation
 	letter_label.rotation_degrees = fmod(letter_label.rotation_degrees, 360)
-	
 		# Step 2: scale up
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(letter_label, "scale", Vector2(1.5, 1.5), 0.3)

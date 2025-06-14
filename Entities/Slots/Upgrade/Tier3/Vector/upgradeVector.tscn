@@ -26,10 +26,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -14.0
-offset_top = -14.0
-offset_right = 31.0
-offset_bottom = 91.0
+offset_left = -15.2
+offset_top = -11.4
+offset_right = 29.8
+offset_bottom = 93.6
 grow_horizontal = 2
 grow_vertical = 2
 rotation = 3.14159
@@ -39,7 +39,7 @@ theme_override_colors/font_color = Color(0, 0.8515, 0.625814, 1)
 theme_override_constants/outline_size = 11
 theme_override_fonts/font = ExtResource("3_w4u2k")
 theme_override_font_sizes/font_size = 75
-text = "A"
+text = "v"
 
 [node name="Slot_Collision" type="CollisionShape2D" parent="."]
 visibility_layer = 2

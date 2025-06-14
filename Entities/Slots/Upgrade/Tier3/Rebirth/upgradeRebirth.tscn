@@ -38,7 +38,7 @@ theme_override_colors/font_color = Color(0, 0.8515, 0.625814, 1)
 theme_override_constants/outline_size = 11
 theme_override_fonts/font = ExtResource("3_qksd5")
 theme_override_font_sizes/font_size = 33
-text = "A->B"
+text = "R->S"
 
 [node name="Slot_Collision" type="CollisionShape2D" parent="."]
 visibility_layer = 2

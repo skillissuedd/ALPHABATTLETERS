@@ -31,10 +31,6 @@ var letter_stats = load(letter_stats_path)
 @onready var frame_bar = $FrameBar/FrameBar
 @onready var LetterDisplay = $Display/LetterDisplay
 
-func finish_letter_preparation():
-	#frame_bar.set_hp_percent(100)
-	frame_bar.border_color = Color.DARK_RED
-
 func init_letter(character: String, is_enemy: bool):
 	var stats = letter_stats.get_stats(character)
 	var max_hp = stats["hp"]
@@ -46,6 +42,10 @@ func init_letter(character: String, is_enemy: bool):
 	if LetterDisplay:
 		LetterDisplay.change_letter(character)
 		LetterDisplay.update_stats()
+	if is_enemy:
+		frame_bar.border_color = Color.DARK_RED
+	else:
+		frame_bar.border_color = Color.WHITE
 		
 		
 func get_upgrade():

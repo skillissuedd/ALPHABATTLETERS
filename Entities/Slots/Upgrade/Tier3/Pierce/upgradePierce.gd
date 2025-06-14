@@ -1,23 +1,18 @@
 extends slot_class
 var is_used: bool = false
+@onready var label: Label = $Sprite2D/Label
+@onready var label_2: Label = $Sprite2D/Label2
+@onready var label_3: Label = $Sprite2D/Label3
+
 
 func letter_is_placed():
-	if !is_used:
-		var upgrade_list = Global.letter_stats.UPGRADE_LIST
-		if current_letter.get_upgrade() == null:
-			var current_tier = upgrade_list["Tier 3"]
-			var current_upgrade = current_tier[randi() % current_tier.size()]
-			match current_upgrade:
-				"The Vector":
-					current_letter.current_hp = current_letter.current_atk
-					current_letter.current_atk = current_letter.max_hp
-					current_letter.max_hp = current_letter.current_hp
-					current_letter.properties.update_stats(current_letter.current_atk, current_letter.current_hp)
-					current_letter.LetterDisplay.animate_letter_flip()
-					#current_letter.properties.update_stats(current_letter.LetterDisplay.return_stats())
-				"The Assassin":
-					current_letter.LetterDisplay.animate_letter_flip()
-				"The Rebirth":
-					current_letter.LetterDisplay.animate_letter_flip()
-				"The Pierce":
-					current_letter.LetterDisplay.animate_letter_flip()
+	if !is_used and current_letter.properties.current_upgrade == "":
+		is_used = true
+		label.queue_free()
+		label_2.queue_free()
+		label_3.queue_free()
+		current_letter.properties.current_upgrade = "Assassin"
+		current_letter.LetterDisplay.upgrade_label.visible = true
+		current_letter.LetterDisplay.upgrade_label.add_theme_color_override("font_color", Color.LIME_GREEN)
+		current_letter.LetterDisplay.letter_label.add_theme_color_override("font_color", Color.LIME_GREEN)
+		current_letter.frame_bar.border_color = Color.WEB_GREEN
