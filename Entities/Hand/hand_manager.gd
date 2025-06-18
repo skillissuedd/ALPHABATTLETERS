@@ -41,10 +41,10 @@ func clear_hand():
 		Global.deck_disc_scene.append_to_deck(child)
 		letter_row.erase(child)
 	
-func unlock_hand(state:bool):
-	for letterToUnlock in get_children():
-		if letterToUnlock as letter2Dclass:
-			letterToUnlock.set_active(state)
+func set_hand_enabled(enabled: bool):
+	for letterToEnable in get_children():
+		if letterToEnable as letter2Dclass:
+			letterToEnable.is_active=enabled
 		
 func arrange_hand():
 	var size := letter_row.size()
@@ -58,9 +58,3 @@ func arrange_hand():
 		
 		# Just use hand_ratio directly
 		letter_row[i].position = Vector2(hand_ratio*5, 0) * cell_size
-
-
-
-func _on_button_pressed() -> void:
-	max_hand_size+=1
-	snap_to_hand(Global.deck_scene.get_random_letter_instance())

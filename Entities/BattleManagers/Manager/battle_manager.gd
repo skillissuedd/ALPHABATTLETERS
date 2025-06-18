@@ -23,9 +23,9 @@ func room_cleared():
 	pass
 	
 func round_start():
-	lock_in(true)
-	var letters = Global.board_scene.return_letters()
+	enable_ui(false)
 	
+	var letters = Global.board_scene.all_letters
 	for letter in letters:
 		if letter:
 			letter.attack()
@@ -36,7 +36,7 @@ func round_start():
 
 func round_end():
 	Global.hand_scene.fill_hand()
-	lock_in(false)
+	enable_ui(true)
 	current_round += 1
 	update_round_label()
 	before_round()
@@ -45,10 +45,9 @@ func update_round_label():
 	if has_node("Panel/roundLabel"):
 		$Panel/roundLabel.text = str(current_round)
 
-func lock_in(value: bool):
-	get_parent().button1.disabled = value
-	Global.board_scene.unlock(!value)
-	Global.hand_scene.unlock_hand(!value)
+func enable_ui(value: bool):
+	Global.board_scene.set_board_enabled(value)
+	Global.hand_scene.set_hand_enabled(value)
 
 func init_enemies(enemy_count: int):
 	var board_width = Global.board_scene.rows
@@ -73,15 +72,14 @@ func init_enemies(enemy_count: int):
 		var enemy = ENEMY_LETTER_2D.instantiate()
 		slot.add_child(enemy)
 		enemy.init_letter(Global.letter_stats.return_random_letter(), true)
-		enemy.finish_letter_preparation()
 		slot.current_letter = enemy
 		slot.letter_is_placed()
 		enemy.position += Vector2(80,80)
 		enemy.properties.grid_x = slot.slotColumn
 		enemy.properties.grid_y = slot.slotRow
 		#enemy.modulate = Color(1, 0.8, 0.8, 1)
-		Global.board_scene.enemy_letters.append(enemy.properties)
+		Global.board_scene.enemy_letters.append(enemy)
 		Global.sfx_manager.play_sfx("stone1", enemy.position)
 		await get_tree().create_timer(0.3).timeout
-		
+	Global.battle_simulator.run_simulation()
 	

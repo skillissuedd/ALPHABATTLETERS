@@ -16,7 +16,7 @@ extends Node2D
 var ally_letters: Array = []
 var enemy_letters: Array = []
 var slot_hovered_block: bool = false
-@export var all_letters: Array = []  
+@export var all_letters: Array = [ally_letters, enemy_letters]  
 @export var slot_grid: Array = [] # 2D array: slot_grid[row][col]
 
 func _ready():
@@ -27,7 +27,7 @@ func on_slot_is_hovered(slot: Node2D, letter2D: Node2D):
 		slot_hovered_block = true
 		var slotX = slot.slotColumn
 		var slotY = slot.slotRow
-		ally_letters.append(letter2D.properties)
+		ally_letters.append(letter2D)
 		letter2D.properties.grid_x = slotX
 		letter2D.properties.grid_y = slotY
 		if GlobalOptions.toggle_preview_animations:
@@ -36,34 +36,36 @@ func on_slot_is_hovered(slot: Node2D, letter2D: Node2D):
 func prepare_simulation_data() -> Dictionary:
 	var ally_letters_sim = []
 	var enemy_letters_sim = []
-	for properties in ally_letters:
-		if properties.is_dead:
+	for letter in ally_letters:
+		if letter.properties.is_dead:
 			continue
+		var props = letter.properties
 		ally_letters_sim.append({
-			"ref": properties,
-			"letter": properties.letter,
-			"x": properties.grid_x,
-			"y": properties.grid_y,
-			"current_hp": properties.current_hp,
-			"max_hp": properties.max_hp,
-			"attack": properties.attack,
-			"is_enemy": properties.is_enemy,
-			"is_dead": properties.is_dead
+			"ref": props,
+			"letter": props.letter,
+			"x": props.grid_x,
+			"y": props.grid_y,
+			"current_hp": props.current_hp,
+			"max_hp": props.max_hp,
+			"attack": props.attack,
+			"is_enemy": props.is_enemy,
+			"is_dead": props.is_dead
 		})
 		
-	for properties in enemy_letters:
-		if properties.is_dead:
+	for letter in enemy_letters:
+		if letter.properties.is_dead:
 			continue
+		var props = letter.properties
 		enemy_letters_sim.append({
-			"ref": properties,
-			"letter": properties.letter,
-			"x": properties.grid_x,
-			"y": properties.grid_y,
-			"current_hp": properties.current_hp,
-			"max_hp": properties.max_hp,
-			"attack": properties.attack,
-			"is_enemy": properties.is_enemy,
-			"is_dead": properties.is_dead
+			"ref": props,
+			"letter": props.letter,
+			"x": props.grid_x,
+			"y": props.grid_y,
+			"current_hp": props.current_hp,
+			"max_hp": props.max_hp,
+			"attack": props.attack,
+			"is_enemy": props.is_enemy,
+			"is_dead": props.is_dead
 		})
 
 	return {
@@ -71,24 +73,11 @@ func prepare_simulation_data() -> Dictionary:
 		"enemy_letters": enemy_letters_sim
 	}
 	
-func unlock(state:bool):
-	var letterArray=return_letters()
-	for letter in letterArray:
+func set_board_enabled(enabled: bool):
+	for letter in ally_letters:
 		if letter:
-			letter.set_active(state)
+			letter.is_active = enabled
 
-func return_letters():
-	all_letters.clear()
-	var slots = get_children().filter(func(n): return n.is_in_group("slots"))
-	for slot in slots:
-		for child in slot.get_children():
-			if child.is_in_group("allyLetters"):
-				ally_letters.append(child)
-				all_letters.append(child)
-			elif child.is_in_group("enemyLetters"):
-				enemy_letters.append(child)
-				all_letters.append(child)
-		return all_letters
 
 func create_upgrade_board():
 	create_board()

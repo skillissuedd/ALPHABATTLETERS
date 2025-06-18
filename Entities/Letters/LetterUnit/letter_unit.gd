@@ -2,21 +2,21 @@ class_name LetterUnit
 extends Node2D
 
 # Identifiers
-var letter: String = ""
-var is_enemy: bool = false
-var grid_x: int = 0
-var grid_y: int = 0
+@export var letter: String = ""
+@export var is_enemy: bool = false
+@export var grid_x: int = 0
+@export var grid_y: int = 0
 @onready var letterParent = get_parent()
 # Combat stats
-var current_hp: int = 20
-var max_hp: int = 20
-var attack: int = 10
-var is_dead: bool = false
+@export var current_hp: int = 20
+@export var max_hp: int = 20
+@export var attack: int = 10
+@export var is_dead: bool = false
 
 # Effects / Buffs
-var element_type: String = "" # Optional: "Fire", "Water", etc.
-var locked: bool = false
-var current_upgrade: String = ""
+@export var element_type: String = "" # Optional: "Fire", "Water", etc.
+@export var locked: bool = false
+@export var current_upgrade: String = ""
 
 func initialize(
 	letter_char: String,

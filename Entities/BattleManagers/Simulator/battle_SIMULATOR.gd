@@ -17,15 +17,17 @@ func letterunit_to_sim_data(properties: LetterUnit) -> Dictionary:
 		"is_dead": properties.is_dead
 	}
 	
-func create_backup(letter_array: Array) -> Dictionary:
+func create_backup(letter_data_array: Array):
+	if letter_data_array == null:
+		return "This array is empty"
+	
 	var backup := {}
-	for letter in letter_array:
-		var unit = letter["ref"]
-		backup[unit] = {
-			"current_hp": unit.current_hp,
-			"max_hp": unit.max_hp,
-			"is_dead": unit.is_dead,
-			"attack": unit.attack
+	for letter_data in letter_data_array:
+		backup[letter_data] = {
+			"current_hp": letter_data.current_hp,
+			"max_hp": letter_data.max_hp,
+			"is_dead": letter_data.is_dead,
+			"attack": letter_data.attack
 		}
 	return backup
 
@@ -41,10 +43,12 @@ func restore_backup(backup: Dictionary):
 		unit.current_hp = backup[unit]["current_hp"]
 		unit.is_dead = backup[unit]["is_dead"]
 		if !unit.is_dead:
-			unit.letterParent.LetterDisplay.death_mark.visible = false
-			unit.letterParent.modulate = Color (1, 1, 1, 1)
-		unit.letterParent.LetterDisplay.update_stats(backup[unit]["attack"], backup[unit]["current_hp"])
-		unit.letterParent.update_frame_bar(100, false)
+			unit["ref"].letterParent.LetterDisplay.death_mark.visible = false
+			unit["ref"].letterParent.modulate = Color (1, 1, 1, 1)
+		unit["ref"].letterParent.LetterDisplay.update_stats(backup[unit]["attack"], backup[unit]["current_hp"])
+		unit["ref"].letterParent.update_frame_bar(100, false)
+		
+
 func simulate_battle(player_letters: Array, enemy_letters: Array, apply: bool = false) -> Dictionary:
 	
 	# Organize enemies by position for quick lookup
@@ -57,7 +61,7 @@ func simulate_battle(player_letters: Array, enemy_letters: Array, apply: bool = 
 		var sim =letterunit_to_sim_data(letter["ref"])
 		var key = Vector2i(sim["x"], sim["y"])
 		sim_player[key] = sim
-
+		
 	for letter in enemy_letters:
 		var sim = letterunit_to_sim_data(letter["ref"])
 		var key = Vector2i(sim["x"], sim["y"])
@@ -91,7 +95,7 @@ func simulate_battle(player_letters: Array, enemy_letters: Array, apply: bool = 
 				current_target["is_dead"] = true
 				current_target["current_hp"] = 0
 	Global.battle_animator.animate_affected_letters(letters_to_animate)
-	
+	print (letters_to_animate)
 	
 	
 # Update real LetterUnits (refs)

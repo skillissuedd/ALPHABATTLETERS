@@ -12,13 +12,13 @@ var LETTER_STATS = {
 	"E": { "atk": 2, "hp": 5 },
 	"F": { "atk": 5, "hp": 3 },
 	"G": { "atk": 4, "hp": 4 },
-	"H": { "atk": 4, "hp": 4 },
+	"H": { "atk": 3, "hp": 4 },
 	"I": { "atk": 1, "hp": 6 },
 	"J": { "atk": 6, "hp": 2 },
 	"K": { "atk": 5, "hp": 3 },
 	"L": { "atk": 2, "hp": 5 },
 	"M": { "atk": 6, "hp": 3 },
-	"N": { "atk": 4, "hp": 4 },
+	"N": { "atk": 4, "hp": 3 },
 	"O": { "atk": 3, "hp": 4 },
 	"P": { "atk": 5, "hp": 3 },
 	"Q": { "atk": 7, "hp": 2 },
@@ -27,10 +27,10 @@ var LETTER_STATS = {
 	"T": { "atk": 2, "hp": 5 },
 	"U": { "atk": 4, "hp": 4 },
 	"V": { "atk": 6, "hp": 2 },
-	"W": { "atk": 7, "hp": 2 },
+	"W": { "atk": 7, "hp": 1 },
 	"X": { "atk": 6, "hp": 2 },
-	"Y": { "atk": 3, "hp": 4 },
-	"Z": { "atk": 8, "hp": 1 }
+	"Y": { "atk": 4, "hp": 3 },
+	"Z": { "atk": 3, "hp": 4 }
 }
 
 const ELEMENT_MAP = {

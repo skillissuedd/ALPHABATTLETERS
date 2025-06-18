@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var letter_scene = preload("res://Entities/Letters/Letter2D/Ally/AllyLetter2D.tscn")
 @onready var current_round: int = 1
-@onready var button1 = $Button
 
 func init_interface():
 	Global.mouse = $Mouse
@@ -26,12 +25,6 @@ func _ready():
 	init_interface()
 	await get_tree().create_timer(3).timeout
 	Global.battle_manager.before_round()
-
-
-
-func _on_button_pressed() -> void:
-	Global.battle_manager.round_start()
-	
 
 
 func _on_area_around_area_entered(area: Area2D) -> void:

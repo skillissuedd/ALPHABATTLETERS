@@ -34,7 +34,6 @@ var letter_stats = load(letter_stats_path)
 func init_letter(character: String, is_enemy: bool):
 	var stats = letter_stats.get_stats(character)
 	var max_hp = stats["hp"]
-	var current_hp = max_hp
 	var current_atk = stats["atk"]
 	var element = letter_stats.get_element_for_letter(character)
 	update_element_style(element)
@@ -46,25 +45,6 @@ func init_letter(character: String, is_enemy: bool):
 		frame_bar.border_color = Color.DARK_RED
 	else:
 		frame_bar.border_color = Color.WHITE
-		
-		
-func get_upgrade():
-	return properties
-	
-func show_stats():
-	properties.show_stats()
-	
-func _ready():
-	pass
-
-func set_active(state: bool):
-	is_active=state
-
-
-func return_letter():
-	if LetterDisplay:
-		return LetterDisplay.return_letter()
-		
 
 func _on_area_2d_mouse_entered() -> void:
 	mouse_in = true
@@ -224,7 +204,7 @@ func drag_logic(delta: float) -> void:
 					is_dragging = true
 					Mousebrain.node_being_dragged = self
 					if get_parent() == current_selected_slot:
-						Global.board_scene.ally_letters.erase(properties)
+						Global.board_scene.ally_letters.erase(self)
 						current_selected_slot.letter_is_taken()
 					else:
 						Global.hand_scene.letter_row.erase(self)
@@ -262,4 +242,4 @@ func snap_to_slot():
 		reparent(current_selected_slot)
 		properties.grid_x = current_selected_slot.slotColumn
 		properties.grid_y = current_selected_slot.slotRow
-		Global.board_scene.ally_letters.append(properties)
+		Global.board_scene.ally_letters.append(self)

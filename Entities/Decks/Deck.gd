@@ -67,7 +67,7 @@ func append_to_deck(letter: Node2D):
 	var total_letters = get_child_count()  # сколько уже добавлено
 	var row = total_letters / GRID_COLUMNS
 	var col = total_letters % GRID_COLUMNS
-	deck.append(letter.return_letter())
+	deck.append(letter.properties.letter)
 	letter.reparent(self)
 	letter.position = Vector2(col, row) * CELL_SIZE
 	
@@ -76,7 +76,7 @@ func refill_main_deck(deckFROM: deck_class, deckTO: deck_class):
 	var letterArray = deckFROM.get_children()
 	for letterIndex in letterArray:
 		letterIndex.reparent(deckTO)
-		deckTO.deck.append(letterIndex.return_letter())
+		deckTO.deck.append(letterIndex.properties.letter)
 	arrange_deck()
 		
 func arrange_deck():
