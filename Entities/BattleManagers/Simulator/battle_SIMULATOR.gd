@@ -49,54 +49,92 @@ func restore_backup(backup: Dictionary):
 		unit["ref"].letterParent.update_frame_bar(100, false)
 		
 
-func simulate_battle(player_letters: Array, enemy_letters: Array, apply: bool = false) -> Dictionary:
-	
-	# Organize enemies by position for quick lookup
+func simulate_battle(simulation_data: Array, apply: bool = false) -> Dictionary:
+	#1. Load backups to restore letter states
 	if !apply:
 		load_backups()
-	var sim_player = {}
-	var sim_enemy = {}
-	var letters_to_animate =[]
-	for letter in player_letters:
-		var sim =letterunit_to_sim_data(letter["ref"])
-		var key = Vector2i(sim["x"], sim["y"])
-		sim_player[key] = sim
-		
-	for letter in enemy_letters:
-		var sim = letterunit_to_sim_data(letter["ref"])
-		var key = Vector2i(sim["x"], sim["y"])
-		sim_enemy[key] = sim
 	
-	var enemy_grid := {}
-	for enemy in enemy_letters:
-		var pos = Vector2i(enemy["x"], enemy["y"])
-		enemy_grid[pos] = enemy
-
-	# Apply attacks from each player letter
-	var sorted_allies = sim_player.values()
-	sorted_allies.sort_custom(func(a, b):
-		return a["y"] > b["y"] or (a["y"] == b["y"] and a["x"] < b["x"])
-)
-	for ally in sorted_allies:
-		var same_column_enemies = sim_enemy.values().filter(func(e): return e["x"] == ally["x"] and e["y"] < ally["y"] and not e["is_dead"])
-		same_column_enemies.sort_custom(func(a, b):
-			return a["y"] > b["y"])
-		var current_target = same_column_enemies[0] if same_column_enemies.size() > 0 else null
-		for enemy in same_column_enemies:
-			if (enemy["y"] > current_target["y"] and !enemy["is_dead"]):
-				#print("current_target: ", current_target, "enemy: ", enemy)
-				current_target = enemy
-				
+	#2. Declaring arrays
+	var sim_letters: Array = []
+	var letters_to_animate: Array = []
+	var action_logs: Array = []
+	var same_column_targets: Array = []
+	
+	#3. Filling sim_letters with letter sim data in dict format
+	for letter in simulation_data:
+		var sim =letterunit_to_sim_data(letter["ref"])
+		sim_letters.append(sim)
+		
+	#4. Sorting all the letters left->right, down->up	
+	sim_letters.sort_custom(func(a, b):
+		return a["y"] > b["y"] or (a["y"] == b["y"] and a["x"] < b["x"]))
+		
+	#6. Cycling through every letter to act
+	for acting_letter in sim_letters:
+		
+		#6.1 Ally attack logic
+		if acting_letter["is_enemy"] == false:
+			same_column_targets = sim_letters.filter(
+				func(e):
+					return (
+						e["x"] == acting_letter["x"] and
+						e["y"] < acting_letter["y"] and 
+						not e["is_dead"] and 
+						not e["is_enemy"] == acting_letter["is_enemy"]
+						)
+					)
+			same_column_targets.sort_custom(func(a, b): return a["y"] > b["y"])
+		#6.2 Enemy attack logic
+		else:
+			same_column_targets = sim_letters.filter(
+				func(e):
+					return (
+						e["x"] == acting_letter["x"] and
+						e["y"] > acting_letter["y"] and 
+						not e["is_dead"] and 
+						not e["is_enemy"] == acting_letter["is_enemy"]
+						)
+					)
+			same_column_targets.sort_custom(func(a, b): return a["y"] < b["y"])
+			
+		#6.3 Picking the current target: closest if more than 1, face if none.
+		var current_target = same_column_targets[0] if same_column_targets.size() > 0 else null
+			
+		#6.4 Ally: Cycling through same column targets to get the nearest alive target
+		if acting_letter["is_enemy"] == false:
+			for enemy in same_column_targets:
+				if (enemy["y"] > current_target["y"] and !enemy["is_dead"]):
+					current_target = enemy
+	
+		#6.5 Enemy: Cycling through same column targets to get the nearest alive target
+		else:
+			for enemy in same_column_targets:
+				if (enemy["y"] < current_target["y"] and !enemy["is_dead"]):
+					current_target = enemy
+			
+		#6.6 Logging the attack action on selected target
 		if current_target:
-			if !letters_to_animate.has(current_target):
-				letters_to_animate.append(current_target)
-			current_target["current_hp"] -= ally["attack"]
+			action_logs.append({
+				"type": "attack",
+				"attacker": acting_letter["ref"],
+				"target": current_target["ref"],
+				"damage": acting_letter["attack"],
+				"timestamp": Time.get_ticks_msec()
+				})
+					
+			#6.7 Applying the damage
+			current_target["current_hp"] -= acting_letter["attack"]
+			
+			#6.8 Checking if target is dead
 			if current_target["current_hp"] <= 0:
 				current_target["is_dead"] = true
 				current_target["current_hp"] = 0
-	Global.battle_animator.animate_affected_letters(letters_to_animate)
-	print (letters_to_animate)
-	
+				#6.9 Logging the target death
+				action_logs.append({
+					"type": "death",
+					"target": current_target["ref"],
+					"timestamp": Time.get_ticks_msec()
+					})
 	
 # Update real LetterUnits (refs)
 	#if apply:
@@ -104,14 +142,16 @@ func simulate_battle(player_letters: Array, enemy_letters: Array, apply: bool = 
 			#attack(player_letter)
 
 	return {
-	"player_alive": sim_player.values().filter(func(p): return !p["is_dead"]).size(),
-	"enemy_alive": sim_enemy.values().filter(func(e): return !e["is_dead"]).size()
+	#"player_alive": sim_player.values().filter(func(p): return !p["is_dead"]).size(),
+	#"enemy_alive": sim_enemy.values().filter(func(e): return !e["is_dead"]).size()
 }
 	
 func run_simulation():
 	var sim_data = Global.board_scene.prepare_simulation_data()
 	if player_backup == null:
-		player_backup = create_backup(sim_data["player_letters"])
+		var allies = sim_data.filter(func(l): return !l["is_enemy"])
+		player_backup = create_backup(allies)
 	if enemy_backup == null:
-		enemy_backup = create_backup(sim_data["enemy_letters"])
-	simulate_battle(sim_data["player_letters"], sim_data["enemy_letters"], false)
+		var enemies = sim_data.filter(func(l): return l["is_enemy"])
+		enemy_backup = create_backup(enemies)
+	simulate_battle(sim_data, false)

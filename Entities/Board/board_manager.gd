@@ -27,20 +27,22 @@ func on_slot_is_hovered(slot: Node2D, letter2D: Node2D):
 		slot_hovered_block = true
 		var slotX = slot.slotColumn
 		var slotY = slot.slotRow
-		ally_letters.append(letter2D)
+		if ally_letters.has(letter2D) == false:
+			ally_letters.append(letter2D)
 		letter2D.properties.grid_x = slotX
 		letter2D.properties.grid_y = slotY
 		if GlobalOptions.toggle_preview_animations:
 			Global.battle_simulator.run_simulation()
 
-func prepare_simulation_data() -> Dictionary:
-	var ally_letters_sim = []
-	var enemy_letters_sim = []
+func prepare_simulation_data() -> Array:
+	var combined_letters = []
+	
+	# Process ally letters
 	for letter in ally_letters:
 		if letter.properties.is_dead:
 			continue
 		var props = letter.properties
-		ally_letters_sim.append({
+		combined_letters.append({
 			"ref": props,
 			"letter": props.letter,
 			"x": props.grid_x,
@@ -52,11 +54,12 @@ func prepare_simulation_data() -> Dictionary:
 			"is_dead": props.is_dead
 		})
 		
+	# Process enemy letters	
 	for letter in enemy_letters:
 		if letter.properties.is_dead:
 			continue
 		var props = letter.properties
-		enemy_letters_sim.append({
+		combined_letters.append({
 			"ref": props,
 			"letter": props.letter,
 			"x": props.grid_x,
@@ -67,11 +70,7 @@ func prepare_simulation_data() -> Dictionary:
 			"is_enemy": props.is_enemy,
 			"is_dead": props.is_dead
 		})
-
-	return {
-		"player_letters": ally_letters_sim,
-		"enemy_letters": enemy_letters_sim
-	}
+	return combined_letters
 	
 func set_board_enabled(enabled: bool):
 	for letter in ally_letters:

@@ -24,6 +24,7 @@ text = "Disable preview"
 
 [node name="AddLetter" type="Button" parent="."]
 visible = false
+layout_mode = 0
 offset_left = -712.0
 offset_top = -20.0
 offset_right = -494.0
@@ -33,6 +34,7 @@ theme_override_font_sizes/font_size = 36
 text = "ADD LETTER"
 
 [node name="FightButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = -697.0
 offset_top = -120.0
 offset_right = -528.0
