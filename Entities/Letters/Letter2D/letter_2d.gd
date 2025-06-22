@@ -94,8 +94,6 @@ func update_frame_bar(ratio:float, permanent: bool):
 	else: 
 		frame_bar.set_temp_percent(ratio)
 
-func attack():
-	play_attack_animation()
 	
 func play_attack_animation():
 	#COPYING
@@ -103,10 +101,6 @@ func play_attack_animation():
 	var attack_label = original_label.letter_label.duplicate()
 	attack_label.name = "attack_label"
 	add_child(attack_label)
-	
-	# SET DAMAGE PARAMETER
-	var damage = int(original_label.ATK_label.text)
-	attack_label.set_meta("damage", damage)
 	
 	#POSITION AND SIZE
 	attack_label.global_position = global_position

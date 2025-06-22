@@ -24,14 +24,7 @@ func room_cleared():
 	
 func round_start():
 	enable_ui(false)
-	
-	var letters = Global.board_scene.all_letters
-	for letter in letters:
-		if letter:
-			letter.attack()
-			await get_tree().create_timer(1.0).timeout
-	
-	await get_tree().create_timer(1.0).timeout
+	Global.battle_simulator.run_simulation(true)
 	round_end()
 
 func round_end():
@@ -81,5 +74,4 @@ func init_enemies(enemy_count: int):
 		Global.board_scene.enemy_letters.append(enemy)
 		Global.sfx_manager.play_sfx("stone1", enemy.position)
 		await get_tree().create_timer(0.3).timeout
-	Global.battle_simulator.run_simulation()
 	

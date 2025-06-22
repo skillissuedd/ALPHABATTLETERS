@@ -34,15 +34,6 @@ func initialize(
 	is_dead = false
 	locked = false
 	
-func show_stats():
-	print("letter: " , letter)
-	print( " is_enemy: ", is_enemy)
-	print( " atk: ", attack,)
-	print( " max_hp: ", 	max_hp,)
-	print( " hp: ", current_hp,)
-	print("element: ", 	element_type)
-	print (is_dead)
-	print (locked)
 	
 # Animation hooks (can be overridden or attached in script later)
 func animate_attack(target: LetterUnit) -> void:
@@ -58,3 +49,9 @@ func update_stats(atk_val: int, hp_val: int):
 	attack = atk_val
 	max_hp = hp_val
 	current_hp = hp_val
+
+func play_hit_animation(damage: int):
+	current_hp -= damage
+	var hit_tween = create_tween()
+	hit_tween.tween_property(self, "modulate", Color.RED, 0.1)
+	hit_tween.tween_property(self, "modulate", Color.WHITE, 0.2)

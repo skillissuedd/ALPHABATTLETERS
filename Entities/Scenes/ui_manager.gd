@@ -15,7 +15,7 @@ func disable_preview():
 		Global.battle_simulator.load_backups()
 	else:
 		GlobalOptions.toggle_preview_animations = true
-		Global.battle_simulator.run_simulation()
+		Global.battle_simulator.load_backups()
 		
 
 

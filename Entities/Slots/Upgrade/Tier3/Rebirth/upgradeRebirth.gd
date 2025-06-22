@@ -15,8 +15,6 @@ func letter_is_placed():
 		current_letter.LetterDisplay.upgrade_label.add_theme_color_override("font_color", Color.LIME_GREEN)
 		current_letter.LetterDisplay.letter_label.add_theme_color_override("font_color", Color.LIME_GREEN)
 		current_letter.frame_bar.border_color = Color.WEB_GREEN
-		
-		Global.battle_simulator.run_simulation()
 			
 func get_next_letter(letter: String) -> String:
 	if letter.length() != 1:

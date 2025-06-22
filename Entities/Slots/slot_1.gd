@@ -37,6 +37,6 @@ func letter_is_taken():
 func attack():
 	for child in get_children():
 		if child.is_in_group("letters"):
-			child.attack()
+			child.play_attack_animation()
 			
 		

@@ -13,10 +13,10 @@ extends Node2D
 @export var cell_size: Vector2 = Vector2(280, 280)
 @onready var rows: int = 5
 @onready var cols: int = 5
-var ally_letters: Array = []
-var enemy_letters: Array = []
+@export var ally_letters: Array = []
+@export var enemy_letters: Array = []
 var slot_hovered_block: bool = false
-@export var all_letters: Array = [ally_letters, enemy_letters]  
+var all_letters: Array = [ally_letters, enemy_letters]  
 @export var slot_grid: Array = [] # 2D array: slot_grid[row][col]
 
 func _ready():
@@ -32,7 +32,7 @@ func on_slot_is_hovered(slot: Node2D, letter2D: Node2D):
 		letter2D.properties.grid_x = slotX
 		letter2D.properties.grid_y = slotY
 		if GlobalOptions.toggle_preview_animations:
-			Global.battle_simulator.run_simulation()
+			Global.battle_simulator.run_simulation(false)
 
 func prepare_simulation_data() -> Array:
 	var combined_letters = []
