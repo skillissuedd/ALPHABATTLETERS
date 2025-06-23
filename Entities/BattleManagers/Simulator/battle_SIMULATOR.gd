@@ -1,6 +1,6 @@
 extends Node
-@export var player_backup: Array = []
-@export var enemy_backup: Array = []
+var player_backup: Array = []
+var enemy_backup: Array = []
 
 	
 func load_backups():
@@ -9,16 +9,16 @@ func load_backups():
 	
 	for new_unit in new_data:
 		for old_unit in enemy_backup:
-			if new_unit["ref"] == old_unit["ref"]:
+			if new_unit["ref"] == old_unit["ref"] and new_unit["ref"].current_hp != old_unit["current_hp"]:
 				# Replace NEW with OLD values
-				new_unit["current_hp"] = old_unit["current_hp"]
-				new_unit["is_dead"] = old_unit["is_dead"]
-				new_unit["attack"] = old_unit["attack"]
+				new_unit["ref"].current_hp = old_unit["current_hp"]
+				new_unit["ref"].is_dead = old_unit["is_dead"]
+				new_unit["ref"].attack = old_unit["attack"]
 				new_unit["ref"].letterParent.modulate = Color.WHITE
 				new_unit["ref"].letterDisplay.death_mark.visible = false
 				new_unit["ref"].letterDisplay.update_stats(
-				old_unit["attack"],
-				old_unit["current_hp"]
+				new_unit["ref"].attack,
+				new_unit["ref"].current_hp
 				)
 			
 		
@@ -55,7 +55,7 @@ func letterunit_to_sim_data(properties: LetterUnit) -> Dictionary:
 func letter_action(letter: Node2D):
 	var unit = letterunit_to_sim_data(letter.properties)
 	var target = _find_valid_targets(unit, enemy_backup)
-	#print (target)
+	print (target)
 
 func simulate_battle(simulation_data: Array, apply: bool) -> void:
 	load_backups()
