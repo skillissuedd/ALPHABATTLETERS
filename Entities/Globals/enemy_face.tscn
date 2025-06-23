@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba8nvcho336y8"]
+
+[ext_resource type="Script" uid="uid://bjjxdhwu3nq1w" path="res://Entities/Globals/enemy_face.gd" id="1_k7nnb"]
+[ext_resource type="Shader" uid="uid://bke45ne6jb570" path="res://Entities/Globals/enemy_face.gdshader" id="2_464t6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sgqu1"]
+shader = ExtResource("2_464t6")
+shader_parameter/fill_amount = 0.69
+shader_parameter/fill_color = Color(1, 1, 0.584314, 0.337255)
+shader_parameter/bg_color = Color(0.709804, 0.411765, 0.286275, 0)
+
+[node name="BookHealthBar" type="Node2D"]
+script = ExtResource("1_k7nnb")
+
+[node name="BookCover" type="ColorRect" parent="."]
+offset_left = -50.0
+offset_top = -59.0
+offset_right = 50.0
+offset_bottom = 25.0
+color = Color(0.597032, 0.334667, 0.152416, 1)
+
+[node name="Pages" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_sgqu1")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -54.0
+offset_right = 50.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="HScrollBar" type="HScrollBar" parent="."]
+offset_left = -47.0
+offset_top = 34.0
+offset_right = 51.0
+offset_bottom = 43.0
+
+[node name="Camera2D" type="Camera2D" parent="HScrollBar"]
+position = Vector2(43, -30)
+zoom = Vector2(3.355, 3.355)
+
+[connection signal="value_changed" from="HScrollBar" to="." method="_on_h_scroll_bar_value_changed"]

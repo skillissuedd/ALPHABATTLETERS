@@ -1,5 +1,6 @@
 extends Node
 
+
 func letterunit_to_sim_data(properties: LetterUnit) -> Dictionary:
 	return {
 		"ref": properties,
@@ -48,7 +49,7 @@ func _play_attack_anim(attacker: Node2D, target: Node2D, damage: int, killed: bo
 	hit_tween.tween_property(target, "modulate", Color.WHITE, 0.3)
 	
 	# 3. Damage display (using your existing system)
-	target.letterParent.LetterDisplay.update_stats(target.attack, target.current_hp)
+	target.letterParent.letterDisplay.update_stats(target.attack, target.current_hp)
 	
 	# 4. Sound (using your SFX system)
 	Global.sfx_manager.play_sfx("hit1", target.global_position)
@@ -68,10 +69,10 @@ func _play_death_anim(target: Node2D):
 func animate_affected_letters(enemy_letters: Array):
 	for letter in enemy_letters:
 		var letterNode = letter["ref"].letterParent
-		var letterDisplay=letterNode.LetterDisplay
+		var letterDisplay=letterNode.letterDisplay
 		var letterCurrentHP = letterNode.properties.current_hp
 		var letterMaxHP = letterNode.properties.max_hp
-		letterNode.LetterDisplay.update_stats(letter["attack"], letter["current_hp"])
+		letterNode.letterDisplay.update_stats(letter["attack"], letter["current_hp"])
 		#letterNode.shake_letter()
 		Global.sfx_manager.hit_sound()
 		#letterNode.modulate = Color(0.7, 0.7, 0.7)

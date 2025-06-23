@@ -19,7 +19,7 @@ func before_round():
 		else:
 			init_enemies(current_round + 4)
 			
-	Global.ui_manager.enemy_healthbar._setup_health_bar(150.0)
+	Global.ui_manager.enemy_healthbar._setup_health_bar(20.0)
 	
 func room_cleared():
 	pass
@@ -76,4 +76,4 @@ func init_enemies(enemy_count: int):
 		Global.board_scene.enemy_letters.append(enemy)
 		Global.sfx_manager.play_sfx("stone1", enemy.position)
 		await get_tree().create_timer(0.3).timeout
-	
+	Global.battle_simulator.save_backups()

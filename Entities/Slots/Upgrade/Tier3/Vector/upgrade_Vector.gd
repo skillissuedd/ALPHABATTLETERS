@@ -13,8 +13,8 @@ func letter_is_placed():
 		Global.letter_stats.update_global_stat(current_letter.properties.letter, "hp", hp)
 		Global.deck_scene.update_letter_instances(current_letter.properties)
 		current_letter.properties.update_stats(atk, hp)
-		current_letter.LetterDisplay.vector_upgrade_animation()
-		current_letter.LetterDisplay.upgrade_label.visible = true
-		current_letter.LetterDisplay.upgrade_label.add_theme_color_override("font_color", Color.LIME_GREEN)
-		current_letter.LetterDisplay.letter_label.add_theme_color_override("font_color", Color.LIME_GREEN)
+		current_letter.letterDisplay.vector_upgrade_animation()
+		current_letter.letterDisplay.upgrade_label.visible = true
+		current_letter.letterDisplay.upgrade_label.add_theme_color_override("font_color", Color.LIME_GREEN)
+		current_letter.letterDisplay.letter_label.add_theme_color_override("font_color", Color.LIME_GREEN)
 		current_letter.frame_bar.border_color = Color.WEB_GREEN

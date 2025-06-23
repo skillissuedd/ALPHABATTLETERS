@@ -27,9 +27,10 @@ var letter_stats_path = "res://Entities/Letters/LetterStats/letter_stats.tres"
 var letter_stats = load(letter_stats_path)
 
 #References
+@onready var letterDisplay = $Display/LetterDisplay
 @onready var properties = $LetterUnit
 @onready var frame_bar = $FrameBar/FrameBar
-@onready var LetterDisplay = $Display/LetterDisplay
+
 
 func init_letter(character: String, is_enemy: bool):
 	var stats = letter_stats.get_stats(character)
@@ -38,9 +39,10 @@ func init_letter(character: String, is_enemy: bool):
 	var element = letter_stats.get_element_for_letter(character)
 	update_element_style(element)
 	properties.initialize(character, is_enemy, current_atk, max_hp, element)
-	if LetterDisplay:
-		LetterDisplay.change_letter(character)
-		LetterDisplay.update_stats()
+	properties.letterDisplay = letterDisplay
+	if letterDisplay:
+		letterDisplay.change_letter(character)
+		letterDisplay.update_stats()
 	if is_enemy:
 		frame_bar.border_color = Color.DARK_RED
 	else:
@@ -53,8 +55,8 @@ func _on_area_2d_mouse_exited() -> void:
 	mouse_in = false
 	
 func update_element_style(letterForElement: String):
-	if LetterDisplay:
-		LetterDisplay.change_element(letterForElement)
+	if letterDisplay:
+		letterDisplay.change_element(letterForElement)
 	match letterForElement:
 		"Water":
 			self.texture=load("res://Entities/Letters/Letter2D/Elements/Water/letterTileWater.png")
@@ -97,7 +99,7 @@ func update_frame_bar(ratio:float, permanent: bool):
 	
 func play_attack_animation():
 	#COPYING
-	var original_label = LetterDisplay
+	var original_label = letterDisplay
 	var attack_label = original_label.letter_label.duplicate()
 	attack_label.name = "attack_label"
 	add_child(attack_label)
@@ -238,3 +240,4 @@ func snap_to_slot():
 		properties.grid_y = current_selected_slot.slotRow
 		if Global.board_scene.ally_letters.has(self) == false:
 			Global.board_scene.ally_letters.append(self)
+		Global.battle_simulator.letter_action(self)

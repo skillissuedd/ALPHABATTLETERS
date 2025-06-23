@@ -12,7 +12,7 @@ func letter_is_placed():
 		label_2.queue_free()
 		label_3.queue_free()
 		current_letter.properties.current_upgrade = "Assassin"
-		current_letter.LetterDisplay.upgrade_label.visible = true
-		current_letter.LetterDisplay.upgrade_label.add_theme_color_override("font_color", Color.LIME_GREEN)
-		current_letter.LetterDisplay.letter_label.add_theme_color_override("font_color", Color.LIME_GREEN)
+		current_letter.letterDisplay.upgrade_label.visible = true
+		current_letter.letterDisplay.upgrade_label.add_theme_color_override("font_color", Color.LIME_GREEN)
+		current_letter.letterDisplay.letter_label.add_theme_color_override("font_color", Color.LIME_GREEN)
 		current_letter.frame_bar.border_color = Color.WEB_GREEN

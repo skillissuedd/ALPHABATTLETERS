@@ -1,6 +1,6 @@
 extends Control
 
-class_name LetterDisplayClass
+class_name letterDisplayClass
 signal animation_ended
 
 #Default letter stats

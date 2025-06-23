@@ -1,4 +1,4 @@
-extends LetterDisplayClass
+extends letterDisplayClass
 
 func _ready():
 	pass
