@@ -13,3 +13,4 @@ var sfx_manager: Node = null
 var battle_simulator: Node = null
 var battle_animator: Node = null
 var mouse: Node = null
+var ui_manager: Node = null

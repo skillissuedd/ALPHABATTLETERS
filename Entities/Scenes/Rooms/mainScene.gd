@@ -13,6 +13,7 @@ func init_interface():
 	Global.battle_simulator = $BattleSimulator
 	Global.battle_animator = $BattleAnimator
 	Global.sfx_manager = $sfxManager
+	Global.ui_manager = $UiManager
 	Global.deck_scene.initialize_deck()
 	Global.deck_scene.fill_deck()
 	Global.board_scene.create_board()

@@ -3,6 +3,7 @@ extends Control
 @onready var toggle_preview: Button = $TogglePreview
 @onready var add_letter: Button = $AddLetter
 @onready var fight_button: Button = $FightButton
+@onready var enemy_healthbar: CustomHealthBar = $EnemyHealthbar
 
 func _on_toggle_preview_button_down() -> void:
 	disable_preview()

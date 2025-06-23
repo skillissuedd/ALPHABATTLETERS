@@ -45,8 +45,3 @@ grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_0g36c")
 theme_override_styles/fill = SubResource("StyleBoxFlat_64342")
 show_percentage = false
-
-[node name="ResetVisibility" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="timeout" from="ResetVisibility" to="." method="_on_reset_visibility_timeout"]

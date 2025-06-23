@@ -61,6 +61,9 @@ func restore_backup(backup: Dictionary):
 		
 
 func simulate_battle(simulation_data: Array, apply: bool = false) -> void:
+	simulation_data.sort_custom(func(a, b): 
+		return a["y"] > b["y"] or (a["y"] == b["y"] and a["x"] < b["x"]))
+		
 	var action_queue = []
 
 	for unit in simulation_data:
@@ -77,14 +80,14 @@ func simulate_battle(simulation_data: Array, apply: bool = false) -> void:
 		execute_actions(action_queue)
 		
 func _find_valid_targets(attacker: Dictionary, all_units: Array):
-	var potential_targets = all_units.filter(
-		func(u): return (
-				u["x"] == attacker["x"] and 
-				u["y"] < attacker["y"] and 
-				!u["is_dead"] and 
-				u["is_enemy"] != attacker["is_enemy"]
-				)
-			)
+	var potential_targets = []
+	for unit in all_units:
+		if (unit["x"] == attacker["x"] and 
+		unit["y"] < attacker["y"] and 
+		!unit["is_dead"] and 
+		unit["is_enemy"] != attacker["is_enemy"]):
+			potential_targets.append(unit)
+			
 	if potential_targets.is_empty():
 		return null
 		
@@ -94,6 +97,7 @@ func _find_valid_targets(attacker: Dictionary, all_units: Array):
 			lowest_target = target
 			
 	return lowest_target
+	 
 func execute_actions(action_queue: Array) -> void:
 	for action in action_queue:
 		var attacker = action.attacker

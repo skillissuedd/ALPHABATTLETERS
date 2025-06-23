@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cngb63kfm4jub"]
+[gd_scene load_steps=3 format=3 uid="uid://cngb63kfm4jub"]
 
 [ext_resource type="Script" uid="uid://c6s72ktyfdcpo" path="res://Entities/Scenes/ui_manager.gd" id="1_pymld"]
+[ext_resource type="PackedScene" uid="uid://llpykdw0gxl1" path="res://Entities/Framebars/healthBar.tscn" id="2_u7n71"]
 
 [node name="UiManager" type="Control"]
 layout_mode = 3
@@ -42,6 +43,14 @@ offset_bottom = -35.0
 theme_override_constants/outline_size = 15
 theme_override_font_sizes/font_size = 56
 text = "FIGHT"
+
+[node name="EnemyHealthbar" parent="." instance=ExtResource("2_u7n71")]
+layout_mode = 0
+offset_left = -491.0
+offset_top = -420.0
+offset_right = 1314.0
+offset_bottom = -310.0
+value = 100.0
 
 [connection signal="button_down" from="TogglePreview" to="." method="_on_toggle_preview_button_down"]
 [connection signal="pressed" from="AddLetter" to="." method="_on_add_letter_pressed"]

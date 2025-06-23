@@ -236,4 +236,5 @@ func snap_to_slot():
 		reparent(current_selected_slot)
 		properties.grid_x = current_selected_slot.slotColumn
 		properties.grid_y = current_selected_slot.slotRow
-		Global.board_scene.ally_letters.append(self)
+		if Global.board_scene.ally_letters.has(self) == false:
+			Global.board_scene.ally_letters.append(self)

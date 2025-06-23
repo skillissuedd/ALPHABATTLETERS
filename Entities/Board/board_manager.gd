@@ -14,7 +14,7 @@ extends Node2D
 @onready var rows: int = 5
 @onready var cols: int = 5
 @export var ally_letters: Array = []
-@export var enemy_letters: Array = []
+@export var enemy_letters: Array
 var slot_hovered_block: bool = false
 var all_letters: Array = [ally_letters, enemy_letters]  
 @export var slot_grid: Array = [] # 2D array: slot_grid[row][col]

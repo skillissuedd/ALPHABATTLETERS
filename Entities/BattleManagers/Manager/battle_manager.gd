@@ -18,7 +18,9 @@ func before_round():
 			room_cleared()
 		else:
 			init_enemies(current_round + 4)
-
+			
+	Global.ui_manager.enemy_healthbar._setup_health_bar(150.0)
+	
 func room_cleared():
 	pass
 	

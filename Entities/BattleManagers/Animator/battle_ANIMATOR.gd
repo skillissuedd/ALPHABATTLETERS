@@ -15,7 +15,7 @@ func letterunit_to_sim_data(properties: LetterUnit) -> Dictionary:
 	
 func apply_animation_effects(animation_events: Array) -> void:
 	for event in animation_events:
-		output_log(event)
+		#output_log(event)
 		match event["type"]:
 			"attack":
 				await _play_attack_anim(
