@@ -84,3 +84,4 @@ grow_vertical = 2
 scale = Vector2(4.235, 4.235)
 
 [node name="EnemyFace" parent="." instance=ExtResource("13_dtwfu")]
+position = Vector2(225, -832)

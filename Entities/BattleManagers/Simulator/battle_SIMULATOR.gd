@@ -11,15 +11,17 @@ func load_backups():
 		for old_unit in enemy_backup:
 			if new_unit["ref"] == old_unit["ref"] and new_unit["ref"].current_hp != old_unit["current_hp"]:
 				# Replace NEW with OLD values
-				new_unit["ref"].current_hp = old_unit["current_hp"]
-				new_unit["ref"].is_dead = old_unit["is_dead"]
-				new_unit["ref"].attack = old_unit["attack"]
-				new_unit["ref"].letterParent.modulate = Color.WHITE
-				new_unit["ref"].letterDisplay.death_mark.visible = false
-				new_unit["ref"].letterDisplay.update_stats(
-				new_unit["ref"].attack,
-				new_unit["ref"].current_hp
-				)
+				var u = new_unit["ref"]
+				u.current_hp = old_unit["current_hp"]
+				u.is_dead = old_unit["is_dead"]
+				u.attack = old_unit["attack"]
+				u.letterParent.modulate = Color.WHITE
+				u.letterDisplay.death_mark.visible = false
+				u.letterDisplay.update_stats(
+				u.attack,
+				u.current_hp)
+				u.letterParent.update_frame_bar((u.current_hp*100.0)/u.max_hp, false)
+				
 			
 		
 func save_backups():
@@ -95,10 +97,12 @@ func calculate_damage(action_queue: Array):
 			if !is_instance_valid(target) or target.is_dead: continue
 			target.current_hp = max(0, target.current_hp - action.damage)
 			target.letterDisplay.update_stats(target.attack, target.current_hp)
+			target.letterParent.update_frame_bar((target.current_hp*100.0)/target.max_hp ,false)
 			if target.current_hp == 0:
 				target.is_dead == true
 				target.letterParent.modulate = Color(0.9, 0.9, 0.9, 0.8)
 				target.letterDisplay.death_mark.visible = true
+				
 		
 	
 func execute_actions(action_queue: Array) -> void:
