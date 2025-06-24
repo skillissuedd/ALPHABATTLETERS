@@ -6,6 +6,7 @@ extends Node2D
 func init_interface():
 	Global.mouse = $Mouse
 	Global.deck_disc_scene = $DeckDiscarded
+	Global.enemy_deck_disc_scene = $enemyDeckDiscarded
 	Global.deck_scene = $Deck
 	Global.board_scene = $BoardManager
 	Global.hand_scene= $handManager

@@ -64,7 +64,7 @@ func pick_random_deck_child():
 			return rand_index
 
 func append_to_deck(letter: Node2D):
-	var total_letters = get_child_count()  # сколько уже добавлено
+	var total_letters = get_child_count() 
 	var row = total_letters / GRID_COLUMNS
 	var col = total_letters % GRID_COLUMNS
 	deck.append(letter.properties.letter)

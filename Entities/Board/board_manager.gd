@@ -39,7 +39,7 @@ func prepare_simulation_data() -> Array:
 	
 	# Process ally letters
 	for letter in ally_letters:
-		if letter.properties.is_dead:
+		if letter.properties.is_dead or letter.is_active == false:
 			continue
 		var props = letter.properties
 		combined_letters.append({
@@ -56,8 +56,6 @@ func prepare_simulation_data() -> Array:
 		
 	# Process enemy letters	
 	for letter in enemy_letters:
-		if letter.properties.is_dead:
-			continue
 		var props = letter.properties
 		combined_letters.append({
 			"ref": props,

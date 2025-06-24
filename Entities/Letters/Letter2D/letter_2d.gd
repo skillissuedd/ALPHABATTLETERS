@@ -97,7 +97,7 @@ func update_frame_bar(ratio:float, permanent: bool):
 		frame_bar.set_temp_percent(ratio)
 
 	
-func play_attack_animation():
+func play_attack_animation(target: Node2D):
 	#COPYING
 	var original_label = letterDisplay
 	var attack_label = original_label.letter_label.duplicate()
@@ -105,7 +105,7 @@ func play_attack_animation():
 	add_child(attack_label)
 	
 	#POSITION AND SIZE
-	attack_label.global_position = global_position
+	attack_label.global_position = original_label.global_position + Vector2(50,0)
 	attack_label.scale = original_label.scale * 0.7
 	attack_label.z_index=1
 	if properties.is_enemy == false:
@@ -119,21 +119,23 @@ func play_attack_animation():
 	attack_label.modulate = Color(1.0, 1.0, 0.5, 1.0) 
 	
 	#MOVING
-	
-	var start_pos = attack_label.global_position
-	var end_pos = Vector2(start_pos.x, -600)	
-	if properties.is_enemy == true:
-		end_pos = Vector2(start_pos.x, 1300)
-		
-	
+	var end_pos = target.letterDisplay.global_position + Vector2(50, 150)
 	var tween = create_tween()
-	tween.tween_property(attack_label, "global_position", end_pos, 1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	tween.tween_property(attack_label, "modulate:a", 0, 0.2).set_delay(0.2)
-	tween.tween_callback(Callable(attack_label, "queue_free"))
+	tween.tween_property(attack_label, "global_position", end_pos, 1.0)\
+		.set_trans(Tween.TRANS_QUAD)\
+		.set_ease(Tween.EASE_IN)
+		
+	await tween.finished
+	
 	Global.sfx_manager.play_sfx("hit1", global_position)
 	
+	tween = create_tween()
+	tween.tween_property(attack_label, "modulate:a", 0, 0.2)
+	await tween.finished
+	attack_label.queue_free()
 	
-func shake_letter(strength := 15.0, duration := 0.3, shakes := 15):
+	
+func shake_letter(strength := 5.0, duration := 0.3, shakes := 15):
 	var tween := get_tree().create_tween()
 	var original_pos := position
 	var time_per_shake := duration / float(shakes)
@@ -230,14 +232,16 @@ func snap_to_parent():
 		
 func snap_to_slot():
 	if closest_slot:
+		reparent(Global.board_scene)
 		global_position = closest_slot.global_position + Vector2(80, 80)
 		current_selected_slot = closest_slot
 		Global.hand_scene.letter_row.erase(self)
 		current_selected_slot.letter_is_placed()
 		self.rotation_degrees = 0
-		reparent(current_selected_slot)
 		properties.grid_x = current_selected_slot.slotColumn
 		properties.grid_y = current_selected_slot.slotRow
 		if Global.board_scene.ally_letters.has(self) == false:
 			Global.board_scene.ally_letters.append(self)
-		Global.battle_simulator.letter_action(self)
+		is_active = false
+		Global.battle_simulator.execute_letter_action(self)
+		

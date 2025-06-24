@@ -1,11 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://be6dijs30c51b"]
+[gd_scene load_steps=4 format=3 uid="uid://be6dijs30c51b"]
 
 [ext_resource type="Script" uid="uid://k7oq1x86epp" path="res://Entities/Letters/LetterDisplay/Ally/ally_letter_display.gd" id="1_7ietf"]
 [ext_resource type="FontFile" uid="uid://cltoojf5br46e" path="res://fonts/SpicyNoodle-K7X5X.ttf" id="2_728kf"]
 [ext_resource type="PackedScene" uid="uid://bcvgb1vvjwqv0" path="res://Entities/Letters/Death/death_mark.tscn" id="3_aw58u"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_785dx"]
-size = Vector2(52.5, 76.75)
 
 [node name="LetterDisplay" type="Control"]
 self_modulate = Color(1, 1, 1, 0)
@@ -77,15 +74,6 @@ theme_override_constants/outline_size = 23
 theme_override_font_sizes/font_size = 79
 text = "O"
 horizontal_alignment = 1
-
-[node name="Area2D" type="Area2D" parent="Panel/LetterLabel"]
-collision_layer = 4
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel/LetterLabel/Area2D"]
-position = Vector2(40, 53.5)
-shape = SubResource("RectangleShape2D_785dx")
-debug_color = Color(0.296228, 0.608454, 0.456804, 0.42)
 
 [node name="HPLabel" type="Label" parent="Panel"]
 layout_mode = 1

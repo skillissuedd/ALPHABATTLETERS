@@ -4,10 +4,12 @@ extends Node2D
 # Identifiers
 @export var letter: String = ""
 @export var is_enemy: bool = false
+@export var is_changed: bool = false
 @export var grid_x: int = 0
 @export var grid_y: int = 0
 @onready var letterParent = get_parent()
 @onready var letterDisplay: letterDisplayClass 
+
 # Combat stats
 @export var current_hp: int = 20
 @export var max_hp: int = 20

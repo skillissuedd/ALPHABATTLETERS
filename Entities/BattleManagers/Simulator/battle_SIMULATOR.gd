@@ -2,28 +2,6 @@ extends Node
 var player_backup: Array = []
 var enemy_backup: Array = []
 
-	
-func load_backups():
-	var new_data = Global.board_scene.prepare_simulation_data().filter(func(a): 
-		return a["is_enemy"])
-	
-	for new_unit in new_data:
-		for old_unit in enemy_backup:
-			if new_unit["ref"] == old_unit["ref"] and new_unit["ref"].current_hp != old_unit["current_hp"]:
-				# Replace NEW with OLD values
-				var u = new_unit["ref"]
-				u.current_hp = old_unit["current_hp"]
-				u.is_dead = old_unit["is_dead"]
-				u.attack = old_unit["attack"]
-				u.letterParent.modulate = Color.WHITE
-				u.letterDisplay.death_mark.visible = false
-				u.letterDisplay.update_stats(
-				u.attack,
-				u.current_hp)
-				u.letterParent.update_frame_bar((u.current_hp*100.0)/u.max_hp, false)
-				
-			
-		
 func save_backups():
 	var backup = Global.board_scene.prepare_simulation_data()
 	#Filtering the backup
@@ -36,9 +14,29 @@ func save_backups():
 		return a["y"] > b["y"] or (a["y"] == b["y"] and a["x"] < b["x"]))
 	enemy_backup.sort_custom(func(a, b):
 		return a["y"] > b["y"] or (a["y"] == b["y"] and a["x"] < b["x"]))
+	
+func load_backups():
+	var new_data = Global.board_scene.prepare_simulation_data().filter(func(a): 
+		return a["is_enemy"])
+	
+	for new_unit in new_data:
+		for old_unit in enemy_backup:
+			if new_unit["ref"] == old_unit["ref"] and new_unit["ref"].is_changed == true:
+				new_unit["ref"].current_hp = old_unit.current_hp
+				new_unit["ref"].is_dead = old_unit.is_dead
+				new_unit["ref"].is_changed = false
+				apply_calculated_changes_to_ui(new_unit["ref"], false)
+				new_unit["ref"].letterParent.modulate = Color(0.9, 0.9, 0.9, 1)
+				new_unit["ref"].letterDisplay.death_mark.visible = false
 
-func run_simulation(apply: bool):
-	simulate_battle(Global.board_scene.prepare_simulation_data(), apply)
+func apply_calculated_changes_to_ui(target: LetterUnit, apply: bool):
+	target.is_changed = true
+	target.letterDisplay.update_stats(target.attack, target.current_hp)
+	target.letterParent.update_frame_bar((target.current_hp*100.0)/target.max_hp, apply)
+	if target.current_hp == 0:
+		target.is_dead = true
+		target.letterParent.modulate = Color(0.9, 0.9, 0.9, 0.4)
+		target.letterDisplay.death_mark.visible = true
 
 func letterunit_to_sim_data(properties: LetterUnit) -> Dictionary:
 	return {
@@ -53,11 +51,8 @@ func letterunit_to_sim_data(properties: LetterUnit) -> Dictionary:
 		"is_dead": properties.is_dead
 	}
 	
-
-func letter_action(letter: Node2D):
-	var unit = letterunit_to_sim_data(letter.properties)
-	var target = _find_valid_targets(unit, enemy_backup)
-	print (target)
+func run_simulation(apply: bool):
+	simulate_battle(Global.board_scene.prepare_simulation_data(), apply)
 
 func simulate_battle(simulation_data: Array, apply: bool) -> void:
 	load_backups()
@@ -87,35 +82,6 @@ func simulate_battle(simulation_data: Array, apply: bool) -> void:
 		execute_actions(action_queue)
 	else:
 		calculate_damage(action_queue)
-			
-func calculate_damage(action_queue: Array):
-	for action in action_queue:
-		if action["type"] == "attack":
-			var attacker = action.attacker
-			var target = action.target
-			if !is_instance_valid(attacker) or attacker.is_dead: continue
-			if !is_instance_valid(target) or target.is_dead: continue
-			target.current_hp = max(0, target.current_hp - action.damage)
-			target.letterDisplay.update_stats(target.attack, target.current_hp)
-			target.letterParent.update_frame_bar((target.current_hp*100.0)/target.max_hp ,false)
-			if target.current_hp == 0:
-				target.is_dead == true
-				target.letterParent.modulate = Color(0.9, 0.9, 0.9, 0.8)
-				target.letterDisplay.death_mark.visible = true
-				
-		
-	
-func execute_actions(action_queue: Array) -> void:
-	for action in action_queue:
-		var attacker = action.attacker
-		var target = action.target
-		if !is_instance_valid(attacker) or attacker.is_dead: continue
-		if !is_instance_valid(target) or target.is_dead: continue
-		
-		action.target.current_hp = max(0, action.target.current_hp - action.damage)
-		action.target.is_dead = action.target.current_hp <= 0
-			
-		Global.battle_animator.apply_animation_effects(action_queue)
 
 func _find_valid_targets(attacker: Dictionary, all_units: Array):
 	var potential_targets = []
@@ -135,3 +101,49 @@ func _find_valid_targets(attacker: Dictionary, all_units: Array):
 			lowest_target = target
 			
 	return lowest_target
+			
+func calculate_damage(action_queue: Array):
+	for action in action_queue:
+		if action["type"] == "attack":
+			var attacker = action.attacker
+			var target = action.target
+			if !is_instance_valid(attacker) or attacker.is_dead: continue
+			if !is_instance_valid(target) or target.is_dead: continue
+			target.current_hp = max(0, target.current_hp - action.damage)
+			target.is_changed = true
+			if target.current_hp == 0:
+				target.is_dead = true
+			apply_calculated_changes_to_ui(target, false)
+			
+			
+func execute_letter_action(letter: Node2D):
+	load_backups()
+	var unit = letterunit_to_sim_data(letter.properties)
+	var target = _find_valid_targets(unit, enemy_backup)
+	var action_queue = []
+	if target != null:
+		action_queue.append({
+			"type": "attack",
+			"attacker": unit["ref"],
+			"target": target["ref"],
+			"damage": unit["attack"]
+			})
+	else:
+		action_queue.append({
+			"type": "face_attack",
+			"attacker": unit["ref"],
+			"target": "face",
+			"damage": unit["attack"]
+			})
+	execute_actions(action_queue)
+
+func execute_actions(action_queue: Array) -> void:
+	for action in action_queue:
+		var attacker = action.attacker
+		var target = action.target
+		if !is_instance_valid(attacker) or attacker.is_dead: continue
+		if !is_instance_valid(target) or target.is_dead: continue
+		
+		action.target.current_hp = max(0, action.target.current_hp - action.damage)
+		action.target.is_dead = action.target.current_hp <= 0
+		Global.battle_animator.apply_animation_effects(action_queue)
