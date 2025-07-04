@@ -34,12 +34,12 @@ func _play_attack_anim(attacker: Node2D, target: Node2D, damage: int) -> void:
 	# Visuals
 	var hit_tween  = create_tween()
 	target2D.shake_letter()
-	hit_tween.tween_property(target2D, "modulate", Color.RED, 0.5)
-	hit_tween.tween_property(target2D, "modulate", Color.WHITE, 0.9)
+	hit_tween.tween_property(target2D, "modulate", Color.RED, 0.2)
+	hit_tween.tween_property(target2D, "modulate", Color.WHITE, 0.3)
 
 	# Sound (using your SFX system)
-	await get_tree().create_timer(0.9).timeout  # Basic attack duration
 	Global.battle_simulator.apply_calculated_changes_to_ui(target, true)
+	await get_tree().create_timer(0.9).timeout
 	
 	if target.is_dead == true:
 		await _play_death_anim(target2D)
@@ -52,9 +52,9 @@ func _play_attack_anim(attacker: Node2D, target: Node2D, damage: int) -> void:
 	
 func _play_death_anim(target: Node2D):
 	var death_tween = create_tween()
-	death_tween.tween_property(target, "modulate:a", 0.0, 0.4)
-	death_tween.parallel().tween_property(target, "scale", Vector2(1.5,1.5), 0.2)
-	death_tween.tween_property(target, "scale", Vector2(0.1,0.1), 0.2)
+	death_tween.tween_property(target, "modulate:a", 0.0, 1.4)
+	death_tween.parallel().tween_property(target, "scale", Vector2(1.5,1.5), 0.4)
+	death_tween.tween_property(target, "scale", Vector2(0.1,0.1), 0.4)
 	await death_tween.finished
 		#letterNode.frame_bar.previous_hp_percent=float(letterCurrentHP*100/letterMaxHP)
 		#letterNode.update_frame_bar((float(letter["current_hp"]*100)/float(letterMaxHP)), true)

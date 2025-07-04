@@ -13,6 +13,7 @@ var max_size := Vector2(200, 200)
 @export var is_dragging: bool = false
 @export var is_active: bool = true
 
+
 #SLOTS AND POSITION
 var current_selected_slot = null
 var overlapping_slots = []
@@ -199,7 +200,12 @@ func drag_logic(delta: float) -> void:
 					_change_scale(Vector2(0.6+scale_mod, 0.6+scale_mod))
 					_set_rotation(delta)
 					self.z_index = 100
-					is_dragging = true
+					
+					if not is_dragging:  # Only play sound when dragging starts
+						is_dragging = true
+						Global.sfx_manager.play_sfx("letterTaken", global_position)
+					
+			
 					Mousebrain.node_being_dragged = self
 					if get_parent() == current_selected_slot:
 						Global.board_scene.ally_letters.erase(self)
@@ -216,6 +222,7 @@ func drag_logic(delta: float) -> void:
 				self.rotation_degrees = lerp(self.rotation_degrees, 0.0, 22.0*delta)
 				if Mousebrain.node_being_dragged == self:
 					Mousebrain.node_being_dragged = null
+					Global.sfx_manager.play_sfx("letterPlaced", global_position)
 					snap_to_parent()
 			return
 		
