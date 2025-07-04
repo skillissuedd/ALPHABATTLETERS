@@ -3,7 +3,7 @@ class_name letter2Dclass
 
 #Physics variables
 #SCALE
-var current_goal_scale: Vector2 = Vector2(0.2, 0.2)
+var current_goal_scale: Vector2 = Vector2(0.4, 0.4)
 var scale_tween: Tween
 var scale_mod:float = 2
 var max_size := Vector2(200, 200)
@@ -13,6 +13,10 @@ var max_size := Vector2(200, 200)
 @export var is_dragging: bool = false
 @export var is_active: bool = true
 
+#ROTATION
+@export var float_amplitude := 5.0    # How much to rotate (in degrees)
+@export var float_speed := 1.0        # How fast to rotate
+var _float_time := 0.0
 
 #SLOTS AND POSITION
 var current_selected_slot = null
@@ -33,6 +37,12 @@ var letter_stats = load(letter_stats_path)
 @onready var frame_bar = $FrameBar/FrameBar
 
 
+func _process(delta: float) -> void:
+	if not is_dragging and is_active:
+		_float_time += delta * float_speed
+		rotation_degrees = sin(_float_time) * float_amplitude
+
+
 func init_letter(character: String, is_enemy: bool):
 	var stats = letter_stats.get_stats(character)
 	var max_hp = stats["hp"]
@@ -51,8 +61,11 @@ func init_letter(character: String, is_enemy: bool):
 
 func _on_area_2d_mouse_entered() -> void:
 	mouse_in = true
+	_change_scale(Vector2(0.6 + scale_mod, 0.6 + scale_mod))
+	
 
 func _on_area_2d_mouse_exited() -> void:
+	_change_scale(Vector2(0.3 + scale_mod, 0.3 + scale_mod))
 	mouse_in = false
 	
 func update_element_style(letterForElement: String):
@@ -165,7 +178,6 @@ func shake_letter(strength := 5.0, duration := 0.3, shakes := 15):
 func _change_scale(desired_scale: Vector2):
 	if desired_scale == current_goal_scale:
 		return
-	#print("Changing scale from ", self.scale, " to ", desired_scale)
 	
 	if scale_tween:
 		scale_tween.kill()
@@ -191,44 +203,51 @@ func _set_rotation(delta: float) -> void:
 func drag_logic(delta: float) -> void:
 	$Shadow.position = Vector2(-5, 5).rotated(self.rotation)
 	#Letter dragging logic
-	if is_active:
-		if (mouse_in or is_dragging) and (Mousebrain.node_being_dragged == null or Mousebrain.node_being_dragged == self):
-			if Input.is_action_pressed("click"):
-				if properties.is_enemy == false:
-					global_position = lerp(global_position, get_global_mouse_position(), 22.0*delta)
-					#SIZE WHEN LETTER IS DRAGGED
-					_change_scale(Vector2(0.6+scale_mod, 0.6+scale_mod))
-					_set_rotation(delta)
-					self.z_index = 100
-					
-					if not is_dragging:  # Only play sound when dragging starts
-						is_dragging = true
-						Global.sfx_manager.play_sfx("letterTaken", global_position)
-					
-			
-					Mousebrain.node_being_dragged = self
-					if get_parent() == current_selected_slot:
-						Global.board_scene.ally_letters.erase(self)
-						current_selected_slot.letter_is_taken()
-					else:
-						Global.hand_scene.letter_row.erase(self)
-						Global.hand_scene.arrange_hand()
-				else:
-					_set_rotation(delta*0.5)
-			else:
-				#SIZE WHEN LETTER IS HOVERED/RELEASED
-				_change_scale(Vector2(0.4+scale_mod, 0.4+scale_mod))
-				is_dragging = false
-				self.rotation_degrees = lerp(self.rotation_degrees, 0.0, 22.0*delta)
-				if Mousebrain.node_being_dragged == self:
-					Mousebrain.node_being_dragged = null
-					Global.sfx_manager.play_sfx("letterPlaced", global_position)
-					snap_to_parent()
-			return
+	if not is_active:
+		_set_resting_state(delta)
+		return
 		
-	#WHEN LETTER IS AT REST
+	
+	var can_drag := (mouse_in or is_dragging) and (Mousebrain.node_being_dragged == null or Mousebrain.node_being_dragged == self)
+	if not can_drag:
+		_change_scale(Vector2(0.1+scale_mod, 0.1+scale_mod))
+		return
+			
+	if Input.is_action_pressed("click"):
+		if properties.is_enemy:
+			_set_rotation(delta * 0.5)
+			return
+			
+			
+		global_position = lerp(global_position, get_global_mouse_position(), 22.0*delta)
+		#SIZE WHEN LETTER IS DRAGGED
+		_change_scale(Vector2(0.8+scale_mod, 0.8+scale_mod))
+		_set_rotation(delta)
+		z_index = 100
+		
+		if not is_dragging:  # Only play sound when dragging starts
+			is_dragging = true
+			Global.sfx_manager.play_sfx("letterTaken", global_position)
+		Mousebrain.node_being_dragged = self
+		
+		if get_parent() == current_selected_slot:
+			Global.board_scene.ally_letters.erase(self)
+			current_selected_slot.letter_is_taken()
+		else:
+			Global.hand_scene.letter_row.erase(self)
+			Global.hand_scene.arrange_hand()
+	else:
+		is_dragging = false
+		rotation_degrees = lerp(rotation_degrees, 0.0, 22.0*delta)
+		
+		if Mousebrain.node_being_dragged == self:
+			Mousebrain.node_being_dragged = null
+			Global.sfx_manager.play_sfx("letterPlaced", global_position)
+			snap_to_parent()
+
+#WHEN LETTER IS AT REST
+func _set_resting_state(delta: float) -> void:
 	self.z_index = 1
-	_change_scale(Vector2(0.2+scale_mod, 0.2+scale_mod))
 	self.rotation_degrees = lerp(self.rotation_degrees, 0.0, 22.0*delta)
 
 func snap_to_parent():
