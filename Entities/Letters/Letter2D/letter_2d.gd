@@ -14,7 +14,7 @@ var max_size := Vector2(200, 200)
 @export var is_active: bool = true
 
 #ROTATION
-@export var float_amplitude := 5.0    # How much to rotate (in degrees)
+@export var float_amplitude := randf_range(1.0, 12.0)    # How much to rotate (in degrees)
 @export var float_speed := 1.0        # How fast to rotate
 var _float_time := 0.0
 
