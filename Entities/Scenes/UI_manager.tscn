@@ -20,10 +20,10 @@ script = ExtResource("1_pymld")
 
 [node name="TogglePreview" type="Button" parent="."]
 layout_mode = 0
-offset_left = 403.0
-offset_top = 229.0
-offset_right = 611.0
-offset_bottom = 273.0
+offset_left = 19.0
+offset_top = 122.0
+offset_right = 227.0
+offset_bottom = 166.0
 theme_override_constants/outline_size = 14
 theme_override_font_sizes/font_size = 26
 text = "Disable preview"

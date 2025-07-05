@@ -14,11 +14,12 @@ func before_round():
 	
 	if enemy_count == 0:
 		enemy_waves_cleared += 1
-		if enemy_waves_cleared >= max_waves_per_room:
-			room_cleared()
-		else:
-			init_enemies(current_round + 4)
-			
+		#if enemy_waves_cleared >= max_waves_per_room:
+			#room_cleared()
+		init_enemies(current_round + 4)
+		
+	else:
+		init_enemies(current_round + 4)
 	Global.ui_manager.enemy_healthbar._setup_health_bar(20.0)
 	
 func room_cleared():
@@ -26,7 +27,7 @@ func room_cleared():
 	
 func round_start():
 	enable_ui(false)
-	Global.battle_simulator.run_simulation(true)
+	Global.battle_simulator.simulate_enemy_attacks(Global.board_scene.prepare_simulation_data())
 	round_end()
 
 func round_end():
@@ -43,7 +44,7 @@ func update_round_label():
 func enable_ui(value: bool):
 	Global.board_scene.set_board_enabled(value)
 	Global.hand_scene.set_hand_enabled(value)
-
+	
 func init_enemies(enemy_count: int):
 	var board_width = Global.board_scene.rows
 	var rows_to_use = int(board_width/2)-1
@@ -77,3 +78,4 @@ func init_enemies(enemy_count: int):
 		Global.sfx_manager.play_sfx("stone1", enemy.position)
 		await get_tree().create_timer(0.3).timeout
 	Global.battle_simulator.save_backups()
+	enable_ui(true)

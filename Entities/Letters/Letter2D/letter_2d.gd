@@ -260,6 +260,7 @@ func drag_logic(delta: float) -> void:
 
 #WHEN LETTER IS AT REST
 func _set_resting_state(delta: float) -> void:
+	_change_scale(Vector2(0.1+scale_mod, 0.1+scale_mod))
 	self.z_index = 1
 	self.rotation_degrees = lerp(self.rotation_degrees, 0.0, 22.0*delta)
 

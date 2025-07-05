@@ -45,7 +45,7 @@ func set_hand_enabled(enabled: bool):
 	for letterToEnable in get_children():
 		if letterToEnable as letter2Dclass:
 			letterToEnable.is_active=enabled
-		
+
 func arrange_hand():
 	var size := letter_row.size()
 	if size == 0:
