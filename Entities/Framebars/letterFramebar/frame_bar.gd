@@ -6,7 +6,7 @@ var previous_hp_percent : float = 100.0
 
 
 @export var lerp_speed := 5.0
-@export var border_thickness := 12.0
+@export var border_thickness := 7.0
 @export var border_color := Color(0, 1, 1)
 @onready var frame2 = $frame2
 

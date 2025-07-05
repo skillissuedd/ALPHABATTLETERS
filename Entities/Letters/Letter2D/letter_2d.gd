@@ -36,12 +36,25 @@ var letter_stats = load(letter_stats_path)
 @onready var properties = $LetterUnit
 @onready var frame_bar = $FrameBar/FrameBar
 
+#SHADOW
+@export var light_pos:Vector2 = Vector2(1920,1080)
+@export var max_distance:float = 1.0  # Reduced from 15
+var _timer: float = 0.0
 
+	
 func _process(delta: float) -> void:
+	
+	_timer += delta
+	if _timer >= 1.0:
+		_timer = 0.0
+	
 	if not is_dragging and is_active:
 		_float_time += delta * float_speed
 		rotation_degrees = sin(_float_time) * float_amplitude
-
+		
+	$Shadow.global_position = global_position + Vector2(-55,-55)
+	
+	#var base_scale:float = 0.8 + (0.2 * distance_ratio)
 
 func init_letter(character: String, is_enemy: bool):
 	var stats = letter_stats.get_stats(character)
@@ -54,11 +67,13 @@ func init_letter(character: String, is_enemy: bool):
 	if letterDisplay:
 		letterDisplay.change_letter(character)
 		letterDisplay.update_stats()
-	if is_enemy:
-		frame_bar.border_color = Color.DARK_RED
+		
+	#DEFAULT FRAME COLORS
+	
+	if not is_enemy:
+		frame_bar.border_color = Color.LIME_GREEN
 	else:
-		frame_bar.border_color = Color.WHITE
-
+		frame_bar.border_color = Color.DARK_RED
 func _on_area_2d_mouse_entered() -> void:
 	mouse_in = true
 	_change_scale(Vector2(0.6 + scale_mod, 0.6 + scale_mod))
@@ -201,7 +216,7 @@ func _set_rotation(delta: float) -> void:
 #############################
 
 func drag_logic(delta: float) -> void:
-	$Shadow.position = Vector2(-5, 5).rotated(self.rotation)
+	
 	#Letter dragging logic
 	if not is_active:
 		_set_resting_state(delta)
@@ -215,9 +230,7 @@ func drag_logic(delta: float) -> void:
 			
 	if Input.is_action_pressed("click"):
 		if properties.is_enemy:
-			_set_rotation(delta * 0.5)
 			return
-			
 			
 		global_position = lerp(global_position, get_global_mouse_position(), 22.0*delta)
 		#SIZE WHEN LETTER IS DRAGGED

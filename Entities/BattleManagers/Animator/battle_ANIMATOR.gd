@@ -10,7 +10,7 @@ func apply_animation_effects(animation_events: Array) -> void:
 					event["target"], 
 					event["damage"],
 				)
-		Global.battle_simulator.save_backups()
+		
 
 func output_log(logs: Dictionary) -> void:
 	if logs["type"] == "attack":

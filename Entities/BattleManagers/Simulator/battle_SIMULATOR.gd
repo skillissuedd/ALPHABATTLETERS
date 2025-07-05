@@ -146,4 +146,5 @@ func execute_actions(action_queue: Array) -> void:
 		
 		action.target.current_hp = max(0, action.target.current_hp - action.damage)
 		action.target.is_dead = action.target.current_hp <= 0
+		Global.battle_simulator.save_backups()
 		Global.battle_animator.apply_animation_effects(action_queue)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dsqwkfrdmmfw1"]
+[gd_scene load_steps=8 format=3 uid="uid://dsqwkfrdmmfw1"]
 
 [ext_resource type="Script" uid="uid://dv1orxkb05ppc" path="res://Entities/Letters/Letter2D/Enemy/enemy_letter_2d.gd" id="1_e4u6o"]
 [ext_resource type="PackedScene" uid="uid://dkm5o1qn5fv2p" path="res://Entities/Framebars/letterFramebar/FrameBar.tscn" id="2_d14qf"]
@@ -7,6 +7,11 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cmgim"]
 size = Vector2(50.4, 51.3514)
+
+[sub_resource type="Gradient" id="Gradient_hfbg8"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_stjv2"]
+gradient = SubResource("Gradient_hfbg8")
 
 [node name="Letter2D" type="Sprite2D"]
 script = ExtResource("1_e4u6o")
@@ -25,19 +30,26 @@ debug_color = Color(0.732085, 0.438544, 0.475271, 0.42)
 [node name="FrameBar" type="Node2D" parent="."]
 
 [node name="FrameBar" parent="FrameBar" instance=ExtResource("2_d14qf")]
+offset_left = -55.0
+offset_top = -57.0
+offset_right = 54.0
+offset_bottom = 50.0
 
 [node name="Display" type="Node2D" parent="."]
 position = Vector2(0, -6)
 
 [node name="LetterDisplay" parent="Display" instance=ExtResource("2_e4u6o")]
 
-[node name="Shadow" type="Sprite2D" parent="."]
-modulate = Color(0, 0, 0, 0.392157)
-show_behind_parent = true
-
 [node name="LetterUnit" type="Node2D" parent="."]
 script = ExtResource("4_n140l")
 metadata/_custom_type_script = "uid://jcv0ems6dx8s"
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.392157)
+show_behind_parent = true
+position = Vector2(7.62939e-06, -48)
+scale = Vector2(0.378906, 94)
+texture = SubResource("GradientTexture1D_stjv2")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

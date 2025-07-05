@@ -40,8 +40,4 @@ offset_top = 34.0
 offset_right = 51.0
 offset_bottom = 43.0
 
-[node name="Camera2D" type="Camera2D" parent="HScrollBar"]
-position = Vector2(43, -30)
-zoom = Vector2(3.355, 3.355)
-
 [connection signal="value_changed" from="HScrollBar" to="." method="_on_h_scroll_bar_value_changed"]

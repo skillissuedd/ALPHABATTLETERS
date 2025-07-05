@@ -3,7 +3,7 @@ extends ColorRect
 var target_hp_percent : float = 100
 var current_hp_percent : float = 100
 @export var lerp_speed := 5.0
-@export var border_thickness := 6.0
+@export var border_thickness := 4.0
 @export var border_color := Color(1, 1, 1)
 var enabled := true
 

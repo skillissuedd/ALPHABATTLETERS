@@ -4,6 +4,7 @@ func _ready():
 	add_to_group("allyLetters")
 	add_to_group("letters")
 	frame_bar.set_hp_percent(100)
+	$Shadow.z_index=-1
 	
 func set_hand_position(current_pos: Vector2):
 	position_in_hand = current_pos
