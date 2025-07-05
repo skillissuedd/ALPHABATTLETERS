@@ -30,9 +30,9 @@ debug_color = Color(0.732085, 0.438544, 0.475271, 0.42)
 [node name="FrameBar" type="Node2D" parent="."]
 
 [node name="FrameBar" parent="FrameBar" instance=ExtResource("2_d14qf")]
-offset_left = -55.0
-offset_top = -57.0
-offset_right = 54.0
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
 offset_bottom = 50.0
 
 [node name="Display" type="Node2D" parent="."]
