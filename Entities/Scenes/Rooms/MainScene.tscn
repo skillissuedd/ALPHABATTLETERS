@@ -35,8 +35,8 @@ script = ExtResource("1_38ype")
 position = Vector2(44, 1675)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(847, 579)
-zoom = Vector2(0.275, 0.275)
+position = Vector2(842, 632)
+zoom = Vector2(0.4, 0.4)
 
 [node name="Mouse" parent="." instance=ExtResource("4_71i26")]
 position = Vector2(-264, 452)

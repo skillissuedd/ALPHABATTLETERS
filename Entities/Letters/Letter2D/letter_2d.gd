@@ -282,5 +282,6 @@ func snap_to_slot():
 		if Global.board_scene.ally_letters.has(self) == false:
 			Global.board_scene.ally_letters.append(self)
 		is_active = false
+		Global.ui_manager._reduce_energy(1)
 		Global.battle_simulator.execute_letter_action(self)
 		
