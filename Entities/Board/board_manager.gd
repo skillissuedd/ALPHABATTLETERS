@@ -33,6 +33,7 @@ func on_slot_is_hovered(slot: Node2D, letter2D: Node2D):
 		letter2D.properties.grid_y = slotY
 		if GlobalOptions.toggle_preview_animations:
 			Global.battle_simulator.simuilate_preview()
+		Global.currently_hovered_slot = slot
 
 func prepare_simulation_data() -> Array:
 	var combined_letters = []

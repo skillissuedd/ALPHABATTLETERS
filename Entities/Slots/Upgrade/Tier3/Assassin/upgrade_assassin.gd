@@ -4,7 +4,7 @@ var is_used: bool = false
 @onready var label_2: Label = $Sprite2D/Label2
 
 
-func letter_is_placed():
+func letter_is_placed(letter2D: Node2D):
 	if !is_used and current_letter.properties.current_upgrade == "":
 		is_used = true
 		label.queue_free()

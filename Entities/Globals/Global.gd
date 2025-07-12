@@ -1,6 +1,6 @@
 extends Node
 
-var currently_hovered_slot: Node = null
+@export var currently_hovered_slot: Node = null
 var overlapping_slots := []
 var letter_stats = load("res://Entities/Letters/LetterStats/letter_stats.tres")
 

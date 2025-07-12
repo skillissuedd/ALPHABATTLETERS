@@ -35,9 +35,9 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0)
 
 [node name="HScrollBar" type="HScrollBar" parent="."]
-offset_left = -47.0
+offset_left = -54.0
 offset_top = 34.0
-offset_right = 51.0
+offset_right = 44.0
 offset_bottom = 43.0
 
 [connection signal="value_changed" from="HScrollBar" to="." method="_on_h_scroll_bar_value_changed"]

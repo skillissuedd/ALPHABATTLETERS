@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://drakbuggxc807"]
+[gd_scene load_steps=16 format=3 uid="uid://drakbuggxc807"]
 
 [ext_resource type="Script" uid="uid://d3f5wy4c6t7e" path="res://Entities/Scenes/Rooms/mainScene.gd" id="1_38ype"]
 [ext_resource type="PackedScene" uid="uid://bvkcos12mjaxr" path="res://Entities/Board/boardManager.tscn" id="2_dtwfu"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://d2cuqmk8uafxv" path="res://Entities/BattleManagers/Simulator/battleSimulator.tscn" id="10_f1fpf"]
 [ext_resource type="PackedScene" uid="uid://cvhipaaqpctj6" path="res://Entities/BattleManagers/Animator/battleANIMATOR.tscn" id="11_rn60a"]
 [ext_resource type="PackedScene" uid="uid://cngb63kfm4jub" path="res://Entities/Scenes/UI_manager.tscn" id="12_b1o7s"]
-[ext_resource type="PackedScene" uid="uid://ba8nvcho336y8" path="res://Entities/Globals/enemy_face.tscn" id="13_dtwfu"]
 [ext_resource type="PackedScene" uid="uid://gviyc2likwkp" path="res://Entities/Decks/EnemyDeckDiscarded/enemyDeckDiscarded.tscn" id="14_4ufd4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4b75m"]
@@ -83,9 +82,6 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(4.235, 4.235)
 metadata/_edit_use_anchors_ = true
-
-[node name="EnemyFace" parent="." instance=ExtResource("13_dtwfu")]
-position = Vector2(225, -832)
 
 [node name="enemyDeckDiscarded" parent="." instance=ExtResource("14_4ufd4")]
 position = Vector2(-2817, 1071)

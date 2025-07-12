@@ -26,7 +26,9 @@ func is_not_hovered():
 	slot_sprite.self_modulate = Color(1, 1, 1, 1.0)
 	current_letter = null
 	
-func letter_is_placed():
+func letter_is_placed(letter2D: Node2D):
+	current_letter = letter2D
+	current_letter.current_selected_slot = self
 	slot_sprite.self_modulate = Color(1, 1, 1, 1)
 	is_selected = true
 

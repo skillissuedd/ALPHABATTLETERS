@@ -2,7 +2,7 @@ extends slot_class
 var is_used: bool = false
 @onready var vector_label = $Sprite2D/Label
 
-func letter_is_placed():
+func letter_is_placed(letter2D: Node2D):
 	if !is_used and current_letter.properties.current_upgrade == "":
 		is_used = true
 		vector_label.queue_free()

@@ -91,8 +91,8 @@ func update_element_style(letterForElement: String):
 			self.texture=load("res://Entities/Letters/Letter2D/Elements/Water/letterTileWater.png")
 		"Fire":
 			self.texture=load("res://Entities/Letters/Letter2D/Elements/Fire/letterTileFire.png")
-		"Electric":
-			self.texture=load("res://Entities/Letters/Letter2D/Elements/Electric/letterTileElectric.png")
+		"Electricity":
+			self.texture=load("res://Entities/Letters/Letter2D/Elements/Electricity/letterTileElectricity.png")
 		"Earth":
 			self.texture=load("res://Entities/Letters/Letter2D/Elements/Earth/woodTile1.jpg")
 		"Neutral":
@@ -249,6 +249,9 @@ func drag_logic(delta: float) -> void:
 		else:
 			Global.hand_scene.letter_row.erase(self)
 			Global.hand_scene.arrange_hand()
+			
+	#RELEASING THE LETTER
+	
 	else:
 		is_dragging = false
 		rotation_degrees = lerp(rotation_degrees, 0.0, 22.0*delta)
@@ -256,6 +259,7 @@ func drag_logic(delta: float) -> void:
 		if Mousebrain.node_being_dragged == self:
 			Mousebrain.node_being_dragged = null
 			Global.sfx_manager.play_sfx("letterPlaced", global_position)
+			Global.ui_manager.energy_preview.visible = false
 			snap_to_parent()
 
 #WHEN LETTER IS AT REST
@@ -276,13 +280,19 @@ func snap_to_slot():
 		global_position = closest_slot.global_position + Vector2(80, 80)
 		current_selected_slot = closest_slot
 		Global.hand_scene.letter_row.erase(self)
-		current_selected_slot.letter_is_placed()
+		current_selected_slot.letter_is_placed(self)
 		self.rotation_degrees = 0
 		properties.grid_x = current_selected_slot.slotColumn
 		properties.grid_y = current_selected_slot.slotRow
 		if Global.board_scene.ally_letters.has(self) == false:
 			Global.board_scene.ally_letters.append(self)
 		is_active = false
-		Global.ui_manager._reduce_energy(1)
+		
+		if properties.element_type == "Electricity":
+			pass
+		else:
+			Global.ui_manager._reduce_energy(1)
+
+		
 		Global.battle_simulator.execute_letter_action(self)
 		

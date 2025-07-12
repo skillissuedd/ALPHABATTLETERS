@@ -130,15 +130,24 @@ func execute_letter_action(letter: Node2D) -> void:
 
 func execute_actions(action_queue: Array) -> void:
 	for action in action_queue:
-		var attacker = action.attacker
-		var target = action.target
-		if !is_instance_valid(attacker) or attacker.is_dead: continue
-		if !is_instance_valid(target) or target.is_dead: continue
 		
-		action.target.current_hp = max(0, action.target.current_hp - action.damage)
-		action.target.is_dead = action.target.current_hp <= 0
-		Global.battle_simulator.save_backups()
-		Global.battle_animator.apply_animation_effects(action_queue)
+		if action["type"] == "attack":
+			var attacker = action.attacker
+			var target = action.target
+			if !is_instance_valid(attacker) or attacker.is_dead: continue
+			if !is_instance_valid(target) or target.is_dead: continue
+			
+			target.current_hp = max(0, target.current_hp - action.damage)
+			target.is_dead = target.current_hp <= 0
+			Global.battle_simulator.save_backups()
+			Global.battle_animator.apply_animation_effects(action_queue)
+			
+		elif action["type"] == "face_attack":
+			var attacker = action.attacker
+			var target = Global.ui_manager.enemy_healthbar
+			if !is_instance_valid(attacker) or attacker.is_dead: continue
+			
+			
 		
 		
 ### ENEMY LETTER ACTIONS ###

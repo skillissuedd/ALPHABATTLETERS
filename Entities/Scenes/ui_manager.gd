@@ -7,6 +7,8 @@ extends Control
 #ENERGY
 @onready var total_energy_label: Label = $TextureRect/total_energy
 @onready var current_energy_label: Label = $TextureRect/current_energy
+@onready var energy_preview: Label = $TextureRect/energy_preview
+
 
 @export var total_energy: int
 @export var current_energy: int 
@@ -19,6 +21,12 @@ func _ready():
 func update_energy_ui() -> void:
 	total_energy_label.text = str(total_energy)
 	current_energy_label.text = str(current_energy)
+	
+
+func _refill_energy() -> void:
+	current_energy = total_energy
+	update_energy_ui()
+	
 	
 func _reduce_energy(energy: int) -> void:
 	current_energy -= energy

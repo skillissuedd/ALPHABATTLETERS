@@ -85,7 +85,7 @@ func change_element(element: String):
 			font = load("res://fonts/VarelaRound-Regular.ttf")
 		"Fire":
 			font = load("res://fonts/PirataOne-Regular.ttf")
-		"Electric":
+		"Electricity":
 			font = load("res://fonts/Orbitron-VariableFont_wght.ttf")
 		"Earth":
 			font = load("res://fonts/AlfaSlabOne-Regular.ttf")

@@ -90,15 +90,29 @@ theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("4_h3fny")
 theme_override_font_sizes/font_size = 28
 text = "ENERGY
-
        /"
+
+[node name="energy_preview" type="Label" parent="TextureRect"]
+visible = false
+layout_mode = 0
+offset_left = 8.0
+offset_top = 71.0
+offset_right = 73.0
+offset_bottom = 107.0
+theme_override_colors/font_color = Color(0.932027, 0.40259, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_h3fny")
+theme_override_font_sizes/font_size = 28
+text = "-1"
 
 [node name="current_energy" type="Label" parent="TextureRect"]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 82.0
+offset_top = 45.0
 offset_right = 48.0
-offset_bottom = 118.0
+offset_bottom = 81.0
 theme_override_colors/font_color = Color(0.932027, 0.40259, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -109,9 +123,9 @@ theme_override_font_sizes/font_size = 28
 [node name="total_energy" type="Label" parent="TextureRect"]
 layout_mode = 0
 offset_left = 99.0
-offset_top = 80.0
+offset_top = 43.0
 offset_right = 139.0
-offset_bottom = 118.0
+offset_bottom = 81.0
 theme_override_colors/font_color = Color(0.932027, 0.40259, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)

@@ -11,7 +11,7 @@ func _ready():
 	
 func before_round():
 	var enemy_count = Global.board_scene.enemy_letters.size()
-	
+	Global.ui_manager._refill_energy()
 	if enemy_count == 0:
 		enemy_waves_cleared += 1
 		#if enemy_waves_cleared >= max_waves_per_room:
@@ -35,6 +35,7 @@ func round_end():
 	enable_ui(true)
 	current_round += 1
 	update_round_label()
+	
 	before_round()
 
 func update_round_label():
@@ -42,7 +43,7 @@ func update_round_label():
 		$Panel/roundLabel.text = str(current_round)
 
 func enable_ui(value: bool):
-	Global.board_scene.set_board_enabled(value)
+	#Global.board_scene.set_board_enabled(value)
 	Global.hand_scene.set_hand_enabled(value)
 	
 func init_enemies(enemy_count: int):
@@ -67,13 +68,15 @@ func init_enemies(enemy_count: int):
 		var slot = candidate_slots[i]
 		var enemy = ENEMY_LETTER_2D.instantiate()
 		slot.add_child(enemy)
+		
 		enemy.init_letter(Global.letter_stats.return_random_letter(), true)
-		slot.current_letter = enemy
-		slot.letter_is_placed()
+		slot.letter_is_placed(enemy)
+		
 		enemy.position += Vector2(80,80)
 		enemy.properties.grid_x = slot.slotColumn
 		enemy.properties.grid_y = slot.slotRow
 		#enemy.modulate = Color(1, 0.8, 0.8, 1)
+		
 		Global.board_scene.enemy_letters.append(enemy)
 		Global.sfx_manager.play_sfx("stone1", enemy.position)
 		await get_tree().create_timer(0.3).timeout

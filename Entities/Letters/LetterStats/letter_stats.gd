@@ -35,7 +35,7 @@ var LETTER_STATS = {
 
 const ELEMENT_MAP = {
 	"Water": ["C", "O", "S", "U", "G", "Q", "J"],
-	"Electric": ["Z", "I", "X", "L", "E", "T", "V"],
+	"Electricity": ["Z", "I", "X", "L", "E", "T", "V"],
 	"Fire": ["A", "W", "H", "M", "R", "K"],
 	"Earth": ["B", "F", "N", "P", "Y", "D"]
 }
