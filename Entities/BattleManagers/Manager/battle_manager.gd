@@ -9,9 +9,11 @@ var max_waves_per_room: int = 2
 func _ready():
 	update_round_label()
 	
+	
 func before_round():
 	var enemy_count = Global.board_scene.enemy_letters.size()
 	Global.ui_manager._refill_energy()
+	
 	if enemy_count == 0:
 		enemy_waves_cleared += 1
 		#if enemy_waves_cleared >= max_waves_per_room:
@@ -20,7 +22,7 @@ func before_round():
 		
 	else:
 		init_enemies(current_round + 4)
-	Global.ui_manager.enemy_healthbar._setup_health_bar(20.0)
+	
 	
 func room_cleared():
 	pass

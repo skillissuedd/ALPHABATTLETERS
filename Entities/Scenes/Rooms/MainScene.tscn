@@ -29,9 +29,11 @@ shader_parameter/is_active = true
 script = ExtResource("1_38ype")
 
 [node name="BoardManager" parent="." instance=ExtResource("2_dtwfu")]
+position = Vector2(264, 0)
+scale = Vector2(1.1, 1.1)
 
 [node name="handManager" parent="." instance=ExtResource("3_4ufd4")]
-position = Vector2(44, 1675)
+position = Vector2(348, 1675)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(842, 632)

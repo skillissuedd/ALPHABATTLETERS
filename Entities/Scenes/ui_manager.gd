@@ -13,6 +13,7 @@ extends Control
 @export var total_energy: int
 @export var current_energy: int 
 
+
 func _ready():
 	total_energy = 5
 	current_energy = 5

@@ -7,6 +7,7 @@ func init_interface():
 	# INIT MANAGERS
 	Global.sfx_manager = $sfxManager
 	Global.ui_manager = $UiManager
+	Global.ui_manager.enemy_healthbar._setup_health_bar(20.0)
 	
 	# INIT DECKS
 	Global.deck_disc_scene = $DeckDiscarded

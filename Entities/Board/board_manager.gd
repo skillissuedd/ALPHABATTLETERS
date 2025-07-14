@@ -40,7 +40,7 @@ func prepare_simulation_data() -> Array:
 	
 	# Process ally letters
 	for letter in ally_letters:
-		if letter.properties.is_dead or letter.is_active == false:
+		if letter.is_active == false:
 			continue
 		var props = letter.properties
 		combined_letters.append({

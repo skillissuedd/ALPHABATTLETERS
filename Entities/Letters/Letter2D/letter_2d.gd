@@ -273,6 +273,7 @@ func snap_to_parent():
 		snap_to_slot()
 	else:
 		Global.hand_scene.snap_to_hand(self)
+		Global.battle_simulator.load_backups()
 		
 func snap_to_slot():
 	if closest_slot:
@@ -289,7 +290,8 @@ func snap_to_slot():
 		is_active = false
 		
 		if properties.element_type == "Electricity":
-			pass
+			Global.ui_manager._reduce_energy(1)
+			Global.ui_manager._reduce_energy(-1)
 		else:
 			Global.ui_manager._reduce_energy(1)
 

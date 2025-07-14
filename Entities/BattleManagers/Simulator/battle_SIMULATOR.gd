@@ -146,7 +146,7 @@ func execute_actions(action_queue: Array) -> void:
 			var attacker = action.attacker
 			var target = Global.ui_manager.enemy_healthbar
 			if !is_instance_valid(attacker) or attacker.is_dead: continue
-			
+			Global.ui_manager.enemy_healthbar.change_value(Global.ui_manager.enemy_healthbar.current_health - float(action.damage)) 
 			
 		
 		
@@ -160,7 +160,7 @@ func simulate_enemy_attacks(simulation_data: Array) -> void:
 		
 	var action_queue = []
 	for unit in simulation_data:
-		if unit.is_dead or !unit.is_enemy: continue
+		if unit.is_dead or unit.is_enemy: continue
 		var target = _find_player_target(unit, simulation_data)
 		if target != null:
 			action_queue.append({
@@ -173,9 +173,9 @@ func simulate_enemy_attacks(simulation_data: Array) -> void:
 			action_queue.append({
 				"type": "face_attack",
 				"attacker": unit["ref"],
-				"target": "face",
 				"damage": unit["attack"]
 				})
+	#print(action_queue)
 	execute_actions(action_queue)
 
 
@@ -190,7 +190,7 @@ func _find_player_target(attacker: Dictionary, all_units: Array):
 				
 	if potential_targets.is_empty():
 		return null
-		
+	print (potential_targets)
 	var lowest_target = potential_targets[0]
 	
 	for target in potential_targets:
