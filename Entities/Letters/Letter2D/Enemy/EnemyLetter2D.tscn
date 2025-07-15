@@ -36,7 +36,6 @@ offset_right = 50.0
 offset_bottom = 50.0
 
 [node name="Display" type="Node2D" parent="."]
-position = Vector2(0, -6)
 
 [node name="LetterDisplay" parent="Display" instance=ExtResource("2_e4u6o")]
 

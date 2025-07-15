@@ -3,6 +3,8 @@ extends Resource
 class_name LetterStats
 const stats_script = preload("res://Entities/Letters/LetterStats/letter_stats.gd")
 
+func _ready():
+	_nerf_all_letters()
 
 var LETTER_STATS = {
 	"A": { "atk": 5, "hp": 3 },
@@ -47,6 +49,12 @@ const UPGRADE_LIST = {
 	"Tier S": ["The Mirror"],
 	"Tier Catharsis": ["The Catharsis"]
 }
+
+func _nerf_all_letters():
+	for letter in LETTER_STATS:
+		LETTER_STATS[letter]["atk"] = 2
+		LETTER_STATS[letter]["hp"] = 1
+		
 
 func update_global_stat(letter: String, stat: String, value: int):
 	if LETTER_STATS.has(letter) and LETTER_STATS[letter].has(stat):

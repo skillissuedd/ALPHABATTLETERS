@@ -11,6 +11,7 @@ func init_interface():
 	Global.ui_manager.enemy_health_bar._setup_health_bar(20.0)
 	Global.ui_manager.ally_health_bar._setup_health_bar(50.0)
 	
+	Global.letter_stats._nerf_all_letters()
 	# INIT DECKS
 	Global.deck_disc_scene = $DeckDiscarded
 	Global.enemy_deck_disc_scene = $enemyDeckDiscarded

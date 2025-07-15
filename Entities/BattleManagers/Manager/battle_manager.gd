@@ -80,5 +80,6 @@ func init_enemies(enemy_count: int):
 		Global.board_scene.enemy_letters.append(enemy)
 		Global.sfx_manager.play_sfx("stone1", enemy.position)
 		await get_tree().create_timer(0.3).timeout
+	Global.battle_simulator.simulate_enemy_attacks(Global.board_scene.prepare_simulation_data())
 	Global.battle_simulator.save_backups()
 	enable_ui(true)

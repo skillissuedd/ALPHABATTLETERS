@@ -8,6 +8,10 @@ var opacity_tween: Tween
 @onready var health_value_label = $HealthValueLabel
 
 
+func get_damaged(value: int):
+	var new_health = current_health-float(value)
+	change_value(new_health)
+	
 func _change_max_health(max_val: float):
 	max_health = max_val
 	max_value = max_val
@@ -58,8 +62,8 @@ func play_death_anim():
 	var tween = create_tween()
 	
 	tween.set_parallel(true)
-	await tween.tween_property(self, "modulate:a", 0.0, 0.5) 
-	await tween.tween_property(self, "scale:x", 0.0, 0.5).set_trans(Tween.TRANS_BACK) 
+	tween.tween_property(self, "modulate:a", 0.0, 0.5) 
+	tween.tween_property(self, "scale:x", 0.0, 0.5).set_trans(Tween.TRANS_BACK) 
 	tween.set_parallel(false)
 	await tween.finished
 	self.queue_free() 

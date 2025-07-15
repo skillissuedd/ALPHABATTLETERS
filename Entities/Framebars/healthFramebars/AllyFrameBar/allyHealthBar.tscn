@@ -24,10 +24,15 @@ bg_color = Color(0.664074, 0, 0.18291, 1)
 bg_color = Color(1, 1, 1, 1)
 
 [node name="CustomHealthBar" type="ProgressBar"]
-offset_left = -118.0
-offset_top = -82.0
-offset_right = 512.0
-offset_bottom = 519.0
+anchors_preset = -1
+anchor_left = -0.048
+anchor_top = -0.034
+anchor_right = -0.048
+anchor_bottom = -0.034
+offset_left = -62.704
+offset_top = -59.968
+offset_right = 567.296
+offset_bottom = 541.032
 scale = Vector2(0.2, 0.2)
 theme_override_styles/background = SubResource("StyleBoxFlat_oljxa")
 theme_override_styles/fill = SubResource("StyleBoxFlat_0g36c")
@@ -37,18 +42,27 @@ script = ExtResource("1_xiv8g")
 
 [node name="HealthValueLabel" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.47619
+anchor_top = 0.5
+anchor_right = 0.47619
+anchor_bottom = 0.5
+offset_left = -245.0
+offset_top = -235.5
+offset_right = -63.0
+offset_bottom = -65.5
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(2.765, 2.765)
+theme_override_colors/font_color = Color(0, 0.482153, 0.410143, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 30
+theme_override_constants/outline_size = 40
 theme_override_fonts/font = ExtResource("2_km4wm")
-theme_override_font_sizes/font_size = 290
+theme_override_font_sizes/font_size = 120
 text = "20"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 show_behind_parent = true

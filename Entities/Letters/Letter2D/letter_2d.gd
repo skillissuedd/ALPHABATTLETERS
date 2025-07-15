@@ -131,9 +131,9 @@ func play_attack_animation(target):
 	
 	#POSITION AND SIZE
 	if not properties.is_enemy:
-		attack_label.global_position = original_label.global_position - Vector2(150,0)
-	else:
 		attack_label.global_position = original_label.global_position + Vector2(50,0)
+	else:
+		attack_label.global_position = original_label.global_position + Vector2(150,150)
 	attack_label.scale = original_label.scale * 0.7
 	attack_label.z_index=1
 	#MIRRORING
@@ -143,15 +143,17 @@ func play_attack_animation(target):
 	attack_label.modulate = Color(1.0, 1.0, 0.5, 1.0) 
 	
 	if target is AllyHealthBar:
-		end_pos = target.global_position - Vector2(50, 150)
+		end_pos = Vector2(attack_label.global_position.x, target.global_position.y)
+	elif target is EnemyHealthBar:
+		end_pos = Vector2(attack_label.global_position.x, target.global_position.y+200)
 	#MOVING
-	
-	if not properties.is_enemy:
-		end_pos = target.letterDisplay.global_position + Vector2(50, 150)
 	else:
-		end_pos = target.letterDisplay.global_position - Vector2(50, 150)
+		if not properties.is_enemy:
+			end_pos = Vector2(attack_label.global_position.x, (target.letterDisplay.global_position.y+250))
+		else:
+			end_pos = Vector2(attack_label.global_position.x, (target.letterDisplay.global_position.y+500))
 	var tween = create_tween()
-	tween.tween_property(attack_label, "global_position", end_pos, 1.0)\
+	tween.tween_property(attack_label, "global_position", end_pos, 0.7)\
 		.set_trans(Tween.TRANS_QUAD)\
 		.set_ease(Tween.EASE_IN)
 	

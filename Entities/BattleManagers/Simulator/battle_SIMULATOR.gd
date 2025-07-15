@@ -139,14 +139,13 @@ func execute_actions(action_queue: Array) -> void:
 			if !is_instance_valid(target) or target.is_dead: continue
 			target.current_hp = max(0, target.current_hp - action.damage)
 			target.is_dead = target.current_hp <= 0
-			save_backups()
 			
 		elif action["type"] == "face_attack":
 			var attacker = action.attacker
 			if !is_instance_valid(attacker) or attacker.is_dead: continue
-			Global.ui_manager.enemy_healthbar.change_value(Global.ui_manager.enemy_health_bar.current_health - float(action.damage)) 
-			save_backups()
-	Global.battle_animator.apply_animation_effects(action_queue)	
+			
+	save_backups()
+	Global.battle_animator.apply_animation_effects(action_queue)
 		
 		
 ### ENEMY LETTER ACTIONS ###

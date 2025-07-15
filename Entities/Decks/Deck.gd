@@ -10,8 +10,8 @@ var rand_index = null
 
 @export var letter_stats: LetterStats
 
-var deck: Array = []
-var letter_instances: Dictionary = {}
+@export var deck: Array = []
+@export var letter_instances: Dictionary = {}
 
 func _ready():
 	pass
