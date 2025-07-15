@@ -1,6 +1,6 @@
 extends Node
-var player_backup: Array = []
-var enemy_backup: Array = []
+@export var player_backup: Array = []
+@export var enemy_backup: Array = []
 
 
 ### BACKUPS ###
@@ -109,6 +109,7 @@ func calculate_prevew_damage(action_queue: Array):
 
 func execute_letter_action(letter: Node2D) -> void:
 	load_backups()
+	player_backup.append(letter.properties)
 	var unit = letterunit_to_sim_data(letter.properties)
 	var target = find_target_for_preview(unit, enemy_backup)
 	var action_queue = []
@@ -136,18 +137,16 @@ func execute_actions(action_queue: Array) -> void:
 			var target = action.target
 			if !is_instance_valid(attacker) or attacker.is_dead: continue
 			if !is_instance_valid(target) or target.is_dead: continue
-			
 			target.current_hp = max(0, target.current_hp - action.damage)
 			target.is_dead = target.current_hp <= 0
-			Global.battle_simulator.save_backups()
-			Global.battle_animator.apply_animation_effects(action_queue)
+			save_backups()
 			
 		elif action["type"] == "face_attack":
 			var attacker = action.attacker
-			var target = Global.ui_manager.enemy_healthbar
 			if !is_instance_valid(attacker) or attacker.is_dead: continue
-			Global.ui_manager.enemy_healthbar.change_value(Global.ui_manager.enemy_healthbar.current_health - float(action.damage)) 
-			
+			Global.ui_manager.enemy_healthbar.change_value(Global.ui_manager.enemy_health_bar.current_health - float(action.damage)) 
+			save_backups()
+	Global.battle_animator.apply_animation_effects(action_queue)	
 		
 		
 ### ENEMY LETTER ACTIONS ###
@@ -160,8 +159,9 @@ func simulate_enemy_attacks(simulation_data: Array) -> void:
 		
 	var action_queue = []
 	for unit in simulation_data:
-		if unit.is_dead or unit.is_enemy: continue
+		if unit.is_dead or not unit.is_enemy: continue
 		var target = _find_player_target(unit, simulation_data)
+		
 		if target != null:
 			action_queue.append({
 				"type": "attack",
@@ -171,11 +171,10 @@ func simulate_enemy_attacks(simulation_data: Array) -> void:
 				})
 		else:
 			action_queue.append({
-				"type": "face_attack",
+				"type": "enemy_face_attack",
 				"attacker": unit["ref"],
 				"damage": unit["attack"]
 				})
-	#print(action_queue)
 	execute_actions(action_queue)
 
 
@@ -187,10 +186,11 @@ func _find_player_target(attacker: Dictionary, all_units: Array):
 		!unit["is_dead"] and 
 		unit["is_enemy"] != attacker["is_enemy"]):
 			potential_targets.append(unit)
-				
+			
+	#print (potential_targets)
 	if potential_targets.is_empty():
 		return null
-	print (potential_targets)
+
 	var lowest_target = potential_targets[0]
 	
 	for target in potential_targets:

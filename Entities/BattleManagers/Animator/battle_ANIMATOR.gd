@@ -10,8 +10,26 @@ func apply_animation_effects(animation_events: Array) -> void:
 					event["target"], 
 					event["damage"],
 				)
-		
+			"face_attack":
+				await _play_face_attack_anim(
+					event["attacker"],
+					event["damage"],
+				)
+			"enemy_face_attack":
+				await _play_enemy_face_attack_anim(
+					event["attacker"],
+					event["damage"],
+				)
 
+func _play_enemy_face_attack_anim(attacker: LetterUnit, damage: int) -> void:
+	var attacker2D = attacker.letterParent
+	var target = Global.ui_manager.ally_health_bar
+	
+	
+func _play_face_attack_anim(attacker: LetterUnit, damage: int)-> void:
+	var attacker2D = attacker.letterParent
+	var target = Global.ui_manager.enemy_health_bar
+	
 func output_log(logs: Dictionary) -> void:
 	if logs["type"] == "attack":
 		var attacker = logs["attacker"].letter
@@ -25,7 +43,7 @@ func output_log(logs: Dictionary) -> void:
 			])
 
 
-func _play_attack_anim(attacker: Node2D, target: Node2D, damage: int) -> void:
+func _play_attack_anim(attacker: LetterUnit, target: LetterUnit, damage: int) -> void:
 	var attacker2D = attacker.letterParent
 	var target2D = target.letterParent
 	

@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://llpykdw0gxl1"]
+[gd_scene load_steps=7 format=3 uid="uid://ds86jqkui174g"]
 
-[ext_resource type="Script" uid="uid://ducx4dd2yoxar" path="res://Entities/Framebars/health_bar.gd" id="1_0g36c"]
-[ext_resource type="FontFile" uid="uid://bfh2xyp5ueny3" path="res://fonts/MarckScript-Regular.ttf" id="1_yqdai"]
+[ext_resource type="Script" uid="uid://dmishq44scdvc" path="res://Entities/Framebars/healthFramebars/AllyFrameBar/ally_health_bar.gd" id="1_xiv8g"]
+[ext_resource type="FontFile" uid="uid://bfh2xyp5ueny3" path="res://fonts/MarckScript-Regular.ttf" id="2_km4wm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oljxa"]
 draw_center = false
@@ -29,16 +29,11 @@ offset_top = -82.0
 offset_right = 512.0
 offset_bottom = 519.0
 scale = Vector2(0.2, 0.2)
-theme_override_colors/font_color = Color(1, 0.756863, 0.701961, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("1_yqdai")
-theme_override_font_sizes/font_size = 100
 theme_override_styles/background = SubResource("StyleBoxFlat_oljxa")
 theme_override_styles/fill = SubResource("StyleBoxFlat_0g36c")
 step = 0.001
 show_percentage = false
-script = ExtResource("1_0g36c")
+script = ExtResource("1_xiv8g")
 
 [node name="HealthValueLabel" type="Label" parent="."]
 layout_mode = 1
@@ -47,10 +42,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0.756863, 0.701961, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("1_yqdai")
+theme_override_fonts/font = ExtResource("2_km4wm")
 theme_override_font_sizes/font_size = 290
 text = "20"
 horizontal_alignment = 1

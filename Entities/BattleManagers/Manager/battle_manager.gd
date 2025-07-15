@@ -7,7 +7,7 @@ var max_waves_per_room: int = 2
 
 
 func _ready():
-	update_round_label()
+	pass
 	
 	
 func before_round():
@@ -29,23 +29,21 @@ func room_cleared():
 	
 func round_start():
 	enable_ui(false)
-	Global.battle_simulator.simulate_enemy_attacks(Global.board_scene.prepare_simulation_data())
+	await Global.battle_simulator.simulate_enemy_attacks(Global.board_scene.prepare_simulation_data())
 	round_end()
 
 func round_end():
 	Global.hand_scene.fill_hand()
 	enable_ui(true)
 	current_round += 1
-	update_round_label()
+	Global.ui_manager.update_round_label()
 	
 	before_round()
 
-func update_round_label():
-	if has_node("Panel/roundLabel"):
-		$Panel/roundLabel.text = str(current_round)
+
 
 func enable_ui(value: bool):
-	#Global.board_scene.set_board_enabled(value)
+	Global.ui_manager.set_ui_enabled(value)
 	Global.hand_scene.set_hand_enabled(value)
 	
 func init_enemies(enemy_count: int):

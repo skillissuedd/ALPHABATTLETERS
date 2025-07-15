@@ -14,7 +14,7 @@ extends Node2D
 @onready var rows: int = 5
 @onready var cols: int = 5
 @export var ally_letters: Array = []
-@export var enemy_letters: Array
+@export var enemy_letters: Array = []
 var slot_hovered_block: bool = false
 var all_letters: Array = [ally_letters, enemy_letters]  
 @export var slot_grid: Array = [] # 2D array: slot_grid[row][col]
@@ -40,8 +40,6 @@ func prepare_simulation_data() -> Array:
 	
 	# Process ally letters
 	for letter in ally_letters:
-		if letter.is_active == false:
-			continue
 		var props = letter.properties
 		combined_letters.append({
 			"ref": props,

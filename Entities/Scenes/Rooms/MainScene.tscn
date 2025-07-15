@@ -33,7 +33,7 @@ position = Vector2(264, 0)
 scale = Vector2(1.1, 1.1)
 
 [node name="handManager" parent="." instance=ExtResource("3_4ufd4")]
-position = Vector2(348, 1675)
+position = Vector2(-755, 542)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(842, 632)
@@ -61,6 +61,7 @@ texture = SubResource("CompressedTexture2D_qxria")
 draw_center = false
 
 [node name="DeckDiscarded" parent="." instance=ExtResource("8_n3i5p")]
+visible = false
 position = Vector2(-2822, 233)
 
 [node name="sfxManager" parent="." instance=ExtResource("9_ruk0k")]
@@ -70,20 +71,15 @@ position = Vector2(364, 233)
 
 [node name="BattleAnimator" parent="." instance=ExtResource("11_rn60a")]
 
-[node name="UiManager" parent="." instance=ExtResource("12_b1o7s")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 1951.0
-offset_top = 1480.0
-offset_right = 2092.0
-offset_bottom = 1526.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(4.235, 4.235)
-metadata/_edit_use_anchors_ = true
+[node name="UI_parent" type="Node2D" parent="."]
+
+[node name="UiManager" parent="UI_parent" instance=ExtResource("12_b1o7s")]
+offset_left = -248.0
+offset_top = -108.0
+offset_right = 1672.0
+offset_bottom = 972.0
+scale = Vector2(2.135, 2.135)
 
 [node name="enemyDeckDiscarded" parent="." instance=ExtResource("14_4ufd4")]
+visible = false
 position = Vector2(-2817, 1071)

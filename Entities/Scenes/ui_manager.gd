@@ -2,7 +2,10 @@ extends Control
 
 @onready var toggle_preview: Button = $TogglePreview
 @onready var end_round_button: Button = $endRoundButton
-@onready var enemy_healthbar: CustomHealthBar = $EnemyHealthbar
+@onready var enemy_health_bar: EnemyHealthBar = $EnemyHealthBar
+@onready var ally_health_bar: AllyHealthBar = $AllyHealthBar
+
+
 
 #ENERGY
 @onready var total_energy_label: Label = $TextureRect/total_energy
@@ -12,6 +15,10 @@ extends Control
 
 @export var total_energy: int
 @export var current_energy: int 
+
+func update_round_label():
+	if has_node("Panel/roundLabel"):
+		$Panel/roundLabel.text = str(Global.battle_manager.current_round)
 
 
 func _ready():
@@ -59,7 +66,7 @@ func _on_draw_button_pressed() -> void:
 	if (Global.hand_scene.letter_row.size() < Global.hand_scene.max_hand_size) and current_energy > 0:
 		_reduce_energy(1)
 		Global.hand_scene.snap_to_hand(Global.deck_scene.get_random_letter_instance())
-
+	Global.hand_scene.snap_to_hand(Global.deck_scene.get_random_letter_instance())
 
 func _on_end_round_button_pressed() -> void:
 	Global.battle_manager.round_start()

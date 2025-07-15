@@ -102,12 +102,6 @@ func update_element_style(letterForElement: String):
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("slots") and not area.is_selected:
 		overlapping_slots.append(area)
-	elif (not properties.is_enemy and area.get_parent().is_in_group("enemyBullets") or (properties.is_enemy and area.get_parent().is_in_group("allyBullets"))):
-		var letter = area.get_parent()
-		#get_hit(letter.get_meta("damage"))
-		area.set_deferred("monitorable", false)
-		area.set_deferred("monitoring", false)
-		letter.visible=false
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if area.is_in_group("slots") and not area.is_selected:
 		area.is_not_hovered()
@@ -125,34 +119,43 @@ func update_frame_bar(ratio:float, permanent: bool):
 	else: 
 		frame_bar.set_temp_percent(ratio)
 
+
 	
-func play_attack_animation(target: Node2D):
+func play_attack_animation(target):
 	#COPYING
+	var end_pos = Vector2(0,0)
 	var original_label = letterDisplay
 	var attack_label = original_label.letter_label.duplicate()
 	attack_label.name = "attack_label"
 	add_child(attack_label)
 	
 	#POSITION AND SIZE
-	attack_label.global_position = original_label.global_position + Vector2(50,0)
+	if not properties.is_enemy:
+		attack_label.global_position = original_label.global_position - Vector2(150,0)
+	else:
+		attack_label.global_position = original_label.global_position + Vector2(50,0)
 	attack_label.scale = original_label.scale * 0.7
 	attack_label.z_index=1
-	if properties.is_enemy == false:
-		attack_label.add_to_group("allyBullets")
-	else:
-		attack_label.add_to_group("enemyBullets")
 	#MIRRORING
 	attack_label.scale.y = -abs(attack_label.scale.y)
 	
 	#GLOWING
 	attack_label.modulate = Color(1.0, 1.0, 0.5, 1.0) 
 	
+	if target is AllyHealthBar:
+		end_pos = target.global_position - Vector2(50, 150)
 	#MOVING
-	var end_pos = target.letterDisplay.global_position + Vector2(50, 150)
+	
+	if not properties.is_enemy:
+		end_pos = target.letterDisplay.global_position + Vector2(50, 150)
+	else:
+		end_pos = target.letterDisplay.global_position - Vector2(50, 150)
 	var tween = create_tween()
 	tween.tween_property(attack_label, "global_position", end_pos, 1.0)\
 		.set_trans(Tween.TRANS_QUAD)\
 		.set_ease(Tween.EASE_IN)
+	
+		
 		
 	await tween.finished
 	
@@ -254,6 +257,10 @@ func drag_logic(delta: float) -> void:
 	
 	else:
 		is_dragging = false
+		if mouse_in:
+			z_index = 100
+		else: 
+			z_index = 1
 		rotation_degrees = lerp(rotation_degrees, 0.0, 22.0*delta)
 		
 		if Mousebrain.node_being_dragged == self:

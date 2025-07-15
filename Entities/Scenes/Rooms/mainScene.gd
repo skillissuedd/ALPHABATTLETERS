@@ -6,8 +6,10 @@ extends Node2D
 func init_interface():
 	# INIT MANAGERS
 	Global.sfx_manager = $sfxManager
-	Global.ui_manager = $UiManager
-	Global.ui_manager.enemy_healthbar._setup_health_bar(20.0)
+	Global.ui_manager = $UI_parent/UiManager
+
+	Global.ui_manager.enemy_health_bar._setup_health_bar(20.0)
+	Global.ui_manager.ally_health_bar._setup_health_bar(50.0)
 	
 	# INIT DECKS
 	Global.deck_disc_scene = $DeckDiscarded
