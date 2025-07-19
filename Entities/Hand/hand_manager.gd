@@ -6,6 +6,12 @@ extends Node2D
 @export var max_hand_size: int = 6
 var letter = null
 var letter_row: Array = []
+
+@export var apply_wheel_rotation := true 
+
+func _process(delta):
+	if apply_wheel_rotation:
+		arrange_hand()
 	
 func fill_hand():
 	if Global.deck_scene == null:
@@ -48,14 +54,55 @@ func set_hand_enabled(enabled: bool):
 			letterToEnable.is_active=enabled
 
 func arrange_hand():
-	
 	var letter_count = letter_row.size()
 	if letter_count == 0:
 		return
 
 	var angle_step = TAU / letter_count
-
+	var base_rotation = get_parent().rotation if apply_wheel_rotation else 0.0
+	
 	for i in range(letter_count):
-		var angle = angle_step * i
+		var angle = angle_step * i + base_rotation
 		var offset = Vector2(cos(angle), sin(angle)) * circle_radius
 		letter_row[i].position = offset
+		letter_row[i].rotation = -base_rotation
+		
+		
+func sort_hand(sort_type: int):
+	if letter_row.is_empty():
+		return
+		
+	match sort_type:
+		0:  # Alphabetical (A-Z)
+			letter_row.sort_custom(_compare_letters_alphabetically)
+		1:  # By Element (assuming element is a String property)
+			letter_row.sort_custom(_compare_letters_by_element)
+		_:  # Default (no sorting)
+			return
+			
+	arrange_hand()
+
+func _compare_letters_alphabetically(a: Node2D, b: Node2D) -> bool:
+	if not (a is letter2Dclass and b is letter2Dclass):
+		return false
+	
+	# Get the first character of each letter (assuming letter is a String property)
+	var a_char = a.properties.letter.unicode_at(0) if a.properties.letter.length() > 0 else 0
+	var b_char = b.properties.letter.unicode_at(0) if b.properties.letter.length() > 0 else 0
+	
+	# Case-insensitive comparison by converting to uppercase
+	return a_char < b_char
+
+# Comparison function for element sorting
+func _compare_letters_by_element(a: Node2D, b: Node2D) -> bool:
+	if not (a is letter2Dclass and b is letter2Dclass):
+		return false
+	
+	# Assuming element is a String property
+	var a_element = a.properties.element_type.to_lower()
+	var b_element = b.properties.element_type.to_lower()
+	if a_element == b_element:
+		# If elements are equal, sort alphabetically as secondary criteria
+		return _compare_letters_alphabetically(a, b)
+	
+	return a_element < b_element

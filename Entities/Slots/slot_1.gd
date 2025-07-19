@@ -18,8 +18,6 @@ func appear():
 	
 func is_hovered(letter2D: Node2D):
 	slot_sprite.self_modulate = Color(1, 1, 1, 0.2)
-	letter2D.reparent(self)
-	current_letter = letter2D
 	Global.board_scene.on_slot_is_hovered(self, letter2D)
 	
 func is_not_hovered():
@@ -29,6 +27,7 @@ func is_not_hovered():
 func letter_is_placed(letter2D: Node2D):
 	current_letter = letter2D
 	current_letter.current_selected_slot = self
+	letter2D.reparent(self)
 	slot_sprite.self_modulate = Color(1, 1, 1, 1)
 	is_selected = true
 

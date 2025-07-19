@@ -5,7 +5,9 @@ extends Control
 @onready var enemy_health_bar: EnemyHealthBar = $EnemyHealthBar
 @onready var ally_health_bar: AllyHealthBar = $AllyHealthBar
 
-
+#SORTING
+@onready var sort_button: Button = $sortButton
+@export var sorting_mode: int = 0
 
 #ENERGY
 @onready var total_energy_label: Label = $TextureRect/total_energy
@@ -73,3 +75,13 @@ func _on_draw_button_pressed() -> void:
 func _on_end_round_button_pressed() -> void:
 	Global.battle_manager.round_start()
 	set_ui_enabled(false)
+
+func _on_sort_button_pressed() -> void:
+	Global.hand_scene.sort_hand(sorting_mode)
+	if sorting_mode == 0:
+		sorting_mode = 1
+		sort_button.text = "SORT ELEMENT"	
+	elif sorting_mode == 1:
+		sorting_mode = 0
+		sort_button.text = "SORT ALPHABET"
+	

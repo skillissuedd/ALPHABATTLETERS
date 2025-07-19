@@ -100,8 +100,15 @@ func update_element_style(letterForElement: String):
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.is_in_group("slots") and not area.is_selected:
-		overlapping_slots.append(area)
+	if area.is_in_group("slots"):
+		if not area.is_selected:
+			overlapping_slots.append(area)
+			
+		elif char(properties.letter.unicode_at(0)-1) == area.current_letter.properties.letter:
+			print ("WORKS")
+			if not area.current_letter.properties.is_enemy:
+				overlapping_slots.append(area)
+				
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if area.is_in_group("slots") and not area.is_selected:
 		area.is_not_hovered()
@@ -290,6 +297,10 @@ func snap_to_slot():
 		global_position = closest_slot.global_position + Vector2(80, 80)
 		current_selected_slot = closest_slot
 		Global.hand_scene.letter_row.erase(self)
+		if current_selected_slot.current_letter:
+			print (current_selected_slot.current_letter)
+			Global.deck_disc_scene.append_to_deck(current_selected_slot.current_letter)
+			current_selected_slot.letter_is_taken()
 		current_selected_slot.letter_is_placed(self)
 		self.rotation_degrees = 0
 		properties.grid_x = current_selected_slot.slotColumn

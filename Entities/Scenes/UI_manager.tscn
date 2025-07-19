@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cngb63kfm4jub"]
+[gd_scene load_steps=8 format=3 uid="uid://cngb63kfm4jub"]
 
 [ext_resource type="Script" uid="uid://c6s72ktyfdcpo" path="res://Entities/Scenes/ui_manager.gd" id="1_pymld"]
 [ext_resource type="FontFile" uid="uid://crla5q0srhg1q" path="res://fonts/AlfaSlabOne-Regular.ttf" id="2_umkwo"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://c3ttg34hfox5l" path="res://fonts/Orbitron-VariableFont_wght.ttf" id="4_h3fny"]
 [ext_resource type="PackedScene" uid="uid://86aet4oiurn4" path="res://Entities/Framebars/healthFramebars/EnemyHealthBar/enemyHealthBar.tscn" id="4_qca4s"]
 [ext_resource type="PackedScene" uid="uid://ds86jqkui174g" path="res://Entities/Framebars/healthFramebars/AllyFrameBar/allyHealthBar.tscn" id="5_qca4s"]
+[ext_resource type="FontFile" uid="uid://i1el5dow254n" path="res://fonts/VarelaRound-Regular.ttf" id="7_35q8v"]
 
 [node name="UiManager" type="Control"]
 layout_mode = 3
@@ -44,10 +45,10 @@ metadata/_edit_use_anchors_ = true
 [node name="endRoundButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.109115
-anchor_top = 0.749537
-anchor_right = -0.109115
-anchor_bottom = 0.749537
+anchor_left = 0.751823
+anchor_top = -0.110648
+anchor_right = 0.751823
+anchor_bottom = -0.110648
 offset_left = -174.5
 offset_top = -101.5
 offset_right = 174.5
@@ -101,7 +102,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="AllyHealthBar" parent="." instance=ExtResource("5_qca4s")]
 layout_mode = 1
-anchors_preset = -1
 anchor_left = 0.289
 anchor_top = 0.761
 anchor_right = 0.289
@@ -235,6 +235,21 @@ grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 91
 text = "1"
 
+[node name="sortButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = -576.0
+offset_top = 708.0
+offset_right = -301.0
+offset_bottom = 817.0
+scale = Vector2(2.085, 2.085)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.429456, 0.822961, 0.766975, 0.611765)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("7_35q8v")
+theme_override_font_sizes/font_size = 36
+text = "SORT ALPHABET"
+
 [connection signal="button_down" from="TogglePreview" to="." method="_on_toggle_preview_button_down"]
 [connection signal="pressed" from="endRoundButton" to="." method="_on_end_round_button_pressed"]
 [connection signal="pressed" from="drawButton" to="." method="_on_draw_button_pressed"]
+[connection signal="pressed" from="sortButton" to="." method="_on_sort_button_pressed"]
