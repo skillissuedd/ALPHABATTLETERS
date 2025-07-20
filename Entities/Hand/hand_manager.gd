@@ -2,7 +2,7 @@ extends Node2D
 
 @export var letter2Dscene = preload("res://Entities/Letters/Letter2D/Ally/AllyLetter2D.tscn")
 @export var cell_size: Vector2 = Vector2(250, 250)
-@export var circle_radius: float = 500.0
+@export var circle_radius: float = 600.0
 @export var max_hand_size: int = 6
 var letter = null
 var letter_row: Array = []
@@ -62,8 +62,9 @@ func arrange_hand():
 	var base_rotation = get_parent().rotation if apply_wheel_rotation else 0.0
 	
 	for i in range(letter_count):
-		var angle = angle_step * i + base_rotation
+		var angle = angle_step * i + base_rotation - PI/2
 		var offset = Vector2(cos(angle), sin(angle)) * circle_radius
+		letter_row[i].z_index = i
 		letter_row[i].position = offset
 		letter_row[i].rotation = -base_rotation
 		

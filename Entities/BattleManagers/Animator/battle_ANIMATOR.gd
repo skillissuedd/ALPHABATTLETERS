@@ -22,7 +22,6 @@ func apply_animation_effects(animation_events: Array) -> void:
 					event["damage"],
 					true
 				)
-
 	
 func _play_face_attack_anim(attacker: LetterUnit, damage: int, is_enemy: bool)-> void:
 	var target = null
