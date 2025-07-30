@@ -28,23 +28,14 @@ func room_cleared():
 	pass
 	
 func round_start():
-	enable_ui(false)
-	await Global.battle_simulator.simulate_enemy_attacks(Global.board_scene.prepare_simulation_data())
-	round_end()
-
-func round_end():
+	Global.ui_manager.set_ui_enabled(false)
+	Global.battle_simulator.simulate_enemy_attacks()
+	await Global.battle_animator.animations_completed
 	Global.hand_scene.fill_hand()
-	enable_ui(true)
+	Global.ui_manager.set_ui_enabled(true)
 	current_round += 1
 	Global.ui_manager.update_round_label()
-	
 	before_round()
-
-
-
-func enable_ui(value: bool):
-	Global.ui_manager.set_ui_enabled(value)
-	Global.hand_scene.set_hand_enabled(value)
 	
 func init_enemies(enemy_count: int):
 	var board_width = Global.board_scene.rows
@@ -80,6 +71,5 @@ func init_enemies(enemy_count: int):
 		Global.board_scene.enemy_letters.append(enemy)
 		Global.sfx_manager.play_sfx("stone1", enemy.position)
 		await get_tree().create_timer(0.3).timeout
-	Global.battle_simulator.simulate_enemy_attacks(Global.board_scene.prepare_simulation_data())
 	Global.battle_simulator.save_backups()
-	enable_ui(true)
+	Global.ui_manager.set_ui_enabled(true)

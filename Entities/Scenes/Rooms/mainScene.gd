@@ -32,7 +32,7 @@ func init_interface():
 		
 	# INIT BATTLE LOGIC
 	Global.battle_manager = $BattleManager
-	Global.battle_manager.enable_ui(false)
+	Global.ui_manager.set_ui_enabled(false)
 	Global.battle_simulator = $BattleSimulator
 	Global.battle_animator = $BattleAnimator
 	

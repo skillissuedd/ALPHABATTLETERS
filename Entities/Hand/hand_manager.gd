@@ -9,9 +9,6 @@ var letter_row: Array = []
 
 @export var apply_wheel_rotation := true 
 
-func _process(delta):
-	if apply_wheel_rotation:
-		arrange_hand()
 	
 func fill_hand():
 	if Global.deck_scene == null:

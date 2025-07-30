@@ -62,7 +62,7 @@ func disable_preview():
 func set_ui_enabled(enabled: bool):
 	toggle_preview.disabled = not enabled
 	end_round_button.disabled = not enabled
-
+	Global.hand_scene.set_hand_enabled(enabled)
 
 func _on_draw_button_pressed() -> void:
 	if (Global.hand_scene.letter_row.size() < Global.hand_scene.max_hand_size) and current_energy > 0:
@@ -71,6 +71,7 @@ func _on_draw_button_pressed() -> void:
 	if not Global.deck_scene.deck.is_empty():
 		Global.hand_scene.snap_to_hand(Global.deck_scene.get_random_letter_instance())
 	Global.hand_scene.sort_hand(sorting_mode)
+	
 func _on_end_round_button_pressed() -> void:
 	Global.battle_manager.round_start()
 	set_ui_enabled(false)

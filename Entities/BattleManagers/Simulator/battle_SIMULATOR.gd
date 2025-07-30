@@ -144,14 +144,15 @@ func execute_actions(action_queue: Array) -> void:
 			var attacker = action.attacker
 			if !is_instance_valid(attacker) or attacker.is_dead: continue
 			
-	save_backups()
 	Global.battle_animator.apply_animation_effects(action_queue)
-		
+	await Global.battle_animator.animations_completed
+	save_backups()
 		
 ### ENEMY LETTER ACTIONS ###
 		
 
-func simulate_enemy_attacks(simulation_data: Array) -> void:
+func simulate_enemy_attacks() -> void:
+	var simulation_data: Array = Global.board_scene.prepare_simulation_data()
 	load_backups()
 	simulation_data.sort_custom(func(a, b): 
 		return a["y"] > b["y"] or (a["y"] == b["y"] and a["x"] < b["x"]))
