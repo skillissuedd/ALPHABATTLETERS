@@ -1,5 +1,6 @@
 extends Node
 signal animations_completed
+signal letter_is_dead(target2D)
 
 	
 func apply_animation_effects(animation_events: Array) -> void:
@@ -93,24 +94,30 @@ func _play_attack_anim(attacker: LetterUnit, target: LetterUnit, damage: int) ->
 	await get_tree().create_timer(0.9).timeout
 	
 	if target.is_dead:
-		target2D.current_selected_slot.letter_is_taken()
+		_letter_is_dead(target2D)
 		
-		var death_copy = target2D.duplicate()
-		death_copy.modulate.a = 1.0
-		death_copy.scale = target2D.scale
-		death_copy.position = target2D.global_position
-		get_tree().current_scene.add_child(death_copy)
+func _letter_is_dead(target2D):
+	target2D.current_selected_slot.letter_is_taken()
+	
+	var death_copy = target2D.duplicate()
+	death_copy.modulate.a = 1.0
+	death_copy.scale = target2D.scale
+	death_copy.position = target2D.global_position
+	get_tree().current_scene.add_child(death_copy)
+	
+	if target2D.properties.is_enemy:
+		if target2D.coins_count > 0:
+			Global.ui_manager.update_coins(target2D.coins_count)
+		Global.board_scene.enemy_letters.erase(target2D)
+		Global.enemy_deck_disc_scene.append_to_deck(target2D)
+	else:
+		Global.board_scene.ally_letters.erase(target2D)
+		Global.deck_disc_scene.append_to_deck(target2D)
 		
-		if target.is_enemy:
-			Global.board_scene.enemy_letters.erase(target2D)
-			Global.enemy_deck_disc_scene.append_to_deck(target2D)
-		else:
-			Global.board_scene.ally_letters.erase(target2D)
-			Global.deck_disc_scene.append_to_deck(target2D)
-			
-		await _play_death_anim(death_copy)
-		death_copy.queue_free()
-
+	await _play_death_anim(death_copy)
+	death_copy.queue_free()
+	emit_signal("letter_is_dead", target2D)
+	
 func _play_death_anim(target: Node2D):
 	var death_tween = create_tween()
 	death_tween.set_parallel(true)

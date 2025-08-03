@@ -70,6 +70,15 @@ func init_enemies(enemy_count: int):
 		
 		Global.board_scene.enemy_letters.append(enemy)
 		Global.sfx_manager.play_sfx("stone1", enemy.position)
+		
+		var roll = randi() % 6 + 1
+		if roll >= 4:
+			enemy.coins.visible = true
+			enemy._change_coins_count(roll-3)
+		
+		
 		await get_tree().create_timer(0.3).timeout
+		
+		
 	Global.battle_simulator.save_backups()
 	Global.ui_manager.set_ui_enabled(true)

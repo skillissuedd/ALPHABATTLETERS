@@ -22,7 +22,7 @@ func initialize_deck():
 	all_letters.sort()
 	for letter in all_letters:
 		deck.append(letter)
-		deck.append(letter)
+		#deck.append(letter)
 
 func fill_deck():
 	letter_instances.clear()

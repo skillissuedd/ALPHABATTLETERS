@@ -14,9 +14,17 @@ extends Control
 @onready var current_energy_label: Label = $TextureRect/current_energy
 @onready var energy_preview: Label = $TextureRect/energy_preview
 
-
 @export var total_energy: int
 @export var current_energy: int 
+
+#COINS
+@onready var coins_count: Label = $coins_section/coins_count
+@export var coins:int = 0
+
+func update_coins(coins_value:int):
+	coins+=coins_value
+	coins_count.text = str(coins)
+
 
 func update_round_label():
 	if has_node("Panel/roundLabel"):

@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsqwkfrdmmfw1"]
+[gd_scene load_steps=10 format=3 uid="uid://dsqwkfrdmmfw1"]
 
 [ext_resource type="Script" uid="uid://dv1orxkb05ppc" path="res://Entities/Letters/Letter2D/Enemy/enemy_letter_2d.gd" id="1_e4u6o"]
 [ext_resource type="PackedScene" uid="uid://dkm5o1qn5fv2p" path="res://Entities/Framebars/letterFramebar/FrameBar.tscn" id="2_d14qf"]
 [ext_resource type="PackedScene" uid="uid://ca1tf0y4ommp7" path="res://Entities/Letters/LetterDisplay/Enemy/EnemyLetterDisplay.tscn" id="2_e4u6o"]
 [ext_resource type="Script" uid="uid://jcv0ems6dx8s" path="res://Entities/Letters/LetterUnit/letter_unit.gd" id="4_n140l"]
+[ext_resource type="Texture2D" uid="uid://dnvv71pkem6yo" path="res://textures/tiles/coin.png" id="5_b2ly3"]
+[ext_resource type="FontFile" uid="uid://boo8dbu4hhay6" path="res://fonts/Inversionz Unboxed Italic.ttf" id="6_sht35"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cmgim"]
 size = Vector2(50.4, 51.3514)
@@ -49,6 +51,30 @@ show_behind_parent = true
 position = Vector2(7.62939e-06, -48)
 scale = Vector2(0.378906, 94)
 texture = SubResource("GradientTexture1D_stjv2")
+
+[node name="Coins" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-39, -39)
+scale = Vector2(0.0507644, 0.0531635)
+texture = ExtResource("5_b2ly3")
+
+[node name="CoinsCountLabel" type="Label" parent="Coins"]
+anchors_preset = -1
+anchor_left = 0.522
+anchor_top = 0.5
+anchor_right = 0.522
+anchor_bottom = 0.5
+offset_left = -969.794
+offset_top = -948.0
+offset_right = -886.794
+offset_bottom = -856.0
+scale = Vector2(11.165, 11.165)
+theme_override_colors/font_color = Color(0.799703, 0.438243, 0.10108, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("6_sht35")
+theme_override_font_sizes/font_size = 132
+text = "0"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

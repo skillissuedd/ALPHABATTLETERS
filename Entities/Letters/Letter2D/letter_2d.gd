@@ -60,6 +60,9 @@ func init_letter(character: String, is_enemy: bool):
 	var stats = letter_stats.get_stats(character)
 	var max_hp = stats["hp"]
 	var current_atk = stats["atk"]
+	if is_enemy:
+		max_hp+=3
+		current_atk+=1
 	var element = letter_stats.get_element_for_letter(character)
 	update_element_style(element)
 	properties.initialize(character, is_enemy, current_atk, max_hp, element)
@@ -74,6 +77,7 @@ func init_letter(character: String, is_enemy: bool):
 		frame_bar.border_color = Color.LIME_GREEN
 	else:
 		frame_bar.border_color = Color.DARK_RED
+		
 func _on_area_2d_mouse_entered() -> void:
 	mouse_in = true
 	_change_scale(Vector2(0.6 + scale_mod, 0.6 + scale_mod))
@@ -317,4 +321,7 @@ func snap_to_slot():
 
 		
 		Global.battle_simulator.execute_letter_action(self)
+		await Global.battle_animator.animations_completed
 		
+		if properties.current_hp <= 0:
+			Global.battle_animator._letter_is_dead(self)

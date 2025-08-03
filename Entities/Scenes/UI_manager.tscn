@@ -187,6 +187,56 @@ theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("4_h3fny")
 theme_override_font_sizes/font_size = 28
 
+[node name="coins_section" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.747542
+anchor_top = 0.101889
+anchor_right = 0.747542
+anchor_bottom = 0.101889
+offset_left = -144.28
+offset_top = -122.04
+offset_right = 0.719971
+offset_bottom = 16.96
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="coins_label" type="Label" parent="coins_section"]
+layout_mode = 0
+offset_left = 4.99997
+offset_top = 3.0
+offset_right = 207.0
+offset_bottom = 62.0
+theme_override_colors/font_color = Color(0.932027, 0.40259, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_h3fny")
+theme_override_font_sizes/font_size = 28
+text = "COINS:"
+
+[node name="coins_count" type="Label" parent="coins_section"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.945
+anchor_top = 0.151
+anchor_right = 0.945
+anchor_bottom = 0.151
+offset_left = -18.025
+offset_top = -17.989
+offset_right = 17.975
+offset_bottom = 18.011
+theme_override_colors/font_color = Color(0.932027, 0.40259, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_h3fny")
+theme_override_font_sizes/font_size = 28
+text = "0"
+
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
