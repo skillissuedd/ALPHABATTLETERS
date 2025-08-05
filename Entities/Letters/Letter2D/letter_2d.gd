@@ -39,14 +39,9 @@ var letter_stats = load(letter_stats_path)
 #SHADOW
 @export var light_pos:Vector2 = Vector2(1920,1080)
 @export var max_distance:float = 1.0  # Reduced from 15
-var _timer: float = 0.0
 
 	
 func _process(delta: float) -> void:
-	
-	_timer += delta
-	if _timer >= 1.0:
-		_timer = 0.0
 	
 	if not is_dragging and is_active:
 		_float_time += delta * float_speed
@@ -67,9 +62,9 @@ func init_letter(character: String, is_enemy: bool):
 	update_element_style(element)
 	properties.initialize(character, is_enemy, current_atk, max_hp, element)
 	properties.letterDisplay = letterDisplay
-	if letterDisplay:
-		letterDisplay.change_letter(character)
-		letterDisplay.update_stats()
+	letterDisplay.properties = properties
+	letterDisplay.change_letter(character)
+	letterDisplay.update_stats()
 		
 	#DEFAULT FRAME COLORS
 	
@@ -84,13 +79,14 @@ func _on_area_2d_mouse_entered() -> void:
 	
 
 func _on_area_2d_mouse_exited() -> void:
-	_change_scale(Vector2(0.3 + scale_mod, 0.3 + scale_mod))
 	mouse_in = false
+	_change_scale(Vector2(0.3 + scale_mod, 0.3 + scale_mod))
 	
-func update_element_style(letterForElement: String):
+	
+func update_element_style(current_element: String):
 	if letterDisplay:
-		letterDisplay.change_element(letterForElement)
-	match letterForElement:
+		letterDisplay.change_element(current_element)
+	match current_element:
 		"Water":
 			self.texture=load("res://Entities/Letters/Letter2D/Elements/Water/letterTileWater.png")
 		"Fire":
@@ -109,12 +105,11 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			overlapping_slots.append(area)
 			
 		elif char(properties.letter.unicode_at(0)-1) == area.current_letter.properties.letter:
-			print ("WORKS")
 			if not area.current_letter.properties.is_enemy:
 				overlapping_slots.append(area)
 				
 func _on_area_2d_area_exited(area: Area2D) -> void:
-	if area.is_in_group("slots") and not area.is_selected:
+	if area.is_in_group("slots"):
 		area.is_not_hovered()
 		overlapping_slots.erase(area)
 	if overlapping_slots.is_empty():
@@ -302,7 +297,6 @@ func snap_to_slot():
 		current_selected_slot = closest_slot
 		Global.hand_scene.letter_row.erase(self)
 		if current_selected_slot.current_letter:
-			print (current_selected_slot.current_letter)
 			Global.deck_disc_scene.append_to_deck(current_selected_slot.current_letter)
 			current_selected_slot.letter_is_taken()
 		current_selected_slot.letter_is_placed(self)

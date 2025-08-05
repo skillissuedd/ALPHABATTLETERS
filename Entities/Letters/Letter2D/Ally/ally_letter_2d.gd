@@ -49,5 +49,4 @@ func affect_energy_preview()-> void:
 	
 		
 func snap_to_hand():
-	#print (self.get_parent().global_position)
 	position = position_in_hand

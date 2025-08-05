@@ -36,7 +36,7 @@ func load_backups():
 func apply_calculated_changes_to_ui(target: LetterUnit, apply: bool):
 	target.is_changed = true
 	target.letterDisplay.update_stats(target.attack, target.current_hp)
-	target.letterParent.update_frame_bar((target.current_hp*100.0)/target.max_hp, apply)
+	target.letterParent.update_frame_bar(target.current_hp*100/target.max_hp, apply)
 	if target.current_hp == 0:
 		target.is_dead = true
 		target.letterParent.modulate = Color(0.9, 0.9, 0.9, 0.4)
@@ -46,40 +46,40 @@ func apply_calculated_changes_to_ui(target: LetterUnit, apply: bool):
 ### PREVIEW ###
 
 
-func simuilate_preview():
+func simuilate_preview(letter2D: letter2Dclass):
 	load_backups()
-	var simulation_data = Global.board_scene.prepare_simulation_data()
-	simulation_data.sort_custom(func(a, b): 
+	var enemy_letters = Global.board_scene.prepare_simulation_data().filter(func(letter): 
+		return letter["is_enemy"])
+	enemy_letters.sort_custom(func(a, b): 
 		return a["y"] > b["y"] or (a["y"] == b["y"] and a["x"] < b["x"]))
 	var action_queue = []
 
-	for unit in simulation_data:
-		if unit.is_dead or unit.is_enemy: continue
-		var target = find_target_for_preview(unit, simulation_data)
-		if target != null:
-			action_queue.append({
-				"type": "attack",
-				"attacker": unit["ref"],
-				"target": target["ref"],
-				"damage": unit["attack"]
-				})
-		else:
-			action_queue.append({
-				"type": "face_attack",
-				"attacker": unit["ref"],
-				"target": "face",
-				"damage": unit["attack"]
-				})
-	calculate_prevew_damage(action_queue)
+	var target = find_target_for_preview(letter2D, enemy_letters)
+	if target != null:
+		action_queue.append({
+			"type": "attack",
+			"attacker": letter2D.properties,
+			"target": target["ref"],
+			"damage": letter2D.properties.attack
+			})
+	else:
+		action_queue.append({
+			"type": "face_attack",
+			"attacker": letter2D.properties,
+			"target": "face",
+			"damage": letter2D.properties.attack
+			})
+	calculate_preview_damage(action_queue)
 
-func find_target_for_preview(attacker: Dictionary, all_units: Array):
+func find_target_for_preview(letter2D: letter2Dclass, enemy_letters: Array):
 	var potential_targets = []
-	for unit in all_units:
-		if (unit["x"] == attacker["x"] and 
-		unit["y"] < attacker["y"] and 
-		!unit["is_dead"] and 
-		unit["is_enemy"] != attacker["is_enemy"]):
-			potential_targets.append(unit)
+	var attacker = letter2D.properties
+	for enemy in enemy_letters:
+		if (enemy["x"] == attacker.grid_x and 
+		enemy["y"] < attacker.grid_y and 
+		!enemy["is_dead"] and 
+		enemy["is_enemy"] != attacker.is_enemy):
+			potential_targets.append(enemy)
 			
 	if potential_targets.is_empty():
 		return null
@@ -90,7 +90,7 @@ func find_target_for_preview(attacker: Dictionary, all_units: Array):
 			lowest_target = target
 	return lowest_target
 	
-func calculate_prevew_damage(action_queue: Array):
+func calculate_preview_damage(action_queue: Array):
 	for action in action_queue:
 		if action["type"] == "attack":
 			var attacker = action.attacker
@@ -111,7 +111,7 @@ func execute_letter_action(letter: Node2D) -> void:
 	load_backups()
 	player_backup.append(letter.properties)
 	var unit = letterunit_to_sim_data(letter.properties)
-	var target = find_target_for_preview(unit, enemy_backup)
+	var target = find_target_for_preview(letter, enemy_backup)
 	var action_queue = []
 	if target != null:
 		action_queue.append({

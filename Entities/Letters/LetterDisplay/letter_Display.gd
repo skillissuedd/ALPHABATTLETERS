@@ -9,6 +9,7 @@ var stats: Dictionary
 
 #Letter face and stats
 @onready var letter2D = get_parent().get_parent() as letter2Dclass
+@onready var properties = letter2D.properties
 @onready var letter_label: Label = $Panel/LetterLabel
 @onready var ATK_label: Label = $Panel/ATKLabel
 @onready var HP_label: Label = $Panel/HPLabel
@@ -17,6 +18,35 @@ var stats: Dictionary
 var current_element = "Neutral"
 var is_enemy:bool
 
+
+	#On ready
+func _ready():
+	mouse_filter = Control.MOUSE_FILTER_PASS
+
+	
+func change_letter(character: String):
+	letter_label.text = str(character)
+	
+func update_stats(attack: int = properties.attack, hp: int = properties.current_hp):
+	ATK_label.text = str(attack)
+	HP_label.text = str(hp)
+
+func change_element(element: String):
+	var font: Font = null
+	match element:
+		"Water":
+			font = load("res://fonts/VarelaRound-Regular.ttf")
+		"Fire":
+			font = load("res://fonts/PirataOne-Regular.ttf")
+		"Electricity":
+			font = load("res://fonts/Orbitron-VariableFont_wght.ttf")
+		"Earth":
+			font = load("res://fonts/AlfaSlabOne-Regular.ttf")
+			letter_label.add_theme_font_size_override("font_size", 60)
+			
+	letter_label.add_theme_font_override("font", font)
+		
+		
 func vector_upgrade_animation():
 	var tween := create_tween()
 		# Step 1: normalize rotation
@@ -65,31 +95,3 @@ func _pop_stat_labels():
 	tween.tween_property(ATK_label, "scale", normal_scale, 0.5).set_delay(0.1)
 	tween.tween_property(HP_label, "scale", normal_scale, 0.5).set_delay(0.1)
 	update_stats()
-
-	#On ready
-func _ready():
-	mouse_filter = Control.MOUSE_FILTER_PASS
-	await get_tree().process_frame
-	
-func change_letter(character: String):
-	letter_label.text = str(character)
-	
-func update_stats(attack: int = letter2D.properties.attack, hp: int = letter2D.properties.max_hp):
-	ATK_label.text = str(attack)
-	HP_label.text = str(hp)
-
-func change_element(element: String):
-	var font: Font = null
-	match element:
-		"Water":
-			font = load("res://fonts/VarelaRound-Regular.ttf")
-		"Fire":
-			font = load("res://fonts/PirataOne-Regular.ttf")
-		"Electricity":
-			font = load("res://fonts/Orbitron-VariableFont_wght.ttf")
-		"Earth":
-			font = load("res://fonts/AlfaSlabOne-Regular.ttf")
-			letter_label.add_theme_font_size_override("font_size", 60)
-			
-	if font:
-		letter_label.add_theme_font_override("font", font)
