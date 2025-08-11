@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bbs5hs4gvot4l" path="res://textures/tiles/letterTile2.png" id="3_uoy1b"]
 [ext_resource type="FontFile" uid="uid://c3ttg34hfox5l" path="res://fonts/Orbitron-VariableFont_wght.ttf" id="4_h3fny"]
 [ext_resource type="PackedScene" uid="uid://86aet4oiurn4" path="res://Entities/Framebars/healthFramebars/EnemyHealthBar/enemyHealthBar.tscn" id="4_qca4s"]
-[ext_resource type="PackedScene" uid="uid://ds86jqkui174g" path="res://Entities/Framebars/healthFramebars/AllyFrameBar/allyHealthBar.tscn" id="5_qca4s"]
+[ext_resource type="PackedScene" uid="uid://ds86jqkui174g" path="res://Entities/Framebars/healthFramebars/AllyHealthBar/allyHealthBar.tscn" id="5_qca4s"]
 [ext_resource type="FontFile" uid="uid://i1el5dow254n" path="res://fonts/VarelaRound-Regular.ttf" id="7_35q8v"]
 
 [node name="UiManager" type="Control"]
@@ -23,7 +23,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_pymld")
-metadata/_edit_use_anchors_ = true
 
 [node name="TogglePreview" type="Button" parent="."]
 layout_mode = 1
@@ -46,10 +45,10 @@ metadata/_edit_use_anchors_ = true
 [node name="endRoundButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.751823
-anchor_top = -0.110648
-anchor_right = 0.751823
-anchor_bottom = -0.110648
+anchor_left = -0.221615
+anchor_top = 0.753241
+anchor_right = -0.176823
+anchor_bottom = 0.753241
 offset_left = -174.5
 offset_top = -101.5
 offset_right = 174.5
@@ -89,30 +88,30 @@ metadata/_edit_use_anchors_ = true
 
 [node name="EnemyHealthBar" parent="." instance=ExtResource("4_qca4s")]
 layout_mode = 1
-anchor_left = 0.261229
-anchor_top = -0.0920739
-anchor_right = 0.261229
-anchor_bottom = -0.092
-offset_left = -345.56
-offset_top = -60.56
-offset_right = 4049.44
-offset_bottom = 540.36
+anchor_left = 0.272
+anchor_top = -0.113
+anchor_right = 0.272
+anchor_bottom = -0.113
+offset_left = -460.24
+offset_top = -70.96
+offset_right = 1841.76
+offset_bottom = 284.04
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.4, 0.4)
 metadata/_edit_use_anchors_ = true
 
 [node name="AllyHealthBar" parent="." instance=ExtResource("5_qca4s")]
 layout_mode = 1
-anchor_left = 0.289
+anchor_left = 0.275979
 anchor_top = 0.761
-anchor_right = 0.289
+anchor_right = 0.275979
 anchor_bottom = 0.761
 offset_left = -350.88
 offset_top = -50.8803
 offset_right = 3154.12
 offset_bottom = 459.12
-grow_horizontal = 2
-grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -212,14 +211,14 @@ theme_override_font_sizes/font_size = 28
 [node name="coins_section" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.747542
-anchor_top = 0.101889
-anchor_right = 0.747542
-anchor_bottom = 0.101889
-offset_left = -144.28
-offset_top = -122.04
-offset_right = 0.719971
-offset_bottom = 16.96
+anchor_left = -0.23726
+anchor_top = -0.0577593
+anchor_right = -0.23726
+anchor_bottom = -0.0577593
+offset_left = -145.46
+offset_top = -138.62
+offset_right = -0.460083
+offset_bottom = 0.380005
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
@@ -227,11 +226,16 @@ expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="coins_label" type="Label" parent="coins_section"]
-layout_mode = 0
-offset_left = 4.99997
-offset_top = 3.0
-offset_right = 207.0
-offset_bottom = 62.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.731
+anchor_top = 0.234
+anchor_right = 0.731
+anchor_bottom = 0.234
+offset_left = -100.995
+offset_top = -29.526
+offset_right = 101.005
+offset_bottom = 29.474
 theme_override_colors/font_color = Color(0.932027, 0.40259, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -243,10 +247,10 @@ text = "ui_coins"
 [node name="coins_count" type="Label" parent="coins_section"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.05558
-anchor_top = 0.161597
-anchor_right = 1.05558
-anchor_bottom = 0.161597
+anchor_left = 1.01765
+anchor_top = 0.172388
+anchor_right = 1.01765
+anchor_bottom = 0.172388
 offset_left = -11.56
 offset_top = -17.962
 offset_right = 11.44
@@ -263,17 +267,16 @@ metadata/_edit_use_anchors_ = true
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.131375
-anchor_top = -0.121556
-anchor_right = -0.131375
-anchor_bottom = -0.121556
+anchor_left = 0.732688
+anchor_top = -0.101185
+anchor_right = 0.732688
+anchor_bottom = -0.101185
 offset_left = -361.76
 offset_top = -84.72
 offset_right = 164.24
 offset_bottom = 82.28
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.375, 1.375)
 metadata/_edit_use_anchors_ = true
 
 [node name="currentRound" type="RichTextLabel" parent="Panel"]
@@ -289,43 +292,53 @@ offset_right = 268.642
 offset_bottom = 51.003
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
 theme_override_font_sizes/normal_font_size = 57
 text = "ui_current_round"
 
 [node name="roundLabel" type="RichTextLabel" parent="Panel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.933
-anchor_top = 0.428
-anchor_right = 0.933
-anchor_bottom = 0.428
-offset_left = -23.5763
+anchor_left = 0.997073
+anchor_top = 0.523809
+anchor_right = 0.997073
+anchor_bottom = 0.523809
+offset_left = -41.4603
 offset_top = -66.476
-offset_right = 59.4237
+offset_right = 41.5397
 offset_bottom = 66.524
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 91
+scale = Vector2(1.2, 1.2)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 60
 text = "1"
+metadata/_edit_use_anchors_ = true
 
 [node name="sortButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.135
-anchor_top = 0.761
-anchor_right = -0.135
-anchor_bottom = 0.761
-offset_left = -321.8
-offset_top = -137.88
-offset_right = -17.7999
-offset_bottom = -28.8801
-scale = Vector2(2.085, 2.085)
+anchor_left = -0.1605
+anchor_top = 0.264815
+anchor_right = -0.02925
+anchor_bottom = 0.325
+offset_left = -101.84
+offset_top = -45.0
+offset_right = 103.16
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0.429456, 0.822961, 0.766975, 0.611765)
-theme_override_constants/outline_size = 20
+theme_override_constants/outline_size = 15
 theme_override_fonts/font = ExtResource("7_35q8v")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 60
 text = "ui_sort_alphabet"
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
 
 [connection signal="button_down" from="TogglePreview" to="." method="_on_toggle_preview_button_down"]
 [connection signal="pressed" from="endRoundButton" to="." method="_on_end_round_button_pressed"]

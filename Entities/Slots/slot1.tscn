@@ -15,13 +15,11 @@ script = ExtResource("1_2csw6")
 modulate = Color(1, 1, 1, 0.658824)
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(80, 80)
 scale = Vector2(10, 10)
 texture = ExtResource("1_6p423")
 
 [node name="Slot_Collision" type="CollisionShape2D" parent="."]
 visibility_layer = 2
-position = Vector2(80, 80)
 scale = Vector2(0.4, 0.4)
 shape = SubResource("RectangleShape2D_4c3kn")
 

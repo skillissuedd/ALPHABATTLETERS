@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://h728a5o31cvd"]
+[gd_scene load_steps=3 format=3 uid="uid://h728a5o31cvd"]
 
 [ext_resource type="Script" uid="uid://bvugk5tbmucvd" path="res://prototype/languageSelection/language_selection.gd" id="1_5qcsq"]
 [ext_resource type="FontFile" uid="uid://5dgoa5x36r7r" path="res://fonts/orbitron_rus.ttf" id="1_xdgih"]
-[ext_resource type="PackedScene" uid="uid://cgbeiher77acw" path="res://Entities/Mouse/mouse.tscn" id="2_vppvl"]
 
 [node name="LanguageSelection" type="Control"]
 layout_mode = 3
@@ -12,24 +11,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5qcsq")
-
-[node name="mouseControl" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -221.5
-offset_top = -193.5
-offset_right = 221.5
-offset_bottom = 193.5
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.41, 0.41)
-
-[node name="Mouse" parent="mouseControl" instance=ExtResource("2_vppvl")]
-position = Vector2(182, 94)
 
 [node name="eng" type="Button" parent="."]
 layout_mode = 1

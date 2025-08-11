@@ -1,8 +1,6 @@
 extends Node2D
 
 var current_round: int = 1
-var enemy_waves_cleared: int = 0
-var max_waves_per_room: int = 2
 @onready var ENEMY_LETTER_2D = preload("res://Entities/Letters/Letter2D/Enemy/EnemyLetter2D.tscn")
 
 
@@ -13,23 +11,19 @@ func _ready():
 func before_round():
 	var enemy_count = Global.board_scene.enemy_letters.size()
 	Global.ui_manager._refill_energy()
-	
-	if enemy_count == 0:
-		enemy_waves_cleared += 1
-		#if enemy_waves_cleared >= max_waves_per_room:
-			#room_cleared()
-		init_enemies(current_round + 2)
+	if current_round <=3:
+		init_enemies(3)
 	else:
-		init_enemies(current_round + 2)
-	
+		init_enemies(current_round + 1)
 	
 func room_cleared():
 	pass
 	
 func round_start():
 	Global.ui_manager.set_ui_enabled(false)
-	Global.battle_simulator.simulate_enemy_attacks()
-	await Global.battle_animator.animations_completed
+	if not Global.board_scene.enemy_letters.is_empty():	
+		Global.battle_simulator.simulate_enemy_attacks()
+		await Global.battle_animator.animations_completed
 	Global.hand_scene.fill_hand()
 	Global.ui_manager.set_ui_enabled(true)
 	current_round += 1
@@ -62,7 +56,6 @@ func init_enemies(enemy_count: int):
 		enemy.init_letter(Global.letter_stats.return_random_letter(), true)
 		slot.letter_is_placed(enemy)
 		
-		enemy.position += Vector2(80,80)
 		enemy.properties.grid_x = slot.slotColumn
 		enemy.properties.grid_y = slot.slotRow
 		#enemy.modulate = Color(1, 0.8, 0.8, 1)

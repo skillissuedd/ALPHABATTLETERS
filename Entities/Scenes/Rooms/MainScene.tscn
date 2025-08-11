@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://drakbuggxc807"]
+[gd_scene load_steps=15 format=3 uid="uid://drakbuggxc807"]
 
 [ext_resource type="Script" uid="uid://d3f5wy4c6t7e" path="res://Entities/Scenes/Rooms/mainScene.gd" id="1_38ype"]
 [ext_resource type="PackedScene" uid="uid://bvkcos12mjaxr" path="res://Entities/Board/boardManager.tscn" id="2_dtwfu"]
 [ext_resource type="PackedScene" uid="uid://cobtvt8orra4u" path="res://Entities/Hand/handManager.tscn" id="3_4ufd4"]
-[ext_resource type="PackedScene" uid="uid://cgbeiher77acw" path="res://Entities/Mouse/mouse.tscn" id="4_71i26"]
 [ext_resource type="PackedScene" uid="uid://ysw1vyd7dj33" path="res://Entities/Decks/deck.tscn" id="5_oy8qg"]
 [ext_resource type="PackedScene" uid="uid://crwftl3w4v8qo" path="res://Entities/BattleManagers/Manager/battleManager.tscn" id="6_gutgw"]
 [ext_resource type="Shader" uid="uid://bebd7eu5owxt0" path="res://shaders/rainbow_border.gdshader" id="7_jnkey"]
@@ -26,27 +25,21 @@ shader_parameter/is_active = true
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qxria"]
 
 [node name="Main" type="Node2D"]
+scale = Vector2(0.4, 0.4)
 script = ExtResource("1_38ype")
 
 [node name="BoardManager" parent="." instance=ExtResource("2_dtwfu")]
-position = Vector2(264, 0)
+position = Vector2(1844, 555)
 scale = Vector2(1.1, 1.1)
 
 [node name="handManager" parent="." instance=ExtResource("3_4ufd4")]
-position = Vector2(-755, 542)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(842, 632)
-zoom = Vector2(0.4, 0.4)
-
-[node name="Mouse" parent="." instance=ExtResource("4_71i26")]
-position = Vector2(-264, 452)
+position = Vector2(825, 1097)
 
 [node name="Deck" parent="." instance=ExtResource("5_oy8qg")]
-position = Vector2(2397, 0)
+position = Vector2(6770, 485)
 
 [node name="BattleManager" parent="." instance=ExtResource("6_gutgw")]
-position = Vector2(-972, -106)
+position = Vector2(608, 449)
 scale = Vector2(0.89, 0.89)
 
 [node name="TextureRect" type="NinePatchRect" parent="."]
@@ -61,17 +54,19 @@ texture = SubResource("CompressedTexture2D_qxria")
 draw_center = false
 
 [node name="DeckDiscarded" parent="." instance=ExtResource("8_n3i5p")]
-visible = false
 position = Vector2(-2822, 233)
 
 [node name="sfxManager" parent="." instance=ExtResource("9_ruk0k")]
-position = Vector2(364, 233)
+position = Vector2(1944, 788)
 
 [node name="BattleSimulator" parent="." instance=ExtResource("10_f1fpf")]
+position = Vector2(1580, 555)
 
 [node name="BattleAnimator" parent="." instance=ExtResource("11_rn60a")]
+position = Vector2(1580, 555)
 
 [node name="UI_parent" type="Node2D" parent="."]
+position = Vector2(1580, 555)
 
 [node name="UiManager" parent="UI_parent" instance=ExtResource("12_b1o7s")]
 offset_left = -248.0

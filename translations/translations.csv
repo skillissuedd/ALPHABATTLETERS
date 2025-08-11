@@ -9,8 +9,8 @@ tutorial_4,"Drag and drop the letters to attack the enemy in front of your lette
 tutorial_start,"Let's go","Поехали"
 ui_current_round,"Current round: ","Текущий раунд: "
 ui_end_round,"END ROUND","ЗАВЕРШИТЬ РАУНД"
-ui_sort_alphabet,"SORT ALPHABET","СОРТИРОВАТЬ(АЛФАВИТ)"
-ui_sort_element,"SORT ELEMENT","СОРТИРОВАТЬ(ЭЛЕМЕНТ)"
+ui_sort_alphabet,"SORT ALPHABET","СОРТИРОВАТЬ (АЛФАВИТ)"
+ui_sort_element,"SORT ELEMENT","СОРТИРОВАТЬ (ЭЛЕМЕНТ)"
 ui_coins,"COINS: ","МОНЕТЫ: "
 ui_draw_a_letter,"DRAW A LETTER COST: 1 ENERGY","ВЗЯТЬ БУКВУ СТОИМОСТЬ: 1 ЭНЕРГИИ"
 ui_energy,ENERGY,ЭНЕРГИЯ

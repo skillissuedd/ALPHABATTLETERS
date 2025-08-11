@@ -144,11 +144,13 @@ func execute_actions(action_queue: Array) -> void:
 		
 
 func simulate_enemy_attacks() -> void:
-	var simulation_data: Array = Global.board_scene.prepare_simulation_data()
 	load_backups()
+	var simulation_data: Array = Global.board_scene.prepare_simulation_data()
 	simulation_data.sort_custom(func(a, b): 
 		return a["y"] > b["y"] or (a["y"] == b["y"] and a["x"] < b["x"]))
-		
+	
+	if simulation_data.is_empty():
+		return
 	var action_queue = []
 	for unit in simulation_data:
 		if unit.is_dead or not unit.is_enemy: continue

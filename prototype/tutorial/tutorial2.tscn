@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c31ucumk246tg"]
+[gd_scene load_steps=6 format=3 uid="uid://c31ucumk246tg"]
 
 [ext_resource type="PackedScene" uid="uid://ysw1vyd7dj33" path="res://Entities/Decks/deck.tscn" id="1_ada6c"]
 [ext_resource type="Script" uid="uid://bblgit4cahlsr" path="res://prototype/tutorial/tutorial_2.gd" id="1_j7nyx"]
 [ext_resource type="FontFile" uid="uid://5dgoa5x36r7r" path="res://fonts/orbitron_rus.ttf" id="2_j7nyx"]
-[ext_resource type="PackedScene" uid="uid://cgbeiher77acw" path="res://Entities/Mouse/mouse.tscn" id="3_k7qt6"]
 [ext_resource type="PackedScene" uid="uid://cobtvt8orra4u" path="res://Entities/Hand/handManager.tscn" id="5_k7qt6"]
 [ext_resource type="PackedScene" uid="uid://86aet4oiurn4" path="res://Entities/Framebars/healthFramebars/EnemyHealthBar/enemyHealthBar.tscn" id="6_rb1ce"]
 
@@ -76,24 +75,6 @@ text = "tutorial_1"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
-
-[node name="mouseControl" type="Control" parent="."]
-layout_mode = 1
-anchor_left = 0.042
-anchor_top = 0.254
-anchor_right = 0.042
-anchor_bottom = 0.254
-offset_left = -91.384
-offset_top = -79.592
-offset_right = 351.616
-offset_bottom = 307.408
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.41, 0.41)
-metadata/_edit_use_anchors_ = true
-
-[node name="Mouse" parent="mouseControl" instance=ExtResource("3_k7qt6")]
-position = Vector2(182, 94)
 
 [node name="handManager" parent="." instance=ExtResource("5_k7qt6")]
 position = Vector2(921, 521)

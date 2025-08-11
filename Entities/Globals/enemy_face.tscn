@@ -1,16 +1,77 @@
-[gd_scene load_steps=4 format=3 uid="uid://ba8nvcho336y8"]
+[gd_scene load_steps=4 format=3 uid="uid://bmpoj3n6tf0vk"]
 
-[ext_resource type="Script" uid="uid://bjjxdhwu3nq1w" path="res://Entities/Globals/enemy_face.gd" id="1_k7nnb"]
-[ext_resource type="Shader" uid="uid://bke45ne6jb570" path="res://Entities/Globals/enemy_face.gdshader" id="2_464t6"]
+[sub_resource type="GDScript" id="GDScript_vxs2u"]
+script/source = "extends Node2D
+class_name BookHealthBar
+
+@export var max_pages := 10
+@export var cover_health := 100.0
+@export var page_health := 50.0
+@onready var pages := $Pages
+var current_cover := 100.0
+var current_pages := 10
+
+
+func _ready():
+	# Set initial size (width: 100, height: 60 - adjust as needed)
+	pages.custom_minimum_size = Vector2(100, 60)
+	pages.size = Vector2(100, 60)
+	
+func update_health(percent: float):
+	# 1. Update shader fill (bottom-up)
+	var mat = pages.material as ShaderMaterial
+	mat.set_shader_parameter(\"fill_color\", Color(0.9, 0.9, 0.5)) # RGB 0.9, 0.9, 0.5
+	
+	# 2. Vertical shrink effect
+	var target_height = 100 * percent # Adjust 100 to your desired max height
+	var tween = create_tween()
+	tween.tween_property(pages, \"custom_minimum_size:y\", target_height, 0.3)
+
+func setup():
+	current_cover = cover_health
+	current_pages = max_pages
+	update_visuals()
+
+func take_damage(damage: float):
+	if current_cover > 0:
+		current_cover = max(0, current_cover - damage)
+	else:
+		var pages_lost = int(damage / page_health)
+		current_pages = max(0, current_pages - pages_lost)
+	update_visuals()
+
+func update_visuals():
+	for i in range(max_pages):
+		get_node(\"Pages/Page%d\" % (i+1)).visible = (i < current_pages)
+	$BookCover.modulate = Color(0.9, 0.9, 0.5, current_cover / cover_health)
+
+
+func _on_h_scroll_bar_value_changed(value: float) -> void:
+	update_health(value/100)
+"
+
+[sub_resource type="Shader" id="Shader_01glh"]
+code = "shader_type canvas_item;
+uniform float fill_amount : hint_range(0, 1) = 1.0;
+uniform vec4 fill_color : source_color = vec4(0.9, 0.9, 0.5, 1.0);
+uniform vec4 bg_color : source_color = vec4(0.3, 0.2, 0.1, 1.0);
+
+void fragment() {
+	if (UV.y < fill_amount) { // Fill from top down
+		COLOR = fill_color;
+	} else {
+		COLOR = bg_color;
+	}
+}"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sgqu1"]
-shader = ExtResource("2_464t6")
+shader = SubResource("Shader_01glh")
 shader_parameter/fill_amount = 0.69
 shader_parameter/fill_color = Color(1, 1, 0.584314, 0.337255)
 shader_parameter/bg_color = Color(0.709804, 0.411765, 0.286275, 0)
 
 [node name="BookHealthBar" type="Node2D"]
-script = ExtResource("1_k7nnb")
+script = SubResource("GDScript_vxs2u")
 
 [node name="BookCover" type="ColorRect" parent="."]
 offset_left = -50.0

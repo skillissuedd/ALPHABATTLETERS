@@ -133,7 +133,7 @@ func update_frame_bar(ratio:float, permanent: bool):
 	
 func play_attack_animation(target):
 	#COPYING
-	var end_pos = Vector2(0,0)
+	var end_pos = target.global_position
 	var original_label = letterDisplay
 	var attack_label = original_label.letter_label.duplicate()
 	attack_label.name = "attack_label"
@@ -141,9 +141,9 @@ func play_attack_animation(target):
 	
 	#POSITION AND SIZE
 	if not properties.is_enemy:
-		attack_label.position = original_label.position 
+		attack_label.global_position = original_label.global_position
 	else:
-		attack_label.position = original_label.position
+		attack_label.global_position = original_label.global_position
 	attack_label.scale = original_label.scale * 0.7
 	attack_label.z_index=1
 	#MIRRORING
@@ -152,16 +152,8 @@ func play_attack_animation(target):
 	#GLOWING
 	attack_label.modulate = Color(1.0, 1.0, 0.5, 1.0) 
 	
-	if target is AllyHealthBar:
-		end_pos = Vector2(attack_label.global_position.x, target.global_position.y)
-	elif target is EnemyHealthBar:
-		end_pos = Vector2(attack_label.global_position.x, target.global_position.y+200)
-	#MOVING
-	else:
-		if not properties.is_enemy:
-			end_pos = Vector2(attack_label.global_position.x, (target.letterDisplay.global_position.y+250))
-		else:
-			end_pos = Vector2(attack_label.global_position.x, (target.letterDisplay.global_position.y+50))
+	end_pos = Vector2(attack_label.global_position.x, target.global_position.y)
+	
 	var tween = create_tween()
 	tween.tween_property(attack_label, "global_position", end_pos, 0.7)\
 		.set_trans(Tween.TRANS_QUAD)\
@@ -295,7 +287,7 @@ func snap_to_parent():
 func snap_to_slot():
 	if closest_slot:
 		reparent(Global.board_scene)
-		global_position = closest_slot.global_position + Vector2(80, 80)
+		global_position = closest_slot.global_position
 		current_selected_slot = closest_slot
 		Global.hand_scene.letter_row.erase(self)
 		if current_selected_slot.current_letter:
@@ -313,8 +305,7 @@ func snap_to_slot():
 		is_active = false
 		
 		if properties.element_type == "Electricity":
-			Global.ui_manager._reduce_energy(1)
-			Global.ui_manager._reduce_energy(-1)
+			Global.ui_manager._reduce_energy(0)
 		else:
 			Global.ui_manager._reduce_energy(1)
 

@@ -7,21 +7,21 @@
 [node name="LetterDisplay" type="Control"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -50.0
-offset_right = 50.0
-offset_bottom = 50.0
+anchor_left = 0.043
+anchor_top = 0.077
+anchor_right = 0.043
+anchor_bottom = 0.077
+offset_left = -49.536
+offset_top = -49.896
+offset_right = 50.464
+offset_bottom = 50.104
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(100, 100)
 size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("1_vec7r")
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="."]
 self_modulate = Color(1, 1, 1, 0)

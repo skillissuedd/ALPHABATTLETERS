@@ -30,7 +30,7 @@ func fill_deck():
 		var letter2Dinstance = LETTER_SCENE2D.instantiate()
 		var row = i / GRID_COLUMNS
 		var col = i % GRID_COLUMNS
-		letter2Dinstance.position = (Vector2(col, row) * CELL_SIZE)+global_position
+		letter2Dinstance.position = (Vector2(col, row) * CELL_SIZE)
 		add_child(letter2Dinstance)
 		letter2Dinstance.init_letter(deck[i], false)
 		

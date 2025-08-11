@@ -19,9 +19,6 @@ func init_interface():
 	Global.deck_scene.initialize_deck()
 	Global.deck_scene.fill_deck()
 	
-	# INIT MOUSE
-	Global.mouse = $Mouse
-	
 	# INIT HAND
 	Global.hand_scene= $handManager
 	Global.hand_scene.fill_hand()
@@ -42,7 +39,6 @@ func _ready():
 	init_interface()
 	await get_tree().create_timer(3).timeout
 	Global.battle_manager.before_round()
-
 
 func free_all_nodes():
 	var root = get_tree().current_scene

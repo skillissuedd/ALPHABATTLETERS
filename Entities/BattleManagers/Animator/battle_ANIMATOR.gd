@@ -5,7 +5,6 @@ signal letter_is_dead(target2D)
 	
 func apply_animation_effects(animation_events: Array) -> void:
 	for event in animation_events:
-		output_log(event)
 		match event["type"]:
 			"attack":
 				await _play_attack_anim(
@@ -25,7 +24,16 @@ func apply_animation_effects(animation_events: Array) -> void:
 					event["damage"],
 					true
 				)
+		if Global.ui_manager.enemy_health_bar.current_health <=0:
+			GlobalOptions.round_outcome = true
+			get_tree().change_scene_to_file("res://prototype/gameover/gameover.tscn")
+			return
+		elif Global.ui_manager.ally_health_bar.current_health <=0:
+			GlobalOptions.round_outcome = false
+			get_tree().change_scene_to_file("res://prototype/gameover/gameover.tscn")
+			return
 	emit_signal("animations_completed")
+
 func _play_face_attack_anim(attacker: LetterUnit, damage: int, is_enemy: bool)-> void:
 	var target = null
 	var attacker2D = attacker.letterParent
@@ -35,12 +43,7 @@ func _play_face_attack_anim(attacker: LetterUnit, damage: int, is_enemy: bool)->
 		target = Global.ui_manager.enemy_health_bar
 	await attacker2D.play_attack_animation(target)
 	target.get_damaged(damage)
-	if target is AllyHealthBar and target.current_health <=0:
-		GlobalOptions.round_outcome = false
-		get_tree().change_scene_to_file("res://prototype/gameover/gameover.tscn")
-	elif target is EnemyHealthBar and target.current_health <=0:
-		GlobalOptions.round_outcome = true
-		get_tree().change_scene_to_file("res://prototype/gameover/gameover.tscn")
+	
 		
 func output_log(logs: Dictionary) -> void:
 	if logs["type"] == "attack":
@@ -73,7 +76,7 @@ func _play_attack_anim(attacker: LetterUnit, target: LetterUnit, damage: int) ->
 	damage_text.add_theme_color_override("font_color", Color(1, 0.2, 0.2))
 	damage_text.add_theme_constant_override("outline_size", 15)
 	damage_text.add_theme_color_override("font_outline_color", Color.BLACK)
-	damage_text.position = target2D.global_position + Vector2(randf_range(-20, 20), -60)
+	damage_text.position = target2D.global_position + Vector2(randf_range(-20, 20), 0)
 	damage_text.z_index = 100
 	
 	get_tree().current_scene.add_child(damage_text)
