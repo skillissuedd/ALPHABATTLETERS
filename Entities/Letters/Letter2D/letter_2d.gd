@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
 		_float_time += delta * float_speed
 		rotation_degrees = sin(_float_time) * float_amplitude
 		
-	$Shadow.global_position = global_position + Vector2(-55,-55)
+	$Shadow.global_position = global_position + Vector2(10, -20)
 	
 	#var base_scale:float = 0.8 + (0.2 * distance_ratio)
 

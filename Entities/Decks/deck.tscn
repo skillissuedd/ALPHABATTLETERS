@@ -4,5 +4,6 @@
 [ext_resource type="Resource" uid="uid://c438xqul6k3yu" path="res://Entities/Letters/LetterStats/letter_stats.tres" id="2_c0h2s"]
 
 [node name="Deck" type="Node2D"]
+position = Vector2(553, 311)
 script = ExtResource("1_ijvi3")
 letter_stats = ExtResource("2_c0h2s")

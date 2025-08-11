@@ -35,7 +35,14 @@ func _play_face_attack_anim(attacker: LetterUnit, damage: int, is_enemy: bool)->
 		target = Global.ui_manager.enemy_health_bar
 	await attacker2D.play_attack_animation(target)
 	target.get_damaged(damage)
-	
+	if target is AllyHealthBar and target.current_health <=0:
+		Global.main_scene.free_all_nodes()
+		GlobalOptions.round_outcome = false
+		get_tree().change_scene_to_file("res://prototype/gameover/gameover.tscn")
+	elif target is EnemyHealthBar and target.current_health <=0:
+		GlobalOptions.round_outcome = true
+		Global.main_scene.free_all_nodes()
+		get_tree().change_scene_to_file("res://prototype/gameover/gameover.tscn")
 func output_log(logs: Dictionary) -> void:
 	if logs["type"] == "attack":
 		var attacker = logs["attacker"].letter

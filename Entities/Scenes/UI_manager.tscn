@@ -60,20 +60,20 @@ theme_override_colors/font_color = Color(0.938422, 0.246126, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_fonts/font = ExtResource("4_h3fny")
 theme_override_font_sizes/font_size = 40
-text = "END ROUND"
+text = "ui_end_round"
 metadata/_edit_use_anchors_ = true
 
 [node name="drawButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.630729
-anchor_top = 0.352778
-anchor_right = 0.630729
-anchor_bottom = 0.352778
-offset_left = -149.0
-offset_top = -48.0
-offset_right = 149.0
-offset_bottom = 48.0
+anchor_left = 0.670209
+anchor_top = 0.387
+anchor_right = 0.681667
+anchor_bottom = 0.387
+offset_left = -262.8
+offset_top = -84.9598
+offset_right = 35.1997
+offset_bottom = 11.0402
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.76, 1.76)
@@ -83,8 +83,8 @@ theme_override_constants/outline_size = 15
 theme_override_fonts/font = ExtResource("2_umkwo")
 theme_override_font_sizes/font_size = 31
 keep_pressed_outside = true
-text = "DRAW A LETTER
-COST: 1 ENERGY"
+text = "ui_draw_a_letter"
+autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="EnemyHealthBar" parent="." instance=ExtResource("4_qca4s")]
@@ -144,8 +144,29 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("4_h3fny")
 theme_override_font_sizes/font_size = 28
-text = "ENERGY
-       /"
+text = "ui_energy"
+
+[node name="energy_label2" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.527589
+anchor_top = 0.554145
+anchor_right = 0.527589
+anchor_bottom = 0.554145
+offset_left = -67.5
+offset_top = -29.526
+offset_right = 67.5
+offset_bottom = 29.474
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.932027, 0.40259, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_h3fny")
+theme_override_font_sizes/font_size = 28
+text = "       /"
+metadata/_edit_use_anchors_ = true
 
 [node name="energy_preview" type="Label" parent="TextureRect"]
 visible = false
@@ -217,19 +238,19 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("4_h3fny")
 theme_override_font_sizes/font_size = 28
-text = "COINS:"
+text = "ui_coins"
 
 [node name="coins_count" type="Label" parent="coins_section"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.945
-anchor_top = 0.151
-anchor_right = 0.945
-anchor_bottom = 0.151
-offset_left = -18.025
-offset_top = -17.989
-offset_right = 17.975
-offset_bottom = 18.011
+anchor_left = 1.05558
+anchor_top = 0.161597
+anchor_right = 1.05558
+anchor_bottom = 0.161597
+offset_left = -11.56
+offset_top = -17.962
+offset_right = 11.44
+offset_bottom = 18.038
 theme_override_colors/font_color = Color(0.932027, 0.40259, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -237,6 +258,7 @@ theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("4_h3fny")
 theme_override_font_sizes/font_size = 28
 text = "0"
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -268,7 +290,7 @@ offset_bottom = 51.003
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 57
-text = "Current round:"
+text = "ui_current_round"
 
 [node name="roundLabel" type="RichTextLabel" parent="Panel"]
 layout_mode = 1
@@ -277,9 +299,9 @@ anchor_left = 0.933
 anchor_top = 0.428
 anchor_right = 0.933
 anchor_bottom = 0.428
-offset_left = -41.758
+offset_left = -23.5763
 offset_top = -66.476
-offset_right = 41.242
+offset_right = 59.4237
 offset_bottom = 66.524
 grow_horizontal = 0
 grow_vertical = 2
@@ -287,18 +309,23 @@ theme_override_font_sizes/normal_font_size = 91
 text = "1"
 
 [node name="sortButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = -576.0
-offset_top = 708.0
-offset_right = -301.0
-offset_bottom = 817.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.135
+anchor_top = 0.761
+anchor_right = -0.135
+anchor_bottom = 0.761
+offset_left = -321.8
+offset_top = -137.88
+offset_right = -17.7999
+offset_bottom = -28.8801
 scale = Vector2(2.085, 2.085)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0.429456, 0.822961, 0.766975, 0.611765)
 theme_override_constants/outline_size = 20
 theme_override_fonts/font = ExtResource("7_35q8v")
-theme_override_font_sizes/font_size = 36
-text = "SORT ALPHABET"
+theme_override_font_sizes/font_size = 24
+text = "ui_sort_alphabet"
 
 [connection signal="button_down" from="TogglePreview" to="." method="_on_toggle_preview_button_down"]
 [connection signal="pressed" from="endRoundButton" to="." method="_on_end_round_button_pressed"]

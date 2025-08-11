@@ -4,7 +4,7 @@ class_name deck_class
 
 const LETTER_SCENE2D = preload("res://Entities/Letters/Letter2D/Ally/AllyLetter2D.tscn")
 
-const GRID_COLUMNS = 13  # 13 x 4 grid for 52 letters
+var GRID_COLUMNS = 13  # 13 x 4 grid for 52 letters
 const CELL_SIZE = Vector2(250, 280)
 var rand_index = null
 
@@ -87,3 +87,7 @@ func arrange_deck():
 		var row = j / GRID_COLUMNS
 		var col = j % GRID_COLUMNS
 		letter2Dinstance.position = Vector2(col, row) * CELL_SIZE
+
+func set_all_letters_inactive():
+	for letter in deck:
+		letter.is_active = false

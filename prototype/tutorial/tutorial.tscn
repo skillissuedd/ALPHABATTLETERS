@@ -1,0 +1,97 @@
+[gd_scene load_steps=4 format=3 uid="uid://elonbcef8qtf"]
+
+[ext_resource type="Script" uid="uid://pfmmq31t64qe" path="res://prototype/tutorial/tutorial.gd" id="1_l175g"]
+[ext_resource type="FontFile" uid="uid://5dgoa5x36r7r" path="res://fonts/orbitron_rus.ttf" id="1_pbaxy"]
+[ext_resource type="PackedScene" uid="uid://cgbeiher77acw" path="res://Entities/Mouse/mouse.tscn" id="3_74qdr"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l175g")
+
+[node name="tutorLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.525
+anchor_top = 0.221
+anchor_right = 0.525
+anchor_bottom = 0.221
+offset_left = -546.8
+offset_top = -121.208
+offset_right = 525.2
+offset_bottom = 73.792
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 27
+theme_override_fonts/font = ExtResource("1_pbaxy")
+theme_override_font_sizes/font_size = 96
+text = "tutorial_welcome"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="yesButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -283.5
+offset_top = -66.0
+offset_right = 283.5
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0.419608, 0, 1)
+theme_override_colors/font_color = Color(0, 0.815686, 0, 1)
+theme_override_constants/outline_size = 23
+theme_override_fonts/font = ExtResource("1_pbaxy")
+theme_override_font_sizes/font_size = 96
+text = "global_yes"
+
+[node name="no Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.807
+anchor_right = 0.5
+anchor_bottom = 0.807
+offset_left = -281.0
+offset_top = -65.936
+offset_right = 286.0
+offset_bottom = 66.064
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.496043, 0, 0.106633, 1)
+theme_override_colors/font_color = Color(0.910829, 0, 0.231336, 1)
+theme_override_constants/outline_size = 23
+theme_override_fonts/font = ExtResource("1_pbaxy")
+theme_override_font_sizes/font_size = 96
+text = "global_no"
+
+[node name="mouseControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -221.5
+offset_top = -193.5
+offset_right = 221.5
+offset_bottom = 193.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.41, 0.41)
+
+[node name="Mouse" parent="mouseControl" instance=ExtResource("3_74qdr")]
+position = Vector2(182, 94)
+
+[connection signal="button_up" from="yesButton" to="." method="_on_yes_button_button_up"]
+[connection signal="button_up" from="no Button" to="." method="_on_no_button_button_up"]

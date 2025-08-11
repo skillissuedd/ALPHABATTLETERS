@@ -4,12 +4,13 @@ extends Node2D
 @onready var current_round: int = 1
 
 func init_interface():
+	Global.main_scene = self
 	# INIT MANAGERS
 	Global.sfx_manager = $sfxManager
 	Global.ui_manager = $UI_parent/UiManager
 
 	Global.ui_manager.enemy_health_bar._setup_health_bar(20.0)
-	Global.ui_manager.ally_health_bar._setup_health_bar(50.0)
+	Global.ui_manager.ally_health_bar._setup_health_bar(20.0)
 	
 	# INIT DECKS
 	Global.deck_disc_scene = $DeckDiscarded
@@ -42,6 +43,11 @@ func _ready():
 	await get_tree().create_timer(3).timeout
 	Global.battle_manager.before_round()
 
+
+func free_all_nodes():
+	var root = get_tree().current_scene
+	for child in root.get_children():
+		child.queue_free()
 
 func _on_area_around_area_entered(area: Area2D) -> void:
 	area.get_parent().current_selected_slot = null

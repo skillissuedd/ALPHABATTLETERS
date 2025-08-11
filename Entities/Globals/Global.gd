@@ -4,6 +4,7 @@ extends Node
 var overlapping_slots := []
 var letter_stats = load("res://Entities/Letters/LetterStats/letter_stats.tres")
 
+var main_scene: Node = null
 var deck_disc_scene: deck_class = null
 var enemy_deck_disc_scene: deck_class = null
 var deck_scene: deck_class = null

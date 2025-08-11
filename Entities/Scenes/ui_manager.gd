@@ -76,8 +76,6 @@ func _on_draw_button_pressed() -> void:
 	if (Global.hand_scene.letter_row.size() < Global.hand_scene.max_hand_size) and current_energy > 0:
 		_reduce_energy(1)
 		Global.hand_scene.snap_to_hand(Global.deck_scene.get_random_letter_instance())
-	if not Global.deck_scene.deck.is_empty():
-		Global.hand_scene.snap_to_hand(Global.deck_scene.get_random_letter_instance())
 	Global.hand_scene.sort_hand(sorting_mode)
 	
 func _on_end_round_button_pressed() -> void:
@@ -88,8 +86,8 @@ func _on_sort_button_pressed() -> void:
 	Global.hand_scene.sort_hand(sorting_mode)
 	if sorting_mode == 0:
 		sorting_mode = 1
-		sort_button.text = "SORT ELEMENT"	
+		sort_button.text = "ui_sort_element"
 	elif sorting_mode == 1:
 		sorting_mode = 0
-		sort_button.text = "SORT ALPHABET"
+		sort_button.text = "ui_sort_alphabet"
 	
