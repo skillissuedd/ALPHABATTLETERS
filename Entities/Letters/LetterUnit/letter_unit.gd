@@ -4,7 +4,6 @@ extends Node2D
 # Identifiers
 @export var letter: String = ""
 @export var is_enemy: bool = false
-@export var is_changed: bool = false
 @export var grid_x: int = 0
 @export var grid_y: int = 0
 @onready var letterParent = get_parent()

@@ -55,13 +55,16 @@ func init_letter(character: String, is_enemy: bool):
 	var stats = letter_stats.get_stats(character)
 	var max_hp = stats["hp"]
 	var current_atk = stats["atk"]
+	var element = letter_stats.get_element_for_letter(character)
+
 	if is_enemy:
 		max_hp+=3
 		current_atk+=1
-	var element = letter_stats.get_element_for_letter(character)
+		element = "Neutral"
 	update_element_style(element)
 	properties.initialize(character, is_enemy, current_atk, max_hp, element)
 	properties.letterDisplay = letterDisplay
+	
 	letterDisplay.properties = properties
 	letterDisplay.change_letter(character)
 	letterDisplay.update_stats()
@@ -96,6 +99,7 @@ func update_element_style(current_element: String):
 		"Earth":
 			self.texture=load("res://Entities/Letters/Letter2D/Elements/Earth/woodTile1.jpg")
 		"Neutral":
+			self.texture=load("res://Entities/Letters/Letter2D/Elements/EnemyElement/enemyElement.png")
 			self_modulate = Color(0.9, 0.9, 0.9) 
 
 
@@ -299,6 +303,9 @@ func snap_to_slot():
 		if current_selected_slot.current_letter:
 			Global.deck_disc_scene.append_to_deck(current_selected_slot.current_letter)
 			current_selected_slot.letter_is_taken()
+			properties.max_hp+=1
+			properties.current_hp=properties.max_hp
+			letterDisplay.update_stats()
 		current_selected_slot.letter_is_placed(self)
 		self.rotation_degrees = 0
 		properties.grid_x = current_selected_slot.slotColumn

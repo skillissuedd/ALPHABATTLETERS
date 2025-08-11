@@ -76,7 +76,6 @@ func init_enemies(enemy_count: int):
 			enemy.coins.visible = true
 			enemy._change_coins_count(roll-3)
 		
-		
 		await get_tree().create_timer(0.3).timeout
 		
 		

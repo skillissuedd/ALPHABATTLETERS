@@ -20,7 +20,9 @@ func _process(delta):
 		current_hp_percent = lerp(current_hp_percent, target_hp_percent, delta * lerp_speed)
 		frame2.set_hp_percent(current_hp_percent)  # Smooth update only for frame2
 	queue_redraw()
-	
+	if not frame2.current_hp_percent == current_hp_percent:
+		frame2.enabled=true
+		frame2.queue_redraw()
 	
 func set_temp_percent(value: float)-> void:
 	current_hp_percent = clamp(value, 0.0, 100.0)

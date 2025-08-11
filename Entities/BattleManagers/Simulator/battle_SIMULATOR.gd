@@ -25,26 +25,14 @@ func load_backups():
 	
 	for new_unit in new_data:
 		for old_unit in enemy_backup:
-			if new_unit["ref"] == old_unit["ref"] and new_unit["ref"].is_changed == true:
+			if new_unit["ref"] == old_unit["ref"]:
 				new_unit["ref"].current_hp = old_unit.current_hp
 				new_unit["ref"].is_dead = old_unit.is_dead
-				new_unit["ref"].is_changed = false
 				apply_calculated_changes_to_ui(new_unit["ref"], false)
 				new_unit["ref"].letterParent.modulate = Color(0.9, 0.9, 0.9, 1)
 				new_unit["ref"].letterDisplay.death_mark.visible = false
 				
-func apply_calculated_changes_to_ui(target: LetterUnit, apply: bool):
-	target.is_changed = true
-	target.letterDisplay.update_stats(target.attack, target.current_hp)
-	target.letterParent.update_frame_bar(target.current_hp*100/target.max_hp, apply)
-	if target.current_hp == 0:
-		target.is_dead = true
-		target.letterParent.modulate = Color(0.9, 0.9, 0.9, 0.4)
-		target.letterDisplay.death_mark.visible = true
-
-
 ### PREVIEW ###
-
 
 func simuilate_preview(letter2D: letter2Dclass):
 	load_backups()
@@ -97,13 +85,22 @@ func calculate_preview_damage(action_queue: Array):
 			var target = action.target
 			if !is_instance_valid(attacker) or attacker.is_dead: continue
 			if !is_instance_valid(target) or target.is_dead or !target.is_enemy: continue
-			target.current_hp = max(0, target.current_hp - action.damage)
-			target.is_changed = true
-			if target.current_hp == 0:
-				target.is_dead = true
-			apply_calculated_changes_to_ui(target, false)
+			var target_hp = max(0, target.current_hp - action.damage)
+			target.letterDisplay.update_stats(target.attack, target_hp)
+			target.letterParent.update_frame_bar(target_hp*100/target.max_hp, false)
+			if target_hp <= 0:
+				target.letterParent.modulate = Color(0.9, 0.9, 0.9, 0.4)
+				target.letterDisplay.death_mark.visible = true
 				
-				
+func apply_calculated_changes_to_ui(target: LetterUnit, apply: bool):
+	target.letterDisplay.update_stats(target.attack, target.current_hp)
+	target.letterParent.update_frame_bar(target.current_hp*100/target.max_hp, apply)
+	if target.current_hp == 0:
+		target.is_dead = true
+		target.letterParent.modulate = Color(0.9, 0.9, 0.9, 0.4)
+		target.letterDisplay.death_mark.visible = true
+		
+
 ### PLAYER LETTER ACTIONS ###
 
 
@@ -131,22 +128,17 @@ func execute_letter_action(letter: Node2D) -> void:
 
 func execute_actions(action_queue: Array) -> void:
 	for action in action_queue:
-		
-		if action["type"] == "attack":
+		if action["type"] == "attack": 
 			var attacker = action.attacker
 			var target = action.target
 			if !is_instance_valid(attacker) or attacker.is_dead: continue
 			if !is_instance_valid(target) or target.is_dead: continue
 			target.current_hp = max(0, target.current_hp - action.damage)
 			target.is_dead = target.current_hp <= 0
-			
-		elif action["type"] == "face_attack":
-			var attacker = action.attacker
-			if !is_instance_valid(attacker) or attacker.is_dead: continue
-			
+	save_backups()
 	Global.battle_animator.apply_animation_effects(action_queue)
 	await Global.battle_animator.animations_completed
-	save_backups()
+	
 		
 ### ENEMY LETTER ACTIONS ###
 		

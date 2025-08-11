@@ -43,7 +43,9 @@ func change_element(element: String):
 		"Earth":
 			font = load("res://fonts/AlfaSlabOne-Regular.ttf")
 			letter_label.add_theme_font_size_override("font_size", 60)
-			
+		"Neutral":
+			font = load("res://fonts/Almendra-Regular.ttf")
+		
 	letter_label.add_theme_font_override("font", font)
 		
 		
