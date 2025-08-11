@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://elonbcef8qtf"]
+[gd_scene load_steps=5 format=3 uid="uid://elonbcef8qtf"]
 
 [ext_resource type="Script" uid="uid://pfmmq31t64qe" path="res://prototype/tutorial/tutorial.gd" id="1_l175g"]
 [ext_resource type="FontFile" uid="uid://5dgoa5x36r7r" path="res://fonts/orbitron_rus.ttf" id="1_pbaxy"]
+[ext_resource type="FontFile" uid="uid://crla5q0srhg1q" path="res://fonts/AlfaSlabOne-Regular.ttf" id="2_clj7x"]
 [ext_resource type="PackedScene" uid="uid://cgbeiher77acw" path="res://Entities/Mouse/mouse.tscn" id="3_74qdr"]
 
 [node name="Tutorial" type="Control"]
@@ -13,19 +14,67 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l175g")
 
+[node name="logo" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.145
+anchor_right = 0.5
+anchor_bottom = 0.145
+offset_left = -626.0
+offset_top = -116.96
+offset_right = 446.0
+offset_bottom = 78.04
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 27
+theme_override_fonts/font = ExtResource("2_clj7x")
+theme_override_font_sizes/font_size = 96
+text = "ALPHABATTLETTERS"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="logo2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.928556
+anchor_top = 0.168235
+anchor_right = 0.928556
+anchor_bottom = 0.168235
+offset_left = -109.696
+offset_top = -56.016
+offset_right = 273.304
+offset_bottom = 138.984
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.575, 0.575)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 27
+theme_override_fonts/font = ExtResource("2_clj7x")
+theme_override_font_sizes/font_size = 96
+text = "v0.001"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
 [node name="tutorLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.525
-anchor_top = 0.221
-anchor_right = 0.525
-anchor_bottom = 0.221
-offset_left = -546.8
-offset_top = -121.208
-offset_right = 525.2
-offset_bottom = 73.792
+anchor_left = 0.5
+anchor_top = 0.36
+anchor_right = 0.5
+anchor_bottom = 0.36
+offset_left = -363.0
+offset_top = -74.28
+offset_right = 709.0
+offset_bottom = 120.72
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.7, 0.7)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 27
 theme_override_fonts/font = ExtResource("1_pbaxy")
@@ -37,43 +86,47 @@ autowrap_mode = 2
 
 [node name="yesButton" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -283.5
-offset_top = -66.0
-offset_right = 283.5
-offset_bottom = 66.0
+anchors_preset = -1
+anchor_left = 0.498854
+anchor_top = 0.624568
+anchor_right = 0.498854
+anchor_bottom = 0.624568
+offset_left = -240.68
+offset_top = -52.72
+offset_right = 361.32
+offset_bottom = 79.28
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.8, 0.8)
 theme_override_colors/font_outline_color = Color(0, 0.419608, 0, 1)
 theme_override_colors/font_color = Color(0, 0.815686, 0, 1)
 theme_override_constants/outline_size = 23
 theme_override_fonts/font = ExtResource("1_pbaxy")
 theme_override_font_sizes/font_size = 96
 text = "global_yes"
+metadata/_edit_use_anchors_ = true
 
 [node name="no Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.807
-anchor_right = 0.5
-anchor_bottom = 0.807
-offset_left = -281.0
-offset_top = -65.936
-offset_right = 286.0
-offset_bottom = 66.064
+anchor_left = 0.488722
+anchor_top = 0.856
+anchor_right = 0.514764
+anchor_bottom = 0.856
+offset_left = -227.008
+offset_top = -52.6881
+offset_right = 339.992
+offset_bottom = 79.312
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.8, 0.8)
 theme_override_colors/font_outline_color = Color(0.496043, 0, 0.106633, 1)
 theme_override_colors/font_color = Color(0.910829, 0, 0.231336, 1)
 theme_override_constants/outline_size = 23
 theme_override_fonts/font = ExtResource("1_pbaxy")
 theme_override_font_sizes/font_size = 96
 text = "global_no"
+metadata/_edit_use_anchors_ = true
 
 [node name="mouseControl" type="Control" parent="."]
 layout_mode = 1

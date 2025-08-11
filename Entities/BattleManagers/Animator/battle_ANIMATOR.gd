@@ -36,13 +36,12 @@ func _play_face_attack_anim(attacker: LetterUnit, damage: int, is_enemy: bool)->
 	await attacker2D.play_attack_animation(target)
 	target.get_damaged(damage)
 	if target is AllyHealthBar and target.current_health <=0:
-		Global.main_scene.free_all_nodes()
 		GlobalOptions.round_outcome = false
 		get_tree().change_scene_to_file("res://prototype/gameover/gameover.tscn")
 	elif target is EnemyHealthBar and target.current_health <=0:
 		GlobalOptions.round_outcome = true
-		Global.main_scene.free_all_nodes()
 		get_tree().change_scene_to_file("res://prototype/gameover/gameover.tscn")
+		
 func output_log(logs: Dictionary) -> void:
 	if logs["type"] == "attack":
 		var attacker = logs["attacker"].letter
@@ -60,6 +59,10 @@ func _play_attack_anim(attacker: LetterUnit, target: LetterUnit, damage: int) ->
 	var attacker2D = attacker.letterParent
 	var target2D = target.letterParent
 	
+	if int(target2D.letterDisplay.HP_label.text) <=0:
+		print ("target is dead")
+		await _play_face_attack_anim(attacker, damage, attacker.is_enemy)
+		return
 	# Trigger your existing attack animation
 	await attacker2D.play_attack_animation(target2D)
 	
@@ -109,8 +112,10 @@ func _letter_is_dead(target2D):
 	var death_copy = target2D.duplicate()
 	death_copy.modulate.a = 1.0
 	death_copy.scale = target2D.scale
-	death_copy.position = target2D.global_position
-	get_tree().current_scene.add_child(death_copy)
+	Global.board_scene.add_child(death_copy)
+	death_copy.global_position = target2D.global_position
+	death_copy.letterDisplay.death_mark.visible = true
+
 	
 	if target2D.properties.is_enemy:
 		if target2D.coins_count > 0:

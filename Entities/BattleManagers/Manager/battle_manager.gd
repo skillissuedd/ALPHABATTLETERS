@@ -18,10 +18,9 @@ func before_round():
 		enemy_waves_cleared += 1
 		#if enemy_waves_cleared >= max_waves_per_room:
 			#room_cleared()
-		init_enemies(current_round + 4)
-		
+		init_enemies(current_round + 2)
 	else:
-		init_enemies(current_round + 4)
+		init_enemies(current_round + 2)
 	
 	
 func room_cleared():

@@ -57,7 +57,7 @@ func init_letter(character: String, is_enemy: bool):
 	var current_atk = stats["atk"]
 	var element = letter_stats.get_element_for_letter(character)
 
-	if is_enemy:
+	if is_enemy == true:
 		max_hp+=3
 		current_atk+=1
 		element = "Neutral"
@@ -141,9 +141,9 @@ func play_attack_animation(target):
 	
 	#POSITION AND SIZE
 	if not properties.is_enemy:
-		attack_label.global_position = original_label.global_position + Vector2(50,0)
+		attack_label.position = original_label.position 
 	else:
-		attack_label.global_position = original_label.global_position + Vector2(150,150)
+		attack_label.position = original_label.position
 	attack_label.scale = original_label.scale * 0.7
 	attack_label.z_index=1
 	#MIRRORING
@@ -161,13 +161,11 @@ func play_attack_animation(target):
 		if not properties.is_enemy:
 			end_pos = Vector2(attack_label.global_position.x, (target.letterDisplay.global_position.y+250))
 		else:
-			end_pos = Vector2(attack_label.global_position.x, (target.letterDisplay.global_position.y+500))
+			end_pos = Vector2(attack_label.global_position.x, (target.letterDisplay.global_position.y+50))
 	var tween = create_tween()
 	tween.tween_property(attack_label, "global_position", end_pos, 0.7)\
 		.set_trans(Tween.TRANS_QUAD)\
 		.set_ease(Tween.EASE_IN)
-	
-		
 		
 	await tween.finished
 	

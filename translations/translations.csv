@@ -4,7 +4,7 @@ global_yes,"YES","ДА"
 global_no,NO, НЕТ
 tutorial_1,"ALPHABATTLETTERS is a game about letters. At the start of each run you have a deck that consists of all the letters from English alphabet.","ALPHABATTLETTERS - игра про буквы. Вы начинаете каждый забег с колодой, которая состоит изо всех букв английского алфавита."
 tutorial_2,"Each round you randomly draw the letters from your deck until your hand is full. Your hand size is fixed","Каждый раунд вы случайным образом тянете буквы из колоды в руку, пока она не заполнится. Размер вашей руки фиксирован"
-tutorial_3,"Each letter has its own stats of Attack and HP, and also an element. Try out different letters to see what elemnts do!","У каждой буквы есть свои показатели атаки и здоровья, а также элемент. Попробуйте сыграть разными буквами, чтоб увидеть, как работают элементы!"
+tutorial_3,"Each letter has its own stats of Attack and HP, and also an element. Try out different letters to see what elements do!","У каждой буквы есть свои показатели атаки и здоровья, а также элемент. Попробуйте сыграть разными буквами, чтобы увидеть, как работают элементы!"
 tutorial_4,"Drag and drop the letters to attack the enemy in front of your letter. The goal is to kill the enemy book (the big red healthbar)","Перетаскивайте буквы на поле чтобы атаковать врага по прямой. Цель - уничтожить вражескую книгу (большая красная полоса здоровья)"
 tutorial_start,"Let's go","Поехали"
 ui_current_round,"Current round: ","Текущий раунд: "
