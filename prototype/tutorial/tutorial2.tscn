@@ -90,6 +90,5 @@ offset_left = -404.0
 offset_top = -60.192
 offset_right = 3946.0
 offset_bottom = 540.808
-metadata/_edit_use_anchors_ = true
 
 [connection signal="button_up" from="okButton" to="." method="_on_ok_button_button_up"]

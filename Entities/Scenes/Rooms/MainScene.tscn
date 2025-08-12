@@ -69,10 +69,17 @@ position = Vector2(1580, 555)
 position = Vector2(1580, 555)
 
 [node name="UiManager" parent="UI_parent" instance=ExtResource("12_b1o7s")]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_left = -248.0
-offset_top = -108.0
+offset_top = -15.5
 offset_right = 1672.0
-offset_bottom = 972.0
+offset_bottom = 1064.5
+grow_horizontal = 1
+grow_vertical = 1
 scale = Vector2(2.135, 2.135)
 
 [node name="enemyDeckDiscarded" parent="." instance=ExtResource("14_4ufd4")]

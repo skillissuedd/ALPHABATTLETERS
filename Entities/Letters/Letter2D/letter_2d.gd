@@ -134,21 +134,17 @@ func update_frame_bar(ratio:float, permanent: bool):
 func play_attack_animation(target):
 	#COPYING
 	var end_pos = target.global_position
-	var original_label = letterDisplay
-	var attack_label = original_label.letter_label.duplicate()
+	var original_label = letterDisplay.letter_label
+	var attack_label = original_label.duplicate()
 	attack_label.name = "attack_label"
 	add_child(attack_label)
 	
 	#POSITION AND SIZE
-	if not properties.is_enemy:
-		attack_label.global_position = original_label.global_position
-	else:
-		attack_label.global_position = original_label.global_position
+	attack_label.global_position = original_label.global_position
 	attack_label.scale = original_label.scale * 0.7
-	attack_label.z_index=1
-	#MIRRORING
 	attack_label.scale.y = -abs(attack_label.scale.y)
-	
+	attack_label.z_index=1
+
 	#GLOWING
 	attack_label.modulate = Color(1.0, 1.0, 0.5, 1.0) 
 	

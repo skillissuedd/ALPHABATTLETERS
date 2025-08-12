@@ -71,15 +71,15 @@ func _play_attack_anim(attacker: LetterUnit, target: LetterUnit, damage: int) ->
 	
 	var damage_text = Label.new()
 	
+	get_tree().current_scene.add_child(damage_text)
+	
 	damage_text.text = "-" + str(damage)
 	damage_text.add_theme_font_size_override("font_size", 150)
 	damage_text.add_theme_color_override("font_color", Color(1, 0.2, 0.2))
 	damage_text.add_theme_constant_override("outline_size", 15)
 	damage_text.add_theme_color_override("font_outline_color", Color.BLACK)
-	damage_text.position = target2D.global_position + Vector2(randf_range(-20, 20), 0)
+	damage_text.global_position = target2D.global_position + Vector2(randf_range(-20, 20), 0)
 	damage_text.z_index = 100
-	
-	get_tree().current_scene.add_child(damage_text)
 	
 	
 	var text_tween = create_tween()
@@ -87,10 +87,8 @@ func _play_attack_anim(attacker: LetterUnit, target: LetterUnit, damage: int) ->
 	var fly_angle = randf_range(-PI/4, -3*PI/4)  # Mostly upward (-45° to -135°)
 	var fly_time = 0.7
 	
-	var fly_offset = Vector2(cos(fly_angle), sin(fly_angle)) * fly_distance
-	
 	text_tween.set_parallel(true)
-	text_tween.tween_property(damage_text, "position", damage_text.position + fly_offset, fly_time)
+	text_tween.tween_property(damage_text, "position", damage_text.position, fly_time)
 	text_tween.tween_property(damage_text, "scale", Vector2(0.5, 0.5), fly_time)  # Shrink
 	text_tween.tween_property(damage_text, "modulate:a", 0.0, fly_time)  # Fade
 	text_tween.set_parallel(false)

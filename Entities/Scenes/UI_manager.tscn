@@ -23,6 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_pymld")
+metadata/_edit_use_anchors_ = true
 
 [node name="TogglePreview" type="Button" parent="."]
 layout_mode = 1
@@ -88,18 +89,15 @@ metadata/_edit_use_anchors_ = true
 
 [node name="EnemyHealthBar" parent="." instance=ExtResource("4_qca4s")]
 layout_mode = 1
-anchor_left = 0.272
-anchor_top = -0.113
-anchor_right = 0.272
-anchor_bottom = -0.113
-offset_left = -460.24
-offset_top = -70.96
-offset_right = 1841.76
-offset_bottom = 284.04
-grow_horizontal = 2
-grow_vertical = 2
+anchor_left = 0.282
+anchor_top = -0.143333
+anchor_right = 0.282
+anchor_bottom = -0.143333
+offset_left = -459.44
+offset_top = -71.2
+offset_right = 1842.56
+offset_bottom = 283.8
 scale = Vector2(0.4, 0.4)
-metadata/_edit_use_anchors_ = true
 
 [node name="AllyHealthBar" parent="." instance=ExtResource("5_qca4s")]
 layout_mode = 1
@@ -111,7 +109,6 @@ offset_left = -350.88
 offset_top = -50.8803
 offset_right = 3154.12
 offset_bottom = 459.12
-metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1

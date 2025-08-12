@@ -41,6 +41,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_0g36c")
 step = 0.001
 show_percentage = false
 script = ExtResource("1_xiv8g")
+metadata/_edit_use_anchors_ = true
 
 [node name="HealthValueLabel" type="Label" parent="."]
 layout_mode = 1
