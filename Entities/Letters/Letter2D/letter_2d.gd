@@ -104,21 +104,29 @@ func update_element_style(current_element: String):
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.is_in_group("slots"):
-		if not area.is_selected:
-			overlapping_slots.append(area)
-			
-		elif char(properties.letter.unicode_at(0)-1) == area.current_letter.properties.letter:
-			if not area.current_letter.properties.is_enemy:
+	if Global.board_scene:
+		if area.is_in_group("slots"):
+			if not area.is_selected:
 				overlapping_slots.append(area)
 				
+			elif char(properties.letter.unicode_at(0)-1) == area.current_letter.properties.letter:
+				if not area.current_letter.properties.is_enemy:
+					overlapping_slots.append(area)
+					
+	elif area is slot_class:
+		closest_slot = area
+		
 func _on_area_2d_area_exited(area: Area2D) -> void:
-	if area.is_in_group("slots"):
-		area.is_not_hovered()
-		overlapping_slots.erase(area)
-	if overlapping_slots.is_empty():
-		Global.battle_simulator.load_backups()
-
+	if Global.board_scene:
+		if area.is_in_group("slots"):
+			area.is_not_hovered()
+			overlapping_slots.erase(area)
+		if overlapping_slots.is_empty():
+			Global.battle_simulator.load_backups()
+			
+	elif area is slot_class:
+		closest_slot = null
+		
 #############################
 #### ANIMATIONS #########
 #############################
@@ -276,13 +284,22 @@ func _set_resting_state(delta: float) -> void:
 func snap_to_parent():
 	if not overlapping_slots.is_empty():
 		snap_to_slot()
+	elif GlobalOptions.selecting_upgrade:
+		snap_to_upgrade_slot()
 	else:
 		Global.hand_scene.snap_to_hand(self)
 		Global.battle_simulator.load_backups()
+
+func snap_to_upgrade_slot():
+	if closest_slot:
+		global_position = closest_slot.global_position
+		current_selected_slot = closest_slot
+		Global.hand_scene.letter_row.erase(self)
+		current_selected_slot.letter_is_placed(self)
+		self.rotation_degrees = 0
 		
 func snap_to_slot():
 	if closest_slot:
-		reparent(Global.board_scene)
 		global_position = closest_slot.global_position
 		current_selected_slot = closest_slot
 		Global.hand_scene.letter_row.erase(self)

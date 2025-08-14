@@ -9,7 +9,7 @@ func _ready():
 func set_hand_position(current_pos: Vector2):
 	position_in_hand = current_pos
 	
-func get_closest_slot() -> Area2D:
+func get_closest_slot_from_board() -> Area2D:
 	if overlapping_slots.is_empty():
 		return null
 		
@@ -30,8 +30,8 @@ func get_closest_slot() -> Area2D:
 	return closest_slot
 	
 func _physics_process(delta: float) -> void:
-	if is_dragging:
-		get_closest_slot()
+	if is_dragging and Global.board_scene:
+		get_closest_slot_from_board()
 		affect_energy_preview()
 	drag_logic(delta)
 	

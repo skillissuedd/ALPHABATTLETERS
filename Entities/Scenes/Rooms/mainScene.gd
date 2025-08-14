@@ -2,44 +2,54 @@ extends Node2D
 
 @onready var letter_scene = preload("res://Entities/Letters/Letter2D/Ally/AllyLetter2D.tscn")
 @onready var current_round: int = 1
+@onready var upgrade_panel = preload("res://Entities/Scenes/Rooms/UpgradePanel/upgradePanel.tscn")
 
-func init_interface():
-	Global.main_scene = self
-	# INIT MANAGERS
+func init_managers():
 	Global.sfx_manager = $sfxManager
 	Global.ui_manager = $UI_parent/UiManager
-
 	Global.ui_manager.enemy_health_bar._setup_health_bar(20.0)
 	Global.ui_manager.ally_health_bar._setup_health_bar(20.0)
-	
-	# INIT DECKS
+
+func init_decks():
 	Global.deck_disc_scene = $DeckDiscarded
 	Global.enemy_deck_disc_scene = $enemyDeckDiscarded
 	Global.deck_scene = $Deck
 	Global.deck_scene.initialize_deck()
 	Global.deck_scene.fill_deck()
-	
-	# INIT HAND
+
+func init_hand():
 	Global.hand_scene= $handManager
 	Global.hand_scene.fill_hand()
 	
-	# INIT BOARD
+func init_board():
 	Global.board_scene = $BoardManager
 	Global.board_scene.create_board()
-		
-	# INIT BATTLE LOGIC
+	
+func init_battle_logic():
 	Global.battle_manager = $BattleManager
 	Global.ui_manager.set_ui_enabled(false)
 	Global.battle_simulator = $BattleSimulator
 	Global.battle_animator = $BattleAnimator
+	Global.battle_manager.before_round()
 	
+func init_interface():
+	init_managers()
+	init_decks()
+	init_hand()
+	init_board()
+	init_battle_logic()
 	
 func _ready():
+	Global.main_scene = self
 	GlobalOptions.current_room = "Battle"
-	init_interface()
-	await get_tree().create_timer(3).timeout
-	Global.battle_manager.before_round()
-
+	init_managers()
+	init_decks()
+	init_hand()
+	
+	var upgrade_scene = upgrade_panel.instantiate()
+	add_child(upgrade_scene)
+	upgrade_scene.global_position = Vector2(900,500)
+	
 func free_all_nodes():
 	var root = get_tree().current_scene
 	for child in root.get_children():

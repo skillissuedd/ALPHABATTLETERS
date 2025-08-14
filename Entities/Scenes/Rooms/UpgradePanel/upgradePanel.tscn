@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://b80ig6424tqwg"]
+
+[ext_resource type="Script" uid="uid://cj020vgv45rdt" path="res://Entities/Scenes/Rooms/UpgradePanel/upgrade_panel.gd" id="1_grnvj"]
+
+[node name="UpgradePanel" type="ColorRect"]
+anchors_preset = -1
+anchor_right = 1.86458
+anchor_bottom = 1.97377
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+color = Color(0.81985, 0.342087, 0.572836, 1)
+script = ExtResource("1_grnvj")
+metadata/_edit_use_anchors_ = true
+
+[node name="GridContainer" type="GridContainer" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 500
+columns = 3
+
+[node name="slot1" type="CenterContainer" parent="GridContainer"]
+z_index = 2
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="slot2" type="CenterContainer" parent="GridContainer"]
+z_index = 2
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+
+[node name="slot3" type="CenterContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4

@@ -5,14 +5,18 @@ extends Control
 @onready var enemy_health_bar: EnemyHealthBar = $EnemyHealthBar
 @onready var ally_health_bar: AllyHealthBar = $AllyHealthBar
 
+@onready var round_info: Panel = $round_info
+
 #SORTING
 @onready var sort_button: Button = $sortButton
 @export var sorting_mode: int = 0
 
 #ENERGY
-@onready var total_energy_label: Label = $TextureRect/total_energy
-@onready var current_energy_label: Label = $TextureRect/current_energy
-@onready var energy_preview: Label = $TextureRect/energy_preview
+@onready var energy_main: TextureRect = $energy_main
+
+@onready var total_energy_label: Label = $energy_main/total_energy
+@onready var current_energy_label: Label = $energy_main/current_energy
+@onready var energy_preview: Label = $energy_main/energy_preview
 
 @export var total_energy: int
 @export var current_energy: int 
@@ -30,11 +34,19 @@ func update_round_label():
 	if has_node("Panel/roundLabel"):
 		$Panel/roundLabel.text = str(Global.battle_manager.current_round)
 
-
-func _ready():
+func init_battle_ui():
+	enemy_health_bar.visible = true
+	end_round_button.visible = true
+	energy_main.visible = true
+	round_info.visible = true
+	$drawButton.visible = true
+	
 	total_energy = 5
 	current_energy = 5
 	update_energy_ui()
+	
+func _ready():
+	pass
 	
 func update_energy_ui() -> void:
 	total_energy_label.text = str(total_energy)

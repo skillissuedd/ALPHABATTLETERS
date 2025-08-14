@@ -44,6 +44,7 @@ text = "Disable preview"
 metadata/_edit_use_anchors_ = true
 
 [node name="endRoundButton" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.221615
@@ -64,6 +65,7 @@ text = "ui_end_round"
 metadata/_edit_use_anchors_ = true
 
 [node name="drawButton" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.670209
@@ -88,6 +90,7 @@ autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="EnemyHealthBar" parent="." instance=ExtResource("4_qca4s")]
+visible = false
 layout_mode = 1
 anchor_left = 0.282
 anchor_top = -0.143333
@@ -110,7 +113,8 @@ offset_top = -50.8803
 offset_right = 3154.12
 offset_bottom = 459.12
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="energy_main" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.742333
@@ -128,7 +132,7 @@ texture = ExtResource("3_uoy1b")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="energy_label" type="Label" parent="TextureRect"]
+[node name="energy_label" type="Label" parent="energy_main"]
 layout_mode = 0
 offset_left = 4.99997
 offset_top = 3.0
@@ -142,7 +146,7 @@ theme_override_fonts/font = ExtResource("4_h3fny")
 theme_override_font_sizes/font_size = 28
 text = "ui_energy"
 
-[node name="energy_label2" type="Label" parent="TextureRect"]
+[node name="energy_label2" type="Label" parent="energy_main"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.527589
@@ -164,7 +168,7 @@ theme_override_font_sizes/font_size = 28
 text = "       /"
 metadata/_edit_use_anchors_ = true
 
-[node name="energy_preview" type="Label" parent="TextureRect"]
+[node name="energy_preview" type="Label" parent="energy_main"]
 visible = false
 layout_mode = 0
 offset_left = 8.0
@@ -179,7 +183,7 @@ theme_override_fonts/font = ExtResource("4_h3fny")
 theme_override_font_sizes/font_size = 28
 text = "-1"
 
-[node name="current_energy" type="Label" parent="TextureRect"]
+[node name="current_energy" type="Label" parent="energy_main"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 45.0
@@ -192,7 +196,7 @@ theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("4_h3fny")
 theme_override_font_sizes/font_size = 28
 
-[node name="total_energy" type="Label" parent="TextureRect"]
+[node name="total_energy" type="Label" parent="energy_main"]
 layout_mode = 0
 offset_left = 99.0
 offset_top = 43.0
@@ -261,7 +265,8 @@ theme_override_font_sizes/font_size = 28
 text = "0"
 metadata/_edit_use_anchors_ = true
 
-[node name="Panel" type="Panel" parent="."]
+[node name="round_info" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.732688
@@ -276,7 +281,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="currentRound" type="RichTextLabel" parent="Panel"]
+[node name="currentRound" type="RichTextLabel" parent="round_info"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.533
@@ -294,7 +299,7 @@ theme_override_constants/outline_size = 15
 theme_override_font_sizes/normal_font_size = 57
 text = "ui_current_round"
 
-[node name="roundLabel" type="RichTextLabel" parent="Panel"]
+[node name="roundLabel" type="RichTextLabel" parent="round_info"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.997073

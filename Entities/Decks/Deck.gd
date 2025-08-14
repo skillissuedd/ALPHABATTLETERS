@@ -22,7 +22,6 @@ func initialize_deck():
 	all_letters.sort()
 	for letter in all_letters:
 		deck.append(letter)
-		#deck.append(letter)
 
 func fill_deck():
 	letter_instances.clear()
@@ -36,14 +35,7 @@ func fill_deck():
 		
 		if not letter_instances.has(deck[i]):
 			letter_instances[deck[i]] = []
-			letter_instances[deck[i]].append(letter2Dinstance)
-
-func update_letter_instances(letterToCheck):
-	var all_instances = get_instances_of_letter(letterToCheck.letter)
-	for instance in all_instances:
-		instance.properties.update_stats(letterToCheck.attack, letterToCheck.max_hp)
-		
-		
+		letter_instances[deck[i]].append(letter2Dinstance)	
 
 func get_instances_of_letter(target_letter: String) -> Array:
 	return letter_instances.get(target_letter, [])

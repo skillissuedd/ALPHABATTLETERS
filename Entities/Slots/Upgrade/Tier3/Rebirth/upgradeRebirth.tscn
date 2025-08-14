@@ -15,7 +15,6 @@ script = ExtResource("1_tp4xd")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.317262, 0.824159, 0.482805, 1)
 texture_filter = 1
-position = Vector2(80, 80)
 scale = Vector2(10, 10)
 texture = ExtResource("2_pg1ol")
 
@@ -42,7 +41,6 @@ text = "R->S"
 
 [node name="Slot_Collision" type="CollisionShape2D" parent="."]
 visibility_layer = 2
-position = Vector2(80, 80)
 scale = Vector2(1.6, 1.6)
 shape = SubResource("RectangleShape2D_4c3kn")
 debug_color = Color(0, 0.6, 0.701961, 0)
