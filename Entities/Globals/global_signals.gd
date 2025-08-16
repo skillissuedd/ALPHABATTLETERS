@@ -1,0 +1,20 @@
+extends Node
+#UPRADES
+signal upgrade_slot_is_used
+signal upgrade_completed
+signal upgrade_panel_is_gone
+
+#BOARD
+signal board_is_complete
+
+func emit_board_is_complete():
+	board_is_complete.emit()
+
+func emit_upgrade_slot_is_used():
+	upgrade_slot_is_used.emit()
+	
+func emit_upgrade_completed():
+	upgrade_completed.emit()
+
+func emit_upgrade_panel_is_gone():
+	upgrade_panel_is_gone.emit()

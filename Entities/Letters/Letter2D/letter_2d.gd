@@ -284,11 +284,12 @@ func _set_resting_state(delta: float) -> void:
 func snap_to_parent():
 	if not overlapping_slots.is_empty():
 		snap_to_slot()
-	elif GlobalOptions.selecting_upgrade:
+	elif GlobalOptions.selecting_upgrade and closest_slot:
 		snap_to_upgrade_slot()
 	else:
 		Global.hand_scene.snap_to_hand(self)
-		Global.battle_simulator.load_backups()
+		if Global.battle_simulator:
+			Global.battle_simulator.load_backups()
 
 func snap_to_upgrade_slot():
 	if closest_slot:
@@ -297,6 +298,7 @@ func snap_to_upgrade_slot():
 		Global.hand_scene.letter_row.erase(self)
 		current_selected_slot.letter_is_placed(self)
 		self.rotation_degrees = 0
+		is_active = false
 		
 func snap_to_slot():
 	if closest_slot:

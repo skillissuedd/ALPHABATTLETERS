@@ -1,4 +1,6 @@
 class_name slot_class extends Area2D 
+signal upgrade_slot_is_used
+
 var mouse_in: bool = false
 var is_selected = false
 var slotColumn: int = 0
@@ -9,6 +11,14 @@ var current_letter: Node2D
 
 func _ready() -> void:
 	add_to_group("slots")
+	z_index = -1
+
+	
+func disappear():
+	var tween := create_tween()
+	tween.tween_property(self, "scale", Vector2(0, 0), 0.8).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	await tween.finished
+	queue_free()
 	
 func appear():
 	scale = Vector2(0, 0)

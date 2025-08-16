@@ -131,7 +131,7 @@ func create_board():
 
 		slot_grid.append(row)
 	await animate_slots_appearing()
-	
+	GlobalSignals.emit_board_is_complete()
 func animate_slots_appearing() -> void:
 	for y in range(rows):
 		for x in range(cols):

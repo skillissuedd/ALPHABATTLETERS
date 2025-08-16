@@ -25,9 +25,16 @@ extends Control
 @onready var coins_count: Label = $coins_section/coins_count
 @export var coins:int = 0
 
+@onready var upgrade_panel = preload("res://Entities/Scenes/Rooms/UpgradePanel/upgradePanel.tscn")
+
 func update_coins(coins_value:int):
 	coins+=coins_value
 	coins_count.text = str(coins)
+	
+func create_upgrade_panel():
+	var upgrade_scene = upgrade_panel.instantiate()
+	add_child(upgrade_scene)
+	upgrade_scene.global_position = Vector2(600,200)
 
 
 func update_round_label():

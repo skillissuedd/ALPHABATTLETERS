@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ca1tf0y4ommp7"]
+[gd_scene load_steps=5 format=3 uid="uid://ca1tf0y4ommp7"]
 
 [ext_resource type="Script" uid="uid://0jwxwj57em7w" path="res://Entities/Letters/LetterDisplay/Enemy/enemy_letter_display.gd" id="1_vec7r"]
+[ext_resource type="Script" uid="uid://8u3yplyk518a" path="res://Entities/Letters/LetterDisplay/Ally/letter_label.gd" id="2_5uk8c"]
 [ext_resource type="FontFile" uid="uid://cltoojf5br46e" path="res://fonts/SpicyNoodle-K7X5X.ttf" id="2_maknq"]
 [ext_resource type="PackedScene" uid="uid://bcvgb1vvjwqv0" path="res://Entities/Letters/Death/death_mark.tscn" id="3_sdokf"]
 
@@ -23,17 +24,7 @@ mouse_filter = 2
 script = ExtResource("1_vec7r")
 metadata/_edit_use_anchors_ = true
 
-[node name="Panel" type="Panel" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="UpgradeLabel" type="Label" parent="Panel"]
+[node name="UpgradeLabel" type="Label" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -53,29 +44,26 @@ text = "."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LetterLabel" type="Label" parent="Panel"]
-self_modulate = Color(0.841641, 0.290439, 0.338203, 1)
+[node name="LetterLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -39.0
-offset_top = -42.0
-offset_right = 41.0
-offset_bottom = 68.0
+anchors_preset = -1
+anchor_top = -0.21
+anchor_right = 1.0
+anchor_bottom = 0.79
 grow_horizontal = 2
 grow_vertical = 2
-rotation = 3.14159
-pivot_offset = Vector2(40, 48)
+pivot_offset = Vector2(50, 59.155)
 size_flags_horizontal = 4
+mouse_filter = 2
 theme_override_constants/outline_size = 23
-theme_override_font_sizes/font_size = 79
-text = "A"
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "O"
 horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_5uk8c")
 
-[node name="HPLabel" type="Label" parent="Panel"]
+[node name="HPLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -96,7 +84,7 @@ text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ATKLabel" type="Label" parent="Panel"]
+[node name="ATKLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -120,7 +108,7 @@ text = "15"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DeathMark" parent="Panel" instance=ExtResource("3_sdokf")]
+[node name="DeathMark" parent="." instance=ExtResource("3_sdokf")]
 visible = false
 position = Vector2(50, 50)
 scale = Vector2(2.13099, 2.02231)

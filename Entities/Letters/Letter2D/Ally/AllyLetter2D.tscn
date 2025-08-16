@@ -14,14 +14,17 @@ size = Vector2(50.4, 51.3514)
 gradient = SubResource("Gradient_hfbg8")
 
 [node name="Letter2D" type="Sprite2D"]
+z_index = 50
 script = ExtResource("1_hfbg8")
 
 [node name="Area2D" type="Area2D" parent="."]
 light_mask = 2
+z_index = 50
 scale = Vector2(1.875, 1.85)
 collision_mask = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+z_index = 50
 shape = SubResource("RectangleShape2D_cmgim")
 debug_color = Color(0.458002, 0.697924, 0.491358, 0.419608)
 

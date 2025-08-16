@@ -38,6 +38,13 @@ func get_letter(col: int) -> Node2D:
 func snap_to_hand(letter_to_snap: Node2D):
 	letter_row.append(letter_to_snap)
 	letter_to_snap.reparent(self)
+	
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_QUAD)
+	tween.set_ease(Tween.EASE_OUT)
+	
+	tween.tween_property(letter_to_snap, "position", Vector2.ZERO, 0.3)
+	letter_to_snap.is_active = true
 	arrange_hand()
 	
 func clear_hand():
@@ -62,8 +69,12 @@ func arrange_hand():
 		var angle = angle_step * i + base_rotation - PI/2
 		var offset = Vector2(cos(angle), sin(angle)) * circle_radius
 		letter_row[i].z_index = i
-		letter_row[i].position = offset
-		letter_row[i].rotation = -base_rotation
+		var tween = create_tween()
+		tween.set_parallel(true)
+		tween.tween_property(letter_row[i], "position", offset, 0.5) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		tween.tween_property(letter_row[i], "rotation", -base_rotation, 0.5) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		
 		
 func sort_hand(sort_type: int):

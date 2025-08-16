@@ -18,12 +18,14 @@ script = ExtResource("1_wv3jd")
 
 [node name="Area2D" type="Area2D" parent="."]
 light_mask = 2
+z_index = 100
 scale = Vector2(1.875, 1.85)
 collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 light_mask = 2
+z_index = 100
 shape = SubResource("RectangleShape2D_cmgim")
 
 [node name="FrameBar" type="Node2D" parent="."]

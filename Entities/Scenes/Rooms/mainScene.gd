@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var letter_scene = preload("res://Entities/Letters/Letter2D/Ally/AllyLetter2D.tscn")
 @onready var current_round: int = 1
-@onready var upgrade_panel = preload("res://Entities/Scenes/Rooms/UpgradePanel/upgradePanel.tscn")
+
 
 func init_managers():
 	Global.sfx_manager = $sfxManager
@@ -45,10 +45,12 @@ func _ready():
 	init_managers()
 	init_decks()
 	init_hand()
-	
-	var upgrade_scene = upgrade_panel.instantiate()
-	add_child(upgrade_scene)
-	upgrade_scene.global_position = Vector2(900,500)
+	Global.ui_manager.create_upgrade_panel()
+	await GlobalSignals.upgrade_panel_is_gone
+	init_board()
+	await GlobalSignals.board_is_complete
+	init_battle_logic()
+	Global.ui_manager.init_battle_ui()
 	
 func free_all_nodes():
 	var root = get_tree().current_scene

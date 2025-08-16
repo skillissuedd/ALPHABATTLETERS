@@ -21,6 +21,7 @@ Global="*res://Entities/Globals/Global.gd"
 SfxManager="*res://Entities/Globals/sfx_manager.gd"
 GlobalOptions="*res://Entities/Globals/GlobalOptions.gd"
 Mouse="*res://Entities/Mouse/mouse.tscn"
+GlobalSignals="*res://Entities/Globals/global_signals.gd"
 
 [debug]
 

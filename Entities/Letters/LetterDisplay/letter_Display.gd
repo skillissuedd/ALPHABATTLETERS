@@ -5,15 +5,15 @@ signal animation_ended
 
 #Default letter stats
 var stats: Dictionary
-@onready var death_mark = $Panel/DeathMark
+@onready var death_mark = $DeathMark
 
 #Letter face and stats
 @onready var letter2D = get_parent().get_parent() as letter2Dclass
 @onready var properties = letter2D.properties
-@onready var letter_label: Label = $Panel/LetterLabel
-@onready var ATK_label: Label = $Panel/ATKLabel
-@onready var HP_label: Label = $Panel/HPLabel
-@onready var upgrade_label: Label = $Panel/UpgradeLabel
+@onready var letter_label: RichTextLabel = $LetterLabel
+@onready var ATK_label: Label = $ATKLabel
+@onready var HP_label: Label = $HPLabel
+@onready var upgrade_label: Label = $UpgradeLabel
 
 var current_element = "Neutral"
 var is_enemy:bool
@@ -46,16 +46,18 @@ func change_element(element: String):
 		"Neutral":
 			font = load("res://fonts/Almendra-Regular.ttf")
 		
-	letter_label.add_theme_font_override("font", font)
+	letter_label.add_theme_font_override("normal_font", font)
 		
 		
 func vector_upgrade_animation():
 	var tween := create_tween()
+	
+	var current_scale = letter_label.scale
 		# Step 1: normalize rotation
 	letter_label.rotation_degrees = fmod(letter_label.rotation_degrees, 360)
 		# Step 2: scale up
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(letter_label, "scale", Vector2(1.5, 1.5), 0.3)
+	tween.tween_property(letter_label, "scale", current_scale*1.5, 0.3)
 	tween.tween_callback(Callable(Global.sfx_manager, "upgrade_vector"))
 	# Step 3: rotate after scale-up
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
@@ -63,25 +65,46 @@ func vector_upgrade_animation():
 	
 	# Step 4: scale back down
 	tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-	tween.tween_property(letter_label, "scale", Vector2(1.0, 1.0), 0.2).set_delay(0.8)
+	tween.tween_property(letter_label, "scale", current_scale, 0.2).set_delay(0.8)
 	
 	# Step 5: after everything, pop the labels in parallel
 	tween.tween_callback(Callable(self, "_pop_stat_labels"))
+	
+	await tween.finished
 	emit_signal("animation_ended")
 	
 func rebirth_upgrade_animation(newLetter: String):
-	# Step 2: Fade out current letter
+	
 	var tween = create_tween()
-	tween.tween_property(letter_label, "modulate:a", 0.0, 0.3)
+	tween.tween_property(self, "modulate:a", 0.0, 0.6)
 
-	# Step 3: After fade out, change text
-	tween.tween_callback(Callable(self, "change_letter").bind(newLetter))
+	tween.tween_callback(Callable(letter2D, "init_letter").bind(newLetter, false))
 
-	# Step 4: Add reforming particles (converge inward)
-	tween.tween_callback(Callable(self, "_add_reform_particles").bind(letter_label))
+	tween.tween_property(self, "modulate:a", 1.0, 0.6)
+	
+	await tween.finished
+	emit_signal("animation_ended")
 
-	# Step 5: Fade in new letter
-	tween.tween_property(letter_label, "modulate:a", 1.0, 0.3)
+func generic_upgrade_animation():
+	
+	var tween = create_tween()
+	tween.tween_property(letter_label, "modulate:a", 0.0, 0.5)
+	
+	tween.tween_property(upgrade_label, "self_modulate:a", 1.0, 0.5)
+	tween.tween_property(letter_label, "modulate:a", 1.0, 0.5)
+	
+	await tween.finished
+	emit_signal("animation_ended")
+	
+func pierce_upgrade_animation():
+	var tween = create_tween()
+	tween.tween_property(letter_label, "modulate:a", 0.0, 0.5)
+	
+	letter_label.draw_strikethrough = true
+	letter_label.queue_redraw()
+	tween.tween_property(letter_label, "modulate:a", 1.0, 0.5)
+	
+	await tween.finished
 	emit_signal("animation_ended")
 	
 func _pop_stat_labels():
