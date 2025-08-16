@@ -319,6 +319,9 @@ func snap_to_slot():
 			Global.board_scene.ally_letters.append(self)
 		is_active = false
 		
+		if properties.is_an_object == true:
+			return
+		
 		if properties.element_type == "Electricity":
 			Global.ui_manager._reduce_energy(0)
 		else:

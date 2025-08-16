@@ -109,6 +109,7 @@ func _play_attack_anim(attacker: LetterUnit, target: LetterUnit, damage: int) ->
 		
 func _letter_is_dead(target2D):
 	target2D.current_selected_slot.letter_is_taken()
+	var grave_copy = null
 	
 	var death_copy = target2D.duplicate()
 	death_copy.modulate.a = 1.0
@@ -116,8 +117,20 @@ func _letter_is_dead(target2D):
 	Global.board_scene.add_child(death_copy)
 	death_copy.global_position = target2D.global_position
 	death_copy.letterDisplay.death_mark.visible = true
-
 	
+	if target2D.properties.current_upgrade == "Pierce":
+		grave_copy = target2D.duplicate()
+		Global.board_scene.add_child(grave_copy)
+		grave_copy.init_letter(target2D.properties.letter, target2D.properties.is_enemy)
+		grave_copy.properties.is_an_object = true
+		grave_copy.properties.update_stats(0,5)
+		grave_copy.letterDisplay.update_stats(0,5)
+		grave_copy.global_position = target2D.global_position
+		grave_copy.letterDisplay.death_mark.visible = true
+		grave_copy.closest_slot = target2D.current_selected_slot
+		grave_copy.visible = false
+		grave_copy.is_active = false
+		
 	if target2D.properties.is_enemy:
 		if target2D.coins_count > 0:
 			Global.ui_manager.update_coins(target2D.coins_count)
@@ -129,6 +142,13 @@ func _letter_is_dead(target2D):
 		
 	await _play_death_anim(death_copy)
 	death_copy.queue_free()
+	if not grave_copy == null:
+		grave_copy.snap_to_slot()
+		grave_copy.visible = true
+		var temp_scale = grave_copy.scale
+		grave_copy.scale = Vector2(0, 0)
+		var tween := create_tween()
+		tween.tween_property(grave_copy, "scale", temp_scale, 0.75).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	emit_signal("letter_is_dead", target2D)
 	
 func _play_death_anim(target: Node2D):

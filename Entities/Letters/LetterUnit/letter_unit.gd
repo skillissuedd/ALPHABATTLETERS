@@ -8,7 +8,7 @@ extends Node2D
 @export var grid_y: int = 0
 @onready var letterParent = get_parent()
 @onready var letterDisplay: letterDisplayClass 
-
+@export var is_an_object: bool = false
 # Combat stats
 @export var current_hp: int = 20
 @export var max_hp: int = 20

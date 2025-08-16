@@ -27,7 +27,6 @@ func init_board():
 	
 func init_battle_logic():
 	Global.battle_manager = $BattleManager
-	Global.ui_manager.set_ui_enabled(false)
 	Global.battle_simulator = $BattleSimulator
 	Global.battle_animator = $BattleAnimator
 	Global.battle_manager.before_round()
@@ -47,6 +46,7 @@ func _ready():
 	init_hand()
 	Global.ui_manager.create_upgrade_panel()
 	await GlobalSignals.upgrade_panel_is_gone
+	Global.ui_manager.set_ui_enabled(false)
 	init_board()
 	await GlobalSignals.board_is_complete
 	init_battle_logic()

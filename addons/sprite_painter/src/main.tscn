@@ -1,41 +1,41 @@
 [gd_scene load_steps=63 format=3 uid="uid://bc0weyhuhf5di"]
 
-[ext_resource type="Script" path="res://addons/sprite_painter/src/main.gd" id="1_pn6xr"]
-[ext_resource type="Script" path="res://addons/sprite_painter/editor_icon_button.gd" id="2_ahevp"]
+[ext_resource type="Script" uid="uid://dgtvw5jpqlvk7" path="res://addons/sprite_painter/src/main.gd" id="1_pn6xr"]
+[ext_resource type="Script" uid="uid://bc6yk7x4r561p" path="res://addons/sprite_painter/editor_icon_button.gd" id="2_ahevp"]
 [ext_resource type="Texture2D" uid="uid://c7nymhfcdr3hl" path="res://addons/sprite_painter/graphics/diags.png" id="3_kxniu"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/image_view/image_tool_preview.gd" id="7_47ui8"]
+[ext_resource type="Script" uid="uid://be1ksyx7kws4y" path="res://addons/sprite_painter/src/image_view/image_tool_preview.gd" id="7_47ui8"]
 [ext_resource type="Shader" uid="uid://bpswjmm8i01cg" path="res://addons/sprite_painter/shaders/gradient.tres" id="7_nc3ac"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/image_view/image_grid_view.gd" id="8_af4ys"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/image_transform_menu.gd" id="9_20sxo"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/workspace.gd" id="9_gvnc2"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/image_view/image_view.gd" id="10_etjnr"]
+[ext_resource type="Script" uid="uid://cuuhip30ckcs6" path="res://addons/sprite_painter/src/image_view/image_grid_view.gd" id="8_af4ys"]
+[ext_resource type="Script" uid="uid://1jto4r8mr51i" path="res://addons/sprite_painter/src/image_transform_menu.gd" id="9_20sxo"]
+[ext_resource type="Script" uid="uid://clyqx4loxljyq" path="res://addons/sprite_painter/src/workspace.gd" id="9_gvnc2"]
+[ext_resource type="Script" uid="uid://c811q7xscm4nw" path="res://addons/sprite_painter/src/image_view/image_view.gd" id="10_etjnr"]
 [ext_resource type="PackedScene" path="res://addons/sprite_painter/src/image_view/resize_rect.tscn" id="11_jhyl6"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/image_view/image_selection_view.gd" id="13_81c1e"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/floating/tool_switcher.gd" id="14_ig7f3"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/editing_tools/tool_select.gd" id="15_2n2l5"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/editing_tools/tool_brush.gd" id="16_b68p1"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/editing_tools/tool_gradient.gd" id="16_np2pu"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/editing_tools/tool_bucket.gd" id="17_4lt5q"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/editing_tools/tool_brush_clone.gd" id="17_pf4en"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/editing_tools/tool_brush_normalmap.gd" id="18_dwsmj"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/editing_tools/tool_brush_shading.gd" id="18_f5yr5"]
+[ext_resource type="Script" uid="uid://ceahwk708qlob" path="res://addons/sprite_painter/src/image_view/image_selection_view.gd" id="13_81c1e"]
+[ext_resource type="Script" uid="uid://d0jkr1cgh3uax" path="res://addons/sprite_painter/src/floating/tool_switcher.gd" id="14_ig7f3"]
+[ext_resource type="Script" uid="uid://dshq4vo771e1t" path="res://addons/sprite_painter/src/editing_tools/tool_select.gd" id="15_2n2l5"]
+[ext_resource type="Script" uid="uid://djm3o518cipdx" path="res://addons/sprite_painter/src/editing_tools/tool_brush.gd" id="16_b68p1"]
+[ext_resource type="Script" uid="uid://dxqvsyxm6d6qq" path="res://addons/sprite_painter/src/editing_tools/tool_gradient.gd" id="16_np2pu"]
+[ext_resource type="Script" uid="uid://dh4ffiq6yxwtk" path="res://addons/sprite_painter/src/editing_tools/tool_bucket.gd" id="17_4lt5q"]
+[ext_resource type="Script" uid="uid://o7cpt5vwbja4" path="res://addons/sprite_painter/src/editing_tools/tool_brush_clone.gd" id="17_pf4en"]
+[ext_resource type="Script" uid="uid://dy05me7mjxyqb" path="res://addons/sprite_painter/src/editing_tools/tool_brush_normalmap.gd" id="18_dwsmj"]
+[ext_resource type="Script" uid="uid://mxc5dkkysmca" path="res://addons/sprite_painter/src/editing_tools/tool_brush_shading.gd" id="18_f5yr5"]
 [ext_resource type="PackedScene" uid="uid://dcc6kewvuomhc" path="res://addons/sprite_painter/src/floating/type_context_settings.tscn" id="18_rmu80"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/editing_tools/tool_pencil.gd" id="19_76b7g"]
+[ext_resource type="Script" uid="uid://chtgvsc0evfo3" path="res://addons/sprite_painter/src/editing_tools/tool_pencil.gd" id="19_76b7g"]
 [ext_resource type="Shader" uid="uid://clpby1t4s1pvy" path="res://addons/sprite_painter/shaders/shape.tres" id="20_0y2y6"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/editing_tools/tool_shape.gd" id="20_vwkmd"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/editing_tools/tool_line.gd" id="21_rp6uq"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/editing_tools/tool_wand.gd" id="21_xj52d"]
+[ext_resource type="Script" uid="uid://cwu14ve84o8yp" path="res://addons/sprite_painter/src/editing_tools/tool_shape.gd" id="20_vwkmd"]
+[ext_resource type="Script" uid="uid://i0wwqwiwnsww" path="res://addons/sprite_painter/src/editing_tools/tool_line.gd" id="21_rp6uq"]
+[ext_resource type="Script" uid="uid://dw3ldwv1dk3t3" path="res://addons/sprite_painter/src/editing_tools/tool_wand.gd" id="21_xj52d"]
 [ext_resource type="PackedScene" uid="uid://be21fmb246ubn" path="res://addons/sprite_painter/src/floating/color_picker.tscn" id="22_rhy5h"]
 [ext_resource type="Shader" uid="uid://c84r6o3a8gfo0" path="res://addons/sprite_painter/shaders/line.tres" id="22_sfnac"]
-[ext_resource type="Script" path="res://addons/sprite_painter/src/editing_tools/tool_scripting.gd" id="23_h1454"]
+[ext_resource type="Script" uid="uid://k442v087cu7v" path="res://addons/sprite_painter/src/editing_tools/tool_scripting.gd" id="23_h1454"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nkhd7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8skav"]
 content_margin_left = 5.0
 content_margin_top = 3.0
 content_margin_right = 5.0
 content_margin_bottom = 3.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nkhd7"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_lb3gr"]
 
@@ -161,28 +161,28 @@ gradient = SubResource("Gradient_jeov6")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xuu2x"]
 shader = ExtResource("7_nc3ac")
+shader_parameter/gradient = SubResource("GradientTexture1D_bmka2")
 shader_parameter/from = Vector2(0.0820313, 0.132813)
 shader_parameter/delta = Vector2(0.0742188, 0.1875)
 shader_parameter/type = 0
-shader_parameter/gradient = SubResource("GradientTexture1D_bmka2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qmoem"]
 shader = ExtResource("20_0y2y6")
 shader_parameter/shape_index = 0
-shader_parameter/color_border = null
-shader_parameter/color_fill = null
-shader_parameter/origin = null
-shader_parameter/shape_size = null
-shader_parameter/border_width = null
-shader_parameter/drag_delta = null
+shader_parameter/color_border = Vector4(0, 0, 0, 0)
+shader_parameter/color_fill = Vector4(0, 0, 0, 0)
+shader_parameter/origin = Vector2(0, 0)
+shader_parameter/shape_size = Vector2(0, 0)
+shader_parameter/border_width = 0.0
+shader_parameter/drag_delta = Vector2(0, 0)
 shader_parameter/enable_aa = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hi61m"]
 shader = ExtResource("22_sfnac")
-shader_parameter/color = null
+shader_parameter/color = Vector4(0, 0, 0, 0)
 shader_parameter/origin = Vector2(104.5, 114.5)
-shader_parameter/delta = null
-shader_parameter/width = null
+shader_parameter/delta = Vector2(0, 0)
+shader_parameter/width = 0.0
 shader_parameter/enable_aa = false
 
 [node name="Painter" type="MarginContainer"]
@@ -209,11 +209,11 @@ layout_mode = 2
 [node name="BoxSelection" type="Button" parent="Box/Toolbar"]
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_lb3gr")
 shortcut = SubResource("Shortcut_ipdqg")
@@ -225,11 +225,11 @@ icon_name = "ActionCopy"
 [node name="WandSelection" type="Button" parent="Box/Toolbar"]
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_lb3gr")
 shortcut = SubResource("Shortcut_ipdqg")
@@ -244,11 +244,11 @@ layout_mode = 2
 [node name="Pencil" type="Button" parent="Box/Toolbar"]
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_lb3gr")
 shortcut = SubResource("Shortcut_7y38e")
@@ -260,11 +260,11 @@ icon_name = "Edit"
 [node name="Brush" type="Button" parent="Box/Toolbar"]
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_lb3gr")
 shortcut = SubResource("Shortcut_cnbj8")
@@ -277,11 +277,11 @@ icon_name = "CanvasItem"
 custom_minimum_size = Vector2(21, 0)
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_lb3gr")
 shortcut = SubResource("Shortcut_cnbj8")
@@ -293,11 +293,11 @@ icon_name = "Eraser"
 [node name="Bucket" type="Button" parent="Box/Toolbar"]
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_lb3gr")
 shortcut = SubResource("Shortcut_unc62")
@@ -309,11 +309,11 @@ icon_name = "Bucket"
 [node name="Gradient" type="Button" parent="Box/Toolbar"]
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 disabled = true
 toggle_mode = true
 button_group = SubResource("ButtonGroup_lb3gr")
@@ -329,11 +329,11 @@ layout_mode = 2
 [node name="ShadingBrush" type="Button" parent="Box/Toolbar"]
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 disabled = true
 toggle_mode = true
 button_group = SubResource("ButtonGroup_lb3gr")
@@ -347,11 +347,11 @@ icon_name = "MaterialPreviewSphere"
 layout_mode = 2
 tooltip_text = "Shape"
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 disabled = true
 toggle_mode = true
 button_group = SubResource("ButtonGroup_lb3gr")
@@ -364,11 +364,11 @@ icon_name = "Clear"
 [node name="NormalMapBrush" type="Button" parent="Box/Toolbar"]
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 disabled = true
 toggle_mode = true
 button_group = SubResource("ButtonGroup_lb3gr")
@@ -385,11 +385,11 @@ layout_mode = 2
 custom_minimum_size = Vector2(21, 0)
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 disabled = true
 toggle_mode = true
 button_group = SubResource("ButtonGroup_lb3gr")
@@ -402,11 +402,11 @@ icon_name = "PickerShapeCircle"
 [node name="Line" type="Button" parent="Box/Toolbar"]
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 disabled = true
 toggle_mode = true
 button_group = SubResource("ButtonGroup_lb3gr")
@@ -419,11 +419,11 @@ icon_name = "Curve2D"
 [node name="Script" type="Button" parent="Box/Toolbar"]
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 disabled = true
 toggle_mode = true
 button_group = SubResource("ButtonGroup_lb3gr")
@@ -438,11 +438,11 @@ layout_mode = 2
 
 [node name="Transform" type="MenuButton" parent="Box/Toolbar"]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_jth0e")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 text = "Transform"
 item_count = 8
 popup/item_0/text = "Rotate clockwise"
@@ -453,7 +453,6 @@ popup/item_2/text = "Flip horizontally"
 popup/item_2/id = 2
 popup/item_3/text = "Flip vertically"
 popup/item_3/id = 3
-popup/item_4/text = ""
 popup/item_4/id = 286
 popup/item_4/separator = true
 popup/item_5/text = "Crop to selection/Crop transparent"
@@ -621,8 +620,8 @@ text = "Algorithm"
 [node name="Interpolation" type="OptionButton" parent="Box/Toolbar/Transform/Dialog/Grid"]
 layout_mode = 2
 disabled = true
-item_count = 4
 selected = 0
+item_count = 4
 popup/item_0/text = "No smoothing"
 popup/item_0/id = 0
 popup/item_1/text = "Bilinear (fastest)"
@@ -643,11 +642,11 @@ size_flags_horizontal = 3
 visible = false
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 flat = true
 script = ExtResource("2_ahevp")
 icon_name = "RotateRight"
@@ -655,11 +654,11 @@ icon_name = "RotateRight"
 [node name="Save" type="Button" parent="Box/Toolbar"]
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 text = "Save"
 flat = true
 script = ExtResource("2_ahevp")
@@ -672,11 +671,11 @@ layout_mode = 2
 layout_mode = 2
 tooltip_text = "Close"
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8skav")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8skav")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nkhd7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8skav")
 shortcut = SubResource("Shortcut_lhl5g")
 text = "Discard"
 flat = true
