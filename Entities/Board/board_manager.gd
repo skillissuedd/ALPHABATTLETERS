@@ -20,7 +20,10 @@ var all_letters: Array = [ally_letters, enemy_letters]
 @export var slot_grid: Array = [] # 2D array: slot_grid[row][col]
 
 func _ready():
-	pass
+	while true:
+		await GlobalSignals.round_is_won
+		for letter in ally_letters:
+			Global.deck_scene.append_to_deck(letter)
 
 func on_slot_is_hovered(slot: Node2D, letter2D: Node2D):
 	if !slot_hovered_block:
@@ -40,33 +43,35 @@ func prepare_simulation_data() -> Array:
 	
 	# Process ally letters
 	for letter in ally_letters:
-		var props = letter.properties
-		combined_letters.append({
-			"ref": props,
-			"letter": props.letter,
-			"x": props.grid_x,
-			"y": props.grid_y,
-			"current_hp": props.current_hp,
-			"max_hp": props.max_hp,
-			"attack": props.attack,
-			"is_enemy": props.is_enemy,
-			"is_dead": props.is_dead
-		})
+		if letter:
+			var props = letter.properties
+			combined_letters.append({
+				"ref": props,
+				"letter": props.letter,
+				"x": props.grid_x,
+				"y": props.grid_y,
+				"current_hp": props.current_hp,
+				"max_hp": props.max_hp,
+				"attack": props.attack,
+				"is_enemy": props.is_enemy,
+				"is_dead": props.is_dead
+			})
 		
 	# Process enemy letters	
 	for letter in enemy_letters:
-		var props = letter.properties
-		combined_letters.append({
-			"ref": props,
-			"letter": props.letter,
-			"x": props.grid_x,
-			"y": props.grid_y,
-			"current_hp": props.current_hp,
-			"max_hp": props.max_hp,
-			"attack": props.attack,
-			"is_enemy": props.is_enemy,
-			"is_dead": props.is_dead
-		})
+		if letter:
+			var props = letter.properties
+			combined_letters.append({
+				"ref": props,
+				"letter": props.letter,
+				"x": props.grid_x,
+				"y": props.grid_y,
+				"current_hp": props.current_hp,
+				"max_hp": props.max_hp,
+				"attack": props.attack,
+				"is_enemy": props.is_enemy,
+				"is_dead": props.is_dead
+			})
 	return combined_letters
 	
 func set_board_enabled(enabled: bool):

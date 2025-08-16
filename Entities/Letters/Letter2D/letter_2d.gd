@@ -121,7 +121,7 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 		if area.is_in_group("slots"):
 			area.is_not_hovered()
 			overlapping_slots.erase(area)
-		if overlapping_slots.is_empty():
+		if overlapping_slots.is_empty() and Global.battle_simulator:
 			Global.battle_simulator.load_backups()
 			
 	elif area is slot_class:
@@ -282,7 +282,7 @@ func _set_resting_state(delta: float) -> void:
 	self.rotation_degrees = lerp(self.rotation_degrees, 0.0, 22.0*delta)
 
 func snap_to_parent():
-	if not overlapping_slots.is_empty():
+	if not overlapping_slots.is_empty() and not GlobalOptions.selecting_upgrade:
 		snap_to_slot()
 	elif GlobalOptions.selecting_upgrade and closest_slot:
 		snap_to_upgrade_slot()

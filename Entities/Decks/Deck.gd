@@ -22,7 +22,7 @@ func initialize_deck():
 	all_letters.sort()
 	for letter in all_letters:
 		deck.append(letter)
-
+		deck.append(letter)
 func fill_deck():
 	letter_instances.clear()
 	for i in range(deck.size()):
@@ -35,7 +35,7 @@ func fill_deck():
 		
 		if not letter_instances.has(deck[i]):
 			letter_instances[deck[i]] = []
-		letter_instances[deck[i]].append(letter2Dinstance)	
+		letter_instances[deck[i]].append(letter2Dinstance)
 
 func get_instances_of_letter(target_letter: String) -> Array:
 	return letter_instances.get(target_letter, [])
@@ -73,12 +73,24 @@ func refill_main_deck(deckFROM: deck_class, deckTO: deck_class):
 		
 func arrange_deck():
 	deck.sort()
-	for j in deck.size():
-		var letter2Dinstance = get_child(j)
-		letter2Dinstance.set_letter(deck[j])
-		var row = j / GRID_COLUMNS
-		var col = j % GRID_COLUMNS
-		letter2Dinstance.position = Vector2(col, row) * CELL_SIZE
+	var index = 0
+	for letter_group in letter_instances.values():
+		for letter in letter_group:
+			var row = index / GRID_COLUMNS
+			var col = index % GRID_COLUMNS
+			letter.position = Vector2(col, row) * CELL_SIZE
+			index+=1
+	
+func _compare_letters_alphabetically(a: Node2D, b: Node2D) -> bool:
+	if not (a is letter2Dclass and b is letter2Dclass):
+		return false
+	
+	# Get the first character of each letter (assuming letter is a String property)
+	var a_char = a.properties.letter.unicode_at(0) if a.properties.letter.length() > 0 else 0
+	var b_char = b.properties.letter.unicode_at(0) if b.properties.letter.length() > 0 else 0
+	
+	# Case-insensitive comparison by converting to uppercase
+	return a_char < b_char
 
 func set_all_letters_inactive():
 	for letter in deck:

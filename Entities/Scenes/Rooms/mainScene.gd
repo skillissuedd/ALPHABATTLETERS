@@ -7,7 +7,7 @@ extends Node2D
 func init_managers():
 	Global.sfx_manager = $sfxManager
 	Global.ui_manager = $UI_parent/UiManager
-	Global.ui_manager.enemy_health_bar._setup_health_bar(20.0)
+	Global.ui_manager.enemy_health_bar._setup_health_bar(10*current_round)
 	Global.ui_manager.ally_health_bar._setup_health_bar(20.0)
 
 func init_decks():
@@ -51,6 +51,31 @@ func _ready():
 	await GlobalSignals.board_is_complete
 	init_battle_logic()
 	Global.ui_manager.init_battle_ui()
+	
+	await GlobalSignals.round_is_won
+	next_round()
+
+func next_round():
+	current_round+=1
+	Global.ui_manager.round_label.text = str(current_round)
+	Global.hand_scene.clear_hand()
+	Global.deck_scene.refill_main_deck(Global.deck_disc_scene, Global.deck_scene)
+	Global.board_scene.reset_board()
+	Global.ui_manager.hide_battle_ui()
+	
+	init_hand()
+	Global.ui_manager.create_upgrade_panel()
+	await GlobalSignals.upgrade_panel_is_gone
+	
+	Global.ui_manager.set_ui_enabled(false)
+	init_board()
+	await GlobalSignals.board_is_complete
+	
+	init_battle_logic()
+	Global.ui_manager.init_battle_ui()
+	Global.ui_manager.enemy_health_bar._setup_health_bar(10*current_round)
+	await GlobalSignals.round_is_won
+	next_round()
 	
 func free_all_nodes():
 	var root = get_tree().current_scene

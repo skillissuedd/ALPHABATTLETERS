@@ -17,3 +17,4 @@ ui_energy,ENERGY,ЭНЕРГИЯ
 gameover_lost,You lose,Вы проиграли
 gameover_won,You win,Вы победили
 gameover_try_again,New run,Новый забег
+upgrade_panel_text,SELECT YOUR UPGRADE,ВЫБЕРИТЕ УЛУЧШЕНИЕ

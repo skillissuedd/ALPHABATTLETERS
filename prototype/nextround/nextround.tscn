@@ -1,18 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://efj7fwbyp426"]
+[gd_scene load_steps=3 format=3 uid="uid://b5kr46jisiiae"]
 
-[ext_resource type="Script" uid="uid://buonmodkhuvdy" path="res://prototype/gameover/gameover.gd" id="1_cii2a"]
-[ext_resource type="FontFile" uid="uid://5dgoa5x36r7r" path="res://fonts/orbitron_rus.ttf" id="1_toqpo"]
+[ext_resource type="Script" uid="uid://buonmodkhuvdy" path="res://prototype/gameover/gameover.gd" id="1_sjg3o"]
+[ext_resource type="FontFile" uid="uid://5dgoa5x36r7r" path="res://fonts/orbitron_rus.ttf" id="2_jv1fj"]
 
-[node name="Gameover" type="Control"]
+[node name="nextround" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_cii2a")
+script = ExtResource("1_sjg3o")
 
-[node name="retryButton" type="Button" parent="."]
+[node name="nextRoundButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -28,9 +28,9 @@ grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0.419608, 0, 1)
 theme_override_colors/font_color = Color(0, 0.815686, 0, 1)
 theme_override_constants/outline_size = 23
-theme_override_fonts/font = ExtResource("1_toqpo")
+theme_override_fonts/font = ExtResource("2_jv1fj")
 theme_override_font_sizes/font_size = 96
-text = "gameover_try_again"
+text = "nextround_button"
 
 [node name="gameoverLabel" type="Label" parent="."]
 layout_mode = 1
@@ -47,11 +47,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 27
-theme_override_fonts/font = ExtResource("1_toqpo")
+theme_override_fonts/font = ExtResource("2_jv1fj")
 theme_override_font_sizes/font_size = 48
-text = "gameover_label"
+text = "nextround_label"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[connection signal="button_up" from="retryButton" to="." method="_on_retry_button_button_up"]
+[connection signal="button_up" from="nextRoundButton" to="." method="_on_retry_button_button_up"]

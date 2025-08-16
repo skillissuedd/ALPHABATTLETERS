@@ -60,10 +60,12 @@ func change_value(new_value: float):
 		
 func play_death_anim():
 	var tween = create_tween()
-	
+	var scale_temp = scale.x
 	tween.set_parallel(true)
 	tween.tween_property(self, "modulate:a", 0.0, 0.5) 
 	tween.tween_property(self, "scale:x", 0.0, 0.5).set_trans(Tween.TRANS_BACK) 
 	tween.set_parallel(false)
 	await tween.finished
-	self.queue_free() 
+	visible=false
+	modulate.a=1
+	scale.x=scale_temp

@@ -7,6 +7,5 @@ func _ready():
 	else:
 		$gameoverLabel.text = "gameover_lost"
 		$gameoverLabel.add_theme_color_override("font_color", Color.CRIMSON)
-		
 func _on_retry_button_button_up() -> void:
 	get_tree().change_scene_to_file("res://Entities/Scenes/Rooms/MainScene.tscn")

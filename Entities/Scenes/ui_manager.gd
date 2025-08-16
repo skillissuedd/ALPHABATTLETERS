@@ -6,6 +6,8 @@ extends Control
 @onready var ally_health_bar: AllyHealthBar = $AllyHealthBar
 
 @onready var round_info: Panel = $round_info
+@onready var round_label: RichTextLabel = $round_info/roundLabel
+
 
 #SORTING
 @onready var sort_button: Button = $sortButton
@@ -41,6 +43,13 @@ func update_round_label():
 	if has_node("Panel/roundLabel"):
 		$Panel/roundLabel.text = str(Global.battle_manager.current_round)
 
+func hide_battle_ui():
+	enemy_health_bar.visible = false
+	end_round_button.visible = false
+	energy_main.visible = false
+	round_info.visible = false
+	$drawButton.visible = false
+	
 func init_battle_ui():
 	enemy_health_bar.visible = true
 	end_round_button.visible = true

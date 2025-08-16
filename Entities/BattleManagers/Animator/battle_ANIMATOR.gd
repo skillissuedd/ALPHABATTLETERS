@@ -25,8 +25,7 @@ func apply_animation_effects(animation_events: Array) -> void:
 					true
 				)
 		if Global.ui_manager.enemy_health_bar.current_health <=0:
-			GlobalOptions.round_outcome = true
-			get_tree().change_scene_to_file("res://prototype/gameover/gameover.tscn")
+			GlobalSignals.emit_round_is_won()
 			return
 		elif Global.ui_manager.ally_health_bar.current_health <=0:
 			GlobalOptions.round_outcome = false
@@ -106,6 +105,14 @@ func _play_attack_anim(attacker: LetterUnit, target: LetterUnit, damage: int) ->
 	
 	if target.is_dead:
 		_letter_is_dead(target2D)
+		if attacker.current_upgrade == "Assassin":
+			var roll = randi() % 2
+			match roll:
+				0:
+					attacker.update_stats(attacker.attack+1, attacker.max_hp)
+				1:
+					attacker.update_stats(attacker.attack, attacker.max_hp+1)
+			attacker2D.letterDisplay.update_stats()
 		
 func _letter_is_dead(target2D):
 	target2D.current_selected_slot.letter_is_taken()
@@ -131,6 +138,8 @@ func _letter_is_dead(target2D):
 		grave_copy.visible = false
 		grave_copy.is_active = false
 		
+	
+	
 	if target2D.properties.is_enemy:
 		if target2D.coins_count > 0:
 			Global.ui_manager.update_coins(target2D.coins_count)
