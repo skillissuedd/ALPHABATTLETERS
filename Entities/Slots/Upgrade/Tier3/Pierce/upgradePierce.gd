@@ -1,4 +1,4 @@
-extends slot_class
+extends slot_upgrade
 var is_used: bool = false
 @onready var label: Label = $Sprite2D/Label
 @onready var label_2: Label = $Sprite2D/Label2

@@ -18,7 +18,7 @@ func remove_panel():
 		var slot_instance = slot.get_child(0) as slot_class
 		await slot_instance.disappear()
 	var tween := create_tween()
-	tween.tween_property(self, "modulate:a", 0, 0.8)
+	tween.tween_property(self, "modulate:a", 0, 0.3)
 	await tween.finished
 	GlobalSignals.emit_upgrade_panel_is_gone()
 	

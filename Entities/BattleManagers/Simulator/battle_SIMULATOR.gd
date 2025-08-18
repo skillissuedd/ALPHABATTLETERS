@@ -27,10 +27,7 @@ func load_backups():
 		for old_unit in enemy_backup:
 			if new_unit["ref"] == old_unit["ref"]:
 				new_unit["ref"].current_hp = old_unit.current_hp
-				new_unit["ref"].is_dead = old_unit.is_dead
 				apply_calculated_changes_to_ui(new_unit["ref"], false)
-				new_unit["ref"].letterParent.modulate = Color(0.9, 0.9, 0.9, 1)
-				new_unit["ref"].letterDisplay.death_mark.visible = false
 				
 ### PREVIEW ###
 
@@ -83,23 +80,31 @@ func calculate_preview_damage(action_queue: Array):
 		if action["type"] == "attack":
 			var attacker = action.attacker
 			var target = action.target
-			if !is_instance_valid(attacker) or attacker.is_dead: continue
-			if !is_instance_valid(target) or target.is_dead or !target.is_enemy: continue
+			if !is_instance_valid(attacker) or attacker.is_dead: 
+				print("Invalid attacker")
+				continue
+			if !is_instance_valid(target) or target.is_dead or !target.is_enemy: 
+				print("Invalid target")
+				continue
+				
 			var target_hp = max(0, target.current_hp - action.damage)
 			target.letterDisplay.update_stats(target.attack, target_hp)
 			target.letterParent.update_frame_bar(target_hp*100/target.max_hp, false)
 			if target_hp <= 0:
-				target.letterParent.modulate = Color(0.9, 0.9, 0.9, 0.4)
+				target.letterParent.modulate.a = 0.5
 				target.letterDisplay.death_mark.visible = true
 				
-func apply_calculated_changes_to_ui(target: LetterUnit, apply: bool):
+func apply_calculated_changes_to_ui(target: LetterUnit, permanent: bool):
 	target.letterDisplay.update_stats(target.attack, target.current_hp)
-	target.letterParent.update_frame_bar(target.current_hp*100/target.max_hp, apply)
-	if target.current_hp == 0:
+	target.letterParent.update_frame_bar(target.current_hp*100/target.max_hp, permanent)
+	if target.current_hp <= 0:
 		target.is_dead = true
-		target.letterParent.modulate = Color(0.9, 0.9, 0.9, 0.4)
+		target.letterParent.modulate.a = 0.5
 		target.letterDisplay.death_mark.visible = true
-		
+	else:
+		target.is_dead = false
+		target.letterParent.modulate.a = 1
+		target.letterDisplay.death_mark.visible = false
 
 ### PLAYER LETTER ACTIONS ###
 
@@ -107,20 +112,20 @@ func apply_calculated_changes_to_ui(target: LetterUnit, apply: bool):
 func execute_letter_action(letter: Node2D) -> void:
 	load_backups()
 	player_backup.append(letter.properties)
-	var unit = letterunit_to_sim_data(letter.properties)
+	var unit = letter.properties
 	var target = find_target_for_preview(letter, enemy_backup)
 	var action_queue = []
 	if target != null:
 		action_queue.append({
 			"type": "attack",
-			"attacker": unit["ref"],
+			"attacker": unit,
 			"target": target["ref"],
 			"damage": unit["attack"]
 			})
 	else:
 		action_queue.append({
 			"type": "face_attack",
-			"attacker": unit["ref"],
+			"attacker": unit,
 			"target": "face",
 			"damage": unit["attack"]
 			})
@@ -181,7 +186,6 @@ func _find_player_target(attacker: Dictionary, all_units: Array):
 		unit["is_enemy"] != attacker["is_enemy"]):
 			potential_targets.append(unit)
 			
-	#print (potential_targets)
 	if potential_targets.is_empty():
 		return null
 
@@ -193,17 +197,3 @@ func _find_player_target(attacker: Dictionary, all_units: Array):
 
 	return lowest_target
 			
-
-			
-func letterunit_to_sim_data(properties: LetterUnit) -> Dictionary:
-	return {
-		"ref": properties,
-		"letter": properties.letter,
-		"x": properties.grid_x,
-		"y": properties.grid_y,
-		"current_hp": properties.current_hp,
-		"max_hp": properties.max_hp,
-		"attack": properties.attack,
-		"is_enemy": properties.is_enemy,
-		"is_dead": properties.is_dead
-	}

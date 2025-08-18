@@ -48,7 +48,7 @@ func _ready():
 	await GlobalSignals.upgrade_panel_is_gone
 	Global.ui_manager.set_ui_enabled(false)
 	init_board()
-	await GlobalSignals.board_is_complete
+	await Global.board_scene.board_is_complete
 	init_battle_logic()
 	Global.ui_manager.init_battle_ui()
 	
@@ -69,7 +69,7 @@ func next_round():
 	
 	Global.ui_manager.set_ui_enabled(false)
 	init_board()
-	await GlobalSignals.board_is_complete
+	await Global.board_scene.board_is_complete
 	
 	init_battle_logic()
 	Global.ui_manager.init_battle_ui()

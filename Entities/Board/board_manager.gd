@@ -1,4 +1,7 @@
 extends Node2D
+
+signal board_is_complete
+
 #SlotTypes
 @export var slot_scene = preload("res://Entities/Slots/slot1.tscn")
 @export var slotRusty = preload("res://Entities/Slots/Rusty/slotRusty.tscn")
@@ -136,7 +139,8 @@ func create_board():
 
 		slot_grid.append(row)
 	await animate_slots_appearing()
-	GlobalSignals.emit_board_is_complete()
+	board_is_complete.emit()
+
 func animate_slots_appearing() -> void:
 	for y in range(rows):
 		for x in range(cols):

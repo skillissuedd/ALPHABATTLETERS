@@ -18,3 +18,5 @@ gameover_lost,You lose,Вы проиграли
 gameover_won,You win,Вы победили
 gameover_try_again,New run,Новый забег
 upgrade_panel_text,SELECT YOUR UPGRADE,ВЫБЕРИТЕ УЛУЧШЕНИЕ
+nextround_label,ROUND %s COMPLETE,РАУНД %s ПРОЙДЕН
+nextround_button,NEXT ROUND, СЛЕДУЮЩИЙ РАУНД

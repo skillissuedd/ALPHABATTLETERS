@@ -6,14 +6,8 @@ signal upgrade_panel_is_gone
 
 signal round_is_won
 
-#BOARD
-signal board_is_complete
-
 func emit_round_is_won():
 	round_is_won.emit()
-	
-func emit_board_is_complete():
-	board_is_complete.emit()
 
 func emit_upgrade_slot_is_used():
 	upgrade_slot_is_used.emit()

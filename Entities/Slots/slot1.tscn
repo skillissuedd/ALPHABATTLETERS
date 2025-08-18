@@ -20,7 +20,6 @@ texture = ExtResource("1_6p423")
 
 [node name="Slot_Collision" type="CollisionShape2D" parent="."]
 visibility_layer = 2
-scale = Vector2(0.4, 0.4)
 shape = SubResource("RectangleShape2D_4c3kn")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

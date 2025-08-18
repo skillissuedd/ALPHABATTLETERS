@@ -100,7 +100,6 @@ func update_element_style(current_element: String):
 			self.texture=load("res://Entities/Letters/Letter2D/Elements/Earth/woodTile1.jpg")
 		"Neutral":
 			self.texture=load("res://Entities/Letters/Letter2D/Elements/EnemyElement/enemyElement.png")
-			self_modulate = Color(0.9, 0.9, 0.9) 
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
@@ -332,4 +331,4 @@ func snap_to_slot():
 		await Global.battle_animator.animations_completed
 		
 		if properties.current_hp <= 0:
-			Global.battle_animator._letter_is_dead(self)
+			Global.battle_manager._letter_is_dead(self)

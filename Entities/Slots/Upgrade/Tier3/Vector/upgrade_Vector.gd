@@ -1,4 +1,4 @@
-extends slot_class
+extends slot_upgrade
 var is_used: bool = false
 @onready var vector_label = $Sprite2D/Label
 
