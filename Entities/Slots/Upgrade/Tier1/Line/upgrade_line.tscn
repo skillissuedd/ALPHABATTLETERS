@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://cq3b2xlhh0xxe"]
+
+[ext_resource type="Script" uid="uid://bin381qhvj7wc" path="res://Entities/Slots/Upgrade/Tier1/Line/upgrade_line.gd" id="1_bnnnc"]
+[ext_resource type="Texture2D" uid="uid://d18adwcrcmd00" path="res://Entities/Slots/Upgrade/Tier1/tileTier1.png" id="2_hsohd"]
+[ext_resource type="FontFile" uid="uid://chvukhbl2d2lh" path="res://fonts/Almendra-Regular.ttf" id="3_5dilv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4c3kn"]
+size = Vector2(168, 159)
+
+[node name="Area2D" type="Area2D"]
+z_index = 1
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_bnnnc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.606012, 0.00348967, 0.925088, 1)
+texture_filter = 1
+scale = Vector2(10, 10)
+texture = ExtResource("2_hsohd")
+
+[node name="Label" type="Label" parent="Sprite2D"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.2
+offset_top = -18.5
+offset_right = -6.2
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+scale = Vector2(0.375, 0.375)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("3_5dilv")
+theme_override_font_sizes/font_size = 33
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Sprite2D"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -24.2
+offset_right = 11.0
+offset_bottom = 38.8
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.375, 0.375)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("3_5dilv")
+theme_override_font_sizes/font_size = 48
+text = "L"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot_Collision" type="CollisionShape2D" parent="."]
+visibility_layer = 2
+scale = Vector2(1.6, 1.6)
+shape = SubResource("RectangleShape2D_4c3kn")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

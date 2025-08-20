@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dnhp0p6jrlk7x"]
 
-[ext_resource type="Script" uid="uid://x0cbccdh6vvm" path="res://Entities/Slots/Upgrade/Tier3/Pierce/upgradePierce.gd" id="1_vl16u"]
-[ext_resource type="Texture2D" uid="uid://bve7i1mct1q1p" path="res://Entities/Slots/Upgrade/Tier3/Vector/tileVector.png" id="2_gjrwn"]
-[ext_resource type="FontFile" uid="uid://chvukhbl2d2lh" path="res://fonts/Almendra-Regular.ttf" id="3_qgd3s"]
+[ext_resource type="Script" uid="uid://x0cbccdh6vvm" path="res://Entities/Slots/Upgrade/Tier3/Pierce/upgrade_pierce.gd" id="1_gsc1s"]
+[ext_resource type="Texture2D" uid="uid://bve7i1mct1q1p" path="res://Entities/Slots/Upgrade/Tier3/tileTier3.png" id="2_4qru7"]
+[ext_resource type="FontFile" uid="uid://chvukhbl2d2lh" path="res://fonts/Almendra-Regular.ttf" id="3_5nh3w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4c3kn"]
 size = Vector2(168, 159)
@@ -11,13 +11,13 @@ size = Vector2(168, 159)
 z_index = 1
 collision_layer = 16
 collision_mask = 3
-script = ExtResource("1_vl16u")
+script = ExtResource("1_gsc1s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.317262, 0.824159, 0.482805, 1)
 texture_filter = 1
 scale = Vector2(10, 10)
-texture = ExtResource("2_gjrwn")
+texture = ExtResource("2_4qru7")
 
 [node name="Label2" type="Label" parent="Sprite2D"]
 texture_filter = 1
@@ -35,7 +35,7 @@ grow_vertical = 2
 scale = Vector2(0.375, 0.375)
 theme_override_colors/font_color = Color(0, 0.8515, 0.625814, 1)
 theme_override_constants/outline_size = 11
-theme_override_fonts/font = ExtResource("3_qgd3s")
+theme_override_fonts/font = ExtResource("3_5nh3w")
 theme_override_font_sizes/font_size = 33
 text = "_"
 horizontal_alignment = 1
@@ -57,7 +57,7 @@ grow_vertical = 2
 scale = Vector2(0.375, 0.375)
 theme_override_colors/font_color = Color(0, 0.8515, 0.625814, 1)
 theme_override_constants/outline_size = 11
-theme_override_fonts/font = ExtResource("3_qgd3s")
+theme_override_fonts/font = ExtResource("3_5nh3w")
 theme_override_font_sizes/font_size = 48
 text = "P"
 horizontal_alignment = 1
@@ -79,7 +79,7 @@ grow_vertical = 2
 scale = Vector2(0.375, 0.375)
 theme_override_colors/font_color = Color(0, 0.8515, 0.625814, 1)
 theme_override_constants/outline_size = 11
-theme_override_fonts/font = ExtResource("3_qgd3s")
+theme_override_fonts/font = ExtResource("3_5nh3w")
 theme_override_font_sizes/font_size = 33
 text = "_"
 horizontal_alignment = 1

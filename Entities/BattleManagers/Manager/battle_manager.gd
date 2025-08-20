@@ -21,7 +21,7 @@ func room_cleared():
 	
 func round_start():
 	Global.ui_manager.set_ui_enabled(false)
-	if not Global.board_scene.enemy_letters.is_empty():	
+	if not Global.board_scene.enemy_letters.is_empty():
 		Global.battle_simulator.simulate_enemy_attacks()
 		await Global.battle_animator.animations_completed
 	Global.hand_scene.fill_hand()

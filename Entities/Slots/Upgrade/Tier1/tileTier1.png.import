@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bve7i1mct1q1p"
-path="res://.godot/imported/tileVector.png-e31f6ac92591299d6d42fe4a8cfde6ab.ctex"
+uid="uid://d18adwcrcmd00"
+path="res://.godot/imported/tileTier1.png-6bc2a315a2c7f4c1c337c40188e81578.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Slots/Upgrade/Tier3/Vector/tileVector.png"
-dest_files=["res://.godot/imported/tileVector.png-e31f6ac92591299d6d42fe4a8cfde6ab.ctex"]
+source_file="res://Entities/Slots/Upgrade/Tier1/tileTier1.png"
+dest_files=["res://.godot/imported/tileTier1.png-6bc2a315a2c7f4c1c337c40188e81578.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://be3r20lyvq7tk"]
 
 [ext_resource type="Script" uid="uid://bkf0mmmfa1yhi" path="res://Entities/Slots/Upgrade/Tier3/Vector/upgrade_Vector.gd" id="1_pfpbm"]
-[ext_resource type="Texture2D" uid="uid://bve7i1mct1q1p" path="res://Entities/Slots/Upgrade/Tier3/Vector/tileVector.png" id="2_w4u2k"]
+[ext_resource type="Texture2D" uid="uid://bve7i1mct1q1p" path="res://Entities/Slots/Upgrade/Tier3/tileTier3.png" id="2_w4u2k"]
 [ext_resource type="FontFile" uid="uid://chvukhbl2d2lh" path="res://fonts/Almendra-Regular.ttf" id="3_w4u2k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4c3kn"]

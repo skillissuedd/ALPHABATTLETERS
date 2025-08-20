@@ -10,7 +10,7 @@ func letter_is_placed(letter2D: Node2D):
 		rebirth_label.queue_free()
 		var next_letter = get_next_letter(letter2D.properties.letter)
 		for letter2Dinstance in Global.deck_scene.get_instances_of_letter(letter2D.properties.letter):
-			letter2Dinstance.properties.current_upgrade = "Rebirth"
+			letter2Dinstance.properties.NSAB = true
 			letter2Dinstance.letterDisplay.rebirth_upgrade_animation(next_letter)
 		await letter2D.letterDisplay.animation_ended
 		letter_is_taken()

@@ -19,6 +19,7 @@ extends Node2D
 @export var element_type: String = "" # Optional: "Fire", "Water", etc.
 @export var locked: bool = false
 @export var current_upgrade: String = ""
+@export var NSAB: bool = false
 
 func initialize(
 	letter_char: String,
