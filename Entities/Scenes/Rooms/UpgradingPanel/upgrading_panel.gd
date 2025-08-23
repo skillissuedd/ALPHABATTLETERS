@@ -20,6 +20,7 @@ func remove_panel():
 	var tween := create_tween()
 	tween.tween_property(self, "modulate:a", 0, 0.3)
 	await tween.finished
+	queue_free()
 	GlobalSignals.emit_upgrade_panel_is_gone()
 	
 func spawn_slots():
@@ -28,7 +29,7 @@ func spawn_slots():
 	for slot in slots:
 		var slot_scene = null
 		while true:
-			var roll = randi() % 100 + 1
+			var roll = 30#randi() % 100 + 1
 			if roll <= 40:
 				var rollTier3 = randi() % 4 + 1
 				match rollTier3:

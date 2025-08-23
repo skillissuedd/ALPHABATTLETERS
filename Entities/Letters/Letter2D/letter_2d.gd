@@ -101,30 +101,6 @@ func update_element_style(current_element: String):
 		"Neutral":
 			self.texture=load("res://Entities/Letters/Letter2D/Elements/EnemyElement/enemyElement.png")
 
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	if Global.board_scene:
-		if area.is_in_group("slots"):
-			if not area.is_selected:
-				overlapping_slots.append(area)
-				
-			elif char(properties.letter.unicode_at(0)-1) == area.current_letter.properties.letter:
-				if not area.current_letter.properties.is_enemy:
-					overlapping_slots.append(area)
-					
-	elif area is slot_class:
-		closest_slot = area
-		
-func _on_area_2d_area_exited(area: Area2D) -> void:
-	if Global.board_scene:
-		if area.is_in_group("slots"):
-			area.is_not_hovered()
-			overlapping_slots.erase(area)
-		if overlapping_slots.is_empty() and Global.battle_simulator:
-			Global.battle_simulator.load_backups()
-			
-	elif area is slot_class:
-		closest_slot = null
 		
 #############################
 #### ANIMATIONS #########
@@ -281,6 +257,7 @@ func _set_resting_state(delta: float) -> void:
 	self.rotation_degrees = lerp(self.rotation_degrees, 0.0, 22.0*delta)
 
 func snap_to_parent():
+	printt ("overlapping_slots.is_empty():", overlapping_slots.is_empty(), "GlobalOptions.selecting_upgrade:", GlobalOptions.selecting_upgrade, "closest_slot", closest_slot )
 	if not overlapping_slots.is_empty() and not GlobalOptions.selecting_upgrade:
 		snap_to_slot()
 	elif GlobalOptions.selecting_upgrade and closest_slot:

@@ -27,7 +27,7 @@ extends Control
 @onready var coins_count: Label = $coins_section/coins_count
 @export var coins:int = 0
 
-@onready var upgrade_panel = preload("res://Entities/Scenes/Rooms/UpgradePanel/upgradePanel.tscn")
+@onready var upgrade_panel = preload("res://Entities/Scenes/Rooms/UpgradingPanel/upgrading_panel.tscn")
 
 func update_coins(coins_value:int):
 	coins+=coins_value

@@ -14,6 +14,7 @@ extends Node2D
 @export var max_hp: int = 20
 @export var attack: int = 10
 @export var is_dead: bool = false
+@export var always_dead: bool = false
 
 # Effects / Buffs
 @export var element_type: String = "" # Optional: "Fire", "Water", etc.

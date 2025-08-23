@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b80ig6424tqwg"]
 
-[ext_resource type="Script" uid="uid://cj020vgv45rdt" path="res://Entities/Scenes/Rooms/UpgradePanel/upgrade_panel.gd" id="1_grnvj"]
-[ext_resource type="FontFile" uid="uid://chvukhbl2d2lh" path="res://fonts/Almendra-Regular.ttf" id="2_ufb22"]
+[ext_resource type="Script" uid="uid://cj020vgv45rdt" path="res://Entities/Scenes/Rooms/UpgradingPanel/upgrading_panel.gd" id="1_1l1xk"]
+[ext_resource type="FontFile" uid="uid://chvukhbl2d2lh" path="res://fonts/Almendra-Regular.ttf" id="2_c0j1i"]
 
 [node name="UpgradePanel" type="Control"]
 self_modulate = Color(1, 1, 1, 0.341176)
@@ -15,7 +15,7 @@ offset_bottom = 391.256
 scale = Vector2(0.5, 0.5)
 size_flags_horizontal = 3
 mouse_filter = 2
-script = ExtResource("1_grnvj")
+script = ExtResource("1_1l1xk")
 metadata/_edit_use_anchors_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
@@ -31,7 +31,7 @@ scale = Vector2(4.5, 4.5)
 theme_override_colors/default_color = Color(0.945098, 0.8, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_fonts/normal_font = ExtResource("2_ufb22")
+theme_override_fonts/normal_font = ExtResource("2_c0j1i")
 theme_override_font_sizes/normal_font_size = 48
 text = "upgrade_panel_text"
 metadata/_edit_use_anchors_ = true

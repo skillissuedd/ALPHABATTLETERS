@@ -108,6 +108,9 @@ func _letter_is_dead(target2D):
 		Global.board_scene.add_child(grave_copy)
 		grave_copy.init_letter(target2D.properties.letter, target2D.properties.is_enemy)
 		grave_copy.properties.is_an_object = true
+		grave_copy.properties.is_dead = false
+		grave_copy.properties.always_dead = true
+		grave_copy.properties.current_upgrade = ""
 		grave_copy.properties.update_stats(0,5)
 		grave_copy.letterDisplay.update_stats(0,5)
 		grave_copy.global_position = death_copy.global_position

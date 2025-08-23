@@ -14,7 +14,6 @@ collision_mask = 3
 script = ExtResource("1_gsc1s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.317262, 0.824159, 0.482805, 1)
 texture_filter = 1
 scale = Vector2(10, 10)
 texture = ExtResource("2_4qru7")
@@ -86,7 +85,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Slot_Collision" type="CollisionShape2D" parent="."]
-visible = false
 visibility_layer = 2
 scale = Vector2(1.6, 1.6)
 shape = SubResource("RectangleShape2D_4c3kn")

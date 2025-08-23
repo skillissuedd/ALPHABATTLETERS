@@ -104,7 +104,8 @@ func apply_calculated_changes_to_ui(target: LetterUnit, permanent: bool):
 	else:
 		target.is_dead = false
 		target.letterParent.modulate.a = 1
-		target.letterDisplay.death_mark.visible = false
+		if target.always_dead == false:
+			target.letterDisplay.death_mark.visible = false
 
 ### PLAYER LETTER ACTIONS ###
 

@@ -63,7 +63,8 @@ func next_round():
 	Global.board_scene.reset_board()
 	Global.ui_manager.hide_battle_ui()
 	
-	init_hand()
+	Global.hand_scene.fill_hand()
+	Global.hand_scene.set_hand_enabled(true)
 	Global.ui_manager.create_upgrade_panel()
 	await GlobalSignals.upgrade_panel_is_gone
 	
