@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://k7oq1x86epp" path="res://Entities/Letters/LetterDisplay/Ally/ally_letter_display.gd" id="1_7ietf"]
 [ext_resource type="Script" uid="uid://8u3yplyk518a" path="res://Entities/Letters/LetterDisplay/Ally/letter_label.gd" id="2_1xexp"]
-[ext_resource type="FontFile" uid="uid://cltoojf5br46e" path="res://fonts/SpicyNoodle-K7X5X.ttf" id="2_728kf"]
+[ext_resource type="FontFile" uid="uid://dkk3khennkce6" path="res://fonts/Bungee-Regular.ttf" id="3_1xexp"]
 [ext_resource type="PackedScene" uid="uid://bcvgb1vvjwqv0" path="res://Entities/Letters/Death/death_mark.tscn" id="3_aw58u"]
 
 [node name="LetterDisplay" type="Control"]
@@ -28,9 +28,9 @@ script = ExtResource("1_7ietf")
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 anchor_left = 0.5
-anchor_top = -0.08
+anchor_top = -0.15
 anchor_right = 0.5
-anchor_bottom = -0.08
+anchor_bottom = -0.15
 offset_left = -7.0
 offset_top = -34.5
 offset_right = 7.0
@@ -80,8 +80,8 @@ size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.262745, 0.627451, 0.278431, 1)
 theme_override_colors/font_outline_color = Color(0.105882, 0.239216, 0.105882, 1)
 theme_override_constants/outline_size = 21
-theme_override_fonts/font = ExtResource("2_728kf")
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("3_1xexp")
+theme_override_font_sizes/font_size = 32
 text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -105,8 +105,8 @@ size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.898039, 0.223529, 0.207843, 1)
 theme_override_colors/font_outline_color = Color(0.294118, 0, 0, 1)
 theme_override_constants/outline_size = 21
-theme_override_fonts/font = ExtResource("2_728kf")
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("3_1xexp")
+theme_override_font_sizes/font_size = 32
 text = "15"
 horizontal_alignment = 1
 vertical_alignment = 1

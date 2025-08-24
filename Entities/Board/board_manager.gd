@@ -36,40 +36,15 @@ func on_slot_is_hovered(slot: Node2D, letter2D: Node2D):
 			Global.battle_simulator.simuilate_preview(letter2D)
 		Global.currently_hovered_slot = slot
 
-func prepare_simulation_data() -> Array:
+func return_letters_from_the_board() -> Array:
 	var combined_letters = []
 	
-	# Process ally letters
 	for letter in ally_letters:
-		if letter:
-			var props = letter.properties
-			combined_letters.append({
-				"ref": props,
-				"letter": props.letter,
-				"x": props.grid_x,
-				"y": props.grid_y,
-				"current_hp": props.current_hp,
-				"max_hp": props.max_hp,
-				"attack": props.attack,
-				"is_enemy": props.is_enemy,
-				"is_dead": props.is_dead
-			})
+		combined_letters.append(letter.properties)
 		
-	# Process enemy letters	
 	for letter in enemy_letters:
-		if letter:
-			var props = letter.properties
-			combined_letters.append({
-				"ref": props,
-				"letter": props.letter,
-				"x": props.grid_x,
-				"y": props.grid_y,
-				"current_hp": props.current_hp,
-				"max_hp": props.max_hp,
-				"attack": props.attack,
-				"is_enemy": props.is_enemy,
-				"is_dead": props.is_dead
-			})
+		combined_letters.append(letter.properties)
+
 	return combined_letters
 	
 func set_board_enabled(enabled: bool):

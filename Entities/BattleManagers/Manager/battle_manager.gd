@@ -118,7 +118,8 @@ func _letter_is_dead(target2D):
 		grave_copy.closest_slot = target2D.current_selected_slot
 		grave_copy.visible = false
 		grave_copy.is_active = false
-		
+	
+	letter_death_upgrades_check(target2D)
 
 	await Global.battle_animator._play_death_anim(death_copy)
 	death_copy.queue_free()
@@ -130,4 +131,34 @@ func _letter_is_dead(target2D):
 		var tween := create_tween()
 		tween.tween_property(grave_copy, "scale", temp_scale, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
+func letter_got_hit_by(target: letter2Dclass, attacker: letter2Dclass):
+	if target.properties.current_upgrade == "Scar":
+		var roll = randi() % 2
+		match roll:
+			0:
+				target.properties.update_stats(target.properties.attack+1, target.properties.max_hp)
+			1:
+				target.properties.update_stats(target.properties.attack, target.properties.max_hp+1)
+		target.letterDisplay.update_stats()
+		
+	if attacker.properties.current_upgrade == "Vector":
+		var roll = randi() % 2
+		if roll == 1:
+			var roll_confusion = randi()% 3 + 1
+			match roll_confusion:
+				1:
+					target.properties.status_effects.append("Weakness")
+				2: 
+					target.properties.status_effects.append("Blindness")
+				3:
+					target.properties.status_effects.append("Panic")
 	
+func letter_death_upgrades_check(letter2D: letter2Dclass):
+	if letter2D.properties.current_upgrade == "Scar":
+		var roll = randi() % 2
+		match roll:
+			0:
+				letter2D.properties.update_stats(letter2D.properties.attack+1, letter2D.properties.max_hp)
+			1:
+				letter2D.properties.update_stats(letter2D.properties.attack, letter2D.properties.max_hp+1)
+		letter2D.letterDisplay.update_stats()

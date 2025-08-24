@@ -257,11 +257,12 @@ func _set_resting_state(delta: float) -> void:
 	self.rotation_degrees = lerp(self.rotation_degrees, 0.0, 22.0*delta)
 
 func snap_to_parent():
-	printt ("overlapping_slots.is_empty():", overlapping_slots.is_empty(), "GlobalOptions.selecting_upgrade:", GlobalOptions.selecting_upgrade, "closest_slot", closest_slot )
-	if not overlapping_slots.is_empty() and not GlobalOptions.selecting_upgrade:
-		snap_to_slot()
-	elif GlobalOptions.selecting_upgrade and closest_slot:
-		snap_to_upgrade_slot()
+	if not overlapping_slots.is_empty():
+		
+		if GlobalOptions.selecting_upgrade:
+			snap_to_upgrade_slot()
+		else:
+			snap_to_slot()
 	else:
 		Global.hand_scene.snap_to_hand(self)
 		if Global.battle_simulator:

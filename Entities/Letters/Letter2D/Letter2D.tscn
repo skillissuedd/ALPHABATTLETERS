@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://crvb5k7fxhxlk"]
+[gd_scene load_steps=10 format=3 uid="uid://crvb5k7fxhxlk"]
 
 [ext_resource type="Script" uid="uid://b1bybni3br7as" path="res://Entities/Letters/Letter2D/letter_2d.gd" id="1_wv3jd"]
 [ext_resource type="PackedScene" uid="uid://dkm5o1qn5fv2p" path="res://Entities/Framebars/letterFramebar/FrameBar.tscn" id="2_8bp8v"]
 [ext_resource type="PackedScene" uid="uid://cb5w2yq6f7axj" path="res://Entities/Letters/LetterDisplay/LetterDisplay.tscn" id="3_g5jtj"]
 [ext_resource type="Script" uid="uid://jcv0ems6dx8s" path="res://Entities/Letters/LetterUnit/letter_unit.gd" id="4_ydupv"]
+[ext_resource type="Texture2D" uid="uid://d0mkfyunftmre" path="res://Entities/Letters/Statuses/blindness.png" id="5_g5jtj"]
+[ext_resource type="Texture2D" uid="uid://hiiehh6puvmm" path="res://Entities/Letters/Statuses/weakness.png" id="6_ydupv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cmgim"]
 size = Vector2(50.4, 51.3514)
@@ -46,6 +48,23 @@ show_behind_parent = true
 position = Vector2(7.62939e-06, -48)
 scale = Vector2(0.378906, 94)
 texture = SubResource("GradientTexture1D_wv3jd")
+
+[node name="status_effects" type="Node2D" parent="."]
+
+[node name="status" type="Sprite2D" parent="status_effects"]
+position = Vector2(-36, -37)
+scale = Vector2(1.7656, 1.99104)
+texture = ExtResource("5_g5jtj")
+
+[node name="status2" type="Sprite2D" parent="status_effects"]
+position = Vector2(-1, -37)
+scale = Vector2(0.746757, 0.59151)
+texture = ExtResource("6_ydupv")
+
+[node name="status3" type="Sprite2D" parent="status_effects"]
+position = Vector2(34, -37)
+scale = Vector2(1.7656, 1.99104)
+texture = ExtResource("5_g5jtj")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

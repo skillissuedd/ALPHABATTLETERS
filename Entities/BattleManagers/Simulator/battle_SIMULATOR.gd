@@ -5,74 +5,86 @@ extends Node
 
 ### BACKUPS ###
 
-
 func save_backups():
-	var backup = Global.board_scene.prepare_simulation_data()
-	#Filtering the backup
-	player_backup = backup.filter(func(letter): 
-		return not letter["is_enemy"])
-	enemy_backup = backup.filter(func(letter): 
-		return letter["is_enemy"])
-	#Sorting the backup
-	player_backup.sort_custom(func(a, b):
-		return a["y"] > b["y"] or (a["y"] == b["y"] and a["x"] < b["x"]))
-	enemy_backup.sort_custom(func(a, b):
-		return a["y"] > b["y"] or (a["y"] == b["y"] and a["x"] < b["x"]))
+	var backup = Global.board_scene.return_letters_from_the_board()
 	
+	for letter in backup:
+		if letter.is_enemy:
+			enemy_backup.append(letter)
+		else:
+			player_backup.append(letter)
+
 func load_backups():
-	var new_data = Global.board_scene.prepare_simulation_data().filter(func(a): 
-		return a["is_enemy"])
+	var new_data = Global.board_scene.return_letters_from_the_board()
 	
-	for new_unit in new_data:
-		for old_unit in enemy_backup:
-			if new_unit["ref"] == old_unit["ref"]:
-				new_unit["ref"].current_hp = old_unit.current_hp
-				apply_calculated_changes_to_ui(new_unit["ref"], false)
+	for new_letter in new_data:
+		for old_letter in enemy_backup:
+			if new_letter == old_letter:
+				new_letter.current_hp = old_letter.current_hp
+				apply_calculated_changes_to_ui(new_letter, false)
 				
 ### PREVIEW ###
 
 func simuilate_preview(letter2D: letter2Dclass):
 	load_backups()
-	var enemy_letters = Global.board_scene.prepare_simulation_data().filter(func(letter): 
-		return letter["is_enemy"])
-	enemy_letters.sort_custom(func(a, b): 
-		return a["y"] > b["y"] or (a["y"] == b["y"] and a["x"] < b["x"]))
 	var action_queue = []
 
-	var target = find_target_for_preview(letter2D, enemy_letters)
-	if target != null:
-		action_queue.append({
-			"type": "attack",
-			"attacker": letter2D.properties,
-			"target": target["ref"],
-			"damage": letter2D.properties.attack
-			})
-	else:
+	var target = find_target(letter2D, enemy_backup)
+	if target == null:
 		action_queue.append({
 			"type": "face_attack",
 			"attacker": letter2D.properties,
 			"target": "face",
 			"damage": letter2D.properties.attack
 			})
+	elif target is Dictionary:
+		action_queue.append({
+			"type": "aoe_attack",
+			"attacker": letter2D.properties,
+			"targets": target.keys(),
+			"damage": target.values()
+			})
+	else:
+		action_queue.append({
+			"type": "attack",
+			"attacker": letter2D.properties,
+			"target": target,
+			"damage": letter2D.properties.attack
+			})
 	calculate_preview_damage(action_queue)
 
-func find_target_for_preview(letter2D: letter2Dclass, enemy_letters: Array):
+func find_target(letter2D: letter2Dclass, enemy_letters: Array):
 	var potential_targets = []
 	var attacker = letter2D.properties
 	for enemy in enemy_letters:
-		if (enemy["x"] == attacker.grid_x and 
-		enemy["y"] < attacker.grid_y and 
-		!enemy["is_dead"] and 
-		enemy["is_enemy"] != attacker.is_enemy):
+		if (enemy.grid_x == attacker.grid_x and 
+		enemy.grid_y < attacker.grid_y and 
+		!enemy.is_dead and 
+		enemy.is_enemy != attacker.is_enemy):
 			potential_targets.append(enemy)
 			
 	if potential_targets.is_empty():
 		return null
+		
 	var lowest_target = potential_targets[0]
 	
 	for target in potential_targets:
-		if target["y"] > lowest_target["y"]:
+		if target.grid_y > lowest_target.grid_y:
 			lowest_target = target
+	
+	if letter2D.properties.element_type == "Water":
+		var targets_array = {}
+		targets_array[lowest_target] = letter2D.properties.attack
+		
+		for enemy in enemy_letters:
+			if (enemy.grid_y  == lowest_target.grid_y  and
+				(enemy.grid_x == lowest_target.grid_x + 1 or
+				enemy.grid_x == lowest_target.grid_x - 1) and
+				!enemy.is_dead and 
+				enemy.is_enemy != attacker.is_enemy):
+					targets_array[enemy] = ceili(letter2D.properties.attack * 0.3)
+		return targets_array
+		
 	return lowest_target
 	
 func calculate_preview_damage(action_queue: Array):
@@ -93,6 +105,29 @@ func calculate_preview_damage(action_queue: Array):
 			if target_hp <= 0:
 				target.letterParent.modulate.a = 0.5
 				target.letterDisplay.death_mark.visible = true
+		
+		elif action["type"] == "aoe_attack":
+			var attacker = action.attacker
+			if !is_instance_valid(attacker) or attacker.is_dead: 
+				print("Invalid attacker")
+				continue
+			
+			for i in range(action.targets.size()):
+				var target = action.targets[i]
+				if !is_instance_valid(target) or target.is_dead or !target.is_enemy: 
+					print("Invalid target")
+					continue
+				
+				var damage = action.damage[i]
+				var target_hp = max(0, target.current_hp - damage)
+				
+				target.letterDisplay.update_stats(target.attack, target_hp)
+				target.letterParent.update_frame_bar(target_hp*100/target.max_hp, false)
+				
+				if target_hp <= 0:
+					target.letterParent.modulate.a = 0.5
+					target.letterDisplay.death_mark.visible = true
+			
 				
 func apply_calculated_changes_to_ui(target: LetterUnit, permanent: bool):
 	target.letterDisplay.update_stats(target.attack, target.current_hp)
@@ -114,20 +149,27 @@ func execute_letter_action(letter: Node2D) -> void:
 	load_backups()
 	player_backup.append(letter.properties)
 	var unit = letter.properties
-	var target = find_target_for_preview(letter, enemy_backup)
+	var target = find_target(letter, enemy_backup)
 	var action_queue = []
-	if target != null:
-		action_queue.append({
-			"type": "attack",
-			"attacker": unit,
-			"target": target["ref"],
-			"damage": unit["attack"]
-			})
-	else:
+	if target == null:
 		action_queue.append({
 			"type": "face_attack",
 			"attacker": unit,
 			"target": "face",
+			"damage": unit["attack"]
+			})
+	elif target is Dictionary:
+		action_queue.append({
+			"type": "aoe_attack",
+			"attacker": unit,
+			"targets": target.keys(),
+			"damage": target.values()
+			})
+	else:
+		action_queue.append({
+			"type": "attack",
+			"attacker": unit,
+			"target": target,
 			"damage": unit["attack"]
 			})
 	execute_actions(action_queue)
@@ -139,8 +181,37 @@ func execute_actions(action_queue: Array) -> void:
 			var target = action.target
 			if !is_instance_valid(attacker) or attacker.is_dead: continue
 			if !is_instance_valid(target) or target.is_dead: continue
+			
+			if attacker.status_effects.has("Weakness"):
+				action.damage *= 0.4
+			if attacker.status_effects.has("Blindness"):
+				var roll_blindness = randi() % 10 + 1
+				if roll_blindness <= 4:
+					action.damage = 0
+			if attacker.status_effects.has("Panic"):
+				action_queue.erase(action)
+				return
+				
 			target.current_hp = max(0, target.current_hp - action.damage)
 			target.is_dead = target.current_hp <= 0
+			
+			
+		elif action["type"] == "aoe_attack":
+			var attacker = action.attacker
+			if !is_instance_valid(attacker) or attacker.is_dead: 
+				print("Invalid attacker")
+				continue
+			
+			for i in range(action.targets.size()):
+				var target = action.targets[i]
+				if !is_instance_valid(target) or target.is_dead or !target.is_enemy: 
+					print("Invalid target")
+					continue
+				
+				var damage = action.damage[i]
+				target.current_hp = max(0, target.current_hp - damage)
+				target.is_dead = target.current_hp <= 0
+		
 	save_backups()
 	Global.battle_animator.apply_animation_effects(action_queue)
 	await Global.battle_animator.animations_completed
@@ -151,9 +222,9 @@ func execute_actions(action_queue: Array) -> void:
 
 func simulate_enemy_attacks() -> void:
 	load_backups()
-	var simulation_data: Array = Global.board_scene.prepare_simulation_data()
+	var simulation_data: Array = Global.board_scene.return_letters_from_the_board()
 	simulation_data.sort_custom(func(a, b): 
-		return a["y"] > b["y"] or (a["y"] == b["y"] and a["x"] < b["x"]))
+		return a.grid_y > b.grid_y or (a.grid_y == b.grid_y and a.grid_x < b.grid_x))
 	
 	if simulation_data.is_empty():
 		return
@@ -165,26 +236,26 @@ func simulate_enemy_attacks() -> void:
 		if target != null:
 			action_queue.append({
 				"type": "attack",
-				"attacker": unit["ref"],
-				"target": target["ref"],
-				"damage": unit["attack"]
+				"attacker": unit,
+				"target": target,
+				"damage": unit.attack
 				})
 		else:
 			action_queue.append({
 				"type": "enemy_face_attack",
-				"attacker": unit["ref"],
-				"damage": unit["attack"]
+				"attacker": unit,
+				"damage": unit.attack
 				})
 	execute_actions(action_queue)
 
 
-func _find_player_target(attacker: Dictionary, all_units: Array):
+func _find_player_target(attacker: LetterUnit, all_units: Array):
 	var potential_targets = []
 	for unit in all_units:
-		if (unit["x"] == attacker["x"] and 
-		unit["y"] > attacker["y"] and 
-		!unit["is_dead"] and 
-		unit["is_enemy"] != attacker["is_enemy"]):
+		if (unit.grid_x == attacker.grid_x and 
+		unit.grid_y > attacker.grid_y and 
+		!unit.is_dead and 
+		unit.is_enemy != attacker.is_enemy):
 			potential_targets.append(unit)
 			
 	if potential_targets.is_empty():
@@ -193,7 +264,7 @@ func _find_player_target(attacker: Dictionary, all_units: Array):
 	var lowest_target = potential_targets[0]
 	
 	for target in potential_targets:
-		if target["y"] < lowest_target["y"]:
+		if target.grid_y < lowest_target.grid_y:
 			lowest_target = target
 
 	return lowest_target

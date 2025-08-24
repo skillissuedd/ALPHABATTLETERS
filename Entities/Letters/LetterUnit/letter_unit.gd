@@ -21,6 +21,7 @@ extends Node2D
 @export var locked: bool = false
 @export var current_upgrade: String = ""
 @export var NSAB: bool = false
+@export var status_effects: Array = []
 
 func initialize(
 	letter_char: String,

@@ -11,6 +11,12 @@ func apply_animation_effects(animation_events: Array) -> void:
 					event["target"], 
 					event["damage"],
 				)
+			"aoe_attack":
+				await _play_aoe_attack_anim(
+					event["attacker"],
+					event["targets"], 
+					event["damage"],
+					)
 			"face_attack":
 				await _play_face_attack_anim(
 					event["attacker"],
@@ -31,6 +37,54 @@ func apply_animation_effects(animation_events: Array) -> void:
 			get_tree().change_scene_to_file("res://prototype/gameover/gameover.tscn")
 			return
 	emit_signal("animations_completed")
+
+func _play_aoe_attack_anim(attacker: LetterUnit, targets: Array, damage: Array) -> void:
+
+	var attacker2D = attacker.letterParent
+	var maintarget = targets[0].letterParent
+	
+	# Trigger your existing attack animation
+	await attacker2D.play_attack_animation(maintarget)
+	
+	for i in targets.size():
+		
+		var damage_text = Label.new()
+		
+		get_tree().current_scene.add_child(damage_text)
+		
+		damage_text.text = "-" + str(damage[i])
+		damage_text.add_theme_font_size_override("font_size", 150)
+		damage_text.add_theme_color_override("font_color", Color(1, 0.2, 0.2))
+		damage_text.add_theme_constant_override("outline_size", 15)
+		damage_text.add_theme_color_override("font_outline_color", Color.BLACK)
+		damage_text.global_position = targets[i].global_position + Vector2(randf_range(-20, 20), -100)
+		damage_text.z_index = 100
+		
+		
+		var text_tween = create_tween()
+		var fly_distance = 80  # Fixed travel distance in pixels
+		var fly_angle = -PI
+		var fly_time = 0.7
+		
+		text_tween.set_parallel(true)
+		text_tween.tween_property(damage_text, "position", damage_text.position, fly_time)
+		text_tween.tween_property(damage_text, "scale", Vector2(0.5, 0.5), fly_time)  # Shrink
+		text_tween.tween_property(damage_text, "modulate:a", 0.0, fly_time)  # Fade
+		text_tween.tween_callback(damage_text.queue_free)
+		
+		# Visuals
+		var hit_tween  = create_tween()
+		targets[i].letterParent.shake_letter()
+		hit_tween.tween_property(targets[i].letterParent, "modulate", Color.RED, 0.2)
+		hit_tween.tween_property(targets[i].letterParent, "modulate", Color.WHITE, 0.3)
+
+		Global.battle_simulator.apply_calculated_changes_to_ui(targets[i], true)
+		Global.battle_manager.letter_got_hit_by(targets[i].letterParent, attacker2D)
+	
+		if targets[i].is_dead:
+			Global.battle_manager._letter_has_killed(attacker2D)
+			Global.battle_manager._letter_is_dead(targets[i].letterParent)
+
 
 func _play_face_attack_anim(attacker: LetterUnit, damage: int, is_enemy: bool)-> void:
 	var target = null
@@ -99,6 +153,8 @@ func _play_attack_anim(attacker: LetterUnit, target: LetterUnit, damage: int) ->
 
 	Global.battle_simulator.apply_calculated_changes_to_ui(target, true)
 	await hit_tween.finished
+	
+	Global.battle_manager.letter_got_hit_by(target2D, attacker2D)
 	
 	if target.is_dead:
 		Global.battle_manager._letter_has_killed(attacker2D)

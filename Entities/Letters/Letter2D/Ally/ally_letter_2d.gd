@@ -21,10 +21,10 @@ func get_closest_slot_from_board() -> Area2D:
 		if dist < closest_dist:
 			closest_slot = slot
 			closest_dist = dist
-			slot.is_not_hovered()
+		slot.is_not_hovered()
 			
-	#if Global.currently_hovered_slot != closest_slot:
-	#	Global.board_scene.slot_hovered_block = false
+	if Global.currently_hovered_slot != closest_slot and Global.board_scene:
+		Global.board_scene.slot_hovered_block = false
 	closest_slot.is_hovered(self)
 
 	return closest_slot
