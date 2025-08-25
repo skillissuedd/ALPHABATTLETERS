@@ -26,16 +26,16 @@ func _ready():
 		add_child(player)
 		pool.append(player)
 
-func play_sfx(name: String, position: Vector2):
-	if not SOUNDS.has(name):
-		push_warning("Unknown SFX name: %s" % name)
+func play_sfx(sfx_name: String, sfx_position: Vector2):
+	if not SOUNDS.has(sfx_name):
+		push_warning("Unknown SFX name: %s" % sfx_name)
 		return
 		
-	var stream = SOUNDS[name]
+	var stream = SOUNDS[sfx_name]
 	
 	for player in pool:
 		if not player.playing:
 			player.stream = stream
-			player.global_position = position
+			player.global_position = sfx_position
 			player.play()
 			return

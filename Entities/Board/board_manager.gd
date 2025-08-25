@@ -13,7 +13,6 @@ signal board_is_complete
 @onready var cols: int = 5
 @export var ally_letters: Array = []
 @export var enemy_letters: Array = []
-var slot_hovered_block: bool = false
 var all_letters: Array = [ally_letters, enemy_letters]  
 @export var slot_grid: Array = [] # 2D array: slot_grid[row][col]
 
@@ -22,10 +21,9 @@ func _ready():
 		await GlobalSignals.round_is_won
 		for letter in ally_letters:
 			Global.deck_scene.append_to_deck(letter)
-
+		enemy_letters.clear()
+		
 func on_slot_is_hovered(slot: Node2D, letter2D: Node2D):
-	if !slot_hovered_block:
-		slot_hovered_block = true
 		var slotX = slot.slotColumn
 		var slotY = slot.slotRow
 		if ally_letters.has(letter2D) == false:
@@ -34,7 +32,7 @@ func on_slot_is_hovered(slot: Node2D, letter2D: Node2D):
 		letter2D.properties.grid_y = slotY
 		if GlobalOptions.toggle_preview_animations:
 			Global.battle_simulator.simuilate_preview(letter2D)
-		Global.currently_hovered_slot = slot
+		
 
 func return_letters_from_the_board() -> Array:
 	var combined_letters = []
@@ -104,6 +102,13 @@ func randomize_slot():
 
 
 func reset_board():
+	for letter in ally_letters:
+		letter.current_selected_slot = null
+		Global.deck_scene.append_to_deck(letter)
+		ally_letters.erase(letter)
+		if letter.properties.is_an_object == true:
+			letter.queue_free()
+
 	for row in slot_grid:
 		for slot in row:
 			slot.queue_free()

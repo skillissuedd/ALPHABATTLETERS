@@ -52,15 +52,20 @@ func _ready():
 	init_battle_logic()
 	Global.ui_manager.init_battle_ui()
 	
+	GlobalOptions.in_battle = true
+	
 	await GlobalSignals.round_is_won
+	
+	GlobalOptions.in_battle = false
+	
 	next_round()
 
 func next_round():
 	current_round+=1
 	Global.ui_manager.round_label.text = str(current_round)
+	Global.board_scene.reset_board()
 	Global.hand_scene.clear_hand()
 	Global.deck_scene.refill_main_deck(Global.deck_disc_scene, Global.deck_scene)
-	Global.board_scene.reset_board()
 	Global.ui_manager.hide_battle_ui()
 	
 	Global.hand_scene.fill_hand()
@@ -69,24 +74,21 @@ func next_round():
 	await GlobalSignals.upgrade_panel_is_gone
 	
 	Global.ui_manager.set_ui_enabled(false)
-	init_board()
+	Global.board_scene.create_board()
 	await Global.board_scene.board_is_complete
 	
-	init_battle_logic()
+	Global.battle_manager.before_round()
 	Global.ui_manager.init_battle_ui()
 	Global.ui_manager.enemy_health_bar._setup_health_bar(10*current_round)
+	
+	GlobalOptions.in_battle = true
+	
 	await GlobalSignals.round_is_won
+	
+	GlobalOptions.in_battle = false
 	next_round()
 	
 func free_all_nodes():
 	var root = get_tree().current_scene
 	for child in root.get_children():
 		child.queue_free()
-
-func _on_area_around_area_entered(area: Area2D) -> void:
-	area.get_parent().current_selected_slot = null
-	area.get_parent().is_outside = true
-
-
-func _on_area_around_area_exited(area: Area2D) -> void:
-	area.get_parent().is_outside = false

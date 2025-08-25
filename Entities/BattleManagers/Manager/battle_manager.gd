@@ -9,10 +9,9 @@ func _ready():
 	
 	
 func before_round():
-	var enemy_count = Global.board_scene.enemy_letters.size()
 	Global.ui_manager._refill_energy()
 	if current_round <=3:
-		init_enemies(9)
+		init_enemies(23)
 	else:
 		init_enemies(current_round + 1)
 	
@@ -23,7 +22,7 @@ func round_start():
 	Global.ui_manager.set_ui_enabled(false)
 	if not Global.board_scene.enemy_letters.is_empty():
 		Global.battle_simulator.simulate_enemy_attacks()
-		await Global.battle_animator.animations_completed
+		await Global.battle_simulator.enemy_actions_finished
 	Global.hand_scene.fill_hand()
 	Global.ui_manager.set_ui_enabled(true)
 	current_round += 1
@@ -87,12 +86,27 @@ func _letter_is_dead(target2D):
 	target2D.current_selected_slot.letter_is_taken()
 	var grave_copy = null
 	
-	var death_copy = target2D.duplicate()
-	death_copy.modulate.a = 1.0
-	death_copy.scale = target2D.scale
-	Global.board_scene.add_child(death_copy)
-	death_copy.global_position = target2D.global_position
-	death_copy.letterDisplay.death_mark.visible = true
+	target2D.letterDisplay.death_mark.visible = true
+	
+	await Global.battle_animator._play_death_anim(target2D)
+	
+	
+	if target2D.properties.current_upgrade == "Pierce":
+		grave_copy = target2D.duplicate()
+		Global.board_scene.add_child(grave_copy)
+		Global.board_scene.ally_letters.append(grave_copy)
+		grave_copy.init_letter(target2D.properties.letter, target2D.properties.is_enemy)
+		grave_copy.properties.is_an_object = true
+		grave_copy.properties.is_dead = false
+		grave_copy.properties.always_dead = true
+		grave_copy.properties.current_upgrade = ""
+		grave_copy.properties.update_stats(0,5)
+		grave_copy.letterDisplay.update_stats(0,5)
+		grave_copy.global_position = target2D.global_position
+		grave_copy.letterDisplay.death_mark.visible = true
+		grave_copy.closest_slot = target2D.current_selected_slot
+		grave_copy.visible = false
+		grave_copy.is_active = false
 	
 	if target2D.properties.is_enemy:
 		if target2D.coins_count > 0:
@@ -102,27 +116,10 @@ func _letter_is_dead(target2D):
 	else:
 		Global.board_scene.ally_letters.erase(target2D)
 		Global.deck_disc_scene.append_to_deck(target2D)
-	
-	if target2D.properties.current_upgrade == "Pierce":
-		grave_copy = target2D.duplicate()
-		Global.board_scene.add_child(grave_copy)
-		grave_copy.init_letter(target2D.properties.letter, target2D.properties.is_enemy)
-		grave_copy.properties.is_an_object = true
-		grave_copy.properties.is_dead = false
-		grave_copy.properties.always_dead = true
-		grave_copy.properties.current_upgrade = ""
-		grave_copy.properties.update_stats(0,5)
-		grave_copy.letterDisplay.update_stats(0,5)
-		grave_copy.global_position = death_copy.global_position
-		grave_copy.letterDisplay.death_mark.visible = true
-		grave_copy.closest_slot = target2D.current_selected_slot
-		grave_copy.visible = false
-		grave_copy.is_active = false
-	
+		
+	target2D.letterDisplay.death_mark.visible = false
 	letter_death_upgrades_check(target2D)
 
-	await Global.battle_animator._play_death_anim(death_copy)
-	death_copy.queue_free()
 	if not grave_copy == null:
 		grave_copy.snap_to_slot()
 		grave_copy.visible = true

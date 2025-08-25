@@ -8,7 +8,6 @@ func _draw():
 	var outline_color = Color.BLACK
 	var line_color = Color.WEB_GREEN
 	var y = size.y / 2
-	var half_width = size.x / 2
 	var quarter_width = size.x / 4
 	var start_x = quarter_width
 	var end_x = size.x - quarter_width

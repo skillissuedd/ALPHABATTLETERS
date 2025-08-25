@@ -30,10 +30,12 @@ func apply_animation_effects(animation_events: Array) -> void:
 					true
 				)
 		if Global.ui_manager.enemy_health_bar.current_health <=0:
+			await Global.ui_manager.enemy_health_bar.healthbar_is_dead
 			GlobalSignals.emit_round_is_won()
+			emit_signal("animations_completed")
 			return
 		elif Global.ui_manager.ally_health_bar.current_health <=0:
-			GlobalOptions.round_outcome = false
+			await Global.ui_manager.ally_health_bar.healthbar_is_dead
 			get_tree().change_scene_to_file("res://prototype/gameover/gameover.tscn")
 			return
 	emit_signal("animations_completed")
@@ -57,16 +59,14 @@ func _play_aoe_attack_anim(attacker: LetterUnit, targets: Array, damage: Array) 
 		damage_text.add_theme_color_override("font_color", Color(1, 0.2, 0.2))
 		damage_text.add_theme_constant_override("outline_size", 15)
 		damage_text.add_theme_color_override("font_outline_color", Color.BLACK)
-		damage_text.global_position = targets[i].global_position + Vector2(randf_range(-20, 20), -100)
+		damage_text.global_position = targets[i].letterParent.global_position + Vector2(randf_range(-20, 20), -100)
 		damage_text.z_index = 100
-		
+		damage_text.scale = Vector2(0,0)
 		
 		var text_tween = create_tween()
-		var fly_distance = 80  # Fixed travel distance in pixels
-		var fly_angle = -PI
-		var fly_time = 0.7
+		var fly_time = 0.4
 		
-		text_tween.set_parallel(true)
+		text_tween.tween_property(damage_text, "scale", Vector2(1, 1), 0.1) 
 		text_tween.tween_property(damage_text, "position", damage_text.position, fly_time)
 		text_tween.tween_property(damage_text, "scale", Vector2(0.5, 0.5), fly_time)  # Shrink
 		text_tween.tween_property(damage_text, "modulate:a", 0.0, fly_time)  # Fade
@@ -93,8 +93,11 @@ func _play_face_attack_anim(attacker: LetterUnit, damage: int, is_enemy: bool)->
 		target = Global.ui_manager.ally_health_bar
 	else: 
 		target = Global.ui_manager.enemy_health_bar
+		
+	if damage >= int(target.current_health):
+		Global.hand_scene.set_hand_enabled(false)
 	await attacker2D.play_attack_animation(target)
-	target.get_damaged(damage)
+	await target.get_damaged(damage)
 	
 		
 func output_log(logs: Dictionary) -> void:
@@ -134,8 +137,6 @@ func _play_attack_anim(attacker: LetterUnit, target: LetterUnit, damage: int) ->
 	
 	
 	var text_tween = create_tween()
-	var fly_distance = 80  # Fixed travel distance in pixels
-	var fly_angle = -PI
 	var fly_time = 0.7
 	
 	text_tween.set_parallel(true)
@@ -161,12 +162,13 @@ func _play_attack_anim(attacker: LetterUnit, target: LetterUnit, damage: int) ->
 		Global.battle_manager._letter_is_dead(target2D)
 
 func _play_death_anim(target: Node2D):
+	var scale_temp = target.scale
 	var death_tween = create_tween()
 	death_tween.set_parallel(true)
-	death_tween.tween_property(target, "modulate:a", 0.0, 1.4)
+	death_tween.tween_property(target, "modulate:a", 0.0, 0.4)
 	death_tween.tween_property(target, "scale", Vector2(1.5, 1.5), 0.4)
 	death_tween.set_parallel(false)
 	death_tween.tween_property(target, "scale", Vector2(0.1,0.1), 0.4)
 	await death_tween.finished
-		#letterNode.frame_bar.previous_hp_percent=float(letterCurrentHP*100/letterMaxHP)
-		#letterNode.update_frame_bar((float(letter["current_hp"]*100)/float(letterMaxHP)), true)
+	target.scale = scale_temp
+	target.modulate.a = 1

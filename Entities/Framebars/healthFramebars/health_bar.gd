@@ -1,6 +1,8 @@
 extends ProgressBar
 class_name CustomHealthBar
 
+signal healthbar_is_dead
+
 var change_value_tween: Tween
 var opacity_tween: Tween
 @export var current_health: float
@@ -55,17 +57,16 @@ func change_value(new_value: float):
 		reset_tween.tween_property($ProgressBar, "modulate", Color.WHITE, 0.3)
 	
 	if current_health <= 0:
+		await play_death_anim()
 		Global.battle_manager.room_cleared()
-		play_death_anim()
+		
 		
 func play_death_anim():
 	var tween = create_tween()
-	var scale_temp = scale.x
 	tween.set_parallel(true)
 	tween.tween_property(self, "modulate:a", 0.0, 0.5) 
-	tween.tween_property(self, "scale:x", 0.0, 0.5).set_trans(Tween.TRANS_BACK) 
 	tween.set_parallel(false)
 	await tween.finished
 	visible=false
 	modulate.a=1
-	scale.x=scale_temp
+	healthbar_is_dead.emit()

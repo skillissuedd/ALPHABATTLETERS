@@ -308,5 +308,5 @@ func snap_to_slot():
 		Global.battle_simulator.execute_letter_action(self)
 		await Global.battle_animator.animations_completed
 		
-		if properties.current_hp <= 0:
+		if properties.current_hp <= 0 and GlobalOptions.in_battle:
 			Global.battle_manager._letter_is_dead(self)

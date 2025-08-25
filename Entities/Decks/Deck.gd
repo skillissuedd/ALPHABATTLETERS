@@ -46,7 +46,7 @@ func get_random_letter_instance() -> Node2D:
 		return null
 	var letter = get_child(pick_random_deck_child())
 	deck.remove_at(rand_index)
-	#print(deck)
+
 	return letter
 		
 func pick_random_deck_child():
@@ -62,6 +62,9 @@ func append_to_deck(letter: Node2D):
 	deck.append(letter.properties.letter)
 	letter.reparent(self)
 	letter.position = Vector2(col, row) * CELL_SIZE
+	letter.properties.grid_x = 0
+	letter.properties.grid_y = 0
+	letter.is_active = true
 	
 func refill_main_deck(deckFROM: deck_class, deckTO: deck_class):
 	deckFROM.deck.clear()

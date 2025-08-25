@@ -3,6 +3,8 @@ extends Node
 
 @export var selecting_upgrade: bool = false
 
+@export var in_battle: bool = false
+
 @export var hard_mode: bool = false
 @export var toggle_preview_animations: bool = true
 @export var current_room: String = "Default"

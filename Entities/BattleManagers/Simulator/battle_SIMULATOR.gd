@@ -2,26 +2,37 @@ extends Node
 @export var player_backup: Array = []
 @export var enemy_backup: Array = []
 
+signal enemy_actions_finished
 
 ### BACKUPS ###
 
 func save_backups():
-	var backup = Global.board_scene.return_letters_from_the_board()
+	for letter in enemy_backup:
+		if letter == null:
+			enemy_backup.erase(letter)
 	
-	for letter in backup:
-		if letter.is_enemy:
-			enemy_backup.append(letter)
-		else:
-			player_backup.append(letter)
+	if GlobalOptions.in_battle == true:
+		var backup = Global.board_scene.return_letters_from_the_board()
+		
+		for letter in backup:
+			if letter.is_enemy:
+				enemy_backup.append(letter)
+			else:
+				player_backup.append(letter)
 
 func load_backups():
-	var new_data = Global.board_scene.return_letters_from_the_board()
+	for letter in enemy_backup:
+		if letter == null:
+			enemy_backup.erase(letter)
 	
-	for new_letter in new_data:
-		for old_letter in enemy_backup:
-			if new_letter == old_letter:
-				new_letter.current_hp = old_letter.current_hp
-				apply_calculated_changes_to_ui(new_letter, false)
+	if GlobalOptions.in_battle == true:
+		var new_data = Global.board_scene.return_letters_from_the_board()
+		
+		for new_letter in new_data:
+			for old_letter in enemy_backup:
+				if new_letter == old_letter:
+					new_letter.current_hp = old_letter.current_hp
+					apply_calculated_changes_to_ui(new_letter, false)
 				
 ### PREVIEW ###
 
@@ -82,7 +93,7 @@ func find_target(letter2D: letter2Dclass, enemy_letters: Array):
 				enemy.grid_x == lowest_target.grid_x - 1) and
 				!enemy.is_dead and 
 				enemy.is_enemy != attacker.is_enemy):
-					targets_array[enemy] = ceili(letter2D.properties.attack * 0.3)
+					targets_array[enemy] = ceili(letter2D.properties.attack * 0.2)
 		return targets_array
 		
 	return lowest_target
@@ -228,10 +239,11 @@ func simulate_enemy_attacks() -> void:
 	
 	if simulation_data.is_empty():
 		return
-	var action_queue = []
+	
 	for unit in simulation_data:
+		var action_queue = []
 		if unit.is_dead or not unit.is_enemy: continue
-		var target = _find_player_target(unit, simulation_data)
+		var target = _find_player_target(unit, Global.board_scene.return_letters_from_the_board())
 		
 		if target != null:
 			action_queue.append({
@@ -246,7 +258,9 @@ func simulate_enemy_attacks() -> void:
 				"attacker": unit,
 				"damage": unit.attack
 				})
-	execute_actions(action_queue)
+		execute_actions(action_queue)
+		await Global.battle_animator.animations_completed
+	enemy_actions_finished.emit()
 
 
 func _find_player_target(attacker: LetterUnit, all_units: Array):

@@ -34,12 +34,3 @@ func position_the_deck():
 func _on_button_pressed() -> void:
 	Global.battle_manager.round_start()
 	
-
-
-func _on_area_around_area_entered(area: Area2D) -> void:
-	area.get_parent().current_selected_slot = null
-	area.get_parent().is_outside = true
-
-
-func _on_area_around_area_exited(area: Area2D) -> void:
-	area.get_parent().is_outside = false
