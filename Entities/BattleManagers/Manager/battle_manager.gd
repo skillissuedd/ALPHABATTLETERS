@@ -72,7 +72,7 @@ func init_enemies(enemy_count: int):
 	Global.battle_simulator.save_backups()
 	Global.ui_manager.set_ui_enabled(true)
 
-func _letter_has_killed(letter2D):
+func _letter_has_killed(letter2D, target2D):
 	if letter2D.properties.current_upgrade == "Assassin":
 			var roll = randi() % 2
 			match roll:
@@ -81,7 +81,26 @@ func _letter_has_killed(letter2D):
 				1:
 					letter2D.properties.update_stats(letter2D.properties.attack, letter2D.properties.max_hp+1)
 			letter2D.letterDisplay.update_stats()
-
+	
+	if letter2D.properties.element_type == "Fire":
+		var target_x = target2D.properties.grid_x
+		var target_y = target2D.properties.grid_y
+	
+		var all_letters = Global.board_scene.return_letters_from_the_board()
+		var potential_targets = []
+		for target_letter in all_letters:
+			if target_letter.is_enemy == letter2D.properties.is_enemy:
+				continue
+				
+			if abs(target_letter.grid_x - target_x) == 1 and target_letter.grid_y == target_y\
+			or abs(target_letter.grid_y - target_y) == 1 and target_letter.grid_x == target_x:
+				potential_targets.append(target_letter)
+				
+		if not potential_targets.is_empty():
+			var final_target = potential_targets.pick_random()
+			final_target.status_effects.append("Burning")
+			print (final_target)
+			
 func _letter_is_dead(target2D):
 	target2D.current_selected_slot.letter_is_taken()
 	var grave_copy = null

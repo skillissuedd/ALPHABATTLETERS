@@ -82,7 +82,7 @@ func _play_aoe_attack_anim(attacker: LetterUnit, targets: Array, damage: Array) 
 		Global.battle_manager.letter_got_hit_by(targets[i].letterParent, attacker2D)
 	
 		if targets[i].is_dead:
-			Global.battle_manager._letter_has_killed(attacker2D)
+			Global.battle_manager._letter_has_killed(attacker2D, targets[i])
 			Global.battle_manager._letter_is_dead(targets[i].letterParent)
 
 
@@ -158,7 +158,7 @@ func _play_attack_anim(attacker: LetterUnit, target: LetterUnit, damage: int) ->
 	Global.battle_manager.letter_got_hit_by(target2D, attacker2D)
 	
 	if target.is_dead:
-		Global.battle_manager._letter_has_killed(attacker2D)
+		Global.battle_manager._letter_has_killed(attacker2D, target2D)
 		Global.battle_manager._letter_is_dead(target2D)
 
 func _play_death_anim(target: Node2D):
