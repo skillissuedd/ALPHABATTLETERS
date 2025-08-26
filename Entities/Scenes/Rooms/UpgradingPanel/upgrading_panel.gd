@@ -6,6 +6,7 @@ func _ready():
 	spawn_slots()
 	init_colorrect()
 	await GlobalSignals.upgrade_slot_is_used
+	Global.hand_scene.set_hand_enabled(false)
 	for slot in slots:
 		var slot_instance = slot.get_child(0) as slot_class
 		slot_instance.is_used = true

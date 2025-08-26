@@ -1,5 +1,6 @@
 extends Node
 signal animations_completed
+signal action_is_completed
 
 	
 func apply_animation_effects(animation_events: Array) -> void:
@@ -30,15 +31,19 @@ func apply_animation_effects(animation_events: Array) -> void:
 					true
 				)
 		if Global.ui_manager.enemy_health_bar.current_health <=0:
+			action_is_completed.emit()
 			await Global.ui_manager.enemy_health_bar.healthbar_is_dead
 			GlobalSignals.emit_round_is_won()
 			emit_signal("animations_completed")
 			return
 		elif Global.ui_manager.ally_health_bar.current_health <=0:
+			action_is_completed.emit()
 			await Global.ui_manager.ally_health_bar.healthbar_is_dead
 			get_tree().change_scene_to_file("res://prototype/gameover/gameover.tscn")
 			return
-	emit_signal("animations_completed")
+			
+		action_is_completed.emit()
+	animations_completed.emit()
 
 func _play_aoe_attack_anim(attacker: LetterUnit, targets: Array, damage: Array) -> void:
 

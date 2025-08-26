@@ -96,8 +96,8 @@ func update_element_style(current_element: String):
 			self.texture=load("res://Entities/Letters/Letter2D/Elements/Fire/letterTileFire.png")
 		"Electricity":
 			self.texture=load("res://Entities/Letters/Letter2D/Elements/Electricity/letterTileElectricity.png")
-		"Earth":
-			self.texture=load("res://Entities/Letters/Letter2D/Elements/Earth/woodTile1.jpg")
+		"Nature":
+			self.texture=load("res://Entities/Letters/Letter2D/Elements/Nature/woodTile1.jpg")
 		"Neutral":
 			self.texture=load("res://Entities/Letters/Letter2D/Elements/EnemyElement/enemyElement.png")
 

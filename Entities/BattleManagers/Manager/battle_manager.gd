@@ -11,15 +11,16 @@ func _ready():
 func before_round():
 	Global.ui_manager._refill_energy()
 	if current_round <=3:
-		init_enemies(23)
+		init_enemies(3)
 	else:
 		init_enemies(current_round + 1)
 	
-func room_cleared():
-	pass
 	
 func round_start():
 	Global.ui_manager.set_ui_enabled(false)
+	for letter in Global.board_scene.return_letters_from_the_board():
+		letter.trigger_end_of_the_round_statuses()
+		
 	if not Global.board_scene.enemy_letters.is_empty():
 		Global.battle_simulator.simulate_enemy_attacks()
 		await Global.battle_simulator.enemy_actions_finished
@@ -27,6 +28,7 @@ func round_start():
 	Global.ui_manager.set_ui_enabled(true)
 	current_round += 1
 	Global.ui_manager.update_round_label()
+	
 	before_round()
 	
 func init_enemies(enemy_count: int):
@@ -98,7 +100,7 @@ func _letter_has_killed(letter2D, target2D):
 				
 		if not potential_targets.is_empty():
 			var final_target = potential_targets.pick_random()
-			final_target.status_effects.append("Burning")
+			final_target.apply_status("Burning", 2, letter2D.properties)
 			print (final_target)
 			
 func _letter_is_dead(target2D):
@@ -109,6 +111,9 @@ func _letter_is_dead(target2D):
 	
 	await Global.battle_animator._play_death_anim(target2D)
 	
+	if target2D.properties.element_type == "Nature":
+		if target2D.properties.is_enemy == false:
+			Global.ui_manager.ally_health_bar.get_healed(2)
 	
 	if target2D.properties.current_upgrade == "Pierce":
 		grave_copy = target2D.duplicate()
@@ -156,18 +161,19 @@ func letter_got_hit_by(target: letter2Dclass, attacker: letter2Dclass):
 			1:
 				target.properties.update_stats(target.properties.attack, target.properties.max_hp+1)
 		target.letterDisplay.update_stats()
-		
-	if attacker.properties.current_upgrade == "Vector":
-		var roll = randi() % 2
-		if roll == 1:
-			var roll_confusion = randi()% 3 + 1
-			match roll_confusion:
-				1:
-					target.properties.status_effects.append("Weakness")
-				2: 
-					target.properties.status_effects.append("Blindness")
-				3:
-					target.properties.status_effects.append("Panic")
+	
+	if attacker and is_instance_valid(attacker):
+		if attacker.properties.current_upgrade == "Vector":
+			var roll = randi() % 2
+			if roll == 1:
+				var roll_confusion = randi()% 3 + 1
+				match roll_confusion:
+					1:
+						target.properties.apply_status("Weakness", 1, attacker.properties)
+					2: 
+						target.properties.apply_status("Blindness", 1, attacker.properties)
+					3:
+						target.properties.apply_status("Panic", 1, attacker.properties)
 	
 func letter_death_upgrades_check(letter2D: letter2Dclass):
 	if letter2D.properties.current_upgrade == "Scar":

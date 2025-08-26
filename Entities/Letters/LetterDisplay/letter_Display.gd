@@ -40,7 +40,7 @@ func change_element(element: String):
 			font = load("res://fonts/PirataOne-Regular.ttf")
 		"Electricity":
 			font = load("res://fonts/Orbitron-VariableFont_wght.ttf")
-		"Earth":
+		"Nature":
 			font = load("res://fonts/AlfaSlabOne-Regular.ttf")
 			letter_label.add_theme_font_size_override("font_size", 60)
 		"Neutral":

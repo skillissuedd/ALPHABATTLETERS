@@ -39,7 +39,7 @@ const ELEMENT_MAP = {
 	"Water": ["C", "O", "S", "U", "G", "Q", "J"],
 	"Electricity": ["Z", "I", "X", "L", "E", "T", "V"],
 	"Fire": ["A", "W", "H", "M", "R", "K"],
-	"Earth": ["B", "F", "N", "P", "Y", "D"]
+	"Nature": ["B", "F", "N", "P", "Y", "D"]
 }
 
 const UPGRADE_LIST = {

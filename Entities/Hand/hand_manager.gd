@@ -44,7 +44,6 @@ func snap_to_hand(letter_to_snap: Node2D):
 	tween.set_ease(Tween.EASE_OUT)
 	
 	tween.tween_property(letter_to_snap, "position", Vector2.ZERO, 0.3)
-	letter_to_snap.is_active = true
 	arrange_hand()
 	
 func clear_hand():

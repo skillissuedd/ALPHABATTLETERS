@@ -193,13 +193,13 @@ func execute_actions(action_queue: Array) -> void:
 			if !is_instance_valid(attacker) or attacker.is_dead: continue
 			if !is_instance_valid(target) or target.is_dead: continue
 			
-			if attacker.status_effects.has("Weakness"):
+			if "Weakness" in attacker.status_effects.keys():
 				action.damage *= 0.4
-			if attacker.status_effects.has("Blindness"):
+			if "Blindness" in attacker.status_effects.keys():
 				var roll_blindness = randi() % 10 + 1
 				if roll_blindness <= 4:
 					action.damage = 0
-			if attacker.status_effects.has("Panic"):
+			if "Panic" in attacker.status_effects.keys():
 				action_queue.erase(action)
 				return
 				

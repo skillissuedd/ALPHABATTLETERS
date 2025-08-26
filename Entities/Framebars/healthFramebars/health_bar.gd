@@ -10,9 +10,13 @@ var opacity_tween: Tween
 @onready var health_value_label = $HealthValueLabel
 
 
-func get_damaged(value: int):
-	var new_health = current_health-float(value)
-	change_value(new_health)
+func get_healed(heal_value: int):
+	var new_health = min(current_health+float(heal_value), max_health)
+	_change_current_health(new_health)
+	
+func get_damaged(dmg_value: int):
+	var new_health = max(current_health-float(dmg_value), 0)
+	_change_current_health(new_health)
 	
 func _change_max_health(max_val: float):
 	max_health = max_val
@@ -24,6 +28,7 @@ func _change_current_health(current_val: float):
 	current_health = current_val
 	value = current_val
 	health_value_label.text = "%d / %d" % [current_val, max_value]
+	change_value(current_val)
 	
 func _setup_health_bar(max_val: float):
 	_change_max_health(max_val)
@@ -37,8 +42,6 @@ func change_value(new_value: float):
 	# Cancel existing tweens
 	if change_value_tween:
 		change_value_tween.kill()
-	
-	_change_current_health(new_value)
 	
 	# Animate the visual bar
 	change_value_tween = create_tween()
@@ -58,8 +61,6 @@ func change_value(new_value: float):
 	
 	if current_health <= 0:
 		await play_death_anim()
-		Global.battle_manager.room_cleared()
-		
 		
 func play_death_anim():
 	var tween = create_tween()

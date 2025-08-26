@@ -102,7 +102,9 @@ func set_ui_enabled(enabled: bool):
 
 func _on_draw_button_pressed() -> void:
 	if (Global.hand_scene.letter_row.size() < Global.hand_scene.max_hand_size) and current_energy > 0:
-		Global.hand_scene.snap_to_hand(Global.deck_scene.get_random_letter_instance())
+		var random_letter = Global.deck_scene.get_random_letter_instance()
+		Global.hand_scene.snap_to_hand(random_letter)
+		random_letter.is_active = true
 		_reduce_energy(1)
 	Global.hand_scene.sort_hand(sorting_mode)
 	

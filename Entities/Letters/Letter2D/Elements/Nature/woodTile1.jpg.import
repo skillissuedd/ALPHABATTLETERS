@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dd2n0uqw5bdqm"
-path="res://.godot/imported/woodTile1.jpg-002bb54cec04cd9a87e2316770474d71.ctex"
+path="res://.godot/imported/woodTile1.jpg-03e9a21f8f28f459f2d1eb7389e8e61f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Letters/Letter2D/Elements/Earth/woodTile1.jpg"
-dest_files=["res://.godot/imported/woodTile1.jpg-002bb54cec04cd9a87e2316770474d71.ctex"]
+source_file="res://Entities/Letters/Letter2D/Elements/Nature/woodTile1.jpg"
+dest_files=["res://.godot/imported/woodTile1.jpg-03e9a21f8f28f459f2d1eb7389e8e61f.ctex"]
 
 [params]
 
