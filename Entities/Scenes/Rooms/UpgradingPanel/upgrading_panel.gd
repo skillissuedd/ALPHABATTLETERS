@@ -92,3 +92,4 @@ func init_colorrect():
 	add_child(panel)
 	panel.size = size
 	panel.z_index = -1
+	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE

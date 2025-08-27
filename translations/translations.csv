@@ -20,3 +20,13 @@ gameover_try_again,New run,Новый забег
 upgrade_panel_text,SELECT YOUR UPGRADE,ВЫБЕРИТЕ УЛУЧШЕНИЕ
 nextround_label,ROUND %s COMPLETE,РАУНД %s ПРОЙДЕН
 nextround_button,NEXT ROUND, СЛЕДУЮЩИЙ РАУНД
+
+upgrades_pierce_name,The Pierce,Пронзание
+upgrades_rebirth_name,The Rebirth,Перерождение
+upgrades_scar_name,The Scar,Шрам
+upgrades_vector_name,The Vector,Вектор
+
+upgrades_pierce_hint,"Pierces the Letters, allowing them to leave a legacy","Пронзает Буквы, позволяя им оставлять наследие"
+upgrades_rebirth_hint,"Promotes the Letters in Alphabet, updating their stats","Продвигает Буквы по Алфавиту, обновляя их характеристики"
+upgrades_scar_hint,"Scars the Letters, making them stronger with each received hit","Оставляет Шрам на Буквах, делая их сильнее с каждым полученым ударом"
+upgrades_vector_hint,"Flips the Letters, swapping their stats","Переворачивает Буквы, меняя местами их характеристики"

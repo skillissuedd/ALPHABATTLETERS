@@ -2,6 +2,9 @@ extends slot_upgrade
 var is_used: bool = false
 @onready var vector_label = $Sprite2D/Label
 
+func _ready():
+	slot_upgrade_type = "Vector"
+
 func letter_is_placed(letter2D: Node2D):
 	if !is_used and letter2D.properties.current_upgrade == "":
 		is_used = true

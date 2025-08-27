@@ -1,5 +1,8 @@
 extends Control
 
+const InfoTabScene = preload("res://Entities/Scenes/Infotabs/infotab.tscn")
+var info_tab : infotab
+
 @onready var toggle_preview: Button = $TogglePreview
 @onready var end_round_button: Button = $endRoundButton
 @onready var enemy_health_bar: EnemyHealthBar = $EnemyHealthBar
@@ -62,7 +65,10 @@ func init_battle_ui():
 	update_energy_ui()
 	
 func _ready():
-	pass
+	info_tab = InfoTabScene.instantiate()
+	add_child(info_tab)
+	info_tab.z_index=100
+	info_tab.hide()
 	
 func update_energy_ui() -> void:
 	total_energy_label.text = str(total_energy)

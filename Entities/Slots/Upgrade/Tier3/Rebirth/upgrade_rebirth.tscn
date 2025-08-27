@@ -13,6 +13,12 @@ collision_layer = 16
 collision_mask = 3
 script = ExtResource("1_tp4xd")
 
+[node name="Slot_Collision" type="CollisionShape2D" parent="."]
+visibility_layer = 2
+scale = Vector2(1.6, 1.6)
+shape = SubResource("RectangleShape2D_4c3kn")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(10, 10)
@@ -39,11 +45,7 @@ theme_override_fonts/font = ExtResource("3_qksd5")
 theme_override_font_sizes/font_size = 33
 text = "R->S"
 
-[node name="Slot_Collision" type="CollisionShape2D" parent="."]
-visibility_layer = 2
-scale = Vector2(1.6, 1.6)
-shape = SubResource("RectangleShape2D_4c3kn")
-debug_color = Color(0, 0.6, 0.701961, 0)
-
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

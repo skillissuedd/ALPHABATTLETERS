@@ -3,6 +3,8 @@ var is_used: bool = false
 @onready var label: Label = $Sprite2D/Label
 @onready var label_2: Label = $Sprite2D/Label2
 
+func _ready():
+	slot_upgrade_type = "Scar"
 
 func letter_is_placed(letter2D: Node2D):
 	if !is_used and letter2D.properties.current_upgrade == "":
