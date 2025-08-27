@@ -338,7 +338,7 @@ theme_override_colors/font_color = Color(0.429456, 0.822961, 0.766975, 0.611765)
 theme_override_constants/outline_size = 15
 theme_override_fonts/font = ExtResource("7_35q8v")
 theme_override_font_sizes/font_size = 60
-text = "ui_sort_alphabet"
+text = "ui_sort_element"
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 

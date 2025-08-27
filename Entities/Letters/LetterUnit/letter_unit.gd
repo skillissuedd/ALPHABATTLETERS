@@ -51,7 +51,6 @@ func apply_status(status_name: String, duration: int, applied_by: LetterUnit):
 		"applied_by": applied_by}
 
 func trigger_end_of_the_round_statuses():
-	var to_remove = []
 	for key in status_effects.keys():
 		match key:
 			"Burning":
@@ -59,13 +58,13 @@ func trigger_end_of_the_round_statuses():
 			"Weakness":
 				pass
 				
+	
+func status_effects_reduce():
+	for key in status_effects.keys():
 		status_effects[key]["duration"] -= 1
 		if status_effects[key]["duration"] <= 0:
-			to_remove.append(key)
-	
-	for key in to_remove:
-		status_effects.erase(key)
-		
+			status_effects.erase(key)
+
 func trigger_burning():
 	#add burning animation
 	current_hp= max(current_hp-1, 0)

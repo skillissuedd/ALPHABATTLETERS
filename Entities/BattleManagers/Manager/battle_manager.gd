@@ -1,4 +1,5 @@
 extends Node2D
+signal round_ended
 
 var current_round: int = 1
 @onready var ENEMY_LETTER_2D = preload("res://Entities/Letters/Letter2D/Enemy/EnemyLetter2D.tscn")
@@ -11,7 +12,7 @@ func _ready():
 func before_round():
 	Global.ui_manager._refill_energy()
 	if current_round <=3:
-		init_enemies(3)
+		init_enemies(7)
 	else:
 		init_enemies(current_round + 1)
 	
@@ -24,6 +25,14 @@ func round_start():
 	if not Global.board_scene.enemy_letters.is_empty():
 		Global.battle_simulator.simulate_enemy_attacks()
 		await Global.battle_simulator.enemy_actions_finished
+	
+	for letter in Global.board_scene.return_letters_from_the_board():
+		letter.status_effects_reduce()
+	round_ended.emit()
+	round_end()
+		
+func round_end():
+	
 	Global.hand_scene.fill_hand()
 	Global.ui_manager.set_ui_enabled(true)
 	current_round += 1
@@ -174,7 +183,7 @@ func letter_got_hit_by(target: letter2Dclass, attacker: letter2Dclass):
 						target.properties.apply_status("Blindness", 1, attacker.properties)
 					3:
 						target.properties.apply_status("Panic", 1, attacker.properties)
-	
+				
 func letter_death_upgrades_check(letter2D: letter2Dclass):
 	if letter2D.properties.current_upgrade == "Scar":
 		var roll = randi() % 2

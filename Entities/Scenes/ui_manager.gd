@@ -11,7 +11,7 @@ extends Control
 
 #SORTING
 @onready var sort_button: Button = $sortButton
-@export var sorting_mode: int = 0
+@export var sorting_mode: String = "Alphabet"
 
 #ENERGY
 @onready var energy_main: TextureRect = $energy_main
@@ -103,6 +103,8 @@ func set_ui_enabled(enabled: bool):
 func _on_draw_button_pressed() -> void:
 	if (Global.hand_scene.letter_row.size() < Global.hand_scene.max_hand_size) and current_energy > 0:
 		var random_letter = Global.deck_scene.get_random_letter_instance()
+		if not random_letter:
+			return
 		Global.hand_scene.snap_to_hand(random_letter)
 		random_letter.is_active = true
 		_reduce_energy(1)
@@ -113,11 +115,10 @@ func _on_end_round_button_pressed() -> void:
 	set_ui_enabled(false)
 
 func _on_sort_button_pressed() -> void:
-	Global.hand_scene.sort_hand(sorting_mode)
-	if sorting_mode == 0:
-		sorting_mode = 1
-		sort_button.text = "ui_sort_element"
-	elif sorting_mode == 1:
-		sorting_mode = 0
+	if sorting_mode == "Alphabet":
+		sorting_mode = "Element"
 		sort_button.text = "ui_sort_alphabet"
-	
+	elif sorting_mode == "Element":
+		sorting_mode = "Alphabet"
+		sort_button.text = "ui_sort_element"
+	Global.hand_scene.sort_hand(sorting_mode)

@@ -16,6 +16,13 @@ var rand_index = null
 func _ready():
 	pass
 	
+func get_all_letter_instances() -> Array:
+	var all_instances = []
+	for instances_array in letter_instances.values():
+		for target_letter in instances_array:
+			all_instances.append(target_letter)
+	return all_instances
+	
 func initialize_deck():
 	deck.clear()
 	var all_letters = letter_stats.LETTER_STATS.keys()

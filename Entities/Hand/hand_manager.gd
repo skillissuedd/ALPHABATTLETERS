@@ -15,15 +15,17 @@ func fill_hand():
 		push_warning("Deck is not set!")
 		return
 		
-	if not letter_row.is_empty():
-		clear_hand()
+	if letter_row.size() >= max_hand_size:
+		print("The hand is already full")
+		return
 		
-	for i in range(max_hand_size):
+	for i in range(max_hand_size-letter_row.size()):
 		letter = Global.deck_scene.get_random_letter_instance()
 		if letter != null:
 			letter_row.append(letter)
 			letter.reparent(self)
 			letter.position = Vector2(i, 0) * cell_size
+	sort_hand(Global.ui_manager.sorting_mode)
 	arrange_hand()
 			
 func _ready():
@@ -76,14 +78,14 @@ func arrange_hand():
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		
 		
-func sort_hand(sort_type: int):
+func sort_hand(sort_type: String):
 	if letter_row.is_empty():
 		return
 		
 	match sort_type:
-		0:  # Alphabetical (A-Z)
+		"Alphabet": 
 			letter_row.sort_custom(_compare_letters_alphabetically)
-		1:  # By Element (assuming element is a String property)
+		"Element":
 			letter_row.sort_custom(_compare_letters_by_element)
 		_:  # Default (no sorting)
 			return

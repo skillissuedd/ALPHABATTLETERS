@@ -30,19 +30,24 @@ func apply_animation_effects(animation_events: Array) -> void:
 					event["damage"],
 					true
 				)
+			"skip_turn":
+				await get_tree().process_frame
+				
 		if Global.ui_manager.enemy_health_bar.current_health <=0:
-			action_is_completed.emit()
 			await Global.ui_manager.enemy_health_bar.healthbar_is_dead
 			GlobalSignals.emit_round_is_won()
-			emit_signal("animations_completed")
+			action_is_completed.emit()
+			animations_completed.emit()
 			return
 		elif Global.ui_manager.ally_health_bar.current_health <=0:
-			action_is_completed.emit()
 			await Global.ui_manager.ally_health_bar.healthbar_is_dead
+			action_is_completed.emit()
+			animations_completed.emit()
 			get_tree().change_scene_to_file("res://prototype/gameover/gameover.tscn")
 			return
 			
 		action_is_completed.emit()
+		
 	animations_completed.emit()
 
 func _play_aoe_attack_anim(attacker: LetterUnit, targets: Array, damage: Array) -> void:

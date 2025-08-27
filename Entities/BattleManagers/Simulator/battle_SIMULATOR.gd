@@ -187,31 +187,30 @@ func execute_letter_action(letter: Node2D) -> void:
 
 func execute_actions(action_queue: Array) -> void:
 	for action in action_queue:
+		var attacker = action.attacker
+		if !is_instance_valid(attacker) or attacker.is_dead: 
+			print("Invalid attacker")
+			continue
+				
+		if "Weakness" in attacker.status_effects.keys():
+			action.damage = int(action.damage*0.4)
+		if "Blindness" in attacker.status_effects.keys():
+			var roll_blindness = randi() % 10 + 1
+			if roll_blindness <= 4:
+				action.damage = 0
+		if "Panic" in attacker.status_effects.keys():
+			action["type"] = "skip_turn"
+			action.damage = 0
+				
 		if action["type"] == "attack": 
-			var attacker = action.attacker
 			var target = action.target
-			if !is_instance_valid(attacker) or attacker.is_dead: continue
 			if !is_instance_valid(target) or target.is_dead: continue
-			
-			if "Weakness" in attacker.status_effects.keys():
-				action.damage *= 0.4
-			if "Blindness" in attacker.status_effects.keys():
-				var roll_blindness = randi() % 10 + 1
-				if roll_blindness <= 4:
-					action.damage = 0
-			if "Panic" in attacker.status_effects.keys():
-				action_queue.erase(action)
-				return
 				
 			target.current_hp = max(0, target.current_hp - action.damage)
 			target.is_dead = target.current_hp <= 0
 			
 			
 		elif action["type"] == "aoe_attack":
-			var attacker = action.attacker
-			if !is_instance_valid(attacker) or attacker.is_dead: 
-				print("Invalid attacker")
-				continue
 			
 			for i in range(action.targets.size()):
 				var target = action.targets[i]
@@ -224,9 +223,9 @@ func execute_actions(action_queue: Array) -> void:
 				target.is_dead = target.current_hp <= 0
 		
 	save_backups()
+	
 	Global.battle_animator.apply_animation_effects(action_queue)
 	await Global.battle_animator.animations_completed
-	
 		
 ### ENEMY LETTER ACTIONS ###
 		
@@ -259,7 +258,7 @@ func simulate_enemy_attacks() -> void:
 				"damage": unit.attack
 				})
 		execute_actions(action_queue)
-		await Global.battle_animator.animations_completed
+		await Global.battle_animator.action_is_completed
 	enemy_actions_finished.emit()
 
 
