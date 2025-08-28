@@ -14,7 +14,7 @@ collision_mask = 3
 script = ExtResource("1_ycbh4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.316561, 0.53454, 1, 1)
+self_modulate = Color(0.317647, 0.533333, 1, 1)
 texture_filter = 1
 scale = Vector2(10, 10)
 texture = ExtResource("2_u3re3")
@@ -33,6 +33,7 @@ offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.375, 0.375)
+theme_override_colors/font_color = Color(0.317647, 0.533333, 1, 1)
 theme_override_constants/outline_size = 11
 theme_override_fonts/font = ExtResource("3_fl5p6")
 theme_override_font_sizes/font_size = 33
@@ -54,6 +55,7 @@ offset_bottom = 60.7
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.375, 0.375)
+theme_override_colors/font_color = Color(0.317647, 0.533333, 1, 1)
 theme_override_constants/outline_size = 11
 theme_override_fonts/font = ExtResource("3_fl5p6")
 theme_override_font_sizes/font_size = 48

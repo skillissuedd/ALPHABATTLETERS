@@ -108,7 +108,7 @@ func update_element_style(current_element: String):
 
 func update_frame_bar(ratio:float, permanent: bool):
 	if permanent:
-		frame_bar.set_hp_percent(ratio)
+		await frame_bar.set_hp_percent(ratio)
 	else: 
 		frame_bar.set_temp_percent(ratio)
 

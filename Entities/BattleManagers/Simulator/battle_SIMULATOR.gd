@@ -2,6 +2,7 @@ extends Node
 @export var player_backup: Array = []
 @export var enemy_backup: Array = []
 
+signal changes_to_ui_applied
 signal enemy_actions_finished
 
 ### BACKUPS ###
@@ -32,7 +33,7 @@ func load_backups():
 			for old_letter in enemy_backup:
 				if new_letter == old_letter:
 					new_letter.current_hp = old_letter.current_hp
-					apply_calculated_changes_to_ui(new_letter, false)
+					apply_calculated_changes_to_ui(new_letter, true)
 				
 ### PREVIEW ###
 
@@ -142,7 +143,11 @@ func calculate_preview_damage(action_queue: Array):
 				
 func apply_calculated_changes_to_ui(target: LetterUnit, permanent: bool):
 	target.letterDisplay.update_stats(target.attack, target.current_hp)
-	target.letterParent.update_frame_bar(target.current_hp*100/target.max_hp, permanent)
+	var update_call = target.letterParent.update_frame_bar(target.current_hp*100/target.max_hp, permanent)
+	
+	if permanent:
+		await update_call
+	
 	if target.current_hp <= 0:
 		target.is_dead = true
 		target.letterParent.modulate.a = 0.5
@@ -152,7 +157,6 @@ func apply_calculated_changes_to_ui(target: LetterUnit, permanent: bool):
 		target.letterParent.modulate.a = 1
 		if target.always_dead == false:
 			target.letterDisplay.death_mark.visible = false
-
 ### PLAYER LETTER ACTIONS ###
 
 

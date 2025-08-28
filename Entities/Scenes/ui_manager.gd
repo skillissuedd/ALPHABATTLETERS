@@ -114,7 +114,7 @@ func _on_draw_button_pressed() -> void:
 		Global.hand_scene.snap_to_hand(random_letter)
 		random_letter.is_active = true
 		_reduce_energy(1)
-	Global.hand_scene.sort_hand(sorting_mode)
+		Global.hand_scene.sort_hand(sorting_mode)
 	
 func _on_end_round_button_pressed() -> void:
 	Global.battle_manager.round_start()

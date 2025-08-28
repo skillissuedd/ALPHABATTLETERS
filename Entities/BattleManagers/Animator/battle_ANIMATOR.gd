@@ -158,14 +158,15 @@ func _play_attack_anim(attacker: LetterUnit, target: LetterUnit, damage: int) ->
 	
 	# Visuals
 	var hit_tween  = create_tween()
-	target2D.shake_letter()
 	hit_tween.tween_property(target2D, "modulate", Color.RED, 0.2)
 	hit_tween.tween_property(target2D, "modulate", Color.WHITE, 0.3)
-
-	Global.battle_simulator.apply_calculated_changes_to_ui(target, true)
-	await hit_tween.finished
+	hit_tween.finished
+	target2D.shake_letter()
+	
+	await Global.battle_simulator.apply_calculated_changes_to_ui(target, true)
 	
 	Global.battle_manager.letter_got_hit_by(target2D, attacker2D)
+	
 	
 	if target.is_dead:
 		Global.battle_manager._letter_has_killed(attacker2D, target2D)

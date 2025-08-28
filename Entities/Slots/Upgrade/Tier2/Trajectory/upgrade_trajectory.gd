@@ -12,8 +12,9 @@ func letter_is_placed(letter2D: Node2D):
 		label_2.queue_free()
 		for letter2Dinstance in Global.deck_scene.get_instances_of_letter(letter2D.properties.letter):
 			letter2Dinstance.properties.current_upgrade = "Trajectory"
-			letter2Dinstance.letterDisplay.upgrade_label.text = "("
-			letter2Dinstance.letterDisplay.upgrade_label.rotation = -90
+			letter2Dinstance.letterDisplay.upgrade_label.text = "~"
+			letter2Dinstance.letterDisplay.upgrade_label.position = Vector2(40, -35)
+			#letter2Dinstance.letterDisplay.upgrade_label.rotation = -90
 			letter2Dinstance.letterDisplay.generic_upgrade_animation()
 			letter2Dinstance.letterDisplay.upgrade_label.add_theme_color_override("font_color", Color.ROYAL_BLUE)
 			letter2Dinstance.letterDisplay.letter_label.add_theme_color_override("default_color", Color.ROYAL_BLUE)

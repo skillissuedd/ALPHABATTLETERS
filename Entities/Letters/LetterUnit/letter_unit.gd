@@ -43,7 +43,6 @@ func initialize(
 func update_stats(atk_val: int, hp_val: int):
 	attack = atk_val
 	max_hp = hp_val
-	current_hp = hp_val
 
 func apply_status(status_name: String, duration: int, applied_by: LetterUnit):
 	status_effects[status_name] = {

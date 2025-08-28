@@ -30,7 +30,7 @@ func spawn_slots():
 	for slot in slots:
 		var slot_scene = null
 		while true:
-			var roll = 30#randi() % 100 + 1
+			var roll = 70#randi() % 100 + 1
 			if roll <= 40:
 				var rollTier3 = randi() % 4 + 1
 				match rollTier3:

@@ -10,7 +10,8 @@ func letter_is_placed(letter2D: Node2D):
 		GlobalSignals.emit_upgrade_slot_is_used()
 		label.queue_free()
 		label_2.queue_free()
-		for letter2Dinstance in Global.deck_scene.get_instances_of_letter(letter2D.properties.letter):
+		for letter2Dinstance in Global.deck_scene.get_all_letter_instances():
+		#for letter2Dinstance in Global.deck_scene.get_instances_of_letter(letter2D.properties.letter):
 			letter2Dinstance.properties.current_upgrade = "Assassin"
 			letter2Dinstance.letterDisplay.upgrade_label.text = "."
 			letter2Dinstance.letterDisplay.generic_upgrade_animation()
