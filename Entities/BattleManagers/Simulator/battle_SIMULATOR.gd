@@ -143,10 +143,7 @@ func calculate_preview_damage(action_queue: Array):
 				
 func apply_calculated_changes_to_ui(target: LetterUnit, permanent: bool):
 	target.letterDisplay.update_stats(target.attack, target.current_hp)
-	var update_call = target.letterParent.update_frame_bar(target.current_hp*100/target.max_hp, permanent)
-	
-	if permanent:
-		await update_call
+	target.letterParent.update_frame_bar(target.current_hp*100/target.max_hp, permanent)
 	
 	if target.current_hp <= 0:
 		target.is_dead = true

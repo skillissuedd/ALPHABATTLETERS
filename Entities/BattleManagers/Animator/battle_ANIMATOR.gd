@@ -163,10 +163,10 @@ func _play_attack_anim(attacker: LetterUnit, target: LetterUnit, damage: int) ->
 	hit_tween.finished
 	target2D.shake_letter()
 	
-	await Global.battle_simulator.apply_calculated_changes_to_ui(target, true)
+	Global.battle_simulator.apply_calculated_changes_to_ui(target, true)
 	
 	Global.battle_manager.letter_got_hit_by(target2D, attacker2D)
-	
+	await target.letterParent.frame_bar.animation_finished
 	
 	if target.is_dead:
 		Global.battle_manager._letter_has_killed(attacker2D, target2D)
@@ -175,6 +175,7 @@ func _play_attack_anim(attacker: LetterUnit, target: LetterUnit, damage: int) ->
 func _play_death_anim(target: Node2D):
 	var scale_temp = target.scale
 	var death_tween = create_tween()
+	target.frame_bar.visible = false
 	death_tween.set_parallel(true)
 	death_tween.tween_property(target, "modulate:a", 0.0, 0.4)
 	death_tween.tween_property(target, "scale", Vector2(1.5, 1.5), 0.4)

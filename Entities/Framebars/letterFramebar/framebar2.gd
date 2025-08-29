@@ -2,20 +2,33 @@ extends ColorRect
 
 var target_hp_percent : float = 100
 var current_hp_percent : float = 100
-@export var lerp_speed := 9.0
+@export var speed := 600.0
 @export var border_thickness := 4.0
 @export var border_color := Color(1, 1, 1)
 var enabled := true
+var animating := false
 
 func _ready():
 	add_to_group("framebar")
 
 func _process(delta):
 	if not enabled:
+		if current_hp_percent != target_hp_percent:
+			current_hp_percent = target_hp_percent
+			queue_redraw()
 		return
 		
-	var old_value = current_hp_percent
-	current_hp_percent = lerp(current_hp_percent, target_hp_percent, delta * lerp_speed)
+	var old_value := current_hp_percent
+	
+	if abs(current_hp_percent - target_hp_percent) < 0.1:
+		if animating:
+			current_hp_percent = target_hp_percent
+			queue_redraw()
+			animating = false
+			get_parent().animation_finished.emit()
+	else:
+		animating = true
+		current_hp_percent = move_toward(current_hp_percent, target_hp_percent, delta * speed)
 	
 	if abs(current_hp_percent - old_value) > 0.01:
 		queue_redraw()
@@ -28,7 +41,7 @@ func set_hp_percent(value: float) -> void:
 	
 
 func _draw():
-	print("FRAME2")
+	#print("FRAME2")
 	var w := size.x
 	var h := size.y
 	var ratio = clamp (current_hp_percent / 100.0, 0.0, 1.0)

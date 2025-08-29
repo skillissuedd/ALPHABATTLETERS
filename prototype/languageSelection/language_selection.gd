@@ -1,10 +1,11 @@
 extends Control
 
+func _ready():
+	TranslationServer.set_locale("en")
 
 func _on_eng_button_up() -> void:
 	change_language("en")
 	
-
 func _on_rus_button_up() -> void:
 	change_language("ru")
 

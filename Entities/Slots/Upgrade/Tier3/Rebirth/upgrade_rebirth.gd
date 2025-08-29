@@ -14,6 +14,7 @@ func letter_is_placed(letter2D: Node2D):
 		for letter2Dinstance in Global.deck_scene.get_instances_of_letter(letter2D.properties.letter):
 			letter2Dinstance.properties.NSAB = true
 			letter2Dinstance.letterDisplay.rebirth_upgrade_animation(next_letter)
+			letter2Dinstance.frame_bar.change_color(Color.WEB_GREEN)
 		await letter2D.letterDisplay.animation_ended
 		letter_is_taken()
 		GlobalSignals.emit_upgrade_completed()

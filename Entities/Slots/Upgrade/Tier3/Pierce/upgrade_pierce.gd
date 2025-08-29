@@ -17,9 +17,8 @@ func letter_is_placed(letter2D: Node2D):
 		for letter2Dinstance in Global.deck_scene.get_instances_of_letter(letter2D.properties.letter):
 			letter2Dinstance.properties.current_upgrade = "Pierce"
 			letter2Dinstance.letterDisplay.pierce_upgrade_animation()
-			letter2Dinstance.letterDisplay.upgrade_label.add_theme_color_override("font_color", Color.WEB_GREEN)
-			letter2Dinstance.letterDisplay.letter_label.add_theme_color_override("default_color", Color.WEB_GREEN)
-			letter2Dinstance.frame_bar.border_color = Color.WEB_GREEN
+			letter2Dinstance.letterDisplay.change_color(Color.WEB_GREEN)
+			letter2Dinstance.frame_bar.change_color(Color.WEB_GREEN)
 			if letter2Dinstance.properties.NSAB == true:
 				letter2Dinstance.properties.max_hp+=1
 				letter2Dinstance.properties.attack+=1

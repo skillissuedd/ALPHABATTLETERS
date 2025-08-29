@@ -23,6 +23,10 @@ var is_enemy:bool
 func _ready():
 	mouse_filter = Control.MOUSE_FILTER_PASS
 
+func change_color(color_to_change: Color):
+	letter_label.add_theme_color_override("default_color", color_to_change)
+	upgrade_label.add_theme_color_override("font_color", color_to_change)
+	
 	
 func change_letter(character: String):
 	letter_label.text = str(character)

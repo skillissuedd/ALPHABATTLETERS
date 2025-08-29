@@ -39,6 +39,7 @@ func init_interface():
 	init_battle_logic()
 	
 func _ready():
+	TranslationServer.set_locale("en")
 	Global.main_scene = self
 	GlobalOptions.current_room = "Battle"
 	init_managers()

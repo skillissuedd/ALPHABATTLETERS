@@ -1,11 +1,12 @@
-extends Control
+extends ColorRect
+signal animation_finished
 
 var target_hp_percent : float = 100
 var current_hp_percent : float = 100
 var previous_hp_percent : float = 100.0
 
 
-@export var lerp_speed := 15.0
+@export var speed := 500.0
 @export var border_thickness := 7.0
 @export var border_color := Color(0, 0, 0, 0)
 @onready var frame2 = $frame2
@@ -17,12 +18,16 @@ func _ready():
 
 func _process(delta):
 	if not use_temp_value:
-		var old_value = current_hp_percent
-		current_hp_percent = lerp(current_hp_percent, target_hp_percent, delta * lerp_speed)
+		var old_value := current_hp_percent
+		
+		if abs(current_hp_percent - target_hp_percent) < 0.1:
+			current_hp_percent = target_hp_percent
+		else:
+			current_hp_percent = move_toward(current_hp_percent, target_hp_percent, delta * speed)
 		
 		if abs(current_hp_percent - old_value) > 0.01:
 			queue_redraw()
-			frame2.set_hp_percent(current_hp_percent)
+			frame2.set_hp_percent(target_hp_percent)
 	else:
 		queue_redraw()
 	
@@ -39,7 +44,7 @@ func set_hp_percent(value: float) -> void:
 	queue_redraw()
 
 func _draw():
-	print("FRAME1")
+	#print("FRAME1")
 	var w := size.x
 	var h := size.y
 	var ratio = clamp (current_hp_percent / 100.0, 0.0, 1.0)
@@ -73,4 +78,10 @@ func _draw():
 		
 		draw_rect(Rect2((w - width_top) / 2, 0, width_top, border_thickness), border_color)
 		
-	
+
+func change_color(color_to_change: Color):
+	border_color = color_to_change
+	if not use_temp_value:
+		use_temp_value = true
+		queue_redraw()
+		use_temp_value = false

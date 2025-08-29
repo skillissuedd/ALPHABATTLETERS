@@ -16,9 +16,8 @@ func letter_is_placed(letter2D: Node2D):
 			letter2Dinstance.properties.current_upgrade = "Scar"
 			letter2Dinstance.letterDisplay.upgrade_label.text = ","
 			letter2Dinstance.letterDisplay.generic_upgrade_animation()
-			letter2Dinstance.letterDisplay.upgrade_label.add_theme_color_override("font_color", Color.WEB_GREEN)
-			letter2Dinstance.letterDisplay.letter_label.add_theme_color_override("default_color", Color.WEB_GREEN)
-			letter2Dinstance.frame_bar.border_color = Color.WEB_GREEN
+			letter2Dinstance.letterDisplay.change_color(Color.WEB_GREEN)
+			letter2Dinstance.frame_bar.change_color(Color.WEB_GREEN)
 			if letter2Dinstance.properties.NSAB == true:
 				letter2Dinstance.properties.max_hp+=1
 				letter2Dinstance.properties.attack+=1

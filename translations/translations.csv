@@ -25,8 +25,21 @@ upgrades_pierce_name,The Pierce,Пронзание
 upgrades_rebirth_name,The Rebirth,Перерождение
 upgrades_scar_name,The Scar,Шрам
 upgrades_vector_name,The Vector,Вектор
+upgrades_assassin_name,The Assassin,Ассасин
+upgrades_halo_name,The Halo,Нимб
+upgrades_trajectory_name,The Trajectory,Траектория
+upgrades_berserker_name,The Berserker,Берсерк
+upgrades_dart_name,The Dart,Дротик
+upgrades_line_name,The Line,Линия
+
 
 upgrades_pierce_hint,"Pierces the Letters, allowing them to leave a legacy","Пронзает Буквы, позволяя им оставлять наследие"
 upgrades_rebirth_hint,"Promotes the Letters in Alphabet, updating their stats","Продвигает Буквы по Алфавиту, обновляя их характеристики"
 upgrades_scar_hint,"Scars the Letters, making them stronger with each received hit","Оставляет Шрам на Буквах, делая их сильнее с каждым полученым ударом"
 upgrades_vector_hint,"Flips the Letters, swapping their stats","Переворачивает Буквы, меняя местами их характеристики"
+upgrades_assassin_hint,"Letters become stronger with each kill","Буквы становятся сильнее с каждым убитым врагом"
+upgrades_halo_hint,"Letter protect allies on the same line","Буквы защищают союзников на своей линии"
+upgrades_trajectory_hint,"Letters shoot a bouncing projectile","Выстрелы Букв отскакивают"
+upgrades_berserker_hint,"Enrages the Letters, making them shoot two projectiles at once","Разъяряет Буквы, позволяя им стрелять дважды за атаку"
+upgrades_dart_hint,"Letters hit the whole column in front of them","Буквы атакуют по всему столбцу перед собой"
+upgrades_line_hint,"Letters hit the whole row of nearest enemy","Буквы атакуют по всему ряду, в котором находится ближайший враг"

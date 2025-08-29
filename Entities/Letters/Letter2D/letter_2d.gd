@@ -112,7 +112,6 @@ func update_frame_bar(ratio:float, permanent: bool):
 	else: 
 		frame_bar.set_temp_percent(ratio)
 
-
 	
 func play_attack_animation(target):
 	#COPYING
