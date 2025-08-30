@@ -8,7 +8,7 @@ func init_managers():
 	Global.sfx_manager = $sfxManager
 	Global.ui_manager = $UI_parent/UiManager
 	Global.ui_manager.enemy_health_bar._setup_health_bar(10*current_round)
-	Global.ui_manager.ally_health_bar._setup_health_bar(200.0)
+	Global.ui_manager.ally_health_bar._setup_health_bar(20.0)
 
 func init_decks():
 	Global.deck_disc_scene = $DeckDiscarded
@@ -39,7 +39,7 @@ func init_interface():
 	init_battle_logic()
 	
 func _ready():
-	TranslationServer.set_locale("en")
+	#TranslationServer.set_locale("en")
 	Global.main_scene = self
 	GlobalOptions.current_room = "Battle"
 	init_managers()

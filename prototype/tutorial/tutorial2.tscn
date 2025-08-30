@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c31ucumk246tg"]
+[gd_scene load_steps=7 format=3 uid="uid://c31ucumk246tg"]
 
 [ext_resource type="PackedScene" uid="uid://ysw1vyd7dj33" path="res://Entities/Decks/deck.tscn" id="1_ada6c"]
 [ext_resource type="Script" uid="uid://bblgit4cahlsr" path="res://prototype/tutorial/tutorial_2.gd" id="1_j7nyx"]
 [ext_resource type="FontFile" uid="uid://5dgoa5x36r7r" path="res://fonts/orbitron_rus.ttf" id="2_j7nyx"]
 [ext_resource type="PackedScene" uid="uid://cobtvt8orra4u" path="res://Entities/Hand/handManager.tscn" id="5_k7qt6"]
+[ext_resource type="PackedScene" uid="uid://cngb63kfm4jub" path="res://Entities/Scenes/UI_manager.tscn" id="6_2a100"]
 [ext_resource type="PackedScene" uid="uid://86aet4oiurn4" path="res://Entities/Framebars/healthFramebars/EnemyHealthBar/enemyHealthBar.tscn" id="6_rb1ce"]
 
 [node name="Tutorial" type="Control"]
@@ -18,30 +19,30 @@ script = ExtResource("1_j7nyx")
 [node name="okButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.49566
-anchor_top = 0.915556
-anchor_right = 0.49566
-anchor_bottom = 0.915556
-offset_left = -301.0
-offset_top = -66.28
-offset_right = 301.0
-offset_bottom = 65.72
+anchor_left = 0.475
+anchor_top = 0.949
+anchor_right = 0.475
+anchor_bottom = 0.949
+offset_left = -177.2
+offset_top = -43.952
+offset_right = 177.8
+offset_bottom = 44.048
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0.419608, 0, 1)
 theme_override_colors/font_color = Color(0, 0.815686, 0, 1)
 theme_override_constants/outline_size = 23
 theme_override_fonts/font = ExtResource("2_j7nyx")
-theme_override_font_sizes/font_size = 96
+theme_override_font_sizes/font_size = 80
 text = "OK"
 metadata/_edit_use_anchors_ = true
 
 [node name="deckNode" type="Control" parent="."]
 layout_mode = 1
-anchor_left = 0.250847
-anchor_top = 0.288975
-anchor_right = 0.250847
-anchor_bottom = 0.288975
+anchor_left = 0.202236
+anchor_top = 0.370765
+anchor_right = 0.202236
+anchor_bottom = 0.370765
 offset_left = -34.976
 offset_top = -34.256
 offset_right = 165.024
@@ -61,10 +62,10 @@ anchor_left = 0.5
 anchor_top = 0.184
 anchor_right = 0.5
 anchor_bottom = 0.184
-offset_left = -566.0
-offset_top = -97.232
-offset_right = 554.0
-offset_bottom = 97.768
+offset_left = -940.0
+offset_top = -173.232
+offset_right = 920.0
+offset_bottom = 21.768
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -77,7 +78,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="handManager" parent="." instance=ExtResource("5_k7qt6")]
-position = Vector2(921, 521)
+position = Vector2(921, 469)
 
 [node name="CustomHealthBar" parent="." instance=ExtResource("6_rb1ce")]
 visible = false
@@ -90,5 +91,8 @@ offset_left = -404.0
 offset_top = -60.192
 offset_right = 3946.0
 offset_bottom = 540.808
+
+[node name="UiManager" parent="." instance=ExtResource("6_2a100")]
+layout_mode = 1
 
 [connection signal="button_up" from="okButton" to="." method="_on_ok_button_button_up"]

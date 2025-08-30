@@ -12,6 +12,8 @@ var info_tab : infotab
 @onready var round_label: RichTextLabel = $round_info/roundLabel
 
 
+@onready var draw_button: Button = $drawButton
+
 #SORTING
 @onready var sort_button: Button = $sortButton
 @export var sorting_mode: String = "Alphabet"

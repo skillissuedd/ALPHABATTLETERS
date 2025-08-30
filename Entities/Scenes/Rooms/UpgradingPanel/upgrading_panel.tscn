@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b80ig6424tqwg"]
+[gd_scene load_steps=5 format=3 uid="uid://b80ig6424tqwg"]
 
 [ext_resource type="Script" uid="uid://cj020vgv45rdt" path="res://Entities/Scenes/Rooms/UpgradingPanel/upgrading_panel.gd" id="1_1l1xk"]
 [ext_resource type="FontFile" uid="uid://chvukhbl2d2lh" path="res://fonts/Almendra-Regular.ttf" id="2_c0j1i"]
+[ext_resource type="FontFile" uid="uid://cbrfpshxq2f07" path="res://fonts/Inversionz Unboxed.ttf" id="3_gufg1"]
+[ext_resource type="FontFile" uid="uid://c3ttg34hfox5l" path="res://fonts/Orbitron-VariableFont_wght.ttf" id="4_xsos8"]
 
 [node name="UpgradePanel" type="Control"]
 self_modulate = Color(1, 1, 1, 0.341176)
@@ -43,9 +45,9 @@ z_index = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.528
-anchor_top = 0.784372
+anchor_top = 0.600229
 anchor_right = 0.528
-anchor_bottom = 0.784372
+anchor_bottom = 0.600229
 offset_left = -879.576
 offset_top = -125.0
 offset_right = 880.424
@@ -76,3 +78,65 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
 mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.499711
+anchor_top = 1.06096
+anchor_right = 0.499711
+anchor_bottom = 1.06096
+offset_left = -550.468
+offset_top = -199.674
+offset_right = 549.531
+offset_bottom = 200.326
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 250
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ok_button" type="Button" parent="HBoxContainer"]
+z_index = 8
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.847919, 0.297995, 1.92523e-07, 1)
+theme_override_fonts/font = ExtResource("3_gufg1")
+theme_override_font_sizes/font_size = 206
+disabled = true
+text = "OK"
+metadata/_edit_use_anchors_ = true
+
+[node name="reroll_button" type="Button" parent="HBoxContainer"]
+z_index = 10
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.847919, 0.297995, 1.92523e-07, 1)
+theme_override_fonts/font = ExtResource("3_gufg1")
+theme_override_font_sizes/font_size = 206
+disabled = true
+text = "⟳"
+
+[node name="coins_count_label" type="Label" parent="HBoxContainer/reroll_button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.461345
+anchor_top = 0.0984775
+anchor_right = 0.461518
+anchor_bottom = 0.0992407
+offset_left = -28.5381
+offset_top = -42.891
+offset_right = 28.4199
+offset_bottom = 42.893
+scale = Vector2(1.7, 1.7)
+theme_override_colors/font_color = Color(0.932027, 0.40259, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_xsos8")
+theme_override_font_sizes/font_size = 68
+text = "5"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="button_up" from="HBoxContainer/ok_button" to="." method="_on_ok_button_button_up"]
+[connection signal="button_up" from="HBoxContainer/reroll_button" to="." method="_on_reroll_button_button_up"]

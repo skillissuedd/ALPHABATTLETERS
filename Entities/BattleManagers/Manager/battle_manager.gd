@@ -12,7 +12,7 @@ func _ready():
 func before_round():
 	Global.ui_manager._refill_energy()
 	if current_round <=3:
-		init_enemies(7)
+		init_enemies(4)
 	else:
 		init_enemies(current_round + 1)
 	
